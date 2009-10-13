@@ -5,6 +5,7 @@
 
 package br.com.renatoccosta.renamer.element;
 
+import br.com.renatoccosta.renamer.element.base.ExpressionElement;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -25,7 +26,7 @@ public class ExpressionElementFactory {
             throw new ExpressionNotFoundException(xpName);
         }
         
-        ee.setContent(params);
+        ee.setParameters(params);
 
         return ee;
     }

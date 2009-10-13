@@ -1,12 +1,13 @@
 package br.com.renatoccosta.renamer.element;
 
+import br.com.renatoccosta.renamer.element.base.ContentElement;
 import java.io.File;
 
 /**
  *
  * @author renato
  */
-public class LiteralElement extends Element {
+public class LiteralElement extends ContentElement {
 
     private String content;
 
@@ -15,12 +16,12 @@ public class LiteralElement extends Element {
     }
 
     @Override
-    public void setContent(String... content) {
+    public void setParameters(String... content) {
         this.content = content[0];
     }
 
     @Override
-    public String getStringRepresentation(String srcName, File srcFile) {
+    public String getContent(String find, String target, File file) {
         return content;
     }
 
