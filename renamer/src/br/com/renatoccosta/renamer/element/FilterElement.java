@@ -16,4 +16,9 @@ public class FilterElement extends StreamChangeElement {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public String convert(String src) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }
