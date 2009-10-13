@@ -12,7 +12,7 @@ import org.apache.commons.lang.ArrayUtils;
  *
  * @author renato
  */
-public class ExpressionElementFactory {
+public class ElementFactory {
 
     public static ExpressionElement compile(String conteudo) {
         String campos[] = conteudo.split(":");
@@ -23,7 +23,7 @@ public class ExpressionElementFactory {
         if (IndexedElement.NAME.equals(xpName)) {
             ee = new IndexedElement();
         } else {
-            throw new ExpressionNotFoundException(xpName);
+            throw new ElementNotFoundException(xpName);
         }
         
         ee.setParameters(params);

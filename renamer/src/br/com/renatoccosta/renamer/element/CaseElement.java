@@ -18,14 +18,40 @@ import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
  */
 public class CaseElement extends StreamChangeElement {
 
+    public static final String UPPER_CASE = "upper";
+
+    public static final String LOWER_CASE = "lower";
+
+    public static final String NONE = "none";
+
+    private String mode = NONE;
+
+    /**
+     * Itens do array:
+     * 0 -> (Opcional) Modo. Padrão é 'none'
+     *
+     * @param content Parâmetros
+     */
     @Override
     public void setParameters(String... content) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (content.length > 0) {
+            String mode = content[0];
+
+            if (UPPER_CASE.equals(mode) || LOWER_CASE.equals(mode)) {
+                this.mode = mode;
+            }
+        }
     }
 
     @Override
     public String convert(String src) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (UPPER_CASE.equals(mode)) {
+            return src.toUpperCase();
+        } else if (LOWER_CASE.equals(mode)) {
+            return src.toLowerCase();
+        } else {
+            return src;
+        }
     }
 
 }

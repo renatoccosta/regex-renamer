@@ -261,7 +261,7 @@ public class GramaticaParser extends Parser {
 
             match(input,SAI_GRUPO,FOLLOW_SAI_GRUPO_in_subgrupo122); 
 
-            		elem = ExpressionElementFactory.compile((conteudo7!=null?input.toString(conteudo7.start,conteudo7.stop):null));
+            		elem = ElementFactory.compile((conteudo7!=null?input.toString(conteudo7.start,conteudo7.stop):null));
             	
 
             }

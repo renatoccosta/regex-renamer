@@ -11,13 +11,13 @@ import br.com.renatoccosta.renamer.i18n.Messages;
  *
  * @author renato
  */
-public class ExpressionNotFoundException extends RuntimeException {
+public class ElementNotFoundException extends RuntimeException {
 
-    public ExpressionNotFoundException(String xpName) {
+    public ElementNotFoundException(String xpName) {
         super(Messages.getExpressionNotFoundMessage(xpName));
     }
 
-    public ExpressionNotFoundException() {
+    public ElementNotFoundException() {
     }
 
 }
