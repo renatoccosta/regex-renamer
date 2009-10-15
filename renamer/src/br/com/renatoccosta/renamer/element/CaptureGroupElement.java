@@ -18,17 +18,20 @@ import java.util.regex.Pattern;
  */
 public class CaptureGroupElement extends ContentElement {
 
-    private String groupNumber;
+    private int groupNumber = 0;
 
     private Pattern patternFind;
 
-    public CaptureGroupElement(String groupNumber) {
+    public CaptureGroupElement() {
+    }
+
+    public CaptureGroupElement(int groupNumber) {
         this.groupNumber = groupNumber;
     }
 
     @Override
     public void setParameters(String... groupNumber) {
-        this.groupNumber = groupNumber[0];
+        this.groupNumber = Integer.parseInt(groupNumber[0]);
     }
 
     @Override
@@ -38,7 +41,9 @@ public class CaptureGroupElement extends ContentElement {
         }
 
         Matcher matcher = patternFind.matcher(target);
-        return matcher.replaceAll(this.toString());
+        matcher.matches();
+        
+        return matcher.group(groupNumber);
     }
 
     @Override

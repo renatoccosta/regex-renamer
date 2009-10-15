@@ -2,6 +2,7 @@ package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
 import br.com.renatoccosta.renamer.i18n.Messages;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Elemento que substitui todas as ocorrências de um caractere por outro no
@@ -11,9 +12,9 @@ import br.com.renatoccosta.renamer.i18n.Messages;
  */
 public class ReplaceElement extends StreamChangeElement {
 
-    private String[] de;
+    private String[] de = new String[] {""};
 
-    private String[] para;
+    private String[] para = new String[] {""};
 
     @Override
     public void setParameters(String... content) {
@@ -30,12 +31,11 @@ public class ReplaceElement extends StreamChangeElement {
             de[i/2] = content[i];
             para[i/2] = content[i+1];
         }
-
     }
 
     @Override
     public String convert(String src) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return StringUtils.replaceEach(src, de, para);
     }
 
 }

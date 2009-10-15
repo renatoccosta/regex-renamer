@@ -8,6 +8,7 @@ package br.com.renatoccosta.renamer.parser;
 package br.com.renatoccosta.renamer.parser;
 
 import br.com.renatoccosta.renamer.element.*;
+import br.com.renatoccosta.renamer.element.base.*;
 }
 
 @members {
@@ -42,7 +43,7 @@ grupo	returns [Element elm] :
 	MARCADOR 
 	(
 	NUMERO {
-		$elm = new CaptureGroupElement($NUMERO.text);
+		$elm = new CaptureGroupElement(Integer.parseInt($NUMERO.text));
 	} | 
 	subgrupo {
 		$elm = $subgrupo.elem;
@@ -52,7 +53,7 @@ subgrupo returns [Element elem] :
 	ENTRA_GRUPO 
 	conteudo 
 	SAI_GRUPO {
-		$elem = ExpressionElementFactory.compile($conteudo.text);
+		$elem = ElementFactory.compile($conteudo.text);
 	};
 
 conteudo:

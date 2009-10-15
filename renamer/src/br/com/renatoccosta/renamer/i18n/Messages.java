@@ -20,4 +20,12 @@ public class Messages {
         return messages.getString("ReplaceElementInvalidNumberParametersMessage");
     }
 
+    public static String getFilterElementInvalidParametersMessage() {
+        return messages.getString("FilterElementInvalidParametersMessage");
+    }
+
+    public static String getCaseElementInvalidParametersMessage() {
+        return messages.getString("CaseElementInvalidParametersMessage");
+    }
+
 }

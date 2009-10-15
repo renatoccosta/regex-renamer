@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g 2009-10-01 16:47:56
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g 2009-10-15 17:38:33
  
 package br.com.renatoccosta.renamer.parser;
 
@@ -29,17 +29,17 @@ public class GramaticaLexer extends Lexer {
         super(input,state);
 
     }
-    public String getGrammarFileName() { return "F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g"; }
+    public String getGrammarFileName() { return "G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g"; }
 
     // $ANTLR start "CARACTERE"
     public final void mCARACTERE() throws RecognitionException {
         try {
             int _type = CARACTERE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:61:11: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:61:13: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:11: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:13: ( 'a' .. 'z' | 'A' .. 'Z' )+
             {
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:61:13: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:13: ( 'a' .. 'z' | 'A' .. 'Z' )+
             int cnt1=0;
             loop1:
             do {
@@ -53,7 +53,7 @@ public class GramaticaLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:
             	    {
             	    if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
             	        input.consume();
@@ -93,10 +93,10 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = ESPACO;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:9: ( ( ' ' )+ )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:11: ( ' ' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:9: ( ( ' ' )+ )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:11: ( ' ' )+
             {
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:11: ( ' ' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:11: ( ' ' )+
             int cnt2=0;
             loop2:
             do {
@@ -110,7 +110,7 @@ public class GramaticaLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:11: ' '
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:11: ' '
             	    {
             	    match(' '); 
 
@@ -142,11 +142,11 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = NUMERO;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:9: ( '1' .. '9' ( '0' .. '9' )* )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:11: '1' .. '9' ( '0' .. '9' )*
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:9: ( '1' .. '9' ( '0' .. '9' )* )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:11: '1' .. '9' ( '0' .. '9' )*
             {
             matchRange('1','9'); 
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:20: ( '0' .. '9' )*
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:20: ( '0' .. '9' )*
             loop3:
             do {
                 int alt3=2;
@@ -159,7 +159,7 @@ public class GramaticaLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:20: '0' .. '9'
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:20: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -187,8 +187,8 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = SEPCAMPO;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:10: ( ':' )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:12: ':'
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:65:10: ( ':' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:65:12: ':'
             {
             match(':'); 
 
@@ -207,8 +207,8 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = MARCADOR;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:65:10: ( '$' )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:65:12: '$'
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:66:10: ( '$' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:66:12: '$'
             {
             match('$'); 
 
@@ -227,8 +227,8 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = ENTRA_GRUPO;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:66:13: ( '{' )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:66:15: '{'
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:67:13: ( '{' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:67:15: '{'
             {
             match('{'); 
 
@@ -247,8 +247,8 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = SAI_GRUPO;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:67:11: ( '}' )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:67:13: '}'
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:68:11: ( '}' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:68:13: '}'
             {
             match('}'); 
 
@@ -263,7 +263,7 @@ public class GramaticaLexer extends Lexer {
     // $ANTLR end "SAI_GRUPO"
 
     public void mTokens() throws RecognitionException {
-        // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:8: ( CARACTERE | ESPACO | NUMERO | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO )
+        // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:8: ( CARACTERE | ESPACO | NUMERO | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO )
         int alt4=7;
         switch ( input.LA(1) ) {
         case 'A':
@@ -369,49 +369,49 @@ public class GramaticaLexer extends Lexer {
 
         switch (alt4) {
             case 1 :
-                // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:10: CARACTERE
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:10: CARACTERE
                 {
                 mCARACTERE(); 
 
                 }
                 break;
             case 2 :
-                // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:20: ESPACO
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:20: ESPACO
                 {
                 mESPACO(); 
 
                 }
                 break;
             case 3 :
-                // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:27: NUMERO
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:27: NUMERO
                 {
                 mNUMERO(); 
 
                 }
                 break;
             case 4 :
-                // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:34: SEPCAMPO
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:34: SEPCAMPO
                 {
                 mSEPCAMPO(); 
 
                 }
                 break;
             case 5 :
-                // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:43: MARCADOR
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:43: MARCADOR
                 {
                 mMARCADOR(); 
 
                 }
                 break;
             case 6 :
-                // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:52: ENTRA_GRUPO
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:52: ENTRA_GRUPO
                 {
                 mENTRA_GRUPO(); 
 
                 }
                 break;
             case 7 :
-                // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:64: SAI_GRUPO
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:64: SAI_GRUPO
                 {
                 mSAI_GRUPO(); 
 

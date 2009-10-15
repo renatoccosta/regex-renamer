@@ -1,6 +1,8 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
+import br.com.renatoccosta.renamer.i18n.Messages;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Elemento que altera o caso dos caracteres dos próximos elementos.
@@ -22,6 +24,8 @@ public class CaseElement extends StreamChangeElement {
 
     public static final String LOWER_CASE = "lower";
 
+    public static final String SWAP = "swap";
+
     public static final String NONE = "none";
 
     private String mode = NONE;
@@ -37,8 +41,12 @@ public class CaseElement extends StreamChangeElement {
         if (content.length > 0) {
             String mode = content[0];
 
-            if (UPPER_CASE.equals(mode) || LOWER_CASE.equals(mode)) {
+            if (UPPER_CASE.equals(mode) || LOWER_CASE.equals(mode) ||
+                    SWAP.equals(mode) || NONE.equals(mode)) {
                 this.mode = mode;
+            } else {
+                throw new IllegalArgumentException(
+                        Messages.getCaseElementInvalidParametersMessage());
             }
         }
     }
@@ -49,6 +57,8 @@ public class CaseElement extends StreamChangeElement {
             return src.toUpperCase();
         } else if (LOWER_CASE.equals(mode)) {
             return src.toLowerCase();
+        } else if (SWAP.equals(mode)) {
+            return StringUtils.swapCase(src);
         } else {
             return src;
         }

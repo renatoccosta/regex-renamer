@@ -1,6 +1,7 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
+import br.com.renatoccosta.renamer.i18n.Messages;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -18,7 +19,7 @@ public class FilterElement extends StreamChangeElement {
 
     public static final String SYMBOLS = "s";
 
-    public static final String WHITE_SPACE = "s";
+    public static final String WHITE_SPACE = "w";
 
     private String mode = SYMBOLS;
 
@@ -30,6 +31,9 @@ public class FilterElement extends StreamChangeElement {
             if (LETTERS.equals(mode) || NUMBERS.equals(mode) ||
                     SYMBOLS.equals(mode) || WHITE_SPACE.equals(mode)) {
                 this.mode = mode;
+            } else {
+                throw new IllegalArgumentException(
+                        Messages.getFilterElementInvalidParametersMessage());
             }
         }
     }

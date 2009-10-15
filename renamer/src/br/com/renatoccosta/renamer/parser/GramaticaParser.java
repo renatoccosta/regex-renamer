@@ -1,10 +1,9 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g 2009-10-01 16:47:55
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g 2009-10-15 17:38:33
 
 package br.com.renatoccosta.renamer.parser;
 
-import br.com.renatoccosta.renamer.element.CaptureGroupElement;
-import br.com.renatoccosta.renamer.element.base.Element;
 import br.com.renatoccosta.renamer.element.*;
+import br.com.renatoccosta.renamer.element.base.*;
 
 
 import org.antlr.runtime.*;
@@ -39,7 +38,7 @@ public class GramaticaParser extends Parser {
         
 
     public String[] getTokenNames() { return GramaticaParser.tokenNames; }
-    public String getGrammarFileName() { return "F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g"; }
+    public String getGrammarFileName() { return "G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g"; }
 
 
     public Element root = new LiteralElement("");
@@ -48,7 +47,7 @@ public class GramaticaParser extends Parser {
 
 
     // $ANTLR start "inicio"
-    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:18:1: inicio : ( ESPACO | CARACTERE | NUMERO | grupo )+ EOF ;
+    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:19:1: inicio : ( ESPACO | CARACTERE | NUMERO | grupo )+ EOF ;
     public final void inicio() throws RecognitionException {
         Token ESPACO1=null;
         Token CARACTERE2=null;
@@ -57,10 +56,10 @@ public class GramaticaParser extends Parser {
 
 
         try {
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:18:8: ( ( ESPACO | CARACTERE | NUMERO | grupo )+ EOF )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:19:2: ( ESPACO | CARACTERE | NUMERO | grupo )+ EOF
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:19:8: ( ( ESPACO | CARACTERE | NUMERO | grupo )+ EOF )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:20:2: ( ESPACO | CARACTERE | NUMERO | grupo )+ EOF
             {
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:19:2: ( ESPACO | CARACTERE | NUMERO | grupo )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:20:2: ( ESPACO | CARACTERE | NUMERO | grupo )+
             int cnt1=0;
             loop1:
             do {
@@ -91,7 +90,7 @@ public class GramaticaParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:20:2: ESPACO
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:21:2: ESPACO
             	    {
             	    ESPACO1=(Token)match(input,ESPACO,FOLLOW_ESPACO_in_inicio35); 
 
@@ -103,7 +102,7 @@ public class GramaticaParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:25:2: CARACTERE
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:26:2: CARACTERE
             	    {
             	    CARACTERE2=(Token)match(input,CARACTERE,FOLLOW_CARACTERE_in_inicio43); 
 
@@ -115,7 +114,7 @@ public class GramaticaParser extends Parser {
             	    }
             	    break;
             	case 3 :
-            	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:30:2: NUMERO
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:31:2: NUMERO
             	    {
             	    NUMERO3=(Token)match(input,NUMERO,FOLLOW_NUMERO_in_inicio51); 
 
@@ -127,7 +126,7 @@ public class GramaticaParser extends Parser {
             	    }
             	    break;
             	case 4 :
-            	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:35:2: grupo
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:36:2: grupo
             	    {
             	    pushFollow(FOLLOW_grupo_in_inicio59);
             	    grupo4=grupo();
@@ -169,7 +168,7 @@ public class GramaticaParser extends Parser {
 
 
     // $ANTLR start "grupo"
-    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:41:1: grupo returns [Element elm] : MARCADOR ( NUMERO | subgrupo ) ;
+    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:42:1: grupo returns [Element elm] : MARCADOR ( NUMERO | subgrupo ) ;
     public final Element grupo() throws RecognitionException {
         Element elm = null;
 
@@ -178,11 +177,11 @@ public class GramaticaParser extends Parser {
 
 
         try {
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:41:29: ( MARCADOR ( NUMERO | subgrupo ) )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:42:2: MARCADOR ( NUMERO | subgrupo )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:42:29: ( MARCADOR ( NUMERO | subgrupo ) )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:43:2: MARCADOR ( NUMERO | subgrupo )
             {
             match(input,MARCADOR,FOLLOW_MARCADOR_in_grupo81); 
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:43:2: ( NUMERO | subgrupo )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:44:2: ( NUMERO | subgrupo )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -200,17 +199,17 @@ public class GramaticaParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:44:2: NUMERO
+                    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:45:2: NUMERO
                     {
                     NUMERO5=(Token)match(input,NUMERO,FOLLOW_NUMERO_in_grupo88); 
 
-                    		elm = new CaptureGroupElement((NUMERO5!=null?NUMERO5.getText():null));
+                    		elm = new CaptureGroupElement(Integer.parseInt((NUMERO5!=null?NUMERO5.getText():null)));
                     	
 
                     }
                     break;
                 case 2 :
-                    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:47:2: subgrupo
+                    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:48:2: subgrupo
                     {
                     pushFollow(FOLLOW_subgrupo_in_grupo96);
                     subgrupo6=subgrupo();
@@ -242,7 +241,7 @@ public class GramaticaParser extends Parser {
 
 
     // $ANTLR start "subgrupo"
-    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:51:1: subgrupo returns [Element elem] : ENTRA_GRUPO conteudo SAI_GRUPO ;
+    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:52:1: subgrupo returns [Element elem] : ENTRA_GRUPO conteudo SAI_GRUPO ;
     public final Element subgrupo() throws RecognitionException {
         Element elem = null;
 
@@ -250,8 +249,8 @@ public class GramaticaParser extends Parser {
 
 
         try {
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:51:33: ( ENTRA_GRUPO conteudo SAI_GRUPO )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:52:2: ENTRA_GRUPO conteudo SAI_GRUPO
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:52:33: ( ENTRA_GRUPO conteudo SAI_GRUPO )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:53:2: ENTRA_GRUPO conteudo SAI_GRUPO
             {
             match(input,ENTRA_GRUPO,FOLLOW_ENTRA_GRUPO_in_subgrupo114); 
             pushFollow(FOLLOW_conteudo_in_subgrupo118);
@@ -281,17 +280,17 @@ public class GramaticaParser extends Parser {
     };
 
     // $ANTLR start "conteudo"
-    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:58:1: conteudo : CARACTERE ( SEPCAMPO ( CARACTERE | NUMERO )+ )* ;
+    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:59:1: conteudo : CARACTERE ( SEPCAMPO ( CARACTERE | NUMERO )+ )* ;
     public final GramaticaParser.conteudo_return conteudo() throws RecognitionException {
         GramaticaParser.conteudo_return retval = new GramaticaParser.conteudo_return();
         retval.start = input.LT(1);
 
         try {
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:58:9: ( CARACTERE ( SEPCAMPO ( CARACTERE | NUMERO )+ )* )
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:59:2: CARACTERE ( SEPCAMPO ( CARACTERE | NUMERO )+ )*
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:59:9: ( CARACTERE ( SEPCAMPO ( CARACTERE | NUMERO )+ )* )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:60:2: CARACTERE ( SEPCAMPO ( CARACTERE | NUMERO )+ )*
             {
             match(input,CARACTERE,FOLLOW_CARACTERE_in_conteudo132); 
-            // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:59:12: ( SEPCAMPO ( CARACTERE | NUMERO )+ )*
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:60:12: ( SEPCAMPO ( CARACTERE | NUMERO )+ )*
             loop4:
             do {
                 int alt4=2;
@@ -304,10 +303,10 @@ public class GramaticaParser extends Parser {
 
                 switch (alt4) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:59:14: SEPCAMPO ( CARACTERE | NUMERO )+
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:60:14: SEPCAMPO ( CARACTERE | NUMERO )+
             	    {
             	    match(input,SEPCAMPO,FOLLOW_SEPCAMPO_in_conteudo136); 
-            	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:59:23: ( CARACTERE | NUMERO )+
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:60:23: ( CARACTERE | NUMERO )+
             	    int cnt3=0;
             	    loop3:
             	    do {
@@ -321,7 +320,7 @@ public class GramaticaParser extends Parser {
 
             	        switch (alt3) {
             	    	case 1 :
-            	    	    // F:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:
+            	    	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:
             	    	    {
             	    	    if ( (input.LA(1)>=CARACTERE && input.LA(1)<=NUMERO) ) {
             	    	        input.consume();
