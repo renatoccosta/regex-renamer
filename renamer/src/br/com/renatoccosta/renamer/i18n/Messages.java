@@ -12,7 +12,12 @@ public class Messages {
             "br/com/renatoccosta/renamer/i18n/Messages");
 
     public static String getExpressionNotFoundMessage(String xpName) {
-        return String.format(messages.getString("ExpressionNotFoundException"), xpName);
+        return String.format(messages.getString("ExpressionNotFoundException"),
+                xpName);
+    }
+
+    public static String getReplaceElementInvalidNumberParametersMessage() {
+        return messages.getString("ReplaceElementInvalidNumberParametersMessage");
     }
 
 }
