@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.ExpressionElement;
+import br.com.renatoccosta.renamer.element.base.Element;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang.ArrayUtils;
 
 /**
@@ -14,18 +11,22 @@ import org.apache.commons.lang.ArrayUtils;
  */
 public class ElementFactory {
 
-    public static ExpressionElement compile(String conteudo) {
+    public static Element compile(String conteudo) {
         String campos[] = conteudo.split(":");
         String xpName = campos[0];
         String params[] = (String[]) ArrayUtils.remove(campos, 0);
-        ExpressionElement ee = null;
 
-        if (IndexedElement.NAME.equals(xpName)) {
-            ee = new IndexedElement();
-        } else {
-            throw new ElementNotFoundException(xpName);
+        Element ee = null;
+        try {
+            ee = ElementDiscovery.lookup(xpName).newInstance();
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ElementFactory.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ElementFactory.class.getName()).log(
+                    Level.SEVERE, null, ex);
         }
-        
+
         ee.setParameters(params);
 
         return ee;
