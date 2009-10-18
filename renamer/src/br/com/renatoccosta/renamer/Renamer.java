@@ -1,10 +1,16 @@
 package br.com.renatoccosta.renamer;
 
+import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.parser.RenamerLexer;
+import br.com.renatoccosta.renamer.parser.RenamerParser;
 import java.io.File;
 import java.text.ParseException;
-import java.util.regex.Matcher;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.RecognitionException;
 
 /**
  * Classe principal da aplicacao. Realiza toda a orquestracao do negocio
@@ -14,12 +20,15 @@ import java.util.regex.PatternSyntaxException;
  */
 public class Renamer {
 
+    private List<String> filesBefore = new ArrayList<String>();
+
+    private List<String> filesAfter = new ArrayList<String>();
+
     private Pattern localizar;
 
-    private String substituir;
+    private Element rootReplace;
 
     /* ---------------------------------------------------------------------- */
-
     /**
      * Cria uma instancia do renomeador.
      *
@@ -33,29 +42,70 @@ public class Renamer {
      * @throws ParseException Caso existe algum erro de sintaxe nas strings de
      * localizar e substituir.
      */
-    public Renamer(String localizar, String substituir) throws ParseException {
-        parseLocalizar(localizar);
-        this.substituir = substituir;
-        parseSubstituir();        
+    public Renamer(File files, String search, String replace) throws
+            ParseException {
+        flattenFiles(files);
+        parseLocalizar(search);
+        parseSubstituir(replace);
+        previewRename();
+    }
+
+    /* ---------------------------------------------------------------------- */
+    /**
+     * Retorna uma lista com o nome dos arquivos antes da mudança de nome
+     * @return Lista com o nome dos arquivos
+     */
+    public List<String> getFileNamesBefore() {
+        return this.filesBefore;
+    }
+
+    /**
+     * Retorna uma lista com o nome dos arquivos depois da mudança de nome
+     * @return Lista com o nome dos arquivos
+     */
+    public List<String> getFileNamesAfter() {
+        return this.filesAfter;
+    }
+
+    /**
+     * Executa a renomeação dos arquivos, desde que não existam conflitos
+     */
+    public void rename() {
+    }
+
+    /**
+     * Verifica se existem conflitos de nomes de arquivos destino.
+     * @return True caso existam.
+     */
+    public boolean hasConflicts() {
+        return false;
     }
 
     /* ---------------------------------------------------------------------- */
 
-    public File preview(File original) throws ParseException {
-        String dest = convert(original);
-        
-        return new File(original.getParent() + File.separator + dest);
+    /**
+     * Varre todos os arquivos da pasta e subpastas e preenche o array de
+     * arquivos com seus respectivos nomes completox.
+     *
+     * @param files
+     */
+    private void flattenFiles(File files) {
+        if (files.isDirectory()) {
+            for (File arq : files.listFiles()) {
+                flattenFiles(arq);
+            }
+        } else {
+            this.filesBefore.add(files.getAbsolutePath());
+        }
     }
 
-    public File rename(File original) throws ParseException {
-        File dest = preview(original);
-        original.renameTo(dest);
-
-        return dest;
-    }
-
-    /* ---------------------------------------------------------------------- */
-
+    /**
+     * Verifica se a string de localização do padrão de nome de arquivo é válida
+     * como uma expressão regular
+     * 
+     * @param localizar String de localizar
+     * @throws ParseException Case existe um erro de sintaxe
+     */
     private void parseLocalizar(String localizar) throws ParseException {
         try {
             this.localizar = Pattern.compile(localizar);
@@ -64,16 +114,33 @@ public class Renamer {
         }
     }
 
-    private void parseSubstituir() throws ParseException {
+    /**
+     * Executa um parse na string de substituição, gerando os elementos
+     * correspondentes.
+     *
+     * @param replace String de substituição
+     * @throws ParseException Case exista um erro de sintaxe
+     */
+    private void parseSubstituir(String replace) throws ParseException {
+        RenamerLexer lexer = new RenamerLexer(replace);
+
+        CommonTokenStream cts = new CommonTokenStream(lexer);
+        RenamerParser instance = new RenamerParser(cts);
+
+        try {
+            instance.inicio();
+            this.rootReplace = instance.root;
+        } catch (RecognitionException ex) {
+            throw new ParseException(ex.getMessage(), ex.index);
+        }
     }
 
-    private String convert(File original) throws ParseException {
-        try {
-            Matcher matcher = localizar.matcher(original.getName());
-            return matcher.replaceAll(substituir);
-        } catch (RuntimeException e) {
-            throw new ParseException(e.getMessage(), -1);
-        }
+    /**
+     * Realiza a transformação dos nomes dos arquivos, sem efetivamente
+     * renomeá-los. Preenche a lista com os nomes de destino. 
+     */
+    private void previewRename() {
+        
     }
 
 }

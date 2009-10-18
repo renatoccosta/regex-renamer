@@ -113,9 +113,6 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtAlvo">
-      <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtAlvoFocusLost"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblLocalizar">
       <Properties>

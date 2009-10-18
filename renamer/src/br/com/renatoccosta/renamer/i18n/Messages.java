@@ -11,6 +11,10 @@ public class Messages {
     private static ResourceBundle messages = ResourceBundle.getBundle(
             "br/com/renatoccosta/renamer/i18n/Messages");
 
+    public static String getFieldValidationMessage() {
+        return messages.getString("FieldValidation");
+    }
+
     public static String getExpressionNotFoundMessage(String xpName) {
         return String.format(messages.getString("ExpressionNotFoundException"),
                 xpName);

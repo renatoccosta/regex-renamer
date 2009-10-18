@@ -5,6 +5,7 @@
  */
 package br.com.renatoccosta.renamer;
 
+import br.com.renatoccosta.renamer.i18n.Messages;
 import java.io.File;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -58,12 +59,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         setTitle(bundle.getString("FrmPrincipal.title")); // NOI18N
 
         lblAlvo.setText(bundle.getString("FrmPrincipal.lblAlvo.text")); // NOI18N
-
-        txtAlvo.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                txtAlvoFocusLost(evt);
-            }
-        });
 
         lblLocalizar.setText(bundle.getString("FrmPrincipal.lblLocalizar.text")); // NOI18N
 
@@ -182,30 +177,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
             File file = fc.getSelectedFile();
             txtAlvo.setText(file.getAbsolutePath());
             limparArquivos();
-            listaArquivosAntes(file);
         }
     }//GEN-LAST:event_btnArquivoActionPerformed
 
-    private void txtAlvoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAlvoFocusLost
-        File arquivo = new File(txtAlvo.getText());
-
-        limparArquivos();
-
-        if (arquivo.exists()) {
-            listaArquivosAntes(arquivo);
-        }
-    }//GEN-LAST:event_txtAlvoFocusLost
-
     private void btnPrevisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevisualizarActionPerformed
         try {
+            validarCampos();
+            limparArquivos();
             inicializarRenomeador();
-            txtDepois.setText(null);
-            
-            File arquivo = new File(txtAlvo.getText());
-            if (arquivo.exists()) {
-                listaArquivosDepois(arquivo);
+
+            for (String file : renamer.getFileNamesBefore()) {
+                txtAntes.append(StringUtils.difference(txtAlvo.getText(), file));
+                txtAntes.append("\n");
             }
-        } catch (ParseException ex) {
+
+            for (String file : renamer.getFileNamesAfter()) {
+                txtDepois.append(StringUtils.difference(txtAlvo.getText(), file));
+                txtDepois.append("\n");
+            }
+
+
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     "Erro", JOptionPane.ERROR_MESSAGE);
 
@@ -234,39 +226,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    private void listaArquivosAntes(File pastaOuArquivo) {
-        if (pastaOuArquivo.isDirectory()) {
-            for (File arq : pastaOuArquivo.listFiles()) {
-                listaArquivosAntes(arq);
-            }
-        } else {
-            txtAntes.append(StringUtils.difference(txtAlvo.getText(),
-                    pastaOuArquivo.getAbsolutePath()));
-            txtAntes.append("\n");
-        }
-    }
-
-    private void listaArquivosDepois(File pastaOuArquivo) throws
-            ParseException {
-        if (pastaOuArquivo.isDirectory()) {
-            for (File arq : pastaOuArquivo.listFiles()) {
-                listaArquivosDepois(arq);
-            }
-        } else {
-            File dest = renamer.preview(pastaOuArquivo);
-            txtDepois.append(StringUtils.difference(txtAlvo.getText(),
-                    dest.getAbsolutePath()));
-            txtDepois.append("\n");
-        }
-    }
-
     private void limparArquivos() {
         txtAntes.setText(null);
         txtDepois.setText(null);
     }
 
     private void inicializarRenomeador() throws ParseException {
-        renamer = new Renamer(txtLocalizar.getText(), txtSubstituir.getText());
+        renamer = new Renamer(new File(txtAlvo.getText()),
+                txtLocalizar.getText(), txtSubstituir.getText());
+    }
+
+    private void validarCampos() throws Exception {
+        if (txtAlvo.getText().trim().equals("") ||
+                txtLocalizar.getText().trim().equals("") ||
+                txtSubstituir.getText().trim().equals("")) {
+            throw new Exception(Messages.getFieldValidationMessage());
+        }
     }
 
 }
