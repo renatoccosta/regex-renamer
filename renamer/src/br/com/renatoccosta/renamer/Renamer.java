@@ -1,12 +1,16 @@
 package br.com.renatoccosta.renamer;
 
 import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
+import br.com.renatoccosta.renamer.i18n.Messages;
 import br.com.renatoccosta.renamer.parser.RenamerLexer;
 import br.com.renatoccosta.renamer.parser.RenamerParser;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.antlr.runtime.CommonTokenStream;
@@ -70,7 +74,16 @@ public class Renamer {
     /**
      * Executa a renomeação dos arquivos, desde que não existam conflitos
      */
-    public void rename() {
+    public void rename() throws RenamerException {
+        if (hasConflicts()) {
+            throw new RenamerException(
+                    Messages.getConflictMessage());
+        }
+
+        for (int i = 0; i < filesBefore.size(); i++) {
+            File file = new File(filesBefore.get(i));
+            file.renameTo(new File(filesAfter.get(i)));
+        }
     }
 
     /**
@@ -82,7 +95,6 @@ public class Renamer {
     }
 
     /* ---------------------------------------------------------------------- */
-
     /**
      * Varre todos os arquivos da pasta e subpastas e preenche o array de
      * arquivos com seus respectivos nomes completox.
@@ -140,7 +152,24 @@ public class Renamer {
      * renomeá-los. Preenche a lista com os nomes de destino. 
      */
     private void previewRename() {
-        
+        //iteração na lista de arquivos
+        for (String string : filesBefore) {
+            StringBuffer nomeFinal = new StringBuffer();
+
+            Map<Class<StreamChangeElement>, StreamChangeElement> scList =
+                    new LinkedHashMap<Class<StreamChangeElement>, StreamChangeElement>();
+
+            Element atual = rootReplace;
+            while (atual != null) {
+                if (atual instanceof StreamChangeElement) {
+                    if (scList.containsKey(atual.getClass())) {
+                        scList.remove(atual.getClass());
+//                        scList.add
+                    }
+                } else {
+                }
+            }
+        }
     }
 
 }

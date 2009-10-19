@@ -15,6 +15,10 @@ public class Messages {
         return messages.getString("FieldValidation");
     }
 
+    public static String getConflictMessage() {
+        return messages.getString("Conflict");
+    }
+
     public static String getExpressionNotFoundMessage(String xpName) {
         return String.format(messages.getString("ExpressionNotFoundException"),
                 xpName);
