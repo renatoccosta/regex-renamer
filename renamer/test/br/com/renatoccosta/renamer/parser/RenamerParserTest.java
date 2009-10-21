@@ -27,7 +27,7 @@ public class RenamerParserTest extends TestCase {
     public void testCompleto() throws RecognitionException {
         System.out.println("testCompleto");
 
-        String exemplo = "123abc$1 $2${idx:1:3}";
+        String exemplo = "abc$1 $2${idx:1:3}";
         RenamerLexer lexer = new RenamerLexer(exemplo);
         CommonTokenStream cts = new CommonTokenStream(lexer);
         RenamerParser instance = new RenamerParser(cts);

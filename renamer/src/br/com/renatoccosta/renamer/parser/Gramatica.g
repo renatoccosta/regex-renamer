@@ -1,5 +1,14 @@
 grammar Gramatica;
 
+tokens {
+	CLOSE_ELEMENT='/';
+	SEPCAMPO=':';
+	MARCADOR='$';
+	ENTRA_GRUPO='{';
+	SAI_GRUPO='}';
+	ESCAPE='\\';
+}
+
 @lexer::header{ 
 package br.com.renatoccosta.renamer.parser;
 } 
@@ -16,33 +25,25 @@ public Element root = new LiteralElement("");
 private Element last = root;
 }
 
-inicio	:
+inicio :
 	(
-	ESPACO {
-		Element elem = new LiteralElement($ESPACO.text);
+	literal {
+		Element elem = new LiteralElement($literal.text);
 		last.setNext(elem);
 		last = elem;
-	} | 
-	CARACTERE {
-		Element elem = new LiteralElement($CARACTERE.text);
-		last.setNext(elem);
-		last = elem;
-	} | 
-	NUMERO {
-		Element elem = new LiteralElement($NUMERO.text);
-		last.setNext(elem);
-		last = elem;
-	} | 
+	} 
+	| 
 	grupo {
 		Element elem = $grupo.elm;
 		last.setNext(elem);
 		last = elem;
-	} )+ EOF;
+	}
+	)+ EOF;
 	
 grupo	returns [Element elm] :	
 	MARCADOR 
 	(
-	NUMERO {
+	NUMEROS {
 		$elm = new CaptureGroupElement(Integer.parseInt($NUMERO.text));
 	} | 
 	subgrupo {
@@ -57,12 +58,16 @@ subgrupo returns [Element elem] :
 	};
 
 conteudo:
-	CARACTERE ( SEPCAMPO (CARACTERE | NUMERO)+ )*;
+	(CLOSE_ELEMENT LETRAS | LETRAS (SEPCAMPO literal)* );
 	
-CARACTERE	: ('a'..'z' | 'A'..'Z')+;
-ESPACO		: ' '+;
-NUMERO		: '1'..'9' '0'..'9'*;
-SEPCAMPO	: ':';
-MARCADOR	: '$';
-ENTRA_GRUPO	: '{';
-SAI_GRUPO	: '}';
+literal	:
+	(   ESCAPE ~( '\r' | '\n' )
+        |   ~( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\r' | '\n' )
+        )+
+	;
+
+LETRAS
+	:	('a'..'z' | 'A'..'Z')+;
+NUMEROS	:	 '1'..'9' '0'..'9'*;
+ESPACOS	:	' '+;
+QUALQUER:	~'\n';

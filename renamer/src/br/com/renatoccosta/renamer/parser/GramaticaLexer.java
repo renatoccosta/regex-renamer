@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g 2009-10-15 17:38:33
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g 2009-10-20 15:26:49
  
 package br.com.renatoccosta.renamer.parser;
 
@@ -9,14 +9,19 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class GramaticaLexer extends Lexer {
-    public static final int SEPCAMPO=10;
-    public static final int NUMERO=6;
+    public static final int T__15=15;
+    public static final int SEPCAMPO=5;
+    public static final int ESCAPE=9;
+    public static final int T__14=14;
+    public static final int CLOSE_ELEMENT=4;
+    public static final int ESPACOS=12;
+    public static final int LETRAS=11;
+    public static final int MARCADOR=6;
     public static final int EOF=-1;
-    public static final int CARACTERE=5;
-    public static final int MARCADOR=7;
-    public static final int ESPACO=4;
-    public static final int ENTRA_GRUPO=8;
-    public static final int SAI_GRUPO=9;
+    public static final int NUMEROS=10;
+    public static final int ENTRA_GRUPO=7;
+    public static final int SAI_GRUPO=8;
+    public static final int QUALQUER=13;
 
     // delegates
     // delegators
@@ -31,15 +36,175 @@ public class GramaticaLexer extends Lexer {
     }
     public String getGrammarFileName() { return "G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g"; }
 
-    // $ANTLR start "CARACTERE"
-    public final void mCARACTERE() throws RecognitionException {
+    // $ANTLR start "CLOSE_ELEMENT"
+    public final void mCLOSE_ELEMENT() throws RecognitionException {
         try {
-            int _type = CARACTERE;
+            int _type = CLOSE_ELEMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:11: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:13: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:7:15: ( '/' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:7:17: '/'
             {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:62:13: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            match('/'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "CLOSE_ELEMENT"
+
+    // $ANTLR start "SEPCAMPO"
+    public final void mSEPCAMPO() throws RecognitionException {
+        try {
+            int _type = SEPCAMPO;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:8:10: ( ':' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:8:12: ':'
+            {
+            match(':'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "SEPCAMPO"
+
+    // $ANTLR start "MARCADOR"
+    public final void mMARCADOR() throws RecognitionException {
+        try {
+            int _type = MARCADOR;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:9:10: ( '$' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:9:12: '$'
+            {
+            match('$'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "MARCADOR"
+
+    // $ANTLR start "ENTRA_GRUPO"
+    public final void mENTRA_GRUPO() throws RecognitionException {
+        try {
+            int _type = ENTRA_GRUPO;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:10:13: ( '{' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:10:15: '{'
+            {
+            match('{'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "ENTRA_GRUPO"
+
+    // $ANTLR start "SAI_GRUPO"
+    public final void mSAI_GRUPO() throws RecognitionException {
+        try {
+            int _type = SAI_GRUPO;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:11:11: ( '}' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:11:13: '}'
+            {
+            match('}'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "SAI_GRUPO"
+
+    // $ANTLR start "ESCAPE"
+    public final void mESCAPE() throws RecognitionException {
+        try {
+            int _type = ESCAPE;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:12:8: ( '\\\\' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:12:10: '\\\\'
+            {
+            match('\\'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "ESCAPE"
+
+    // $ANTLR start "T__14"
+    public final void mT__14() throws RecognitionException {
+        try {
+            int _type = T__14;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:13:7: ( '\\r' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:13:9: '\\r'
+            {
+            match('\r'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__14"
+
+    // $ANTLR start "T__15"
+    public final void mT__15() throws RecognitionException {
+        try {
+            int _type = T__15;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:14:7: ( '\\n' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:14:9: '\\n'
+            {
+            match('\n'); 
+
+            }
+
+            state.type = _type;
+            state.channel = _channel;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end "T__15"
+
+    // $ANTLR start "LETRAS"
+    public final void mLETRAS() throws RecognitionException {
+        try {
+            int _type = LETRAS;
+            int _channel = DEFAULT_TOKEN_CHANNEL;
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:70:2: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:70:4: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            {
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:70:4: ( 'a' .. 'z' | 'A' .. 'Z' )+
             int cnt1=0;
             loop1:
             do {
@@ -86,80 +251,31 @@ public class GramaticaLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "CARACTERE"
+    // $ANTLR end "LETRAS"
 
-    // $ANTLR start "ESPACO"
-    public final void mESPACO() throws RecognitionException {
+    // $ANTLR start "NUMEROS"
+    public final void mNUMEROS() throws RecognitionException {
         try {
-            int _type = ESPACO;
+            int _type = NUMEROS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:9: ( ( ' ' )+ )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:11: ( ' ' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:9: ( '1' .. '9' ( '0' .. '9' )* )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:12: '1' .. '9' ( '0' .. '9' )*
             {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:11: ( ' ' )+
-            int cnt2=0;
+            matchRange('1','9'); 
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:21: ( '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
                 int LA2_0 = input.LA(1);
 
-                if ( (LA2_0==' ') ) {
+                if ( ((LA2_0>='0' && LA2_0<='9')) ) {
                     alt2=1;
                 }
 
 
                 switch (alt2) {
             	case 1 :
-            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:11: ' '
-            	    {
-            	    match(' '); 
-
-            	    }
-            	    break;
-
-            	default :
-            	    if ( cnt2 >= 1 ) break loop2;
-                        EarlyExitException eee =
-                            new EarlyExitException(2, input);
-                        throw eee;
-                }
-                cnt2++;
-            } while (true);
-
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "ESPACO"
-
-    // $ANTLR start "NUMERO"
-    public final void mNUMERO() throws RecognitionException {
-        try {
-            int _type = NUMERO;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:9: ( '1' .. '9' ( '0' .. '9' )* )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:11: '1' .. '9' ( '0' .. '9' )*
-            {
-            matchRange('1','9'); 
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:20: ( '0' .. '9' )*
-            loop3:
-            do {
-                int alt3=2;
-                int LA3_0 = input.LA(1);
-
-                if ( ((LA3_0>='0' && LA3_0<='9')) ) {
-                    alt3=1;
-                }
-
-
-                switch (alt3) {
-            	case 1 :
-            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:20: '0' .. '9'
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:21: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -167,7 +283,7 @@ public class GramaticaLexer extends Lexer {
             	    break;
 
             	default :
-            	    break loop3;
+            	    break loop2;
                 }
             } while (true);
 
@@ -180,17 +296,46 @@ public class GramaticaLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "NUMERO"
+    // $ANTLR end "NUMEROS"
 
-    // $ANTLR start "SEPCAMPO"
-    public final void mSEPCAMPO() throws RecognitionException {
+    // $ANTLR start "ESPACOS"
+    public final void mESPACOS() throws RecognitionException {
         try {
-            int _type = SEPCAMPO;
+            int _type = ESPACOS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:65:10: ( ':' )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:65:12: ':'
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:72:9: ( ( ' ' )+ )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:72:11: ( ' ' )+
             {
-            match(':'); 
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:72:11: ( ' ' )+
+            int cnt3=0;
+            loop3:
+            do {
+                int alt3=2;
+                int LA3_0 = input.LA(1);
+
+                if ( (LA3_0==' ') ) {
+                    alt3=1;
+                }
+
+
+                switch (alt3) {
+            	case 1 :
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:72:11: ' '
+            	    {
+            	    match(' '); 
+
+            	    }
+            	    break;
+
+            	default :
+            	    if ( cnt3 >= 1 ) break loop3;
+                        EarlyExitException eee =
+                            new EarlyExitException(3, input);
+                        throw eee;
+                }
+                cnt3++;
+            } while (true);
+
 
             }
 
@@ -200,17 +345,25 @@ public class GramaticaLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "SEPCAMPO"
+    // $ANTLR end "ESPACOS"
 
-    // $ANTLR start "MARCADOR"
-    public final void mMARCADOR() throws RecognitionException {
+    // $ANTLR start "QUALQUER"
+    public final void mQUALQUER() throws RecognitionException {
         try {
-            int _type = MARCADOR;
+            int _type = QUALQUER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:66:10: ( '$' )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:66:12: '$'
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:73:9: (~ '\\n' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:73:11: ~ '\\n'
             {
-            match('$'); 
+            if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\uFFFF') ) {
+                input.consume();
+
+            }
+            else {
+                MismatchedSetException mse = new MismatchedSetException(null,input);
+                recover(mse);
+                throw mse;}
+
 
             }
 
@@ -220,200 +373,94 @@ public class GramaticaLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end "MARCADOR"
-
-    // $ANTLR start "ENTRA_GRUPO"
-    public final void mENTRA_GRUPO() throws RecognitionException {
-        try {
-            int _type = ENTRA_GRUPO;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:67:13: ( '{' )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:67:15: '{'
-            {
-            match('{'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "ENTRA_GRUPO"
-
-    // $ANTLR start "SAI_GRUPO"
-    public final void mSAI_GRUPO() throws RecognitionException {
-        try {
-            int _type = SAI_GRUPO;
-            int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:68:11: ( '}' )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:68:13: '}'
-            {
-            match('}'); 
-
-            }
-
-            state.type = _type;
-            state.channel = _channel;
-        }
-        finally {
-        }
-    }
-    // $ANTLR end "SAI_GRUPO"
+    // $ANTLR end "QUALQUER"
 
     public void mTokens() throws RecognitionException {
-        // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:8: ( CARACTERE | ESPACO | NUMERO | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO )
-        int alt4=7;
-        switch ( input.LA(1) ) {
-        case 'A':
-        case 'B':
-        case 'C':
-        case 'D':
-        case 'E':
-        case 'F':
-        case 'G':
-        case 'H':
-        case 'I':
-        case 'J':
-        case 'K':
-        case 'L':
-        case 'M':
-        case 'N':
-        case 'O':
-        case 'P':
-        case 'Q':
-        case 'R':
-        case 'S':
-        case 'T':
-        case 'U':
-        case 'V':
-        case 'W':
-        case 'X':
-        case 'Y':
-        case 'Z':
-        case 'a':
-        case 'b':
-        case 'c':
-        case 'd':
-        case 'e':
-        case 'f':
-        case 'g':
-        case 'h':
-        case 'i':
-        case 'j':
-        case 'k':
-        case 'l':
-        case 'm':
-        case 'n':
-        case 'o':
-        case 'p':
-        case 'q':
-        case 'r':
-        case 's':
-        case 't':
-        case 'u':
-        case 'v':
-        case 'w':
-        case 'x':
-        case 'y':
-        case 'z':
-            {
-            alt4=1;
-            }
-            break;
-        case ' ':
-            {
-            alt4=2;
-            }
-            break;
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
-        case '6':
-        case '7':
-        case '8':
-        case '9':
-            {
-            alt4=3;
-            }
-            break;
-        case ':':
-            {
-            alt4=4;
-            }
-            break;
-        case '$':
-            {
-            alt4=5;
-            }
-            break;
-        case '{':
-            {
-            alt4=6;
-            }
-            break;
-        case '}':
-            {
-            alt4=7;
-            }
-            break;
-        default:
-            NoViableAltException nvae =
-                new NoViableAltException("", 4, 0, input);
-
-            throw nvae;
-        }
-
+        // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:8: ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | T__14 | T__15 | LETRAS | NUMEROS | ESPACOS | QUALQUER )
+        int alt4=12;
+        alt4 = dfa4.predict(input);
         switch (alt4) {
             case 1 :
-                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:10: CARACTERE
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:10: CLOSE_ELEMENT
                 {
-                mCARACTERE(); 
+                mCLOSE_ELEMENT(); 
 
                 }
                 break;
             case 2 :
-                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:20: ESPACO
-                {
-                mESPACO(); 
-
-                }
-                break;
-            case 3 :
-                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:27: NUMERO
-                {
-                mNUMERO(); 
-
-                }
-                break;
-            case 4 :
-                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:34: SEPCAMPO
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:24: SEPCAMPO
                 {
                 mSEPCAMPO(); 
 
                 }
                 break;
-            case 5 :
-                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:43: MARCADOR
+            case 3 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:33: MARCADOR
                 {
                 mMARCADOR(); 
 
                 }
                 break;
-            case 6 :
-                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:52: ENTRA_GRUPO
+            case 4 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:42: ENTRA_GRUPO
                 {
                 mENTRA_GRUPO(); 
 
                 }
                 break;
-            case 7 :
-                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:64: SAI_GRUPO
+            case 5 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:54: SAI_GRUPO
                 {
                 mSAI_GRUPO(); 
+
+                }
+                break;
+            case 6 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:64: ESCAPE
+                {
+                mESCAPE(); 
+
+                }
+                break;
+            case 7 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:71: T__14
+                {
+                mT__14(); 
+
+                }
+                break;
+            case 8 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:77: T__15
+                {
+                mT__15(); 
+
+                }
+                break;
+            case 9 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:83: LETRAS
+                {
+                mLETRAS(); 
+
+                }
+                break;
+            case 10 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:90: NUMEROS
+                {
+                mNUMEROS(); 
+
+                }
+                break;
+            case 11 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:98: ESPACOS
+                {
+                mESPACOS(); 
+
+                }
+                break;
+            case 12 :
+                // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:1:106: QUALQUER
+                {
+                mQUALQUER(); 
 
                 }
                 break;
@@ -423,6 +470,120 @@ public class GramaticaLexer extends Lexer {
     }
 
 
+    protected DFA4 dfa4 = new DFA4(this);
+    static final String DFA4_eotS =
+        "\27\uffff";
+    static final String DFA4_eofS =
+        "\27\uffff";
+    static final String DFA4_minS =
+        "\1\0\26\uffff";
+    static final String DFA4_maxS =
+        "\1\uffff\26\uffff";
+    static final String DFA4_acceptS =
+        "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1"+
+        "\1\1\2\1\3\1\4\1\5\1\6\1\7\1\11\1\12\1\13";
+    static final String DFA4_specialS =
+        "\1\0\26\uffff}>";
+    static final String[] DFA4_transitionS = {
+            "\12\14\1\10\2\14\1\7\22\14\1\13\3\14\1\3\12\14\1\1\1\14\11"+
+            "\12\1\2\6\14\32\11\1\14\1\6\4\14\32\11\1\4\1\14\1\5\uff82\14",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            "",
+            ""
+    };
+
+    static final short[] DFA4_eot = DFA.unpackEncodedString(DFA4_eotS);
+    static final short[] DFA4_eof = DFA.unpackEncodedString(DFA4_eofS);
+    static final char[] DFA4_min = DFA.unpackEncodedStringToUnsignedChars(DFA4_minS);
+    static final char[] DFA4_max = DFA.unpackEncodedStringToUnsignedChars(DFA4_maxS);
+    static final short[] DFA4_accept = DFA.unpackEncodedString(DFA4_acceptS);
+    static final short[] DFA4_special = DFA.unpackEncodedString(DFA4_specialS);
+    static final short[][] DFA4_transition;
+
+    static {
+        int numStates = DFA4_transitionS.length;
+        DFA4_transition = new short[numStates][];
+        for (int i=0; i<numStates; i++) {
+            DFA4_transition[i] = DFA.unpackEncodedString(DFA4_transitionS[i]);
+        }
+    }
+
+    class DFA4 extends DFA {
+
+        public DFA4(BaseRecognizer recognizer) {
+            this.recognizer = recognizer;
+            this.decisionNumber = 4;
+            this.eot = DFA4_eot;
+            this.eof = DFA4_eof;
+            this.min = DFA4_min;
+            this.max = DFA4_max;
+            this.accept = DFA4_accept;
+            this.special = DFA4_special;
+            this.transition = DFA4_transition;
+        }
+        public String getDescription() {
+            return "1:1: Tokens : ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | T__14 | T__15 | LETRAS | NUMEROS | ESPACOS | QUALQUER );";
+        }
+        public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+            IntStream input = _input;
+        	int _s = s;
+            switch ( s ) {
+                    case 0 : 
+                        int LA4_0 = input.LA(1);
+
+                        s = -1;
+                        if ( (LA4_0=='/') ) {s = 1;}
+
+                        else if ( (LA4_0==':') ) {s = 2;}
+
+                        else if ( (LA4_0=='$') ) {s = 3;}
+
+                        else if ( (LA4_0=='{') ) {s = 4;}
+
+                        else if ( (LA4_0=='}') ) {s = 5;}
+
+                        else if ( (LA4_0=='\\') ) {s = 6;}
+
+                        else if ( (LA4_0=='\r') ) {s = 7;}
+
+                        else if ( (LA4_0=='\n') ) {s = 8;}
+
+                        else if ( ((LA4_0>='A' && LA4_0<='Z')||(LA4_0>='a' && LA4_0<='z')) ) {s = 9;}
+
+                        else if ( ((LA4_0>='1' && LA4_0<='9')) ) {s = 10;}
+
+                        else if ( (LA4_0==' ') ) {s = 11;}
+
+                        else if ( ((LA4_0>='\u0000' && LA4_0<='\t')||(LA4_0>='\u000B' && LA4_0<='\f')||(LA4_0>='\u000E' && LA4_0<='\u001F')||(LA4_0>='!' && LA4_0<='#')||(LA4_0>='%' && LA4_0<='.')||LA4_0=='0'||(LA4_0>=';' && LA4_0<='@')||LA4_0=='['||(LA4_0>=']' && LA4_0<='`')||LA4_0=='|'||(LA4_0>='~' && LA4_0<='\uFFFF')) ) {s = 12;}
+
+                        if ( s>=0 ) return s;
+                        break;
+            }
+            NoViableAltException nvae =
+                new NoViableAltException(getDescription(), 4, _s, input);
+            error(nvae);
+            throw nvae;
+        }
+    }
  
 
 }

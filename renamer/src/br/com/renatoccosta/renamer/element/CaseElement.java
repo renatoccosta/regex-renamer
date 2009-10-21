@@ -52,7 +52,7 @@ public class CaseElement extends StreamChangeElement {
     }
 
     @Override
-    public String convert(String src) {
+    protected String convert(String src) {
         if (UPPER_CASE.equals(mode)) {
             return src.toUpperCase();
         } else if (LOWER_CASE.equals(mode)) {
