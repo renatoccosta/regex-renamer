@@ -8,6 +8,7 @@ package br.com.renatoccosta.renamer;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.io.File;
 import java.text.ParseException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -174,29 +175,39 @@ public class FrmPrincipal extends javax.swing.JFrame {
         int returnVal = fc.showOpenDialog(this);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            txtAlvo.setText(file.getAbsolutePath());
-            limparArquivos();
+            try {
+                File file = fc.getSelectedFile();
+                txtAlvo.setText(file.getAbsolutePath());
+                Renamer ren = new Renamer(file);
+
+                limparArquivos();
+
+                preencherArquivosAntes(ren.getFileNamesBefore());
+
+                preencherArquivosDepois(ren.getFileNamesBefore());
+
+            } catch (ParseException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(),
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+
+                Logger.getLogger(FrmPrincipal.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_btnArquivoActionPerformed
 
     private void btnPrevisualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevisualizarActionPerformed
         try {
             validarCampos();
+
             limparArquivos();
+
             inicializarRenomeador();
-
-            for (String file : renamer.getFileNamesBefore()) {
-                txtAntes.append(StringUtils.difference(txtAlvo.getText(), file));
-                txtAntes.append("\n");
-            }
-
-            for (String file : renamer.getFileNamesAfter()) {
-                txtDepois.append(StringUtils.difference(txtAlvo.getText(), file));
-                txtDepois.append("\n");
-            }
-
-
+            
+            preencherArquivosAntes(renamer.getFileNamesAfter());
+            
+            preencherArquivosDepois(renamer.getFileNamesAfter());
+            
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     "Erro", JOptionPane.ERROR_MESSAGE);
@@ -241,6 +252,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 txtLocalizar.getText().trim().equals("") ||
                 txtSubstituir.getText().trim().equals("")) {
             throw new Exception(Messages.getFieldValidationMessage());
+        }
+    }
+
+    private void preencherArquivosAntes(List<String> fileNames) {
+        for (String file : fileNames) {
+            txtAntes.append(StringUtils.difference(txtAlvo.getText(), file));
+            txtAntes.append("\n");
+        }
+    }
+
+    private void preencherArquivosDepois(List<String> fileNames) {
+        for (String file : fileNames) {
+            txtDepois.append(StringUtils.difference(txtAlvo.getText(), file));
+            txtDepois.append("\n");
         }
     }
 

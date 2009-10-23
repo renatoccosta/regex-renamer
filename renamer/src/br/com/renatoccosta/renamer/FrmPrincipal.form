@@ -37,10 +37,10 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtLocalizar" alignment="0" pref="485" max="32767" attributes="0"/>
-                          <Component id="txtSubstituir" alignment="0" pref="485" max="32767" attributes="0"/>
+                          <Component id="txtLocalizar" alignment="0" pref="513" max="32767" attributes="0"/>
+                          <Component id="txtSubstituir" alignment="0" pref="513" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="txtAlvo" pref="371" max="32767" attributes="0"/>
+                              <Component id="txtAlvo" pref="400" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnArquivo" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -57,7 +57,7 @@
                               <Component id="lblDepois" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="pnlDepois" pref="279" max="32767" attributes="0"/>
+                          <Component id="pnlDepois" pref="283" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>

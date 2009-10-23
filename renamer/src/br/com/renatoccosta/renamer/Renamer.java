@@ -2,16 +2,13 @@ package br.com.renatoccosta.renamer;
 
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.element.base.Element;
-import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import br.com.renatoccosta.renamer.parser.RenamerLexer;
 import br.com.renatoccosta.renamer.parser.RenamerParser;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.antlr.runtime.CommonTokenStream;
@@ -53,6 +50,27 @@ public class Renamer {
         parseLocalizar(search);
         parseSubstituir(replace);
         previewRename();
+    }
+
+    /**
+     * Cria uma instancia do renomeador.
+     *
+     * @param localizar String com o padrao de localizacao dos nomes dos
+     * arquivos a serem alterados. Utiliza a notacao de regex do Java.
+     *
+     * @param substituir String com o padrao de substituicao para o nome de
+     * destino dos arquivos que se encaixarem no padrao de localizacao. Utiliza
+     * a notacao de regex do Java alem das extensoes definidas.
+     *
+     * @throws ParseException Caso existe algum erro de sintaxe nas strings de
+     * localizar e substituir.
+     */
+    public Renamer(File files) throws
+            ParseException {
+        flattenFiles(files);
+//        parseLocalizar(search);
+//        parseSubstituir(replace);
+//        previewRename();
     }
 
     /* ---------------------------------------------------------------------- */
@@ -98,7 +116,7 @@ public class Renamer {
     /* ---------------------------------------------------------------------- */
     /**
      * Varre todos os arquivos da pasta e subpastas e preenche o array de
-     * arquivos com seus respectivos nomes completox.
+     * arquivos com seus respectivos nomes completos.
      *
      * @param files
      */
@@ -153,23 +171,13 @@ public class Renamer {
      * renomeá-los. Preenche a lista com os nomes de destino. 
      */
     private void previewRename() {
+        filesAfter.clear();
+
         //iteração na lista de arquivos
-        for (String string : filesBefore) {
-            StringBuffer nomeFinal = new StringBuffer();
-
-            Map<Class<StreamChangeElement>, StreamChangeElement> scList =
-                    new LinkedHashMap<Class<StreamChangeElement>, StreamChangeElement>();
-
-            Element atual = rootReplace;
-            while (atual != null) {
-                if (atual instanceof StreamChangeElement) {
-                    if (scList.containsKey(atual.getClass())) {
-                        scList.remove(atual.getClass());
-//                        scList.add
-                    }
-                } else {
-                }
-            }
+        for (String strFile : filesBefore) {
+            String destino = rootReplace.getContent(localizar.pattern(), strFile,
+                    new File(strFile));
+            filesAfter.add(destino);
         }
     }
 

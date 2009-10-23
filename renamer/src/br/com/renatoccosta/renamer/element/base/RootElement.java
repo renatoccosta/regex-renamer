@@ -11,7 +11,7 @@ public class RootElement extends StreamChangeElement {
 
     @Override
     protected String convert(String src) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return src;
     }
 
     @Override
