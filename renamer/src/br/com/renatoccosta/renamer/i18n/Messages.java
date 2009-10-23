@@ -36,4 +36,9 @@ public class Messages {
         return messages.getString("CaseElementInvalidParametersMessage");
     }
 
+    public static String getInvalidElementMessage(String id) {
+        return String.format(messages.getString("InvalidElementException"),
+                id);
+    }
+
 }

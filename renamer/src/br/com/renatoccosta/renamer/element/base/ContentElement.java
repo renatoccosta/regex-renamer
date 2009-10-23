@@ -7,10 +7,4 @@ package br.com.renatoccosta.renamer.element.base;
  */
 public abstract class ContentElement extends Element {
 
-    @Override
-    public Element add(Element element) {
-        this.setNext(element);
-        return element;
-    }
-
 }

@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g 2009-10-20 15:26:49
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g 2009-10-23 15:28:08
  
 package br.com.renatoccosta.renamer.parser;
 
@@ -201,10 +201,10 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = LETRAS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:70:2: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:70:4: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:80:2: ( ( 'a' .. 'z' | 'A' .. 'Z' )+ )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:80:4: ( 'a' .. 'z' | 'A' .. 'Z' )+
             {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:70:4: ( 'a' .. 'z' | 'A' .. 'Z' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:80:4: ( 'a' .. 'z' | 'A' .. 'Z' )+
             int cnt1=0;
             loop1:
             do {
@@ -258,11 +258,11 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = NUMEROS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:9: ( '1' .. '9' ( '0' .. '9' )* )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:12: '1' .. '9' ( '0' .. '9' )*
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:81:9: ( '1' .. '9' ( '0' .. '9' )* )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:81:12: '1' .. '9' ( '0' .. '9' )*
             {
             matchRange('1','9'); 
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:21: ( '0' .. '9' )*
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:81:21: ( '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -275,7 +275,7 @@ public class GramaticaLexer extends Lexer {
 
                 switch (alt2) {
             	case 1 :
-            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:21: '0' .. '9'
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:81:21: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -303,10 +303,10 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = ESPACOS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:72:9: ( ( ' ' )+ )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:72:11: ( ' ' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:82:9: ( ( ' ' )+ )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:82:11: ( ' ' )+
             {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:72:11: ( ' ' )+
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:82:11: ( ' ' )+
             int cnt3=0;
             loop3:
             do {
@@ -320,7 +320,7 @@ public class GramaticaLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:72:11: ' '
+            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:82:11: ' '
             	    {
             	    match(' '); 
 
@@ -352,8 +352,8 @@ public class GramaticaLexer extends Lexer {
         try {
             int _type = QUALQUER;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:73:9: (~ '\\n' )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:73:11: ~ '\\n'
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:83:9: (~ '\\n' )
+            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:83:11: ~ '\\n'
             {
             if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\uFFFF') ) {
                 input.consume();

@@ -21,22 +21,20 @@ import br.com.renatoccosta.renamer.element.base.*;
 }
 
 @members {
-public Element root = new LiteralElement("");
-private Element last = root;
+public StreamChangeElement root = new RootElement();
+private StreamChangeElement last = root;
 }
 
 inicio :
 	(
 	literal {
-		Element elem = new LiteralElement($literal.text);
-		last.setNext(elem);
-		last = elem;
+		Element elem = new LiteralElement($literal.text);		
+		last = last.add(elem);;
 	} 
 	| 
 	grupo {
-		Element elem = $grupo.elm;
-		last.setNext(elem);
-		last = elem;
+		if ($grupo.elm != null) 
+			last = last.add($grupo.elm);
 	}
 	)+ EOF;
 	
@@ -44,21 +42,33 @@ grupo	returns [Element elm] :
 	MARCADOR 
 	(
 	NUMEROS {
-		$elm = new CaptureGroupElement(Integer.parseInt($NUMERO.text));
+		$elm = new CaptureGroupElement(Integer.parseInt($NUMEROS.text));
 	} | 
 	subgrupo {
 		$elm = $subgrupo.elem;
 	} );
 
 subgrupo returns [Element elem] :	
-	ENTRA_GRUPO 
-	conteudo 
-	SAI_GRUPO {
-		$elem = ElementFactory.compile($conteudo.text);
+	ENTRA_GRUPO conteudo SAI_GRUPO {
+		$elem = $conteudo.elem;
 	};
 
-conteudo:
-	(CLOSE_ELEMENT LETRAS | LETRAS (SEPCAMPO literal)* );
+conteudo returns [Element elem] :
+	( closeElement 
+	| 
+	otherElement {
+		$elem = ElementFactory.compile($conteudo.text);
+	} );
+	
+closeElement
+	:
+	CLOSE_ELEMENT LETRAS {
+		last.close($LETRAS.text);
+	};
+
+otherElement
+	:
+	LETRAS (SEPCAMPO literal)*;	
 	
 literal	:
 	(   ESCAPE ~( '\r' | '\n' )

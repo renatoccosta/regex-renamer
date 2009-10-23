@@ -1,5 +1,6 @@
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.element.ElementDiscovery;
 import java.io.File;
 
 /**
@@ -10,25 +11,16 @@ import java.io.File;
  */
 public abstract class Element {
 
-    private Element next;
-
-    public Element getNext() {
-        return next;
-    }
-
-    public void setNext(Element next) {
-        this.next = next;
-    }
-
     /**
-     * Adiciona um elemento à cadeia. O comportamento e o retorno varia de
-     * acordo com o tipo e estado deste elemento e com o parâmetro.
+     * Retorna o id do elemento. Este id é utilizado para identificação na
+     * string de substituição
      *
-     * @param element Elemento a ser adicionado à cadeia
-     * @return Depende dos fatores citados acima.
+     * @return
      */
-    public abstract Element add(Element element);
-
+    public String getId() {
+        return ElementDiscovery.lookup(this.getClass());
+    }
+ 
     /**
      * Retorna a string de acordo com a transformação do elemento
      *
@@ -36,7 +28,7 @@ public abstract class Element {
      * @param target String alvo que será alterada. Normalmente é o nome do
      * arquivo.
      * @param file Arquivo associado à string alvo.
-     * @return
+     * @return Conteúdo do elemento
      */
     public abstract String getContent(String find, String target, File file);
 

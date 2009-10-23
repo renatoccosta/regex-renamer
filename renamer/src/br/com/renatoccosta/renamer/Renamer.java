@@ -1,5 +1,6 @@
 package br.com.renatoccosta.renamer;
 
+import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.element.base.Element;
 import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
 import br.com.renatoccosta.renamer.i18n.Messages;

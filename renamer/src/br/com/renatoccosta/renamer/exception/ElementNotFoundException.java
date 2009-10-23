@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package br.com.renatoccosta.renamer.element;
+package br.com.renatoccosta.renamer.exception;
 
 import br.com.renatoccosta.renamer.i18n.Messages;
 
@@ -11,7 +11,7 @@ import br.com.renatoccosta.renamer.i18n.Messages;
  *
  * @author renato
  */
-public class ElementNotFoundException extends RuntimeException {
+public class ElementNotFoundException extends RuntimeRenamerException {
 
     public ElementNotFoundException(String xpName) {
         super(Messages.getExpressionNotFoundMessage(xpName));

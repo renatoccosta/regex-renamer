@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package br.com.renatoccosta.renamer;
+package br.com.renatoccosta.renamer.exception;
 
 /**
  *
