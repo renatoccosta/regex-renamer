@@ -1,6 +1,5 @@
 package br.com.renatoccosta.renamer.parser;
 
-import br.com.renatoccosta.renamer.element.ElementDiscovery;
 import java.io.File;
 import junit.framework.TestCase;
 import org.antlr.runtime.CommonTokenStream;
@@ -19,7 +18,6 @@ public class RenamerParserTest extends TestCase {
     @Override
     protected void setUp() throws Exception {
         super.setUp();
-        ElementDiscovery.initialize();
     }
 
     @Override

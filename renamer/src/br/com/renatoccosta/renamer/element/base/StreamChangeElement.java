@@ -1,6 +1,6 @@
 package br.com.renatoccosta.renamer.element.base;
 
-import br.com.renatoccosta.renamer.element.ElementDiscovery;
+import br.com.renatoccosta.renamer.element.ElementsDirectory;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
 import java.io.File;
@@ -66,7 +66,7 @@ public abstract class StreamChangeElement extends Element {
      * @param id Id do elemento a ser fechado.
      */
     public StreamChangeElement close(String id) {
-        Class<Element> ce = ElementDiscovery.lookup(id);
+        Class<Element> ce = ElementsDirectory.getInstance().lookup(id);
         
         if (ce == null) {
             throw new ElementNotFoundException(id);

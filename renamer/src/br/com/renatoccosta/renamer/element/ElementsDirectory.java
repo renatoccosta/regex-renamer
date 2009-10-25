@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Classe que mantém um map entre o id de cada elemento e sua classe associada.
@@ -17,20 +19,26 @@ import java.util.Set;
  *
  * @author Renato Costa
  */
-public class ElementDiscovery {
+public class ElementsDirectory {
 
-    private static Map<String, Class<Element>> mapId =
+    private static ElementsDirectory discovery = new ElementsDirectory();
+
+    private Map<String, Class<Element>> mapId =
             new HashMap<String, Class<Element>>();
 
-    private static ResourceBundle directory = ResourceBundle.getBundle(
+    private ResourceBundle directory = ResourceBundle.getBundle(
             "br/com/renatoccosta/renamer/element/ElementsDirectory");
 
     /**
      * Carrega os elementos internos e externos no map
      */
-    public static void initialize() throws ClassNotFoundException {
+    private ElementsDirectory() {
         loadInternalElements();
         loadExternalElements();
+    }
+
+    public static ElementsDirectory getInstance() {
+        return discovery;
     }
 
     /**
@@ -40,7 +48,7 @@ public class ElementDiscovery {
      * @param id Nome descritivo da classe
      * @return Classe do elemento ou null caso não encontre
      */
-    public static Class<Element> lookup(String id) {
+    public Class<Element> lookup(String id) {
         Class<Element> cl = mapId.get(id);
         if (cl == null) {
             throw new ElementNotFoundException(id);
@@ -54,7 +62,7 @@ public class ElementDiscovery {
      * @param clasz Classe elemento
      * @return Id do elemento
      */
-    public static String lookup(Class<? extends Element> clasz) {
+    public String lookup(Class<? extends Element> clasz) {
         for (Map.Entry<String, Class<Element>> entry : mapId.entrySet()) {
             if (entry.getValue().equals(clasz)) {
                 return entry.getKey();
@@ -68,13 +76,17 @@ public class ElementDiscovery {
      * Os elementos internos são carregados a partir do arquivo de recurso que
      * informa todos os ids e suas respectivas classes.
      */
-    private static void loadInternalElements() throws ClassNotFoundException {
+    private void loadInternalElements() {
         Set keys = directory.keySet();
         for (Iterator it = keys.iterator(); it.hasNext();) {
-            String id = (String) it.next();
-            Class classElm = Class.forName(directory.getString(id));
-
-            mapId.put(id, classElm);
+            try {
+                String id = (String) it.next();
+                Class classElm = Class.forName(directory.getString(id));
+                mapId.put(id, classElm);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ElementsDirectory.class.getName()).log(
+                        Level.SEVERE, null, ex);
+            }
         }
     }
 

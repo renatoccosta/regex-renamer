@@ -54,6 +54,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnPrevisualizar = new javax.swing.JButton();
         btnAplicar = new javax.swing.JButton();
         btnArquivo = new javax.swing.JButton();
+        barMenu = new javax.swing.JMenuBar();
+        mnuArquivo = new javax.swing.JMenu();
+        mnuAbrir = new javax.swing.JMenuItem();
+        mnuSalvar = new javax.swing.JMenuItem();
+        mnuHelp = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("br/com/renatoccosta/renamer/i18n/Messages"); // NOI18N
@@ -100,6 +105,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        mnuArquivo.setText(bundle.getString("FrmPrincipal.mnuArquivo.text")); // NOI18N
+
+        mnuAbrir.setText(bundle.getString("FrmPrincipal.mnuAbrir.text")); // NOI18N
+        mnuArquivo.add(mnuAbrir);
+
+        mnuSalvar.setText(bundle.getString("FrmPrincipal.mnuSalvar.text")); // NOI18N
+        mnuArquivo.add(mnuSalvar);
+
+        barMenu.add(mnuArquivo);
+
+        mnuHelp.setText(bundle.getString("FrmPrincipal.mnuHelp.text")); // NOI18N
+        barMenu.add(mnuHelp);
+
+        setJMenuBar(barMenu);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,10 +134,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                             .addComponent(lblAlvo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-                            .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                            .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                            .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 371, Short.MAX_VALUE)
+                                .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnArquivo))))
                     .addGroup(layout.createSequentialGroup()
@@ -129,9 +149,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDepois)
                                 .addGap(218, 218, 218))
-                            .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))))
+                            .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addComponent(pnlBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
+            .addComponent(pnlBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,22 +174,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblAntes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlAntes, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
+                        .addComponent(pnlAntes, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(lblDepois)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)))
+                        .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         bindingGroup.bind();
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-625)/2, (screenSize.height-515)/2, 625, 515);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivoActionPerformed
-        final JFileChooser fc = new JFileChooser();
+        final JFileChooser fc = new JFileChooser(txtAlvo.getText());
         fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
 
         int returnVal = fc.showOpenDialog(this);
@@ -204,7 +225,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             inicializarRenomeador();
             
-            preencherArquivosAntes(renamer.getFileNamesAfter());
+            preencherArquivosAntes(renamer.getFileNamesBefore());
             
             preencherArquivosDepois(renamer.getFileNamesAfter());
             
@@ -218,6 +239,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPrevisualizarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar barMenu;
     private javax.swing.JButton btnAplicar;
     private javax.swing.JButton btnArquivo;
     private javax.swing.JButton btnPrevisualizar;
@@ -226,6 +248,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblDepois;
     private javax.swing.JLabel lblLocalizar;
     private javax.swing.JLabel lblSubstituir;
+    private javax.swing.JMenuItem mnuAbrir;
+    private javax.swing.JMenu mnuArquivo;
+    private javax.swing.JMenu mnuHelp;
+    private javax.swing.JMenuItem mnuSalvar;
     private javax.swing.JScrollPane pnlAntes;
     private javax.swing.JPanel pnlBotoes;
     private javax.swing.JScrollPane pnlDepois;

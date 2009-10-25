@@ -18,7 +18,7 @@ public class ElementFactory {
 
         Element ee = null;
         try {
-            ee = ElementDiscovery.lookup(xpName).newInstance();
+            ee = ElementsDirectory.getInstance().lookup(xpName).newInstance();
         } catch (InstantiationException ex) {
             Logger.getLogger(ElementFactory.class.getName()).log(
                     Level.SEVERE, null, ex);

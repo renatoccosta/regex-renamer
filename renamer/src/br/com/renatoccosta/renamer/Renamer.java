@@ -175,9 +175,12 @@ public class Renamer {
 
         //iteração na lista de arquivos
         for (String strFile : filesBefore) {
-            String destino = rootReplace.getContent(localizar.pattern(), strFile,
-                    new File(strFile));
-            filesAfter.add(destino);
+            File f = new File(strFile);
+
+            String destino = rootReplace.getContent(localizar.pattern(), 
+                    f.getName(), f);
+            
+            filesAfter.add(f.getParent() + f.separator + destino);
         }
     }
 

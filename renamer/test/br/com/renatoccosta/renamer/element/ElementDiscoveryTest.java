@@ -25,14 +25,13 @@ public class ElementDiscoveryTest extends TestCase {
 
     public void testInitialize() throws Exception {
         System.out.println("initialize");
-        ElementDiscovery.initialize();
     }
 
     public void testLookup() {
         System.out.println("lookup");
         String id = "case";
         Class expResult = CaseElement.class;
-        Class result = ElementDiscovery.lookup(id);
+        Class result = ElementsDirectory.getInstance().lookup(id);
         assertEquals(expResult, result);
     }
 

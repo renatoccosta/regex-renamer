@@ -1,6 +1,6 @@
 package br.com.renatoccosta.renamer.element.base;
 
-import br.com.renatoccosta.renamer.element.ElementDiscovery;
+import br.com.renatoccosta.renamer.element.ElementsDirectory;
 import java.io.File;
 
 /**
@@ -18,7 +18,7 @@ public abstract class Element {
      * @return
      */
     public String getId() {
-        return ElementDiscovery.lookup(this.getClass());
+        return ElementsDirectory.getInstance().lookup(this.getClass());
     }
  
     /**
