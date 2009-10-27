@@ -17,6 +17,9 @@
                   <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.mnuAbrir.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAbrirActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuSalvar">
               <Properties>
@@ -24,6 +27,9 @@
                   <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.mnuSalvar.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuSalvarActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

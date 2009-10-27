@@ -108,9 +108,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnuArquivo.setText(bundle.getString("FrmPrincipal.mnuArquivo.text")); // NOI18N
 
         mnuAbrir.setText(bundle.getString("FrmPrincipal.mnuAbrir.text")); // NOI18N
+        mnuAbrir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAbrirActionPerformed(evt);
+            }
+        });
         mnuArquivo.add(mnuAbrir);
 
         mnuSalvar.setText(bundle.getString("FrmPrincipal.mnuSalvar.text")); // NOI18N
+        mnuSalvar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSalvarActionPerformed(evt);
+            }
+        });
         mnuArquivo.add(mnuSalvar);
 
         barMenu.add(mnuArquivo);
@@ -224,11 +234,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
             limparArquivos();
 
             inicializarRenomeador();
-            
+
             preencherArquivosAntes(renamer.getFileNamesBefore());
-            
+
             preencherArquivosDepois(renamer.getFileNamesAfter());
-            
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     "Erro", JOptionPane.ERROR_MESSAGE);
@@ -237,6 +247,32 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnPrevisualizarActionPerformed
+
+    private void mnuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrirActionPerformed
+        final JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int returnVal = fc.showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            SavedCriteria criteria = CriteriaDao.load(file);
+            loadCriteria(criteria);
+        }
+    }//GEN-LAST:event_mnuAbrirActionPerformed
+
+    private void mnuSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalvarActionPerformed
+        final JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+        int returnVal = fc.showOpenDialog(this);
+
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            SavedCriteria criteria = saveCriteria();
+            CriteriaDao.save(criteria, file);
+        }
+    }//GEN-LAST:event_mnuSalvarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMenu;
@@ -293,6 +329,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
             txtDepois.append(StringUtils.difference(txtAlvo.getText(), file));
             txtDepois.append("\n");
         }
+    }
+
+    private void loadCriteria(SavedCriteria criteria) {
+        txtAlvo.setText(criteria.getPath());
+        txtLocalizar.setText(criteria.getSearch());
+        txtSubstituir.setText(criteria.getReplace());
+    }
+
+    private SavedCriteria saveCriteria() {
+        SavedCriteria sc = new SavedCriteria();
+        sc.setPath(txtAlvo.getText());
+        sc.setReplace(txtSubstituir.getText());
+        sc.setSearch(txtLocalizar.getText());
+
+        return sc;
     }
 
 }
