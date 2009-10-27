@@ -41,4 +41,8 @@ public class Messages {
                 id);
     }
 
+    public static String getSaveCaption() {
+        return messages.getString("FrmPrincipal.mnuSalvar.text");
+    }
+
 }

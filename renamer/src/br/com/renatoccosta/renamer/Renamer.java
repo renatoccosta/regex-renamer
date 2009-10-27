@@ -94,9 +94,10 @@ public class Renamer {
      * Executa a renomeação dos arquivos, desde que não existam conflitos
      */
     public void rename() throws RenamerException {
+        previewRename();
+
         if (hasConflicts()) {
-            throw new RenamerException(
-                    Messages.getConflictMessage());
+            throw new RenamerException(Messages.getConflictMessage());
         }
 
         for (int i = 0; i < filesBefore.size(); i++) {
@@ -179,8 +180,14 @@ public class Renamer {
 
             String destino = rootReplace.getContent(localizar.pattern(), 
                     f.getName(), f);
+
+            //qnd o destino é vazio é porque a string de localizar não encontrou
+            //uma ocorrência no alvo. o destino deve ser igual à origem.
+            if (destino == null | "".equals(destino)) {
+                destino  = f.getName();
+            }
             
-            filesAfter.add(f.getParent() + f.separator + destino);
+            filesAfter.add(f.getParent() + File.separator + destino);
         }
     }
 

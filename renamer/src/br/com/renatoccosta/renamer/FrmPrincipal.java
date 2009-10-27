@@ -7,10 +7,13 @@ package br.com.renatoccosta.renamer;
 
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang.StringUtils;
@@ -21,11 +24,22 @@ import org.apache.commons.lang.StringUtils;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
+    private static Logger logger = Logger.getLogger(
+            FrmPrincipal.class.getName());
+
     private Renamer renamer;
 
     /** Creates new form FrmPrincipal */
     public FrmPrincipal() {
         initComponents();
+
+        try {
+            InputStream is = this.getClass().getResourceAsStream("/icon.PNG");
+            this.setIconImage(ImageIO.read(is));
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        
     }
 
     /** This method is called from within the constructor to
@@ -221,8 +235,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
                         "Erro", JOptionPane.ERROR_MESSAGE);
 
-                Logger.getLogger(FrmPrincipal.class.getName()).log(
-                        Level.SEVERE, null, ex);
+                logger.log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_btnArquivoActionPerformed
@@ -243,8 +256,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     "Erro", JOptionPane.ERROR_MESSAGE);
 
-            Logger.getLogger(FrmPrincipal.class.getName()).log(
-                    Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnPrevisualizarActionPerformed
 
@@ -255,9 +267,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         int returnVal = fc.showOpenDialog(this);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            SavedCriteria criteria = CriteriaDao.load(file);
-            loadCriteria(criteria);
+            try {
+                File file = fc.getSelectedFile();
+                SavedCriteria criteria = CriteriaDao.load(file);
+                loadCriteria(criteria);
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(),
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+
+                logger.log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_mnuAbrirActionPerformed
 
@@ -265,12 +284,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         final JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
-        int returnVal = fc.showOpenDialog(this);
+        int returnVal = fc.showSaveDialog(this);
 
         if (returnVal == JFileChooser.APPROVE_OPTION) {
-            File file = fc.getSelectedFile();
-            SavedCriteria criteria = saveCriteria();
-            CriteriaDao.save(criteria, file);
+            try {
+                File file = fc.getSelectedFile();
+                SavedCriteria criteria = saveCriteria();
+                CriteriaDao.save(criteria, file);
+            } catch (FileNotFoundException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(),
+                        "Erro", JOptionPane.ERROR_MESSAGE);
+
+                logger.log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_mnuSalvarActionPerformed
 

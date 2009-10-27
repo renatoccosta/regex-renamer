@@ -41,9 +41,13 @@ public class CaptureGroupElement extends ContentElement {
         }
 
         Matcher matcher = patternFind.matcher(target);
-        matcher.matches();
-        
-        return matcher.group(groupNumber);
+        matcher.find();
+
+        try {
+            return matcher.group(groupNumber);
+        } catch (IllegalStateException e) {
+            return "";
+        }
     }
 
     @Override
