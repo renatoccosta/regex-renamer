@@ -8,7 +8,9 @@ import br.com.renatoccosta.renamer.parser.RenamerParser;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.antlr.runtime.CommonTokenStream;
@@ -25,6 +27,8 @@ public class Renamer {
     private List<String> filesBefore = new ArrayList<String>();
 
     private List<String> filesAfter = new ArrayList<String>();
+
+    private int[] idxConflicts = new int[]{};
 
     private Pattern localizar;
 
@@ -111,7 +115,11 @@ public class Renamer {
      * @return True caso existam.
      */
     public boolean hasConflicts() {
-        return false;
+        return idxConflicts.length > 0;
+    }
+
+    public int[] getConflicts() {
+        return idxConflicts;
     }
 
     /* ---------------------------------------------------------------------- */
@@ -178,16 +186,32 @@ public class Renamer {
         for (String strFile : filesBefore) {
             File f = new File(strFile);
 
-            String destino = rootReplace.getContent(localizar.pattern(), 
+            String destino = rootReplace.getContent(localizar.pattern(),
                     f.getName(), f);
 
             //qnd o destino é vazio é porque a string de localizar não encontrou
             //uma ocorrência no alvo. o destino deve ser igual à origem.
             if (destino == null | "".equals(destino)) {
-                destino  = f.getName();
+                destino = f.getName();
             }
-            
+
             filesAfter.add(f.getParent() + File.separator + destino);
+        }
+    }
+
+    private void calculateConflicts() {
+        //chave: nome do arquivo
+        //valor: lista com o indice de cada ocorrência do nome do arquivo na 
+        //lista original
+        Map<String, List<Integer>> conflicts =
+                new HashMap<String, List<Integer>>();
+
+        for (String file : filesAfter) {
+            if (tmp.contains(file)) {
+                idx.add(filesAfter.indexOf(file));
+            }
+
+            tmp.add(file);
         }
     }
 
