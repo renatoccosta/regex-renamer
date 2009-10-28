@@ -45,4 +45,8 @@ public class Messages {
         return messages.getString("FrmPrincipal.mnuSalvar.text");
     }
 
+    public static String getNotReadyMessage() {
+        return messages.getString("NotReady");
+    }
+
 }

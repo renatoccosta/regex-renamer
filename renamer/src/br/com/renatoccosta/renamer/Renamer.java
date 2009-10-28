@@ -28,11 +28,20 @@ public class Renamer {
 
     private List<String> filesAfter = new ArrayList<String>();
 
-    private int[] idxConflicts = new int[]{};
+    /**
+     * Map de nome do arquivo que possui conflitos com os indices de
+     * sua ocorrência na lista filesAfter
+     */
+    private Map<String, List<Integer>> conflicts =
+                new HashMap<String, List<Integer>>();
 
     private Pattern localizar;
 
     private Element rootReplace;
+
+    private static final String TMP_SUFIX = "~";
+
+    private boolean ready = false;
 
     /* ---------------------------------------------------------------------- */
     /**
@@ -54,6 +63,8 @@ public class Renamer {
         parseLocalizar(search);
         parseSubstituir(replace);
         previewRename();
+        calculateConflicts();
+        this.ready = true;
     }
 
     /**
@@ -98,7 +109,9 @@ public class Renamer {
      * Executa a renomeação dos arquivos, desde que não existam conflitos
      */
     public void rename() throws RenamerException {
-        previewRename();
+        if (!ready) {
+            throw new RenamerException(Messages.getNotReadyMessage());
+        }
 
         if (hasConflicts()) {
             throw new RenamerException(Messages.getConflictMessage());
@@ -115,11 +128,11 @@ public class Renamer {
      * @return True caso existam.
      */
     public boolean hasConflicts() {
-        return idxConflicts.length > 0;
+        return conflicts.isEmpty();
     }
 
-    public int[] getConflicts() {
-        return idxConflicts;
+    public Map<String, List<Integer>> getConflicts() {
+        return conflicts;
     }
 
     /* ---------------------------------------------------------------------- */
@@ -200,18 +213,29 @@ public class Renamer {
     }
 
     private void calculateConflicts() {
+        conflicts.clear();
+
         //chave: nome do arquivo
         //valor: lista com o indice de cada ocorrência do nome do arquivo na 
         //lista original
-        Map<String, List<Integer>> conflicts =
+        Map<String, List<Integer>> cfsTemp =
                 new HashMap<String, List<Integer>>();
 
-        for (String file : filesAfter) {
-            if (tmp.contains(file)) {
-                idx.add(filesAfter.indexOf(file));
+        for (int i = 0; i < filesAfter.size(); i++) {
+            String fAfter = filesAfter.get(i);
+            if (cfsTemp.containsKey(fAfter)) {
+                cfsTemp.get(fAfter).add(i);
+            } else {
+                List<Integer> idx = new ArrayList<Integer>();
+                idx.add(i);
+                cfsTemp.put(fAfter, idx);
             }
+        }
 
-            tmp.add(file);
+        for (Map.Entry<String, List<Integer>> entry : cfsTemp.entrySet()) {
+            if (entry.getValue().size() > 1) {
+                conflicts.put(entry.getKey(), entry.getValue());
+            }
         }
     }
 
