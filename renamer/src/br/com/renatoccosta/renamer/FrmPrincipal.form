@@ -83,10 +83,10 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtLocalizar" alignment="0" pref="544" max="32767" attributes="0"/>
-                          <Component id="txtSubstituir" alignment="0" pref="544" max="32767" attributes="0"/>
+                          <Component id="txtLocalizar" alignment="0" pref="524" max="32767" attributes="0"/>
+                          <Component id="txtSubstituir" alignment="0" pref="524" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="txtAlvo" pref="431" max="32767" attributes="0"/>
+                              <Component id="txtAlvo" pref="410" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnArquivo" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -103,13 +103,13 @@
                               <Component id="lblDepois" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
                           </Group>
-                          <Component id="pnlDepois" pref="314" max="32767" attributes="0"/>
+                          <Component id="pnlDepois" pref="318" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="pnlBotoes" alignment="0" pref="617" max="32767" attributes="0"/>
+          <Component id="pnlBotoes" alignment="0" pref="625" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -136,12 +136,12 @@
                   <Group type="102" attributes="0">
                       <Component id="lblAntes" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlAntes" pref="309" max="32767" attributes="0"/>
+                      <Component id="pnlAntes" pref="296" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="lblDepois" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="pnlDepois" pref="309" max="32767" attributes="0"/>
+                      <Component id="pnlDepois" pref="296" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -246,6 +246,9 @@
               <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnAplicar.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAplicarActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

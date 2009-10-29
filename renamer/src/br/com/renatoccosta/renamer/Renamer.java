@@ -33,7 +33,7 @@ public class Renamer {
      * sua ocorrência na lista filesAfter
      */
     private Map<String, List<Integer>> conflicts =
-                new HashMap<String, List<Integer>>();
+            new HashMap<String, List<Integer>>();
 
     private Pattern localizar;
 
@@ -58,7 +58,7 @@ public class Renamer {
      * localizar e substituir.
      */
     public Renamer(File files, String search, String replace) throws
-            ParseException {
+            RenamerException {
         flattenFiles(files);
         parseLocalizar(search);
         parseSubstituir(replace);
@@ -81,7 +81,7 @@ public class Renamer {
      * localizar e substituir.
      */
     public Renamer(File files) throws
-            ParseException {
+            RenamerException {
         flattenFiles(files);
 //        parseLocalizar(search);
 //        parseSubstituir(replace);
@@ -117,10 +117,38 @@ public class Renamer {
             throw new RenamerException(Messages.getConflictMessage());
         }
 
+        /*
+         * o ato de renomear é feito em dois passos para que não existam
+         * conflitos de nomes de arquivos entre os nomes de origem e os de
+         * destino.
+         *
+         * ex:
+         * joao -> maria
+         * maria -> joao
+         *
+         * se 'joao' fosse renomeado diretamente para 'maria', existiria um
+         * conflito de nomes (existe um arquivo com o nome 'maria').
+         *
+         * joao -> joao~
+         * maria -> maria~
+         * joao~ -> maria
+         * maria~ -> joao
+         *
+         * desta forma não existe conflito de nome.
+         */
+
+        //renomea para o temporário
+        for (String strFile : filesBefore) {
+            File file = new File(strFile);
+            file.renameTo(new File(strFile + TMP_SUFIX));
+        }
+
+        //renomea para o definitivo
         for (int i = 0; i < filesBefore.size(); i++) {
-            File file = new File(filesBefore.get(i));
+            File file = new File(filesBefore.get(i) + TMP_SUFIX);
             file.renameTo(new File(filesAfter.get(i)));
         }
+
     }
 
     /**
@@ -142,7 +170,12 @@ public class Renamer {
      *
      * @param files
      */
-    private void flattenFiles(File files) {
+    private void flattenFiles(File files) throws RenamerException {
+        if (!files.exists()) {
+            throw new RenamerException(
+                    Messages.getFileNotFoundMessage());
+        }
+
         if (files.isDirectory()) {
             for (File arq : files.listFiles()) {
                 flattenFiles(arq);
@@ -159,11 +192,11 @@ public class Renamer {
      * @param localizar String de localizar
      * @throws ParseException Case existe um erro de sintaxe
      */
-    private void parseLocalizar(String localizar) throws ParseException {
+    private void parseLocalizar(String localizar) throws RenamerException {
         try {
             this.localizar = Pattern.compile(localizar);
         } catch (PatternSyntaxException e) {
-            throw new ParseException(e.getMessage(), e.getIndex());
+            throw new RenamerException(e);
         }
     }
 
@@ -174,7 +207,7 @@ public class Renamer {
      * @param replace String de substituição
      * @throws ParseException Case exista um erro de sintaxe
      */
-    private void parseSubstituir(String replace) throws ParseException {
+    private void parseSubstituir(String replace) throws RenamerException {
         RenamerLexer lexer = new RenamerLexer(replace);
 
         CommonTokenStream cts = new CommonTokenStream(lexer);
@@ -184,7 +217,7 @@ public class Renamer {
             instance.inicio();
             this.rootReplace = instance.root;
         } catch (RecognitionException ex) {
-            throw new ParseException(ex.getMessage(), ex.index);
+            throw new RenamerException(ex);
         }
     }
 

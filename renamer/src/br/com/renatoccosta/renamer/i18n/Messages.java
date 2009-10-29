@@ -49,4 +49,8 @@ public class Messages {
         return messages.getString("NotReady");
     }
 
+    public static String getFileNotFoundMessage() {
+        return messages.getString("FileNotFound");
+    }
+
 }

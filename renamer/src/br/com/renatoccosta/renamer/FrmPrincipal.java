@@ -5,11 +5,11 @@
  */
 package br.com.renatoccosta.renamer;
 
+import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -110,6 +110,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlBotoes.add(btnPrevisualizar);
 
         btnAplicar.setText(bundle.getString("FrmPrincipal.btnAplicar.text")); // NOI18N
+        btnAplicar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAplicarActionPerformed(evt);
+            }
+        });
         pnlBotoes.add(btnAplicar);
 
         btnArquivo.setText(bundle.getString("FrmPrincipal.btnArquivo.text")); // NOI18N
@@ -158,10 +163,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                             .addComponent(lblAlvo))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
-                            .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                            .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                            .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+                                .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnArquivo))))
                     .addGroup(layout.createSequentialGroup()
@@ -173,9 +178,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblDepois)
                                 .addGap(218, 218, 218))
-                            .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))))
+                            .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addComponent(pnlBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+            .addComponent(pnlBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,11 +203,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblAntes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlAntes, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
+                        .addComponent(pnlAntes, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(lblDepois)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
+                        .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -231,7 +236,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
                 preencherArquivosDepois(ren.getFileNamesBefore());
 
-            } catch (ParseException ex) {
+            } catch (RenamerException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
                         "Erro", JOptionPane.ERROR_MESSAGE);
 
@@ -300,6 +305,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_mnuSalvarActionPerformed
 
+    private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAplicarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMenu;
     private javax.swing.JButton btnAplicar;
@@ -330,7 +339,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtDepois.setText(null);
     }
 
-    private void inicializarRenomeador() throws ParseException {
+    private void inicializarRenomeador() throws RenamerException {
         renamer = new Renamer(new File(txtAlvo.getText()),
                 txtLocalizar.getText(), txtSubstituir.getText());
     }
