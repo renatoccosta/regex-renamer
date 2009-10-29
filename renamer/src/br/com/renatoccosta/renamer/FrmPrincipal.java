@@ -50,7 +50,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         lblAlvo = new javax.swing.JLabel();
         txtAlvo = new javax.swing.JTextField();
@@ -58,16 +57,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtLocalizar = new javax.swing.JTextField();
         lblSubstituir = new javax.swing.JLabel();
         txtSubstituir = new javax.swing.JTextField();
-        lblAntes = new javax.swing.JLabel();
-        pnlAntes = new javax.swing.JScrollPane();
-        txtAntes = new javax.swing.JTextArea();
-        lblDepois = new javax.swing.JLabel();
-        pnlDepois = new javax.swing.JScrollPane();
-        txtDepois = new javax.swing.JTextArea();
         pnlBotoes = new javax.swing.JPanel();
         btnPrevisualizar = new javax.swing.JButton();
         btnAplicar = new javax.swing.JButton();
         btnArquivo = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        pnlArquivos = new javax.swing.JSplitPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstAntes = new javax.swing.JList();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lstDepois = new javax.swing.JList();
         barMenu = new javax.swing.JMenuBar();
         mnuArquivo = new javax.swing.JMenu();
         mnuAbrir = new javax.swing.JMenuItem();
@@ -83,23 +82,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblLocalizar.setText(bundle.getString("FrmPrincipal.lblLocalizar.text")); // NOI18N
 
         lblSubstituir.setText(bundle.getString("FrmPrincipal.lblSubstituir.text")); // NOI18N
-
-        lblAntes.setText(bundle.getString("FrmPrincipal.lblAntes.text")); // NOI18N
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pnlDepois, org.jdesktop.beansbinding.ELProperty.create("${horizontalScrollBar}"), pnlAntes, org.jdesktop.beansbinding.BeanProperty.create("horizontalScrollBar"));
-        bindingGroup.addBinding(binding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pnlDepois, org.jdesktop.beansbinding.ELProperty.create("${verticalScrollBar}"), pnlAntes, org.jdesktop.beansbinding.BeanProperty.create("verticalScrollBar"));
-        bindingGroup.addBinding(binding);
-
-        txtAntes.setColumns(20);
-        txtAntes.setRows(5);
-        pnlAntes.setViewportView(txtAntes);
-
-        lblDepois.setText(bundle.getString("FrmPrincipal.lblDepois.text")); // NOI18N
-
-        txtDepois.setColumns(20);
-        txtDepois.setRows(5);
-        pnlDepois.setViewportView(txtDepois);
 
         btnPrevisualizar.setText(bundle.getString("FrmPrincipal.btnPrevisualizar.text")); // NOI18N
         btnPrevisualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,6 +105,39 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 btnArquivoActionPerformed(evt);
             }
         });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 613, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 28, Short.MAX_VALUE)
+        );
+
+        pnlArquivos.setDividerLocation(280);
+
+        lstAntes.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(lstAntes);
+
+        pnlArquivos.setLeftComponent(jScrollPane1);
+
+        lstDepois.setModel(new javax.swing.AbstractListModel() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public Object getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(lstDepois);
+
+        pnlArquivos.setRightComponent(jScrollPane2);
 
         mnuArquivo.setText(bundle.getString("FrmPrincipal.mnuArquivo.text")); // NOI18N
 
@@ -156,31 +171,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSubstituir)
-                            .addComponent(lblLocalizar)
-                            .addComponent(lblAlvo))
+                    .addComponent(lblSubstituir)
+                    .addComponent(lblLocalizar)
+                    .addComponent(lblAlvo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
-                            .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnArquivo))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAntes)
-                            .addComponent(pnlAntes, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDepois)
-                                .addGap(218, 218, 218))
-                            .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE))))
+                        .addComponent(btnArquivo))
+                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
+                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(pnlBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -199,23 +207,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblSubstituir)
                     .addComponent(txtSubstituir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblAntes)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlAntes, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(lblDepois)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pnlDepois, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)))
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bindingGroup.bind();
-
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-625)/2, (screenSize.height-515)/2, 625, 515);
+        setBounds((screenSize.width-625)/2, (screenSize.height-467)/2, 625, 467);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivoActionPerformed
@@ -314,24 +314,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnAplicar;
     private javax.swing.JButton btnArquivo;
     private javax.swing.JButton btnPrevisualizar;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAlvo;
-    private javax.swing.JLabel lblAntes;
-    private javax.swing.JLabel lblDepois;
     private javax.swing.JLabel lblLocalizar;
     private javax.swing.JLabel lblSubstituir;
+    private javax.swing.JList lstAntes;
+    private javax.swing.JList lstDepois;
     private javax.swing.JMenuItem mnuAbrir;
     private javax.swing.JMenu mnuArquivo;
     private javax.swing.JMenu mnuHelp;
     private javax.swing.JMenuItem mnuSalvar;
-    private javax.swing.JScrollPane pnlAntes;
+    private javax.swing.JSplitPane pnlArquivos;
     private javax.swing.JPanel pnlBotoes;
-    private javax.swing.JScrollPane pnlDepois;
     private javax.swing.JTextField txtAlvo;
-    private javax.swing.JTextArea txtAntes;
-    private javax.swing.JTextArea txtDepois;
     private javax.swing.JTextField txtLocalizar;
     private javax.swing.JTextField txtSubstituir;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
     private void limparArquivos() {
