@@ -1,9 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.renatoccosta.renamer.view;
 
+import br.com.renatoccosta.renamer.Renamer;
+import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -15,8 +13,11 @@ import javax.swing.ListCellRenderer;
  */
 public class FileListRenderer extends JLabel implements ListCellRenderer {
 
-    public FileListRenderer() {
+    private Renamer renamer;
+
+    public FileListRenderer(Renamer renamer) {
         setOpaque(true);
+        this.renamer = renamer;
     }
 
     public Component getListCellRendererComponent(JList list, Object value,
@@ -28,6 +29,10 @@ public class FileListRenderer extends JLabel implements ListCellRenderer {
         } else {
             setBackground(list.getBackground());
             setForeground(list.getForeground());
+        }
+
+        if (renamer.getConflicts().containsKey(value.toString())) {
+            setForeground(Color.red);
         }
 
         setText(value.toString());

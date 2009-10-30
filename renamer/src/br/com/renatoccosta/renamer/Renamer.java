@@ -24,6 +24,10 @@ import org.antlr.runtime.RecognitionException;
  */
 public class Renamer {
 
+    private static final String TMP_SUFIX = "~";
+
+    private File files;
+
     private List<String> filesBefore = new ArrayList<String>();
 
     private List<String> filesAfter = new ArrayList<String>();
@@ -39,53 +43,50 @@ public class Renamer {
 
     private Element rootReplace;
 
-    private static final String TMP_SUFIX = "~";
-
-    private boolean ready = false;
+    /**
+     * Indica que variáveis foram alteradas depois do método
+     * {@code previewRename()} ter sido chamado.
+     */
+    private boolean dirty = true;
 
     /* ---------------------------------------------------------------------- */
     /**
      * Cria uma instancia do renomeador.
-     *
-     * @param localizar String com o padrao de localizacao dos nomes dos
-     * arquivos a serem alterados. Utiliza a notacao de regex do Java.
-     *
-     * @param substituir String com o padrao de substituicao para o nome de
-     * destino dos arquivos que se encaixarem no padrao de localizacao. Utiliza
-     * a notacao de regex do Java alem das extensoes definidas.
-     *
-     * @throws ParseException Caso existe algum erro de sintaxe nas strings de
-     * localizar e substituir.
      */
-    public Renamer(File files, String search, String replace) throws
-            RenamerException {
-        flattenFiles(files);
-        parseLocalizar(search);
-        parseSubstituir(replace);
-        previewRename();
-        calculateConflicts();
-        this.ready = true;
+    public Renamer() {
     }
 
     /**
      * Cria uma instancia do renomeador.
      *
-     * @param localizar String com o padrao de localizacao dos nomes dos
-     * arquivos a serem alterados. Utiliza a notacao de regex do Java.
-     *
-     * @param substituir String com o padrao de substituicao para o nome de
-     * destino dos arquivos que se encaixarem no padrao de localizacao. Utiliza
-     * a notacao de regex do Java alem das extensoes definidas.
-     *
-     * @throws ParseException Caso existe algum erro de sintaxe nas strings de
-     * localizar e substituir.
+     * @throws RenamerException Caso exista algum erro no caminho dos arquivos
      */
     public Renamer(File files) throws
             RenamerException {
-        flattenFiles(files);
-//        parseLocalizar(search);
-//        parseSubstituir(replace);
-//        previewRename();
+        setFiles(files);
+    }
+
+    /**
+     * Cria uma instancia do renomeador.
+     *
+     * @param files
+     *
+     * @param search String com o padrao de localizacao dos nomes dos
+     * arquivos a serem alterados. Utiliza a notacao de regex do Java.
+     *
+     * @param replace String com o padrao de substituicao para o nome de
+     * destino dos arquivos que se encaixarem no padrao de localizacao. Utiliza
+     * a notacao de regex do Java alem das extensoes definidas.
+     *
+     * @throws RenamerException Caso exista algum erro de sintaxe nas strings de
+     * localizar e substituir.
+     */
+    public Renamer(File files, String search, String replace) throws
+            RenamerException {
+        this(files);
+        setSearch(search);
+        setReplace(replace);
+        previewRename();
     }
 
     /* ---------------------------------------------------------------------- */
@@ -105,11 +106,83 @@ public class Renamer {
         return this.filesAfter;
     }
 
+    public Map<String, List<Integer>> getConflicts() {
+        return conflicts;
+    }
+
+    public boolean isReady() {
+        return !this.filesBefore.isEmpty() && this.localizar != null &&
+                this.rootReplace != null;
+    }
+
+    public void setFiles(File files) throws RenamerException {
+        if (files.equals(this.files)) {
+            return;
+        }
+        
+        if (!files.exists()) {
+            throw new RenamerException(
+                    Messages.getFileNotFoundMessage());
+        }
+
+        filesBefore.clear();
+        filesAfter.clear();
+        conflicts.clear();
+
+        flattenFiles(files);
+        this.dirty = true;
+    }
+
+    public void setSearch(String search) throws RenamerException {
+        parseSearch(search);
+        this.dirty = true;
+    }
+
+    public void setReplace(String replace) throws RenamerException {
+        parseReplace(replace);
+        this.dirty = true;
+    }
+
+    /* ---------------------------------------------------------------------- */
     /**
-     * Executa a renomeação dos arquivos, desde que não existam conflitos
+     * Realiza a transformação dos nomes dos arquivos, sem efetivamente
+     * renomeá-los. Preenche a lista com os nomes de destino. Este método deve
+     * ser chamado antes de qualquer outro método desta classe, pois ele prepara
+     * todo o estado desta classe.
+     */
+    public void previewRename() throws RenamerException {
+        if (!isReady()) {
+            throw new RenamerException(Messages.getNotReadyMessage());
+        }
+
+        filesAfter.clear();
+
+        //iteração na lista de arquivos
+        for (String strFile : filesBefore) {
+            File f = new File(strFile);
+
+            String destino = rootReplace.getContent(localizar.pattern(),
+                    f.getName(), f);
+
+            //qnd o destino é vazio é porque a string de localizar não encontrou
+            //uma ocorrência no alvo. o destino deve ser igual à origem.
+            if (destino == null | "".equals(destino)) {
+                destino = f.getName();
+            }
+
+            filesAfter.add(f.getParent() + File.separator + destino);
+        }
+
+        calculateConflicts();
+    }
+
+    /**
+     * Executa a renomeação dos arquivos, desde que não existam conflitos. Antes
+     * de chamar este método, chame o {@code previewRename()} para que resultado
+     * da renomeação saia correto.
      */
     public void rename() throws RenamerException {
-        if (!ready) {
+        if (!isReady() || this.dirty) {
             throw new RenamerException(Messages.getNotReadyMessage());
         }
 
@@ -148,19 +221,18 @@ public class Renamer {
             File file = new File(filesBefore.get(i) + TMP_SUFIX);
             file.renameTo(new File(filesAfter.get(i)));
         }
-
     }
 
     /**
      * Verifica se existem conflitos de nomes de arquivos destino.
      * @return True caso existam.
      */
-    public boolean hasConflicts() {
-        return conflicts.isEmpty();
-    }
+    public boolean hasConflicts() throws RenamerException {
+        if (!isReady() || this.dirty) {
+            throw new RenamerException(Messages.getNotReadyMessage());
+        }
 
-    public Map<String, List<Integer>> getConflicts() {
-        return conflicts;
+        return conflicts.isEmpty();
     }
 
     /* ---------------------------------------------------------------------- */
@@ -171,17 +243,13 @@ public class Renamer {
      * @param files
      */
     private void flattenFiles(File files) throws RenamerException {
-        if (!files.exists()) {
-            throw new RenamerException(
-                    Messages.getFileNotFoundMessage());
-        }
-
         if (files.isDirectory()) {
             for (File arq : files.listFiles()) {
                 flattenFiles(arq);
             }
         } else {
             this.filesBefore.add(files.getAbsolutePath());
+            this.filesAfter.add(files.getAbsolutePath());
         }
     }
 
@@ -192,7 +260,7 @@ public class Renamer {
      * @param localizar String de localizar
      * @throws ParseException Case existe um erro de sintaxe
      */
-    private void parseLocalizar(String localizar) throws RenamerException {
+    private void parseSearch(String localizar) throws RenamerException {
         try {
             this.localizar = Pattern.compile(localizar);
         } catch (PatternSyntaxException e) {
@@ -207,7 +275,7 @@ public class Renamer {
      * @param replace String de substituição
      * @throws ParseException Case exista um erro de sintaxe
      */
-    private void parseSubstituir(String replace) throws RenamerException {
+    private void parseReplace(String replace) throws RenamerException {
         RenamerLexer lexer = new RenamerLexer(replace);
 
         CommonTokenStream cts = new CommonTokenStream(lexer);
@@ -218,30 +286,6 @@ public class Renamer {
             this.rootReplace = instance.root;
         } catch (RecognitionException ex) {
             throw new RenamerException(ex);
-        }
-    }
-
-    /**
-     * Realiza a transformação dos nomes dos arquivos, sem efetivamente
-     * renomeá-los. Preenche a lista com os nomes de destino. 
-     */
-    private void previewRename() {
-        filesAfter.clear();
-
-        //iteração na lista de arquivos
-        for (String strFile : filesBefore) {
-            File f = new File(strFile);
-
-            String destino = rootReplace.getContent(localizar.pattern(),
-                    f.getName(), f);
-
-            //qnd o destino é vazio é porque a string de localizar não encontrou
-            //uma ocorrência no alvo. o destino deve ser igual à origem.
-            if (destino == null | "".equals(destino)) {
-                destino = f.getName();
-            }
-
-            filesAfter.add(f.getParent() + File.separator + destino);
         }
     }
 
