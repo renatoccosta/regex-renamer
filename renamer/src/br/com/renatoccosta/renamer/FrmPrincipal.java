@@ -7,6 +7,7 @@ package br.com.renatoccosta.renamer;
 
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
+import br.com.renatoccosta.renamer.view.FileListRenderer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -14,9 +15,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.commons.lang.StringUtils;
+import org.jdesktop.beansbinding.Converter;
 
 /**
  *
@@ -26,6 +29,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private static Logger logger = Logger.getLogger(
             FrmPrincipal.class.getName());
+
+    private Converter<Double, Integer> conversor =
+            new org.jdesktop.beansbinding.Converter<Double, Integer>() {
+
+                @Override
+                public Double convertReverse(Integer value) {
+                    return new Double(value);
+                }
+
+                @Override
+                public Integer convertForward(Double value) {
+                    return new Integer(value.intValue());
+                }
+
+            };
 
     private Renamer renamer;
 
@@ -39,7 +57,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -50,6 +68,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         lblAlvo = new javax.swing.JLabel();
         txtAlvo = new javax.swing.JTextField();
@@ -63,9 +82,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnArquivo = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         pnlArquivos = new javax.swing.JSplitPane();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        pnlAntes = new javax.swing.JScrollPane();
         lstAntes = new javax.swing.JList();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        pnlDepois = new javax.swing.JScrollPane();
         lstDepois = new javax.swing.JList();
         barMenu = new javax.swing.JMenuBar();
         mnuArquivo = new javax.swing.JMenu();
@@ -112,32 +131,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 613, Short.MAX_VALUE)
+            .addGap(0, 611, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 28, Short.MAX_VALUE)
         );
 
-        pnlArquivos.setDividerLocation(280);
+        pnlArquivos.setContinuousLayout(true);
 
-        lstAntes.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane1.setViewportView(lstAntes);
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pnlDepois, org.jdesktop.beansbinding.ELProperty.create("${verticalScrollBar}"), pnlAntes, org.jdesktop.beansbinding.BeanProperty.create("verticalScrollBar"));
+        bindingGroup.addBinding(binding);
 
-        pnlArquivos.setLeftComponent(jScrollPane1);
+        lstAntes.setModel(new DefaultListModel());
+        pnlAntes.setViewportView(lstAntes);
 
-        lstDepois.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(lstDepois);
+        pnlArquivos.setLeftComponent(pnlAntes);
 
-        pnlArquivos.setRightComponent(jScrollPane2);
+        lstDepois.setModel(new DefaultListModel());
+        lstDepois.setCellRenderer(new FileListRenderer());
+        pnlDepois.setViewportView(lstDepois);
+
+        pnlArquivos.setRightComponent(pnlDepois);
 
         mnuArquivo.setText(bundle.getString("FrmPrincipal.mnuArquivo.text")); // NOI18N
 
@@ -177,17 +192,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
+                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnArquivo))
-                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE)
-                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 544, Short.MAX_VALUE))
+                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE))
                 .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
+            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 597, Short.MAX_VALUE)
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 591, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -207,12 +222,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblSubstituir)
                     .addComponent(txtSubstituir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        bindingGroup.bind();
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-625)/2, (screenSize.height-467)/2, 625, 467);
@@ -315,8 +332,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnArquivo;
     private javax.swing.JButton btnPrevisualizar;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblAlvo;
     private javax.swing.JLabel lblLocalizar;
     private javax.swing.JLabel lblSubstituir;
@@ -326,16 +341,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu mnuArquivo;
     private javax.swing.JMenu mnuHelp;
     private javax.swing.JMenuItem mnuSalvar;
+    private javax.swing.JScrollPane pnlAntes;
     private javax.swing.JSplitPane pnlArquivos;
     private javax.swing.JPanel pnlBotoes;
+    private javax.swing.JScrollPane pnlDepois;
     private javax.swing.JTextField txtAlvo;
     private javax.swing.JTextField txtLocalizar;
     private javax.swing.JTextField txtSubstituir;
+    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
     private void limparArquivos() {
-        txtAntes.setText(null);
-        txtDepois.setText(null);
+        ((DefaultListModel) lstAntes.getModel()).clear();
+        ((DefaultListModel) lstDepois.getModel()).clear();
     }
 
     private void inicializarRenomeador() throws RenamerException {
@@ -353,15 +371,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void preencherArquivosAntes(List<String> fileNames) {
         for (String file : fileNames) {
-            txtAntes.append(StringUtils.difference(txtAlvo.getText(), file));
-            txtAntes.append("\n");
+            ((DefaultListModel) lstAntes.getModel()).addElement(
+                    StringUtils.difference(txtAlvo.getText(), file));
         }
     }
 
     private void preencherArquivosDepois(List<String> fileNames) {
         for (String file : fileNames) {
-            txtDepois.append(StringUtils.difference(txtAlvo.getText(), file));
-            txtDepois.append("\n");
+            ((DefaultListModel) lstDepois.getModel()).addElement(
+                    StringUtils.difference(txtAlvo.getText(), file));
         }
     }
 
