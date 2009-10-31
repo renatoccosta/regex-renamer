@@ -6,7 +6,6 @@ import br.com.renatoccosta.renamer.i18n.Messages;
 import br.com.renatoccosta.renamer.parser.RenamerLexer;
 import br.com.renatoccosta.renamer.parser.RenamerParser;
 import java.io.File;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +25,7 @@ public class Renamer {
 
     private static final String TMP_SUFIX = "~";
 
-    private File files;
+    private File rootFile;
 
     private List<String> filesBefore = new ArrayList<String>();
 
@@ -63,7 +62,7 @@ public class Renamer {
      */
     public Renamer(File files) throws
             RenamerException {
-        setFiles(files);
+        setRootFiles(files);
     }
 
     /**
@@ -90,6 +89,11 @@ public class Renamer {
     }
 
     /* ---------------------------------------------------------------------- */
+
+    public File getRootFile() {
+        return rootFile;
+    }
+
     /**
      * Retorna uma lista com o nome dos arquivos antes da mudança de nome
      * @return Lista com o nome dos arquivos
@@ -115,21 +119,22 @@ public class Renamer {
                 this.rootReplace != null;
     }
 
-    public void setFiles(File files) throws RenamerException {
-        if (files.equals(this.files)) {
+    public void setRootFiles(File rootFile) throws RenamerException {
+        if (rootFile.equals(this.rootFile)) {
             return;
         }
         
-        if (!files.exists()) {
+        if (!rootFile.exists()) {
             throw new RenamerException(
                     Messages.getFileNotFoundMessage());
         }
 
-        filesBefore.clear();
-        filesAfter.clear();
-        conflicts.clear();
+        this.rootFile = rootFile;
+        this.filesBefore.clear();
+        this.filesAfter.clear();
+        this.conflicts.clear();
 
-        flattenFiles(files);
+        flattenFiles(rootFile);
         this.dirty = true;
     }
 

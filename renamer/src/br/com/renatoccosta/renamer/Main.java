@@ -1,5 +1,6 @@
 package br.com.renatoccosta.renamer;
 
+import br.com.renatoccosta.renamer.view.FrmPrincipal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;

@@ -3,22 +3,19 @@
  *
  * Created on 28/09/2009, 09:43:12
  */
-package br.com.renatoccosta.renamer;
+package br.com.renatoccosta.renamer.view;
 
+import br.com.renatoccosta.renamer.*;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
-import br.com.renatoccosta.renamer.view.FileListRenderer;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -105,12 +102,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pnlDepois, org.jdesktop.beansbinding.ELProperty.create("${verticalScrollBar}"), pnlAntes, org.jdesktop.beansbinding.BeanProperty.create("verticalScrollBar"));
         bindingGroup.addBinding(binding);
 
-        lstAntes.setModel(new DefaultListModel());
+        lstAntes.setModel(new RenamerBeforeListModel(renamer));
         pnlAntes.setViewportView(lstAntes);
 
         pnlArquivos.setLeftComponent(pnlAntes);
 
-        lstDepois.setModel(new DefaultListModel());
+        lstDepois.setModel(new RenamerAfterListModel(renamer));
         lstDepois.setCellRenderer(new FileListRenderer(this.renamer));
         pnlDepois.setViewportView(lstDepois);
 
@@ -176,17 +173,17 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnArquivo))
-                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE))
+                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
-            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)
+            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 622, Short.MAX_VALUE)
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -206,7 +203,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblSubstituir)
                     .addComponent(txtSubstituir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -230,13 +227,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 File file = fc.getSelectedFile();
 
                 txtAlvo.setText(file.getAbsolutePath());
-                renamer.setFiles(file);
-
-                clearFiles();
-
-                fillFilesBefore(renamer.getFileNamesBefore());
-
-                fillFilesLater(renamer.getFileNamesBefore());
+                renamer.setRootFiles(file);
+                
+                ((RenamerListModel) lstAntes.getModel()).refresh();
+                ((RenamerListModel) lstDepois.getModel()).refresh();
 
             } catch (RenamerException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
@@ -251,15 +245,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         try {
             validateFields();
 
-            clearFiles();
-
             configureRenamer();
 
             renamer.previewRename();
 
-            fillFilesBefore(renamer.getFileNamesBefore());
-
-            fillFilesLater(renamer.getFileNamesAfter());
+            ((RenamerListModel) lstAntes.getModel()).refresh();
+            ((RenamerListModel) lstDepois.getModel()).refresh();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
@@ -344,30 +335,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
-    private void clearFiles() {
-        ((DefaultListModel) lstAntes.getModel()).clear();
-        ((DefaultListModel) lstDepois.getModel()).clear();
-    }
-
     private void validateFields() throws Exception {
         if (txtAlvo.getText().trim().equals("") ||
                 txtLocalizar.getText().trim().equals("") ||
                 txtSubstituir.getText().trim().equals("")) {
             throw new Exception(Messages.getFieldValidationMessage());
-        }
-    }
-
-    private void fillFilesBefore(List<String> fileNames) {
-        for (String file : fileNames) {
-            ((DefaultListModel) lstAntes.getModel()).addElement(
-                    StringUtils.difference(txtAlvo.getText(), file));
-        }
-    }
-
-    private void fillFilesLater(List<String> fileNames) {
-        for (String file : fileNames) {
-            ((DefaultListModel) lstDepois.getModel()).addElement(
-                    StringUtils.difference(txtAlvo.getText(), file));
         }
     }
 
@@ -387,7 +359,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     private void configureRenamer() throws RenamerException {
-        renamer.setFiles(new File(txtAlvo.getText()));
+        renamer.setRootFiles(new File(txtAlvo.getText()));
         renamer.setReplace(txtSubstituir.getText());
         renamer.setSearch(txtLocalizar.getText());
     }

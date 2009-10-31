@@ -31,7 +31,8 @@ public class FileListRenderer extends JLabel implements ListCellRenderer {
             setForeground(list.getForeground());
         }
 
-        if (renamer.getConflicts().containsKey(value.toString())) {
+        if (renamer.getConflicts().containsKey(
+                renamer.getFileNamesAfter().get(index))) {
             setForeground(Color.red);
         }
 
