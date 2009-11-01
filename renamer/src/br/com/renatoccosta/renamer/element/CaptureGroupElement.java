@@ -30,6 +30,11 @@ public class CaptureGroupElement extends ContentElement {
     }
 
     @Override
+    public String[] getParameters() {
+        return new String[] {String.valueOf(groupNumber)};
+    }
+
+    @Override
     public void setParameters(String... groupNumber) {
         this.groupNumber = Integer.parseInt(groupNumber[0]);
     }
@@ -53,6 +58,11 @@ public class CaptureGroupElement extends ContentElement {
     @Override
     public String toString() {
         return "$" + groupNumber;
+    }
+
+    @Override
+    public void resetState() {
+        
     }
 
 }

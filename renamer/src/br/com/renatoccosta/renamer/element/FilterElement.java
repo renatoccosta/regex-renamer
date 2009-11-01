@@ -24,6 +24,11 @@ public class FilterElement extends StreamChangeElement {
     private String mode = SYMBOLS;
 
     @Override
+    public String[] getParameters() {
+        return new String[] {mode};
+    }
+
+    @Override
     public void setParameters(String... content) {
         if (content.length > 0) {
             String mode = content[0];

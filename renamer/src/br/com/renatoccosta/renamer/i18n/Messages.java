@@ -11,6 +11,10 @@ public class Messages {
     private static ResourceBundle messages = ResourceBundle.getBundle(
             "br/com/renatoccosta/renamer/i18n/Messages");
 
+    public static String getTitle() {
+        return messages.getString("FrmPrincipal.title");
+    }
+
     public static String getFieldValidationMessage() {
         return messages.getString("FieldValidation");
     }
@@ -51,6 +55,10 @@ public class Messages {
 
     public static String getFileNotFoundMessage() {
         return messages.getString("FileNotFound");
+    }
+
+    public static String getConfirmRenameMessage() {
+        return messages.getString("ConfirmRename");
     }
 
 }

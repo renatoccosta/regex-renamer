@@ -10,8 +10,18 @@ package br.com.renatoccosta.renamer.element.base;
 public class RootElement extends StreamChangeElement {
 
     @Override
+    public String getId() {
+        return "root";
+    }
+
+    @Override
     protected String convert(String src) {
         return src;
+    }
+
+    @Override
+    public String[] getParameters() {
+        return new String[] {};
     }
 
     @Override

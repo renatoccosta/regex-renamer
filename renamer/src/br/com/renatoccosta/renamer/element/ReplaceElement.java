@@ -17,6 +17,18 @@ public class ReplaceElement extends StreamChangeElement {
     private String[] para = new String[] {""};
 
     @Override
+    public String[] getParameters() {
+        String[] parms = new String[de.length + para.length];
+
+        for (int i = 0; i < parms.length; i+=2) {
+            parms[i] = de[i/2];
+            parms[i+1] = para[i/2];
+        }
+
+        return parms;
+    }
+
+    @Override
     public void setParameters(String... content) {
         if (content.length % 2 > 0) {
             throw new IllegalArgumentException(

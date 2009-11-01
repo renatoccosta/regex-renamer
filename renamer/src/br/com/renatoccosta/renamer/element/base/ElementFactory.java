@@ -1,4 +1,4 @@
-package br.com.renatoccosta.renamer.element;
+package br.com.renatoccosta.renamer.element.base;
 
 import br.com.renatoccosta.renamer.element.base.Element;
 import java.util.logging.Level;

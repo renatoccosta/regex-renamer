@@ -16,6 +16,11 @@ public class LiteralElement extends ContentElement {
     }
 
     @Override
+    public String[] getParameters() {
+        return new String[] {content};
+    }
+
+    @Override
     public void setParameters(String... content) {
         this.content = content[0];
     }
@@ -23,6 +28,15 @@ public class LiteralElement extends ContentElement {
     @Override
     public String getContent(String find, String target, File file) {
         return content;
+    }
+
+    @Override
+    public String toString() {
+        return content;
+    }
+
+    @Override
+    public void resetState() {
     }
 
 }

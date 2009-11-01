@@ -26,9 +26,12 @@ public class CaseElement extends StreamChangeElement {
 
     public static final String SWAP = "swap";
 
-    public static final String NONE = "none";
+    private String mode = LOWER_CASE;
 
-    private String mode = NONE;
+    @Override
+    public String[] getParameters() {
+        return new String[] {mode};
+    }
 
     /**
      * Itens do array:
@@ -42,7 +45,7 @@ public class CaseElement extends StreamChangeElement {
             String mode = content[0];
 
             if (UPPER_CASE.equals(mode) || LOWER_CASE.equals(mode) ||
-                    SWAP.equals(mode) || NONE.equals(mode)) {
+                    SWAP.equals(mode)) {
                 this.mode = mode;
             } else {
                 throw new IllegalArgumentException(

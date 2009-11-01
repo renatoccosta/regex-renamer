@@ -28,4 +28,14 @@ public class FileInformationElement extends ExpressionElement {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    @Override
+    public String[] getParameters() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void resetState() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

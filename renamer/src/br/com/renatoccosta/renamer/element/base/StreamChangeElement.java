@@ -1,6 +1,5 @@
 package br.com.renatoccosta.renamer.element.base;
 
-import br.com.renatoccosta.renamer.element.ElementsDirectory;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
 import java.io.File;
@@ -67,7 +66,7 @@ public abstract class StreamChangeElement extends Element {
      */
     public StreamChangeElement close(String id) {
         Class<Element> ce = ElementsDirectory.getInstance().lookup(id);
-        
+
         if (ce == null) {
             throw new ElementNotFoundException(id);
         }
@@ -84,7 +83,7 @@ public abstract class StreamChangeElement extends Element {
                 throw new InvalidElementException(id);
             }
         }
-        
+
         return this.parent;
     }
 
@@ -117,5 +116,34 @@ public abstract class StreamChangeElement extends Element {
      * @return String convertida
      */
     protected abstract String convert(String src);
+
+    @Override
+    public void resetState() {
+        for (Element element : childs) {
+            element.resetState();
+        }
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+
+        sb.append("${").append(getId());
+
+        String params = getParametersAsString();
+        if (!"".equals(params)) {
+            sb.append(":").append(params);
+        }
+
+        sb.append("}");
+
+        for (Element element : childs) {
+            sb.append(element.toString());
+        }
+
+        sb.append("${/").append(getId()).append("}");
+
+        return sb.toString();
+    }
 
 }

@@ -1,6 +1,7 @@
 
 package br.com.renatoccosta.renamer.element;
 
+import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
 import junit.framework.TestCase;
 
 /**

@@ -54,10 +54,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblAlvo = new javax.swing.JLabel();
         txtAlvo = new javax.swing.JTextField();
         btnArquivo = new javax.swing.JButton();
+        chkSubpastas = new javax.swing.JCheckBox();
         lblLocalizar = new javax.swing.JLabel();
         txtLocalizar = new javax.swing.JTextField();
         lblSubstituir = new javax.swing.JLabel();
         txtSubstituir = new javax.swing.JTextField();
+        lblArquivos = new javax.swing.JLabel();
         pnlArquivos = new javax.swing.JSplitPane();
         pnlAntes = new javax.swing.JScrollPane();
         lstAntes = new javax.swing.JList();
@@ -92,9 +94,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        chkSubpastas.setText(bundle.getString("FrmPrincipal.chkSubpastas.text")); // NOI18N
+        chkSubpastas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkSubpastasActionPerformed(evt);
+            }
+        });
+
         lblLocalizar.setText(bundle.getString("FrmPrincipal.lblLocalizar.text")); // NOI18N
 
         lblSubstituir.setText(bundle.getString("FrmPrincipal.lblSubstituir.text")); // NOI18N
+
+        lblArquivos.setText(bundle.getString("FrmPrincipal.lblArquivos.text")); // NOI18N
 
         pnlArquivos.setDividerLocation(.5d);
         pnlArquivos.setContinuousLayout(true);
@@ -166,21 +177,32 @@ public class FrmPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSubstituir)
-                    .addComponent(lblLocalizar)
-                    .addComponent(lblAlvo))
+                .addComponent(lblAlvo)
+                .addGap(46, 46, 46)
+                .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnArquivo))
-                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
-                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
+                .addComponent(btnArquivo)
                 .addContainerGap())
             .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
             .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(chkSubpastas)
+                .addContainerGap(497, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSubstituir)
+                    .addComponent(lblLocalizar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
+                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblArquivos)
+                .addContainerGap(472, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
@@ -195,6 +217,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(txtAlvo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnArquivo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(chkSubpastas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLocalizar)
                     .addComponent(txtLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,7 +227,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblSubstituir)
                     .addComponent(txtSubstituir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(lblArquivos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -213,7 +239,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         bindingGroup.bind();
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-650)/2, (screenSize.height-500)/2, 650, 500);
+        setBounds((screenSize.width-650)/2, (screenSize.height-481)/2, 650, 481);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivoActionPerformed
@@ -227,10 +253,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 File file = fc.getSelectedFile();
 
                 txtAlvo.setText(file.getAbsolutePath());
-                renamer.setRootFiles(file);
-                
-                ((RenamerListModel) lstAntes.getModel()).refresh();
-                ((RenamerListModel) lstDepois.getModel()).refresh();
+
+                configureRenamer(true);
 
             } catch (RenamerException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
@@ -245,7 +269,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         try {
             validateFields();
 
-            configureRenamer();
+            configureRenamer(false);
 
             renamer.previewRename();
 
@@ -269,9 +293,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
                 File file = fc.getSelectedFile();
+
                 SavedCriteria criteria = CriteriaDao.load(file);
                 loadCriteria(criteria);
-            } catch (FileNotFoundException ex) {
+
+                configureRenamer(true);
+
+            } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
                         "Erro", JOptionPane.ERROR_MESSAGE);
 
@@ -301,7 +329,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuSalvarActionPerformed
 
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
-        // TODO add your handling code here:
+        try {
+            validateFields();
+
+            int result = JOptionPane.showConfirmDialog(this,
+                    Messages.getConfirmRenameMessage(),
+                    Messages.getTitle(), JOptionPane.YES_NO_OPTION);
+
+            if (result == JOptionPane.YES_OPTION) {
+                configureRenamer(false);
+                renamer.rename();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+
+            logger.log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnAplicarActionPerformed
 
     private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
@@ -309,12 +353,70 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlArquivos.setDividerLocation(.5d);
     }//GEN-LAST:event_formComponentResized
 
+    private void chkSubpastasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkSubpastasActionPerformed
+        try {
+            configureRenamer(true);
+        } catch (RenamerException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    "Erro", JOptionPane.ERROR_MESSAGE);
+
+            logger.log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_chkSubpastasActionPerformed
+
+    private void validateFields() throws Exception {
+        if (txtAlvo.getText().trim().equals("") ||
+                txtLocalizar.getText().trim().equals("") ||
+                txtSubstituir.getText().trim().equals("")) {
+            throw new Exception(Messages.getFieldValidationMessage());
+        }
+    }
+
+    private void loadCriteria(SavedCriteria criteria) {
+        txtAlvo.setText(criteria.getPath());
+        txtLocalizar.setText(criteria.getSearch());
+        txtSubstituir.setText(criteria.getReplace());
+        chkSubpastas.setSelected(criteria.isIncludeSubfolders());
+    }
+
+    private SavedCriteria saveCriteria() {
+        SavedCriteria sc = new SavedCriteria();
+        sc.setPath(txtAlvo.getText());
+        sc.setReplace(txtSubstituir.getText());
+        sc.setSearch(txtLocalizar.getText());
+        sc.setIncludeSubfolders(chkSubpastas.isSelected());
+
+        return sc;
+    }
+
+    private void configureRenamer(boolean refreshLists) throws RenamerException {
+        if (!"".equals(txtAlvo.getText())) {
+            renamer.setRootFiles(new File(txtAlvo.getText()),
+                    chkSubpastas.isSelected());
+        }
+
+        if (!"".equals(txtSubstituir.getText())) {
+            renamer.setReplace(txtSubstituir.getText());
+        }
+
+        if (!"".equals(txtLocalizar.getText())) {
+            renamer.setSearch(txtLocalizar.getText());
+        }
+
+        if (refreshLists) {
+            ((RenamerListModel) lstAntes.getModel()).refresh();
+            ((RenamerListModel) lstDepois.getModel()).refresh();
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barMenu;
     private javax.swing.JButton btnAplicar;
     private javax.swing.JButton btnArquivo;
     private javax.swing.JButton btnPrevisualizar;
+    private javax.swing.JCheckBox chkSubpastas;
     private javax.swing.JLabel lblAlvo;
+    private javax.swing.JLabel lblArquivos;
     private javax.swing.JLabel lblLocalizar;
     private javax.swing.JLabel lblSubstituir;
     private javax.swing.JLabel lblText;
@@ -334,34 +436,5 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtSubstituir;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
-
-    private void validateFields() throws Exception {
-        if (txtAlvo.getText().trim().equals("") ||
-                txtLocalizar.getText().trim().equals("") ||
-                txtSubstituir.getText().trim().equals("")) {
-            throw new Exception(Messages.getFieldValidationMessage());
-        }
-    }
-
-    private void loadCriteria(SavedCriteria criteria) {
-        txtAlvo.setText(criteria.getPath());
-        txtLocalizar.setText(criteria.getSearch());
-        txtSubstituir.setText(criteria.getReplace());
-    }
-
-    private SavedCriteria saveCriteria() {
-        SavedCriteria sc = new SavedCriteria();
-        sc.setPath(txtAlvo.getText());
-        sc.setReplace(txtSubstituir.getText());
-        sc.setSearch(txtLocalizar.getText());
-
-        return sc;
-    }
-
-    private void configureRenamer() throws RenamerException {
-        renamer.setRootFiles(new File(txtAlvo.getText()));
-        renamer.setReplace(txtSubstituir.getText());
-        renamer.setSearch(txtLocalizar.getText());
-    }
 
 }

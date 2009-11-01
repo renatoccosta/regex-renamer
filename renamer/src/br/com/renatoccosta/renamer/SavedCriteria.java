@@ -12,6 +12,8 @@ public class SavedCriteria {
 
     private String replace;
 
+    private boolean includeSubfolders = false;
+
     public SavedCriteria() {
     }
 
@@ -43,6 +45,14 @@ public class SavedCriteria {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public boolean isIncludeSubfolders() {
+        return includeSubfolders;
+    }
+
+    public void setIncludeSubfolders(boolean includeSubfolders) {
+        this.includeSubfolders = includeSubfolders;
     }
 
 }

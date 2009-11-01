@@ -27,7 +27,15 @@ public class IndexedElement extends ExpressionElement {
 
     private int cont = 0;
 
-    private int leadingZeros = 0;
+    private int contOriginal = 0;
+
+    private int leadingZeros = 1;
+
+    @Override
+    public String[] getParameters() {
+        return new String[]{String.valueOf(contOriginal),
+                    String.valueOf(leadingZeros)};
+    }
 
     /**
      * Itens do array:
@@ -40,6 +48,7 @@ public class IndexedElement extends ExpressionElement {
     public void setParameters(String... content) {
         if (content.length > 0) {
             cont = Integer.parseInt(content[0]);
+            contOriginal = cont;
         }
 
         if (content.length > 1) {
@@ -49,7 +58,12 @@ public class IndexedElement extends ExpressionElement {
 
     @Override
     public String getContent(String find, String target, File file) {
-        return String.format("%0" + leadingZeros +"d", cont++);
+        return String.format("%0" + leadingZeros + "d", cont++);
+    }
+
+    @Override
+    public void resetState() {
+        this.cont = contOriginal;
     }
 
 }

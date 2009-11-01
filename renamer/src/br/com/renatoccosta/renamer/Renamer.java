@@ -6,10 +6,12 @@ import br.com.renatoccosta.renamer.i18n.Messages;
 import br.com.renatoccosta.renamer.parser.RenamerLexer;
 import br.com.renatoccosta.renamer.parser.RenamerParser;
 import java.io.File;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.antlr.runtime.CommonTokenStream;
@@ -27,6 +29,8 @@ public class Renamer {
 
     private File rootFile;
 
+    private boolean includeSubFolders = false;
+
     private List<String> filesBefore = new ArrayList<String>();
 
     private List<String> filesAfter = new ArrayList<String>();
@@ -38,7 +42,7 @@ public class Renamer {
     private Map<String, List<Integer>> conflicts =
             new HashMap<String, List<Integer>>();
 
-    private Pattern localizar;
+    private Pattern search;
 
     private Element rootReplace;
 
@@ -58,17 +62,21 @@ public class Renamer {
     /**
      * Cria uma instancia do renomeador.
      *
+     * @param files Pasta ou Arquivo a ser renomeado. Se for uma pasta, todos os
+     * arquivos desta e das subpastas serão considerados.
+     *
      * @throws RenamerException Caso exista algum erro no caminho dos arquivos
      */
     public Renamer(File files) throws
             RenamerException {
-        setRootFiles(files);
+        setRootFiles(files, true);
     }
 
     /**
      * Cria uma instancia do renomeador.
      *
-     * @param files
+     * @param files Pasta ou Arquivo a ser renomeado. Se for uma pasta, todos os
+     * arquivos desta e das subpastas serão considerados.
      *
      * @param search String com o padrao de localizacao dos nomes dos
      * arquivos a serem alterados. Utiliza a notacao de regex do Java.
@@ -89,7 +97,6 @@ public class Renamer {
     }
 
     /* ---------------------------------------------------------------------- */
-
     public File getRootFile() {
         return rootFile;
     }
@@ -115,15 +122,17 @@ public class Renamer {
     }
 
     public boolean isReady() {
-        return !this.filesBefore.isEmpty() && this.localizar != null &&
+        return !this.filesBefore.isEmpty() && this.search != null &&
                 this.rootReplace != null;
     }
 
-    public void setRootFiles(File rootFile) throws RenamerException {
-        if (rootFile.equals(this.rootFile)) {
+    public void setRootFiles(File rootFile, boolean includeSubFolders) throws
+            RenamerException {
+        if (rootFile.equals(this.rootFile) && includeSubFolders ==
+                this.includeSubFolders) {
             return;
         }
-        
+
         if (!rootFile.exists()) {
             throw new RenamerException(
                     Messages.getFileNotFoundMessage());
@@ -134,18 +143,31 @@ public class Renamer {
         this.filesAfter.clear();
         this.conflicts.clear();
 
-        flattenFiles(rootFile);
+        flattenFiles(rootFile, includeSubFolders);
         this.dirty = true;
     }
 
     public void setSearch(String search) throws RenamerException {
+        if (this.search != null && search.equals(this.search.pattern())) {
+            return;
+        }
+
         parseSearch(search);
         this.dirty = true;
     }
 
     public void setReplace(String replace) throws RenamerException {
+        String lastReplace = null;
+
+        if (this.rootReplace != null) {
+            lastReplace = this.rootReplace.toString();
+        }
+
         parseReplace(replace);
-        this.dirty = true;
+
+        if (!this.rootReplace.toString().equals(lastReplace)) {
+            this.dirty = true;
+        }
     }
 
     /* ---------------------------------------------------------------------- */
@@ -161,24 +183,26 @@ public class Renamer {
         }
 
         filesAfter.clear();
+        rootReplace.resetState();
 
         //iteração na lista de arquivos
         for (String strFile : filesBefore) {
             File f = new File(strFile);
 
-            String destino = rootReplace.getContent(localizar.pattern(),
-                    f.getName(), f);
+            String destino = f.getName();
 
-            //qnd o destino é vazio é porque a string de localizar não encontrou
-            //uma ocorrência no alvo. o destino deve ser igual à origem.
-            if (destino == null | "".equals(destino)) {
-                destino = f.getName();
+            Matcher matcher = search.matcher(f.getName());
+            if (matcher.find()) {
+                destino = rootReplace.getContent(search.pattern(),
+                        f.getName(), f);
             }
 
             filesAfter.add(f.getParent() + File.separator + destino);
         }
 
         calculateConflicts();
+
+        this.dirty = false;
     }
 
     /**
@@ -233,11 +257,7 @@ public class Renamer {
      * @return True caso existam.
      */
     public boolean hasConflicts() throws RenamerException {
-        if (!isReady() || this.dirty) {
-            throw new RenamerException(Messages.getNotReadyMessage());
-        }
-
-        return conflicts.isEmpty();
+        return !conflicts.isEmpty();
     }
 
     /* ---------------------------------------------------------------------- */
@@ -247,10 +267,13 @@ public class Renamer {
      *
      * @param files
      */
-    private void flattenFiles(File files) throws RenamerException {
+    private void flattenFiles(File files, boolean includeSubFolders) throws
+            RenamerException {
         if (files.isDirectory()) {
             for (File arq : files.listFiles()) {
-                flattenFiles(arq);
+                if (arq.isFile() || includeSubFolders) {
+                    flattenFiles(arq, includeSubFolders);
+                }
             }
         } else {
             this.filesBefore.add(files.getAbsolutePath());
@@ -267,7 +290,7 @@ public class Renamer {
      */
     private void parseSearch(String localizar) throws RenamerException {
         try {
-            this.localizar = Pattern.compile(localizar);
+            this.search = Pattern.compile(localizar);
         } catch (PatternSyntaxException e) {
             throw new RenamerException(e);
         }

@@ -2,6 +2,7 @@
 
 package br.com.renatoccosta.renamer.parser;
 
+import br.com.renatoccosta.renamer.element.base.ElementFactory;
 import br.com.renatoccosta.renamer.element.*;
 import br.com.renatoccosta.renamer.element.base.*;
 

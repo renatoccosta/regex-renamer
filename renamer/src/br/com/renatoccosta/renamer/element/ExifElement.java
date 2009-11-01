@@ -1,4 +1,3 @@
-
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.ExpressionElement;
@@ -17,6 +16,16 @@ public class ExifElement extends ExpressionElement {
 
     @Override
     public String getContent(String find, String target, File file) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String[] getParameters() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void resetState() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

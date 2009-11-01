@@ -1,6 +1,5 @@
 package br.com.renatoccosta.renamer.element.base;
 
-import br.com.renatoccosta.renamer.element.ElementsDirectory;
 import java.io.File;
 
 /**
@@ -20,7 +19,7 @@ public abstract class Element {
     public String getId() {
         return ElementsDirectory.getInstance().lookup(this.getClass());
     }
- 
+
     /**
      * Retorna a string de acordo com a transformação do elemento
      *
@@ -33,5 +32,37 @@ public abstract class Element {
     public abstract String getContent(String find, String target, File file);
 
     public abstract void setParameters(String... content);
+
+    public abstract String[] getParameters();
+
+    @Override
+    public abstract String toString();
+
+    /**
+     * Volta o valor das variáveis internas de cada elemento para as originais
+     * de quando foram criados.
+     */
+    public abstract void resetState();
+
+    /**
+     * Converte o array de parâmetros na string separada por ':'
+     * 
+     * @return Parâmetros separados por ':'
+     */
+    protected String getParametersAsString() {
+        StringBuffer sb = new StringBuffer();
+
+        for (String parm : getParameters()) {
+            sb.append(parm);
+            sb.append(":");
+        }
+
+        //remove o ':' do final
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+
+        return sb.toString();
+    }
 
 }

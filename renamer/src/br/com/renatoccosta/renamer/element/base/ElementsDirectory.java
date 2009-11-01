@@ -1,7 +1,6 @@
-package br.com.renatoccosta.renamer.element;
+package br.com.renatoccosta.renamer.element.base;
 
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
-import br.com.renatoccosta.renamer.element.base.Element;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class ElementsDirectory {
             new HashMap<String, Class<Element>>();
 
     private ResourceBundle directory = ResourceBundle.getBundle(
-            "br/com/renatoccosta/renamer/element/ElementsDirectory");
+            "br/com/renatoccosta/renamer/element/base/ElementsDirectory");
 
     /**
      * Carrega os elementos internos e externos no map
