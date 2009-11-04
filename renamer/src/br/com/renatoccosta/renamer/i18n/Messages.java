@@ -45,6 +45,10 @@ public class Messages {
                 id);
     }
 
+    public static String getErrorCaption() {
+        return messages.getString("Error");
+    }
+
     public static String getSaveCaption() {
         return messages.getString("FrmPrincipal.mnuSalvar.text");
     }
@@ -59,6 +63,10 @@ public class Messages {
 
     public static String getConfirmRenameMessage() {
         return messages.getString("ConfirmRename");
+    }
+
+    public static String getConfirmReplaceMessage(String fileName) {
+        return String.format(messages.getString("ConfirmReplace"), fileName);
     }
 
 }

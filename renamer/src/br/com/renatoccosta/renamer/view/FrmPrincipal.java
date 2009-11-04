@@ -28,6 +28,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private Renamer renamer = new Renamer();
 
+    private boolean lockSelect = false;
+
     /** Creates new form FrmPrincipal */
     public FrmPrincipal() {
         initComponents();
@@ -114,12 +116,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
         bindingGroup.addBinding(binding);
 
         lstAntes.setModel(new RenamerBeforeListModel(renamer));
+        lstAntes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstAntesValueChanged(evt);
+            }
+        });
         pnlAntes.setViewportView(lstAntes);
 
         pnlArquivos.setLeftComponent(pnlAntes);
 
         lstDepois.setModel(new RenamerAfterListModel(renamer));
         lstDepois.setCellRenderer(new FileListRenderer(this.renamer));
+        lstDepois.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstDepoisValueChanged(evt);
+            }
+        });
         pnlDepois.setViewportView(lstDepois);
 
         pnlArquivos.setRightComponent(pnlDepois);
@@ -258,7 +270,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             } catch (RenamerException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
-                        "Erro", JOptionPane.ERROR_MESSAGE);
+                        Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
                 logger.log(Level.SEVERE, null, ex);
             }
@@ -278,7 +290,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+                    Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
             logger.log(Level.SEVERE, null, ex);
         }
@@ -301,7 +313,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
-                        "Erro", JOptionPane.ERROR_MESSAGE);
+                        Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
                 logger.log(Level.SEVERE, null, ex);
             }
@@ -317,11 +329,29 @@ public class FrmPrincipal extends javax.swing.JFrame {
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             try {
                 File file = fc.getSelectedFile();
-                SavedCriteria criteria = saveCriteria();
-                CriteriaDao.save(criteria, file);
+                boolean salvar = true;
+
+                if (file.exists()) {
+                    int result = JOptionPane.showConfirmDialog(this,
+                            Messages.getConfirmReplaceMessage(file.getName()),
+                            Messages.getTitle(), JOptionPane.YES_NO_OPTION);
+
+                    if (result != JOptionPane.YES_OPTION) {
+                        salvar = false;
+                    }
+                } else if (!file.getName().endsWith(SavedCriteria.FILE_EXT)) {
+                    file = new File(file.getAbsolutePath() +
+                            SavedCriteria.FILE_EXT);
+                }
+
+                if (salvar) {
+                    SavedCriteria criteria = saveCriteria();
+                    CriteriaDao.save(criteria, file);
+                }
+
             } catch (FileNotFoundException ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
-                        "Erro", JOptionPane.ERROR_MESSAGE);
+                        Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
                 logger.log(Level.SEVERE, null, ex);
             }
@@ -342,7 +372,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+                    Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
             logger.log(Level.SEVERE, null, ex);
         }
@@ -358,11 +388,29 @@ public class FrmPrincipal extends javax.swing.JFrame {
             configureRenamer(true);
         } catch (RenamerException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
-                    "Erro", JOptionPane.ERROR_MESSAGE);
+                    Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
             logger.log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_chkSubpastasActionPerformed
+
+    private void lstAntesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstAntesValueChanged
+        if (!lockSelect) {
+            lockSelect = true;
+            lstDepois.setSelectedIndex(lstAntes.getSelectedIndex());
+        } else {
+            lockSelect = false;
+        }
+    }//GEN-LAST:event_lstAntesValueChanged
+
+    private void lstDepoisValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstDepoisValueChanged
+        if (!lockSelect) {
+            lockSelect = true;
+            lstAntes.setSelectedIndex(lstDepois.getSelectedIndex());
+        } else {
+            lockSelect = false;
+        }
+    }//GEN-LAST:event_lstDepoisValueChanged
 
     private void validateFields() throws Exception {
         if (txtAlvo.getText().trim().equals("") ||

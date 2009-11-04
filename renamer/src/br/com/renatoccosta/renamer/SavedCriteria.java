@@ -6,6 +6,8 @@ package br.com.renatoccosta.renamer;
  */
 public class SavedCriteria {
 
+    public static final String FILE_EXT = ".xml";
+
     private String path;
 
     private String search;

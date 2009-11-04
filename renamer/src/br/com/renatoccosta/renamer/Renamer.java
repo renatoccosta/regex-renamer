@@ -240,14 +240,28 @@ public class Renamer {
          */
 
         //renomea para o temporário
-        for (String strFile : filesBefore) {
+        //apenas os arquivos que tiverem alterações nos nomes
+        for (int i = 0; i < filesBefore.size(); i++) {
+            String strFile = filesBefore.get(i);
+
+            if (strFile.equals(filesAfter.get(i))) {
+                continue;
+            }
+
             File file = new File(strFile);
             file.renameTo(new File(strFile + TMP_SUFIX));
         }
 
         //renomea para o definitivo
+        //apenas os arquivos que tiverem alterações nos nomes
         for (int i = 0; i < filesBefore.size(); i++) {
-            File file = new File(filesBefore.get(i) + TMP_SUFIX);
+            String strFile = filesBefore.get(i);
+
+            if (strFile.equals(filesAfter.get(i))) {
+                continue;
+            }
+
+            File file = new File(strFile + TMP_SUFIX);
             file.renameTo(new File(filesAfter.get(i)));
         }
     }

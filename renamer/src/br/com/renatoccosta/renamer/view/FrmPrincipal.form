@@ -235,6 +235,9 @@
                   <Connection code="new RenamerBeforeListModel(renamer)" type="code"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstAntesValueChanged"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -259,6 +262,9 @@
                   <Connection code="new FileListRenderer(this.renamer)" type="code"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="lstDepoisValueChanged"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
