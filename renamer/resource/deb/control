@@ -1,0 +1,17 @@
+Package: [[name]]
+Version: [[version]]
+Architecture: all
+Maintainer: Renato Couto da Costa <renamer@renatoccosta.com.br>
+Installed-Size: 13348
+Depends: openjdk-6-jre | sun-java5-jre | sun-java6-jre, libcommons-cli-java, liblog4j1.2-java, libswt-gtk-3.4-java, java-wrappers
+Section: utils
+Priority: optional
+Homepage: http://renamer.renatoccosta.com.br
+Description: Rename your files the way you want in a batch process!
+ Renamer is a tool to mass rename files given an expression.
+ .
+ Azureus offers multiple torrent downloads, queuing/priority systems
+ (on torrents and files), start/stop seeding options and instant
+ access to numerous pieces of information about your torrents. Azureus
+ now features an embedded tracker easily set up and ready to use.
+Original-Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>

@@ -71,4 +71,18 @@
     nbproject/build-impl.xml file. 
 
     -->
+
+    <target name="build-package" description="Creates the Debian Package" depends="jar">
+        <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
+        
+        <copy todir="${build.debian.dir}/control">
+            <fileset file="${resource.dir}/deb/control"/>
+            <filterset begintoken="[[" endtoken="]]">
+                <filter token="version" value="${version}"/>
+                <filter token="name" value="${application.title}"/>
+            </filterset>
+        </copy>
+
+
+    </target>
 </project>
