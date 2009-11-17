@@ -69,4 +69,8 @@ public class Messages {
         return String.format(messages.getString("ConfirmReplace"), fileName);
     }
 
+    public static String getOutOfBoundsMessage() {
+        return messages.getString("OutOfBoundsMessage");
+    }
+
 }

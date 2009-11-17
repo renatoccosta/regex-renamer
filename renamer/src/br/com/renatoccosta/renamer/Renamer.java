@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
+import org.apache.commons.lang.ArrayUtils;
 
 /**
  * Classe principal da aplicacao. Realiza toda a orquestracao do negocio
@@ -139,6 +140,8 @@ public class Renamer {
         }
 
         this.rootFile = rootFile;
+        this.includeSubFolders = includeSubFolders;
+
         this.filesBefore.clear();
         this.filesAfter.clear();
         this.conflicts.clear();
@@ -171,6 +174,15 @@ public class Renamer {
     }
 
     /* ---------------------------------------------------------------------- */
+
+    public void moveFilesUp(int startIndex, int endIndex) {
+        
+    }
+
+    public void moveFilesDown(int startIndex, int endIndex) {
+
+    }
+
     /**
      * Realiza a transformação dos nomes dos arquivos, sem efetivamente
      * renomeá-los. Preenche a lista com os nomes de destino. Este método deve

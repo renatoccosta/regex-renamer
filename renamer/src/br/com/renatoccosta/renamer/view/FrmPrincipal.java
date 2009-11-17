@@ -67,6 +67,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lstAntes = new javax.swing.JList();
         pnlDepois = new javax.swing.JScrollPane();
         lstDepois = new javax.swing.JList();
+        pnlOrdenacao = new javax.swing.JPanel();
+        btnCima = new javax.swing.JButton();
+        btnBaixo = new javax.swing.JButton();
         pnlBotoes = new javax.swing.JPanel();
         btnPrevisualizar = new javax.swing.JButton();
         btnAplicar = new javax.swing.JButton();
@@ -136,6 +139,42 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pnlArquivos.setRightComponent(pnlDepois);
 
+        btnCima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/up.gif"))); // NOI18N
+        btnCima.setText(bundle.getString("FrmPrincipal.btnCima.text")); // NOI18N
+        btnCima.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCimaActionPerformed(evt);
+            }
+        });
+
+        btnBaixo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/down.gif"))); // NOI18N
+        btnBaixo.setText(bundle.getString("FrmPrincipal.btnBaixo.text")); // NOI18N
+        btnBaixo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBaixoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlOrdenacaoLayout = new javax.swing.GroupLayout(pnlOrdenacao);
+        pnlOrdenacao.setLayout(pnlOrdenacaoLayout);
+        pnlOrdenacaoLayout.setHorizontalGroup(
+            pnlOrdenacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOrdenacaoLayout.createSequentialGroup()
+                .addGroup(pnlOrdenacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnCima, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(btnBaixo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        pnlOrdenacaoLayout.setVerticalGroup(
+            pnlOrdenacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlOrdenacaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnCima, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnBaixo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         btnPrevisualizar.setText(bundle.getString("FrmPrincipal.btnPrevisualizar.text")); // NOI18N
         btnPrevisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,38 +226,34 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblAlvo)
-                .addGap(46, 46, 46)
-                .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
+                .addComponent(lblArquivos)
+                .addContainerGap(450, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnArquivo)
+                .addComponent(pnlOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
-            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chkSubpastas)
-                .addContainerGap(497, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSubstituir)
-                    .addComponent(lblLocalizar))
+                    .addComponent(lblLocalizar)
+                    .addComponent(lblAlvo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE)
-                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
+                    .addComponent(chkSubpastas)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnArquivo))
+                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
+                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblArquivos)
-                .addContainerGap(472, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 616, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,7 +276,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblArquivos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -251,7 +288,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         bindingGroup.bind();
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-650)/2, (screenSize.height-481)/2, 650, 481);
+        setBounds((screenSize.width-587)/2, (screenSize.height-481)/2, 587, 481);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivoActionPerformed
@@ -412,6 +449,30 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_lstDepoisValueChanged
 
+    private void btnCimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCimaActionPerformed
+        if (lstAntes.getSelectedIndex() == -1) {
+            return;
+        }
+
+        this.renamer.moveFilesUp(lstAntes.getMinSelectionIndex(),
+                lstAntes.getMaxSelectionIndex());
+
+        ((RenamerListModel) lstAntes.getModel()).refresh();
+        ((RenamerListModel) lstDepois.getModel()).refresh();
+    }//GEN-LAST:event_btnCimaActionPerformed
+
+    private void btnBaixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaixoActionPerformed
+        if (lstAntes.getSelectedIndex() == -1) {
+            return;
+        }
+
+        this.renamer.moveFilesDown(lstAntes.getMinSelectionIndex(),
+                lstAntes.getMaxSelectionIndex());
+
+        ((RenamerListModel) lstAntes.getModel()).refresh();
+        ((RenamerListModel) lstDepois.getModel()).refresh();
+    }//GEN-LAST:event_btnBaixoActionPerformed
+
     private void validateFields() throws Exception {
         if (txtAlvo.getText().trim().equals("") ||
                 txtLocalizar.getText().trim().equals("") ||
@@ -461,6 +522,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuBar barMenu;
     private javax.swing.JButton btnAplicar;
     private javax.swing.JButton btnArquivo;
+    private javax.swing.JButton btnBaixo;
+    private javax.swing.JButton btnCima;
     private javax.swing.JButton btnPrevisualizar;
     private javax.swing.JCheckBox chkSubpastas;
     private javax.swing.JLabel lblAlvo;
@@ -478,6 +541,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JSplitPane pnlArquivos;
     private javax.swing.JPanel pnlBotoes;
     private javax.swing.JScrollPane pnlDepois;
+    private javax.swing.JPanel pnlOrdenacao;
     private javax.swing.JPanel pnlStatus;
     private javax.swing.JTextField txtAlvo;
     private javax.swing.JTextField txtLocalizar;

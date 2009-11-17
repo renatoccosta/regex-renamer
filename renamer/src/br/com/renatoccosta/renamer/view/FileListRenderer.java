@@ -3,6 +3,7 @@ package br.com.renatoccosta.renamer.view;
 import br.com.renatoccosta.renamer.Renamer;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
@@ -17,6 +18,8 @@ public class FileListRenderer extends JLabel implements ListCellRenderer {
 
     public FileListRenderer(Renamer renamer) {
         setOpaque(true);
+        setPreferredSize(new Dimension(50, 16));
+        
         this.renamer = renamer;
     }
 
