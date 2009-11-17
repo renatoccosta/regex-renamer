@@ -83,6 +83,12 @@
             </filterset>
         </copy>
 
+        <deb destfile="${dist.dir}/${application.title}.deb"
+            control="${build.debian.dir}/control">
+            <data src="${dist.dir}">
+                <exclude name="**/*.deb"/>
+            </data>
+        </deb>
 
     </target>
 </project>

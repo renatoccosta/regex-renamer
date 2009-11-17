@@ -3,7 +3,7 @@ Version: [[version]]
 Architecture: all
 Maintainer: Renato Couto da Costa <renamer@renatoccosta.com.br>
 Installed-Size: 13348
-Depends: openjdk-6-jre | sun-java5-jre | sun-java6-jre, libcommons-cli-java, liblog4j1.2-java, libswt-gtk-3.4-java, java-wrappers
+Depends: openjdk-6-jre | sun-java6-jre
 Section: utils
 Priority: optional
 Homepage: http://renamer.renatoccosta.com.br
