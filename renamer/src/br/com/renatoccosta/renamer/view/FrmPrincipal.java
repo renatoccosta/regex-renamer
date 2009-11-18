@@ -112,7 +112,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         lblArquivos.setText(bundle.getString("FrmPrincipal.lblArquivos.text")); // NOI18N
 
-        pnlArquivos.setDividerLocation(.5d);
+        pnlArquivos.setDividerLocation(260);
         pnlArquivos.setContinuousLayout(true);
 
         org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pnlDepois, org.jdesktop.beansbinding.ELProperty.create("${verticalScrollBar}"), pnlAntes, org.jdesktop.beansbinding.BeanProperty.create("verticalScrollBar"));
@@ -226,14 +226,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblArquivos)
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addContainerGap(409, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -247,13 +247,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkSubpastas)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
+                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnArquivo))
-                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE))
+                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +278,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                    .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -322,8 +322,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             renamer.previewRename();
 
-            ((RenamerListModel) lstAntes.getModel()).refresh();
-            ((RenamerListModel) lstDepois.getModel()).refresh();
+            refreshLists();
 
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
@@ -434,8 +433,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void lstAntesValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstAntesValueChanged
         if (!lockSelect) {
             lockSelect = true;
-            lstDepois.setSelectedIndex(lstAntes.getSelectedIndex());
-        } else {
+            lstDepois.setSelectedIndices(lstAntes.getSelectedIndices());
             lockSelect = false;
         }
     }//GEN-LAST:event_lstAntesValueChanged
@@ -443,34 +441,53 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void lstDepoisValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstDepoisValueChanged
         if (!lockSelect) {
             lockSelect = true;
-            lstAntes.setSelectedIndex(lstDepois.getSelectedIndex());
-        } else {
+            lstAntes.setSelectedIndices(lstDepois.getSelectedIndices());
             lockSelect = false;
         }
     }//GEN-LAST:event_lstDepoisValueChanged
 
     private void btnCimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCimaActionPerformed
-        if (lstAntes.getSelectedIndex() == -1) {
-            return;
+        try {
+            if (lstAntes.getSelectedIndex() == -1) {
+                return;
+            }
+
+            validadeSelection(lstAntes.getSelectedIndices());
+
+            this.renamer.moveFilesUp(lstAntes.getMinSelectionIndex(),
+                    lstAntes.getMaxSelectionIndex());
+
+            refreshLists();
+            updateSelection(-1);
+
+        } catch (RenamerException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
+
+            logger.log(Level.SEVERE, null, ex);
         }
-
-        this.renamer.moveFilesUp(lstAntes.getMinSelectionIndex(),
-                lstAntes.getMaxSelectionIndex());
-
-        ((RenamerListModel) lstAntes.getModel()).refresh();
-        ((RenamerListModel) lstDepois.getModel()).refresh();
     }//GEN-LAST:event_btnCimaActionPerformed
 
     private void btnBaixoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBaixoActionPerformed
-        if (lstAntes.getSelectedIndex() == -1) {
-            return;
+        try {
+            if (lstAntes.getSelectedIndex() == -1) {
+                return;
+            }
+
+            validadeSelection(lstAntes.getSelectedIndices());
+
+            this.renamer.moveFilesDown(lstAntes.getMinSelectionIndex(),
+                    lstAntes.getMaxSelectionIndex());
+
+            refreshLists();
+            updateSelection(1);
+
+        } catch (RenamerException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
+
+            logger.log(Level.SEVERE, null, ex);
         }
-
-        this.renamer.moveFilesDown(lstAntes.getMinSelectionIndex(),
-                lstAntes.getMaxSelectionIndex());
-
-        ((RenamerListModel) lstAntes.getModel()).refresh();
-        ((RenamerListModel) lstDepois.getModel()).refresh();
     }//GEN-LAST:event_btnBaixoActionPerformed
 
     private void validateFields() throws Exception {
@@ -513,9 +530,47 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
 
         if (refreshLists) {
-            ((RenamerListModel) lstAntes.getModel()).refresh();
-            ((RenamerListModel) lstDepois.getModel()).refresh();
+            refreshLists();
         }
+    }
+
+    /**
+     * Valida se a seleção está contígua
+     *
+     * @param selectedIndices Array de indices dos elementos selecionados
+     * @throws RenamerException
+     */
+    private void validadeSelection(int[] selectedIndices) throws
+            RenamerException {
+        int qtd = selectedIndices[selectedIndices.length - 1] - selectedIndices[0];
+
+        if (qtd != selectedIndices.length - 1) {
+            throw new RenamerException(Messages.getContiguousSelectionMessage());
+        }
+    }
+
+    /**
+     * Atualiza as listas
+     */
+    private void refreshLists() {
+        ((RenamerListModel) lstAntes.getModel()).refresh();
+        ((RenamerListModel) lstDepois.getModel()).refresh();
+    }
+
+    /**
+     * Atualiza a seleção das listas, considerando o deslocamento
+     *
+     * @param i Delta de deslocamento
+     */
+    private void updateSelection(int i) {
+        int[] sels = lstAntes.getSelectedIndices();
+
+        for (int j = 0; j < sels.length; j++) {
+            sels[j] = sels[j] + i;
+        }
+
+        lstAntes.setSelectedIndices(sels);
+        lstDepois.setSelectedIndices(sels);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

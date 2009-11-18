@@ -10,8 +10,8 @@ import java.util.List;
  */
 public class ArrayUtil {
 
-    public static List moveBlock(List source, int padding, int startIdx,
-            int endIdx) {
+    public static <T> List<T> moveBlock(List<T> source, int padding, 
+            int startIdx, int endIdx) {
         int newStart = startIdx + padding;
         int newEnd = endIdx + padding;
 
@@ -35,7 +35,7 @@ public class ArrayUtil {
             dest.add(i + padding, source.get(i));
         }
 
-        return null;
+        return dest;
     }
 
 }

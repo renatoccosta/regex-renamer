@@ -5,9 +5,11 @@ import br.com.renatoccosta.renamer.element.base.Element;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import br.com.renatoccosta.renamer.parser.RenamerLexer;
 import br.com.renatoccosta.renamer.parser.RenamerParser;
+import br.com.renatoccosta.renamer.util.ArrayUtil;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +18,6 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.apache.commons.lang.ArrayUtils;
 
 /**
  * Classe principal da aplicacao. Realiza toda a orquestracao do negocio
@@ -53,8 +54,22 @@ public class Renamer {
      */
     private boolean dirty = true;
 
-    /* ---------------------------------------------------------------------- */
-    /**
+    private Comparator<String> cmpFiles = new Comparator<String>() {
+
+        public int compare(String o1, String o2) {
+            int qtdo1 = o1.split("\\/").length;
+            int qtdo2 = o2.split("\\/").length;
+
+            if (qtdo1 != qtdo2) {
+                return qtdo1 - qtdo2;
+            }
+            
+            return o1.compareTo(o2);
+        }
+
+    };
+    
+    /* ---------------------------------------------------------------------- */ /**
      * Cria uma instancia do renomeador.
      */
     public Renamer() {
@@ -174,13 +189,18 @@ public class Renamer {
     }
 
     /* ---------------------------------------------------------------------- */
-
     public void moveFilesUp(int startIndex, int endIndex) {
-        
+        this.filesBefore = ArrayUtil.moveBlock(filesBefore, -1, startIndex,
+                endIndex);
+        this.filesAfter = ArrayUtil.moveBlock(filesAfter, -1, startIndex,
+                endIndex);
     }
 
     public void moveFilesDown(int startIndex, int endIndex) {
-
+        this.filesBefore = ArrayUtil.moveBlock(filesBefore, 1, startIndex,
+                endIndex);
+        this.filesAfter = ArrayUtil.moveBlock(filesAfter, 1, startIndex,
+                endIndex);
     }
 
     /**

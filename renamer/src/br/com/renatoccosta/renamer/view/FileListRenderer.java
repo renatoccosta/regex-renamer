@@ -18,7 +18,7 @@ public class FileListRenderer extends JLabel implements ListCellRenderer {
 
     public FileListRenderer(Renamer renamer) {
         setOpaque(true);
-        setPreferredSize(new Dimension(50, 16));
+        //setPreferredSize(new Dimension(50, 16));
         
         this.renamer = renamer;
     }

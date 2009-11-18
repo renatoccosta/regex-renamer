@@ -73,4 +73,8 @@ public class Messages {
         return messages.getString("OutOfBoundsMessage");
     }
 
+    public static String getContiguousSelectionMessage() {
+        return messages.getString("ContiguousSelectionMessage");
+    }
+
 }

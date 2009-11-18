@@ -75,15 +75,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnlBotoes" alignment="1" pref="579" max="32767" attributes="0"/>
+          <Component id="pnlBotoes" alignment="1" pref="577" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblArquivos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="450" max="32767" attributes="0"/>
+              <EmptySpace pref="409" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlArquivos" pref="515" max="32767" attributes="0"/>
+              <Component id="pnlArquivos" pref="509" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlOrdenacao" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -99,16 +99,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="chkSubpastas" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="txtAlvo" pref="393" max="32767" attributes="0"/>
+                      <Component id="txtAlvo" pref="362" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnArquivo" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="txtLocalizar" alignment="0" pref="506" max="32767" attributes="1"/>
-                  <Component id="txtSubstituir" alignment="0" pref="506" max="32767" attributes="1"/>
+                  <Component id="txtLocalizar" alignment="0" pref="476" max="32767" attributes="1"/>
+                  <Component id="txtSubstituir" alignment="0" pref="476" max="32767" attributes="1"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="pnlStatus" alignment="0" pref="579" max="32767" attributes="0"/>
+          <Component id="pnlStatus" alignment="0" pref="577" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -137,7 +137,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnlOrdenacao" min="-2" max="-2" attributes="0"/>
-                  <Component id="pnlArquivos" pref="220" max="32767" attributes="0"/>
+                  <Component id="pnlArquivos" pref="196" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlBotoes" min="-2" max="-2" attributes="0"/>
@@ -204,9 +204,7 @@
     </Component>
     <Container class="javax.swing.JSplitPane" name="pnlArquivos">
       <Properties>
-        <Property name="dividerLocation" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-          <Connection code=".5d" type="code"/>
-        </Property>
+        <Property name="dividerLocation" type="int" value="260"/>
         <Property name="continuousLayout" type="boolean" value="true"/>
       </Properties>
 
