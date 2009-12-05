@@ -70,6 +70,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlOrdenacao = new javax.swing.JPanel();
         btnCima = new javax.swing.JButton();
         btnBaixo = new javax.swing.JButton();
+        btnSortName = new javax.swing.JButton();
+        btnSortDate = new javax.swing.JButton();
         pnlBotoes = new javax.swing.JPanel();
         btnPrevisualizar = new javax.swing.JButton();
         btnAplicar = new javax.swing.JButton();
@@ -141,6 +143,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         btnCima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/up.gif"))); // NOI18N
         btnCima.setText(bundle.getString("FrmPrincipal.btnCima.text")); // NOI18N
+        btnCima.setToolTipText(bundle.getString("FrmPrincipal.btnCima.toolTipText")); // NOI18N
         btnCima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCimaActionPerformed(evt);
@@ -149,9 +152,28 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         btnBaixo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/down.gif"))); // NOI18N
         btnBaixo.setText(bundle.getString("FrmPrincipal.btnBaixo.text")); // NOI18N
+        btnBaixo.setToolTipText(bundle.getString("FrmPrincipal.btnBaixo.toolTipText")); // NOI18N
         btnBaixo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBaixoActionPerformed(evt);
+            }
+        });
+
+        btnSortName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/az.gif"))); // NOI18N
+        btnSortName.setText(bundle.getString("FrmPrincipal.btnSortName.text")); // NOI18N
+        btnSortName.setToolTipText(bundle.getString("FrmPrincipal.btnSortName.toolTipText")); // NOI18N
+        btnSortName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSortNameActionPerformed(evt);
+            }
+        });
+
+        btnSortDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar.gif"))); // NOI18N
+        btnSortDate.setText(bundle.getString("FrmPrincipal.btnSortDate.text")); // NOI18N
+        btnSortDate.setToolTipText(bundle.getString("FrmPrincipal.btnSortDate.toolTipText")); // NOI18N
+        btnSortDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSortDateActionPerformed(evt);
             }
         });
 
@@ -161,9 +183,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
             pnlOrdenacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlOrdenacaoLayout.createSequentialGroup()
                 .addGroup(pnlOrdenacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnSortDate, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                    .addComponent(btnSortName, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                     .addComponent(btnCima, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                     .addComponent(btnBaixo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(6, Short.MAX_VALUE))
         );
         pnlOrdenacaoLayout.setVerticalGroup(
             pnlOrdenacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,7 +196,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnCima, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBaixo, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnSortName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSortDate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         btnPrevisualizar.setText(bundle.getString("FrmPrincipal.btnPrevisualizar.text")); // NOI18N
@@ -277,7 +305,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(lblArquivos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlOrdenacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -490,6 +518,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnBaixoActionPerformed
 
+    private void btnSortNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortNameActionPerformed
+        renamer.setSortType(SortType.FILE_NAME);
+        refreshLists();
+    }//GEN-LAST:event_btnSortNameActionPerformed
+
+    private void btnSortDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortDateActionPerformed
+        renamer.setSortType(SortType.MODIFIED_DATE);
+        refreshLists();
+    }//GEN-LAST:event_btnSortDateActionPerformed
+
     private void validateFields() throws Exception {
         if (txtAlvo.getText().trim().equals("") ||
                 txtLocalizar.getText().trim().equals("") ||
@@ -580,6 +618,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnBaixo;
     private javax.swing.JButton btnCima;
     private javax.swing.JButton btnPrevisualizar;
+    private javax.swing.JButton btnSortDate;
+    private javax.swing.JButton btnSortName;
     private javax.swing.JCheckBox chkSubpastas;
     private javax.swing.JLabel lblAlvo;
     private javax.swing.JLabel lblArquivos;

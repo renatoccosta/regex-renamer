@@ -6,8 +6,8 @@ import br.com.renatoccosta.renamer.i18n.Messages;
 import br.com.renatoccosta.renamer.parser.RenamerLexer;
 import br.com.renatoccosta.renamer.parser.RenamerParser;
 import br.com.renatoccosta.renamer.util.ArrayUtil;
+import br.com.renatoccosta.renamer.util.FileUtil;
 import java.io.File;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -32,6 +32,8 @@ public class Renamer {
     private File rootFile;
 
     private boolean includeSubFolders = false;
+
+    private SortType sortType = SortType.FILE_NAME;
 
     private List<String> filesBefore = new ArrayList<String>();
 
@@ -63,13 +65,14 @@ public class Renamer {
             if (qtdo1 != qtdo2) {
                 return qtdo1 - qtdo2;
             }
-            
+
             return o1.compareTo(o2);
         }
 
     };
-    
-    /* ---------------------------------------------------------------------- */ /**
+
+    /* ---------------------------------------------------------------------- */
+    /**
      * Cria uma instancia do renomeador.
      */
     public Renamer() {
@@ -137,6 +140,10 @@ public class Renamer {
         return conflicts;
     }
 
+    public SortType getSortType() {
+        return sortType;
+    }
+
     public boolean isReady() {
         return !this.filesBefore.isEmpty() && this.search != null &&
                 this.rootReplace != null;
@@ -161,7 +168,13 @@ public class Renamer {
         this.filesAfter.clear();
         this.conflicts.clear();
 
-        flattenFiles(rootFile, includeSubFolders);
+        List<String> flattenedFiles = FileUtil.flattenFiles(rootFile,
+                includeSubFolders);
+        this.filesBefore.addAll(flattenedFiles);
+        this.filesAfter.addAll(flattenedFiles);
+
+        sortFiles();
+
         this.dirty = true;
     }
 
@@ -186,6 +199,11 @@ public class Renamer {
         if (!this.rootReplace.toString().equals(lastReplace)) {
             this.dirty = true;
         }
+    }
+
+    public void setSortType(SortType sortType) {
+        this.sortType = sortType;
+        sortFiles();
     }
 
     /* ---------------------------------------------------------------------- */
@@ -306,27 +324,6 @@ public class Renamer {
         return !conflicts.isEmpty();
     }
 
-    /* ---------------------------------------------------------------------- */
-    /**
-     * Varre todos os arquivos da pasta e subpastas e preenche o array de
-     * arquivos com seus respectivos nomes completos.
-     *
-     * @param files
-     */
-    private void flattenFiles(File files, boolean includeSubFolders) throws
-            RenamerException {
-        if (files.isDirectory()) {
-            for (File arq : files.listFiles()) {
-                if (arq.isFile() || includeSubFolders) {
-                    flattenFiles(arq, includeSubFolders);
-                }
-            }
-        } else {
-            this.filesBefore.add(files.getAbsolutePath());
-            this.filesAfter.add(files.getAbsolutePath());
-        }
-    }
-
     /**
      * Verifica se a string de localização do padrão de nome de arquivo é válida
      * como uma expressão regular
@@ -387,6 +384,16 @@ public class Renamer {
             if (entry.getValue().size() > 1) {
                 conflicts.put(entry.getKey(), entry.getValue());
             }
+        }
+    }
+
+    private void sortFiles() {
+        if (sortType.equals(SortType.FILE_NAME)) {
+            FileUtil.sortFilesByName(filesBefore);
+            FileUtil.sortFilesByName(filesAfter);
+        } else {
+            FileUtil.sortFilesByDate(filesBefore);
+            FileUtil.sortFilesByDate(filesAfter);
         }
     }
 
