@@ -10,8 +10,10 @@ Homepage: http://renamer.renatoccosta.com.br
 Description: Rename your files the way you want in a batch process!
  Renamer is a tool to mass rename files given an expression.
  .
- Azureus offers multiple torrent downloads, queuing/priority systems
- (on torrents and files), start/stop seeding options and instant
- access to numerous pieces of information about your torrents. Azureus
- now features an embedded tracker easily set up and ready to use.
-Original-Maintainer: Debian Java Maintainers <pkg-java-maintainers@lists.alioth.debian.org>
+ Renamer is an extensible tool to rename files of a folder. It renames files
+ based on a regular-expression to match patterns and replace with vales the user
+ define. The values varies from constant expressions and a wide range of
+ variable expressions like sequencers, file information, mp3 tags, and much
+ more. It's also possible to create custom expressions and integrate them with
+ Renamer with the plug-in APIs.
+Original-Maintainer: Renato Costa <renamer@renatoccosta.com.br>

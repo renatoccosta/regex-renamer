@@ -33,14 +33,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
     /** Creates new form FrmPrincipal */
     public FrmPrincipal() {
         initComponents();
+        initComponentsLocal();
+    }
 
+    public FrmPrincipal(String path) {
+        initComponents();
+        initComponentsLocal();
+
+        txtAlvo.setText(path);
         try {
-            InputStream is = this.getClass().getResourceAsStream("/icon.PNG");
-            this.setIconImage(ImageIO.read(is));
-        } catch (Exception ex) {
-            ex.printStackTrace();
+            renamer.setRootFiles(new File(path), false);
+        } catch (RenamerException ex) {
         }
-
     }
 
     /** This method is called from within the constructor to
@@ -318,6 +322,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-587)/2, (screenSize.height-481)/2, 587, 481);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void initComponentsLocal() {
+        try {
+            InputStream is = this.getClass().getResourceAsStream("/icon.PNG");
+            this.setIconImage(ImageIO.read(is));
+        } catch (Exception ex) {
+        }
+
+    }
 
     private void btnArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivoActionPerformed
         final JFileChooser fc = new JFileChooser(txtAlvo.getText());

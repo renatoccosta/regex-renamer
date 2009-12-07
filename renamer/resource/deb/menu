@@ -1,0 +1,3 @@
+?package(renamer):needs="X11" section="Applications/File Management"\
+  title="renamer" command="/usr/bin/renamer"\
+  icon="/usr/share/renamer/renamer.png"\

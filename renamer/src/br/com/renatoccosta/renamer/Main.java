@@ -18,11 +18,12 @@ public class Main {
     public static void main(String[] args) {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            java.awt.EventQueue.invokeLater(new Runnable() {
-                public void run() {
-                    new FrmPrincipal().setVisible(true);
-                }
-            });
+
+            if (args.length > 0) {
+                new FrmPrincipal(args[0]).setVisible(true);
+            } else {
+                new FrmPrincipal().setVisible(true);
+            }
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

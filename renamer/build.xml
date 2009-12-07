@@ -83,11 +83,24 @@
             </filterset>
         </copy>
 
-        <deb destfile="${dist.dir}/${application.title}.deb"
+        <!--copy todir="${build.debian.dir}/data/usr/share/${application.title}">
+            <fileset dir="${dist.dir}" excludes="**/*.deb"/>
+        </copy-->
+
+        <!--copy todir="${build.debian.dir}/data/usr/bin">
+            <fileset file="${resource.dir}/deb/renamer"/>
+        </copy-->
+
+        <deb destfile="${dist.dir}/${package.name}.deb"
             control="${build.debian.dir}/control">
-            <data src="${dist.dir}">
-                <exclude name="**/*.deb"/>
-            </data>
+            <tarfileset file="${resource.dir}/deb/renamer"
+                prefix="/usr/bin"
+                filemode="755"/>
+            <tarfileset file="${resource.dir}/deb/menu"
+                prefix="/usr/share/menu"/>
+            <tarfileset dir="${dist.dir}"
+                prefix="/usr/share/${application.title}"
+                excludes="*.deb"/>
         </deb>
 
     </target>
