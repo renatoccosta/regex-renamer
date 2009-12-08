@@ -87,11 +87,30 @@
             <fileset dir="${dist.dir}" excludes="**/*.deb"/>
         </copy-->
 
-        <!--copy todir="${build.debian.dir}/data/usr/bin">
-            <fileset file="${resource.dir}/deb/renamer"/>
-        </copy-->
+        <mkdir dir="${build.debian.dir}/data/usr/share/${application.title}/"/>
 
-        <deb destfile="${dist.dir}/${package.name}.deb"
+        <jar destfile="${build.debian.dir}/data/usr/share/${application.title}/${application.title}.jar"
+             basedir="${build.classes.dir}">
+            <manifest>
+                <!-- Who is building this jar? -->
+                <attribute name="Built-By" value="${user.name}"/>
+                <!-- Information about the program itself -->
+                <attribute name="Implementation-Vendor" value="ACME inc."/>
+                <attribute name="Implementation-Title" value="GreatProduct"/>
+                <attribute name="Implementation-Version" value="1.0.0beta2"/>
+            </manifest>
+        </jar>
+
+        <copy todir="${build.debian.dir}/data/usr/bin"
+              file="${resource.dir}/deb/renamer"/>
+
+        <copy file="${resource.dir}/deb/menu"
+              tofile="${build.debian.dir}/data/usr/share/menu/${application.title}"/>
+
+        <copy file="${resource.dir}/icon.PNG"
+              tofile="${build.debian.dir}/data/usr/share/pixmaps/${application.title}.png"/>
+
+        <!--deb destfile="${dist.dir}/${package.name}.deb"
             control="${build.debian.dir}/control">
             <tarfileset file="${resource.dir}/deb/renamer"
                 prefix="/usr/bin"
@@ -101,7 +120,7 @@
             <tarfileset dir="${dist.dir}"
                 prefix="/usr/share/${application.title}"
                 excludes="*.deb"/>
-        </deb>
+        </deb-->
 
     </target>
 </project>
