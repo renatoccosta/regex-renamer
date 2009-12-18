@@ -17,6 +17,27 @@ import java.util.List;
 public class FileUtil {
 
     /**
+     * Compara os nomes dos arquivos. Os arquivos que estiverem em pastas de
+     * níveis diferentes serão comparados pela sua proximidade da raiz.
+     */
+    private static Comparator<String> compFileName = new Comparator<String>() {
+
+        public int compare(String o1, String o2) {
+            int depth1 = o1.split(File.separator).length;
+            int depth2 = o2.split(File.separator).length;
+
+            if (depth1 > depth2) {
+                return 1;
+            } else if (depth2 > depth1) {
+                return -1;
+            } else {
+                return o1.compareTo(o2);
+            }
+        }
+
+    };
+
+    /**
      * Compara as data de modificação de arquivos. Os arquivos que estiverem em
      * pastas de níveis diferentes serão comparados pela sua proximidade da raiz.
      */
@@ -84,7 +105,7 @@ public class FileUtil {
      * @param files Lista dos arquivos
      */
     public static void sortFilesByName(List<String> files) {
-        Collections.sort(files);
+        Collections.sort(files, compFileName);
     }
 
     /**
