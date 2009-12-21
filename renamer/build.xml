@@ -83,36 +83,30 @@
             </filterset>
         </copy>
 
-        <!--copy todir="${build.debian.dir}/data/usr/share/${application.title}">
-            <fileset dir="${dist.dir}" excludes="**/*.deb"/>
-        </copy-->
+        <mkdir dir="${build.debian.data.dir}/usr/share/${application.title}/"/>
 
-        <mkdir dir="${build.debian.dir}/data/usr/share/${application.title}/"/>
-
-        <jar destfile="${build.debian.dir}/data/usr/share/${application.title}/${application.title}.jar"
+        <jar destfile="${build.debian.data.dir}/usr/share/${application.title}/${application.title}.jar"
              basedir="${build.classes.dir}">
         </jar>
 
-        <copy todir="${build.debian.dir}/data/usr/bin"
-              file="${resource.dir}/deb/renamer"/>
+        <copy file="${resource.dir}/deb/${application.title}"
+              todir="${build.debian.data.dir}/usr/bin" />
 
         <copy file="${resource.dir}/deb/menu"
-              tofile="${build.debian.dir}/data/usr/share/menu/${application.title}"/>
+              tofile="${build.debian.data.dir}/usr/share/menu/${application.title}"/>
 
         <copy file="${resource.dir}/icon.PNG"
-              tofile="${build.debian.dir}/data/usr/share/pixmaps/${application.title}.png"/>
+              tofile="${build.debian.data.dir}/usr/share/pixmaps/${application.title}.png"/>
 
-        <!--deb destfile="${dist.dir}/${package.name}.deb"
-            control="${build.debian.dir}/control">
-            <tarfileset file="${resource.dir}/deb/renamer"
+        <deb destfile="${dist.dir}/${package.name}.deb"
+             control="${build.debian.control.dir}">
+            <tarfileset file="${build.debian.data.dir}/usr/bin/${application.title}"
                 prefix="/usr/bin"
                 filemode="755"/>
-            <tarfileset file="${resource.dir}/deb/menu"
-                prefix="/usr/share/menu"/>
-            <tarfileset dir="${dist.dir}"
-                prefix="/usr/share/${application.title}"
-                excludes="*.deb"/>
-        </deb-->
+            <fileset dir="${build.debian.data.dir}">
+                <exclude name="usr/bin/${application.title}" />
+            </fileset>
+        </deb>
 
     </target>
 </project>
