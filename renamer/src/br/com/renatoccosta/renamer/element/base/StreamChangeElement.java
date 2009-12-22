@@ -2,6 +2,7 @@ package br.com.renatoccosta.renamer.element.base;
 
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
+import br.com.renatoccosta.renamer.exception.RuntimeRenamerException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +40,8 @@ public abstract class StreamChangeElement extends Element {
     /**
      * Adiciona um elemento à cadeia.
      */
-    public StreamChangeElement add(Element element) {
+    public StreamChangeElement add(Element element) throws
+            InvalidElementException {
         if (elementoAberto) {
             //quando este está aberto, o elemento é adicionado como filho
             childs.add(element);
@@ -64,7 +66,7 @@ public abstract class StreamChangeElement extends Element {
      *
      * @param id Id do elemento a ser fechado.
      */
-    public StreamChangeElement close(String id) {
+    public StreamChangeElement close(String id) throws RuntimeRenamerException {
         Class<Element> ce = ElementsDirectory.getInstance().lookup(id);
 
         if (ce == null) {

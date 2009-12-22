@@ -29,7 +29,7 @@ inicio :
 	(
 	literal {
 		Element elem = new LiteralElement($literal.text);		
-		last = last.add(elem);;
+		last = last.add(elem);
 	} 
 	| 
 	grupo {

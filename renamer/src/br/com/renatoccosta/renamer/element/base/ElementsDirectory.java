@@ -47,7 +47,7 @@ public class ElementsDirectory {
      * @param id Nome descritivo da classe
      * @return Classe do elemento ou null caso não encontre
      */
-    public Class<Element> lookup(String id) {
+    public Class<Element> lookup(String id) throws ElementNotFoundException {
         Class<Element> cl = mapId.get(id);
         if (cl == null) {
             throw new ElementNotFoundException(id);
@@ -61,7 +61,8 @@ public class ElementsDirectory {
      * @param clasz Classe elemento
      * @return Id do elemento
      */
-    public String lookup(Class<? extends Element> clasz) {
+    public String lookup(Class<? extends Element> clasz) throws
+            ElementNotFoundException {
         for (Map.Entry<String, Class<Element>> entry : mapId.entrySet()) {
             if (entry.getValue().equals(clasz)) {
                 return entry.getKey();

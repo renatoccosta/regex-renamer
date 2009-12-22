@@ -1,6 +1,5 @@
 package br.com.renatoccosta.renamer.element.base;
 
-import br.com.renatoccosta.renamer.element.base.Element;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang.ArrayUtils;
