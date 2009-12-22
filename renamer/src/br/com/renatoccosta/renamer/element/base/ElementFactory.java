@@ -1,5 +1,6 @@
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.lang.ArrayUtils;
@@ -10,7 +11,8 @@ import org.apache.commons.lang.ArrayUtils;
  */
 public class ElementFactory {
 
-    public static Element compile(String conteudo) {
+    public static Element compile(String conteudo) throws
+            ElementNotFoundException {
         String campos[] = conteudo.split(":");
         String xpName = campos[0];
         String params[] = (String[]) ArrayUtils.remove(campos, 0);
