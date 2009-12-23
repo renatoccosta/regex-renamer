@@ -2,6 +2,7 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
+import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import junit.framework.TestCase;
 
 /**
@@ -28,7 +29,7 @@ public class ElementDiscoveryTest extends TestCase {
         System.out.println("initialize");
     }
 
-    public void testLookup() {
+    public void testLookup() throws ElementNotFoundException {
         System.out.println("lookup");
         String id = "case";
         Class expResult = CaseElement.class;

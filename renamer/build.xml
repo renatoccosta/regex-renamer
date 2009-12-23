@@ -72,7 +72,7 @@
 
     -->
 
-    <target name="build-package" description="Creates the Debian Package" depends="jar">
+    <target name="build-deb-package" description="Creates the Debian Package" depends="jar">
         <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
         
         <copy todir="${build.debian.dir}/control">
@@ -81,6 +81,11 @@
                 <filter token="version" value="${version}"/>
                 <filter token="name" value="${application.title}"/>
             </filterset>
+        </copy>
+
+        <copy todir="${build.debian.control.dir}">
+              <fileset dir="${resource.dir}/deb" includes="post*"/>
+              <fileset dir="${resource.dir}/deb" includes="pre*"/>
         </copy>
 
         <mkdir dir="${build.debian.data.dir}/usr/share/${application.title}/"/>

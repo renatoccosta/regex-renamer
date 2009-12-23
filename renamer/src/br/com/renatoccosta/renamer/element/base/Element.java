@@ -1,5 +1,6 @@
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import java.io.File;
 
 /**
@@ -14,10 +15,14 @@ public abstract class Element {
      * Retorna o id do elemento. Este id é utilizado para identificação na
      * string de substituição
      *
-     * @return
+     * @return Id do elemento ou null caso não seja possível obter o id
      */
     public String getId() {
-        return ElementsDirectory.getInstance().lookup(this.getClass());
+        try {
+            return ElementsDirectory.getInstance().lookup(this.getClass());
+        } catch (ElementNotFoundException ex) {
+            return null;
+        }
     }
 
     /**
