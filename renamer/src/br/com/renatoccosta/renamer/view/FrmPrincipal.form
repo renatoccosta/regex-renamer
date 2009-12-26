@@ -211,9 +211,6 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
         <Container class="javax.swing.JScrollPane" name="pnlAntes">
-          <BindingProperties>
-            <BindingProperty name="verticalScrollBar" source="pnlDepois" sourcePath="${verticalScrollBar}" target="pnlAntes" targetPath="verticalScrollBar" updateStrategy="0" immediately="false"/>
-          </BindingProperties>
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>

@@ -4,18 +4,11 @@
 . /usr/lib/java-wrappers/java-wrappers.sh
 
 JAVA_CLASSPATH="/usr/lib/jni:/usr/lib/java"
-VUZE_BIN="/usr/bin/vuze"
 
-find_java_runtime openjdk sunmin5
+find_java_runtime java6
 
-find_jars Azureus2 log4j-1.2 commons-cli swt
+find_jars log4j-1.2 commons-lang antlr3 xstream xpp3
 
-if [ ! -x $VUZE_BIN ]; then
-	UI=-Dforce.ui=az2
-fi
+JAVA_CLASSPATH=$JAVA_CLASSPATH:/usr/share/renamer/renamer.jar
 
-run_java -Dazureus.install.path="$HOME/.azureus" $UI \
-    -XX:CompileCommand=exclude,com/aelitis/net/udp/uc/impl/PRUDPPacketHandlerImpl\$5,runSupport \
-    org.gudy.azureus2.ui.common.Main "$@"
-
-#java -jar /usr/share/renamer/renamer.jar $1 &
+run_java br.com.renatoccosta.renamer.Main "$@"

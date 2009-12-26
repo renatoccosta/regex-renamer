@@ -3,7 +3,7 @@ Version: [[version]]
 Architecture: all
 Maintainer: Renato Couto da Costa <renamer@renatoccosta.com.br>
 Installed-Size: 13348
-Depends: openjdk-6-jre | sun-java6-jre, antlr3, libbeansbinding-java, libcommons-lang-java, libxstream-java, liblog4j1.2-java, gconf2, nautilus-actions, java-wrappers
+Depends: openjdk-6-jre | sun-java6-jre, antlr3, libcommons-lang-java, libxstream-java, libxpp3-java, liblog4j1.2-java, gconf2, nautilus-actions, java-wrappers
 Section: utils
 Priority: optional
 Homepage: http://renamer.renatoccosta.com.br

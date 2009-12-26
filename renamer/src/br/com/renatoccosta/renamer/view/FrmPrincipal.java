@@ -8,6 +8,8 @@ package br.com.renatoccosta.renamer.view;
 import br.com.renatoccosta.renamer.*;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -29,6 +31,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private Renamer renamer = new Renamer();
 
     private boolean lockSelect = false;
+
+    private boolean lockScroll = false;
 
     /** Creates new form FrmPrincipal */
     public FrmPrincipal() {
@@ -55,7 +59,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         lblAlvo = new javax.swing.JLabel();
         txtAlvo = new javax.swing.JTextField();
@@ -120,9 +123,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pnlArquivos.setDividerLocation(260);
         pnlArquivos.setContinuousLayout(true);
-
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, pnlDepois, org.jdesktop.beansbinding.ELProperty.create("${verticalScrollBar}"), pnlAntes, org.jdesktop.beansbinding.BeanProperty.create("verticalScrollBar"));
-        bindingGroup.addBinding(binding);
 
         lstAntes.setModel(new RenamerBeforeListModel(renamer));
         lstAntes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -317,8 +317,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(pnlStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        bindingGroup.bind();
-
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-587)/2, (screenSize.height-481)/2, 587, 481);
     }// </editor-fold>//GEN-END:initComponents
@@ -327,9 +325,36 @@ public class FrmPrincipal extends javax.swing.JFrame {
         try {
             InputStream is = this.getClass().getResourceAsStream("/icon.PNG");
             this.setIconImage(ImageIO.read(is));
-        } catch (Exception ex) {
-        }
 
+            pnlAntes.getVerticalScrollBar().
+                    addAdjustmentListener(new AdjustmentListener() {
+
+                public void adjustmentValueChanged(AdjustmentEvent e) {
+                    if (!lockSelect) {
+                        lockSelect = true;
+                        pnlDepois.getVerticalScrollBar().setValue(e.getValue());
+                        lockSelect = false;
+                    }
+                }
+
+            });
+
+            pnlDepois.getVerticalScrollBar().
+                    addAdjustmentListener(new AdjustmentListener() {
+
+                public void adjustmentValueChanged(AdjustmentEvent e) {
+                    if (!lockSelect) {
+                        lockSelect = true;
+                        pnlAntes.getVerticalScrollBar().setValue(e.getValue());
+                        lockSelect = false;
+                    }
+                }
+
+            });
+
+        } catch (Exception ex) {
+            logger.log(Level.SEVERE, null, ex);
+        }
     }
 
     private void btnArquivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnArquivoActionPerformed
@@ -654,7 +679,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField txtAlvo;
     private javax.swing.JTextField txtLocalizar;
     private javax.swing.JTextField txtSubstituir;
-    private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 
 }
