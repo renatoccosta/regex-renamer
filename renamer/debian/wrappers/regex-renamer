@@ -9,6 +9,6 @@ find_java_runtime java6
 
 find_jars log4j-1.2 commons-lang antlr3 xstream xpp3
 
-JAVA_CLASSPATH=$JAVA_CLASSPATH:/usr/share/renamer/renamer.jar
+JAVA_CLASSPATH=$JAVA_CLASSPATH:/usr/share/regex-renamer/regex-renamer.jar
 
 run_java br.com.renatoccosta.renamer.Main "$@"
