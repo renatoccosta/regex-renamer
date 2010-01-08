@@ -1,0 +1,25 @@
+#summary Design Architecture
+#labels Phase-Design
+
+= Programming Environment =
+
+This project uses Java as it's base programming language. It was created using Netbeans 6.7.1
+
+== Dependencies ==
+
+The project needs the following libraries to compile and run:
+
+  * commons-lang-2.4
+  * antlr-3.2 (only the runtime)
+  * xstream-1.3 (including the xpp3)
+  * log4j-1.2.15
+
+= User Interface =
+
+The application uses Swing to build the user interface. It's not possible, yet, to rename the files and get the results all over the command line, but the parameters passed will reflect the initial state of the GUI. If no parameters are passed, the application will start with all the fields blank.
+
+= Custom Language =
+
+This project used ANTLR (Another Tool for Language Recognition) for implementing it's own replace expression language.
+
+For more details considering this language, follow this link [ReplaceEL]
