@@ -12,8 +12,8 @@ simple language that was based on EL (expression language) to tell Regex-renamer
 how to replace the file names.
 
 The replace expressions can be divided into two categories:
-* Constant Expressions;
-* Variable Expressions
+  * Constant Expressions;
+  * Variable Expressions
 
 Constant expressions are string literals that will be used in the new file name.
 Variable expressions are special code able to perform a wide range of functions
