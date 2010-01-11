@@ -23,3 +23,9 @@ The application uses Swing to build the user interface. It's not possible, yet, 
 This project used ANTLR (Another Tool for Language Recognition) for implementing it's own replace expression language.
 
 For more details considering this language, follow this link [ReplaceEL]
+
+= Extensions = 
+
+Regex-renamer was built to be extendable in its variable expressions. It has a lot of built-in variable expressions but a developer can create more. To do that, the API has to be used.
+
+In this first version the extensions won't be allowed yet, because i'm still developing the component architecture.
