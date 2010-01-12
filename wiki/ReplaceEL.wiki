@@ -1,0 +1,22 @@
+#summary Replace Expression Language Sintax
+#labels Phase-Design
+
+= The Replace Expression Language =
+
+Regex-renamer uses regular expressions as it's core functionality to search for file patterns to be renamed. The syntax of the regular expression used is based on the [http://java.sun.com/docs/books/tutorial/essential/regex/ Java Regex]. You should follow this link to learn more about this language.
+
+Besides the normal regex language to search for the files, there is another one to tell the application how to rename the files. This language is called the Replace Expression Language.
+  * Language because it has lexical and syntax rules
+  * Replace because it is used to replace the file names with other information
+  * Expression because it is composed of special characters that can be used to activate functionalities during the replace operation. There are two kinds of expressions:
+    * Constant Expressions: Means that whatever you type in the REL will be directly reflected in the destination name.
+    * Variable Expressions: Means that you are activating a certain function, passing parameters (if necessary) and getting a result. That result will be reflected in the destination name. There are some built-in variable expressions ready to be used. To know more about those expressions read [Built-in Variable Expressions]. It is also possible to create more expressions using the APIs, but it's not available in this first version.
+
+== Syntax ==
+
+The syntax of the REL is very simple. Basically, everything that you type will be considered a constant expression, except the cases where the text is inside `${...}`, which will be a variable expression.
+
+=== Ex1: ===
+Let's say you type the following text as a search:
+`.*`
+This means that the search will match any number of characters, including zero (which is not possible for a file...)
