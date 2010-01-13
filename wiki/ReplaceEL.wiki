@@ -34,3 +34,14 @@ Considering the same search as the example 1, you type the following REL:
 `${case:lower}$1`
 
 This is an example of a variable expression. `case` is the name of the function and `lower` is a parameter. If a function requires more parameters, you need to use `:` (colon) to divide them. The result of this example will be a lower cased file name.
+
+=== Ex3: ===
+Consider the following search text:
+
+`(.*?)(\d*)(.*?)`
+
+It will match texts that begins with 0 or more characters, followed by 0 or more numbers, followed by 0 or more characters. The REL is:
+
+`$2${case:upper}$1${/case}$3`
+
+This is a bit complex. First it puts the second capture group (the numbers) on the beginning of the name. Second it upper case the first capture group. The `${/case}` works like a XML tag, closing the `case` opened right before. And finally it repeats the text on the third capture group, without any kind of modification.
