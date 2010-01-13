@@ -1,4 +1,4 @@
-#summary Replace Expression Language Sintax
+#summary Replace Expression Language Syntax
 #labels Phase-Design
 
 = The Replace Expression Language =
