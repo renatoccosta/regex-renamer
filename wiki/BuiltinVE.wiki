@@ -77,6 +77,6 @@ The `s:r` pair can be repeated to replace many characters at once.
 
 === Examples ===
 
-`${replace:e:3}renato${replace}` results in r3nato
+`${replace:e:3}renato${replace}` results in `r3nato`
 
-`${replace:e:3:a:4:o:0}renato${replace}` results in r3n4t0
+`${replace:e:3:a:4:o:0}renato${replace}` results in `r3n4t0`
