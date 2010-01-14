@@ -16,10 +16,13 @@
 package br.com.renatoccosta.renamer;
 
 import br.com.renatoccosta.renamer.view.FrmPrincipal;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
@@ -27,26 +30,41 @@ import javax.swing.UnsupportedLookAndFeelException;
  */
 public class Main {
 
+    private static Logger logger;
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            loadLog4J();
+            setLookAndFeel();
+            loadMainForm(args);
+        } catch (Exception ex) {
+            logger.error(ex);
+            ex.printStackTrace();
+        }
+    }
 
-            if (args.length > 0) {
-                new FrmPrincipal(args[0]).setVisible(true);
-            } else {
-                new FrmPrincipal().setVisible(true);
-            }
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+    public static void loadLog4J() throws IOException {
+        Properties props = new Properties();
+        props.load(new FileInputStream("log4j.properties"));
+        PropertyConfigurator.configure(props);
+
+        logger = Logger.getLogger(Main.class);
+    }
+
+    private static void setLookAndFeel() throws ClassNotFoundException,
+            InstantiationException, IllegalAccessException,
+            UnsupportedLookAndFeelException {
+        UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+    }
+
+    private static void loadMainForm(String[] args) {
+        if (args.length > 0) {
+            new FrmPrincipal(args[0]).setVisible(true);
+        } else {
+            new FrmPrincipal().setVisible(true);
         }
     }
 

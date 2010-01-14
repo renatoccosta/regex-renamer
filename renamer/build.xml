@@ -72,6 +72,18 @@
 
     -->
 
+    <target name="-pre-compile">
+        <copy todir="${build.dir}">
+            <fileset dir="${resource.dir}"/>
+        </copy>
+    </target>
+
+    <target name="-pre-jar">
+        <copy todir="${dist.dir}">
+            <fileset dir="${resource.dir}"/>
+        </copy>
+    </target>
+    
     <target name="build-deb-package" description="Creates the Debian Package" depends="jar">
         <taskdef name="deb" classname="org.vafer.jdeb.ant.DebAntTask"/>
         

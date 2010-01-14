@@ -13,11 +13,11 @@ import java.awt.event.AdjustmentListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.ListCellRenderer;
+import org.apache.log4j.Logger;
 
 /**
  *
@@ -25,8 +25,7 @@ import javax.swing.JOptionPane;
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
-    private static Logger logger = Logger.getLogger(
-            FrmPrincipal.class.getName());
+    private static Logger logger = Logger.getLogger(FrmPrincipal.class);
 
     private Renamer renamer = new Renamer();
 
@@ -323,17 +322,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void initComponentsLocal() {
         try {
+            //icone da aplicação
             InputStream is = this.getClass().getResourceAsStream("/icon.PNG");
             this.setIconImage(ImageIO.read(is));
 
+            //movimentação vertical sincronizada entre as listas de arquivos
             pnlAntes.getVerticalScrollBar().
                     addAdjustmentListener(new AdjustmentListener() {
 
                 public void adjustmentValueChanged(AdjustmentEvent e) {
-                    if (!lockSelect) {
-                        lockSelect = true;
+                    if (!lockScroll) {
+                        lockScroll = true;
                         pnlDepois.getVerticalScrollBar().setValue(e.getValue());
-                        lockSelect = false;
+                        lockScroll = false;
                     }
                 }
 
@@ -343,17 +344,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     addAdjustmentListener(new AdjustmentListener() {
 
                 public void adjustmentValueChanged(AdjustmentEvent e) {
-                    if (!lockSelect) {
-                        lockSelect = true;
+                    if (!lockScroll) {
+                        lockScroll = true;
                         pnlAntes.getVerticalScrollBar().setValue(e.getValue());
-                        lockSelect = false;
+                        lockScroll = false;
                     }
                 }
 
             });
 
+            ListCellRenderer lcr = lstAntes.getCellRenderer();
+            logger.debug(lcr.getClass().getName());
+
         } catch (Exception ex) {
-            logger.log(Level.SEVERE, null, ex);
+            logger.fatal(ex.getMessage(), ex);
         }
     }
 
@@ -375,7 +379,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
                         Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-                logger.log(Level.SEVERE, null, ex);
+                logger.error(ex);
             }
         }
     }//GEN-LAST:event_btnArquivoActionPerformed
@@ -394,7 +398,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-            logger.log(Level.SEVERE, null, ex);
+                logger.error(ex);
         }
     }//GEN-LAST:event_btnPrevisualizarActionPerformed
 
@@ -417,7 +421,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
                         Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-                logger.log(Level.SEVERE, null, ex);
+                logger.error(ex);
             }
         }
     }//GEN-LAST:event_mnuAbrirActionPerformed
@@ -455,7 +459,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage(),
                         Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-                logger.log(Level.SEVERE, null, ex);
+                logger.error(ex);
             }
         }
     }//GEN-LAST:event_mnuSalvarActionPerformed
@@ -476,7 +480,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-            logger.log(Level.SEVERE, null, ex);
+                logger.error(ex);
         }
     }//GEN-LAST:event_btnAplicarActionPerformed
 
@@ -492,7 +496,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-            logger.log(Level.SEVERE, null, ex);
+                logger.error(ex);
         }
     }//GEN-LAST:event_chkSubpastasActionPerformed
 
@@ -530,7 +534,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-            logger.log(Level.SEVERE, null, ex);
+                logger.error(ex);
         }
     }//GEN-LAST:event_btnCimaActionPerformed
 
@@ -552,7 +556,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-            logger.log(Level.SEVERE, null, ex);
+                logger.error(ex);
         }
     }//GEN-LAST:event_btnBaixoActionPerformed
 
