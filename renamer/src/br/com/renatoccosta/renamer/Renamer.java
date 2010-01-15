@@ -71,6 +71,13 @@ public class Renamer {
      */
     private boolean dirty = true;
 
+    /**
+     * Indica que o preview foi realizado com sucesso e os arquivos podem ser
+     * renomeados. Não significa que não possam ocorrer erros durante o processo
+     * de renomear.
+     */
+    private boolean canRename = true;
+
     private Comparator<String> cmpFiles = new Comparator<String>() {
 
         public int compare(String o1, String o2) {
@@ -223,6 +230,10 @@ public class Renamer {
 
     /* ---------------------------------------------------------------------- */
     public void moveFilesUp(int startIndex, int endIndex) {
+        if (startIndex <= 0) {
+            return;
+        }
+
         this.filesBefore = ArrayUtil.moveBlock(filesBefore, -1, startIndex,
                 endIndex);
         this.filesAfter = ArrayUtil.moveBlock(filesAfter, -1, startIndex,
@@ -230,6 +241,10 @@ public class Renamer {
     }
 
     public void moveFilesDown(int startIndex, int endIndex) {
+        if (endIndex >= this.filesBefore.size() - 1) {
+            return;
+        }
+
         this.filesBefore = ArrayUtil.moveBlock(filesBefore, 1, startIndex,
                 endIndex);
         this.filesAfter = ArrayUtil.moveBlock(filesAfter, 1, startIndex,
@@ -249,22 +264,36 @@ public class Renamer {
 
         filesAfter.clear();
         rootReplace.resetState();
+        canRename = true;
 
         //iteração na lista de arquivos
         for (String strFile : filesBefore) {
             File f = new File(strFile);
 
-            String destino = f.getName();
+            String target = f.getName();
 
             Matcher matcher = search.matcher(f.getName());
             if (matcher.find()) {
-                destino = rootReplace.getContent(search.pattern(),
-                        f.getName(), f);
+                try {
+                    target = rootReplace.getContent(search.pattern(),
+                            f.getName(), f);
+                } catch (RenamerException ex) {
+                    target = Messages.getErrorRenamingMessage();
+                    canRename = false;
+                } catch (RuntimeException ex) {
+                    target = Messages.getErrorRenamingMessage();
+                    canRename = false;
+                }
             }
 
-            filesAfter.add(f.getParent() + File.separator + destino);
+            filesAfter.add(f.getParent() + File.separator + target);
         }
 
+        //ocorreram problemas durante o rename de alguns arquivos
+        if (!canRename) {
+            throw new RenamerException(Messages.getErrorRenamingFilesMessage());
+        }
+        
         calculateConflicts();
 
         this.dirty = false;
@@ -276,7 +305,7 @@ public class Renamer {
      * da renomeação saia correto.
      */
     public void rename() throws RenamerException {
-        if (!isReady() || this.dirty) {
+        if (!isReady() || this.dirty || !this.canRename) {
             throw new RenamerException(Messages.getNotReadyMessage());
         }
 

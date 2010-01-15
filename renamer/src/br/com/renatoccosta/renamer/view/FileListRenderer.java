@@ -16,11 +16,11 @@
 package br.com.renatoccosta.renamer.view;
 
 import br.com.renatoccosta.renamer.Renamer;
+import br.com.renatoccosta.renamer.i18n.Messages;
 import java.awt.Color;
 import java.awt.Component;
 import java.io.Serializable;
 import javax.swing.DefaultListCellRenderer;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
@@ -57,7 +57,8 @@ public class FileListRenderer extends DefaultListCellRenderer implements
 //        }
 
         if (renamer.getConflicts().containsKey(
-                renamer.getFileNamesAfter().get(index))) {
+                renamer.getFileNamesAfter().get(index)) ||
+                Messages.getErrorRenamingMessage().equals(value)) {
             setForeground(Color.red);
         }
 

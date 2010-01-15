@@ -17,6 +17,7 @@ package br.com.renatoccosta.renamer.element.base;
 
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
+import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.exception.RuntimeRenamerException;
 import java.io.File;
 import java.util.ArrayList;
@@ -115,7 +116,8 @@ public abstract class StreamChangeElement extends Element {
      * @return Conteúdo do elemento
      */
     @Override
-    public String getContent(String find, String target, File file) {
+    public String getContent(String find, String target, File file) throws
+            RenamerException {
         StringBuffer sb = new StringBuffer();
 
         for (Element element : childs) {

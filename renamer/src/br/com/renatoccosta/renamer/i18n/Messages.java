@@ -92,4 +92,12 @@ public class Messages {
         return messages.getString("ContiguousSelectionMessage");
     }
 
+    public static String getErrorRenamingMessage() {
+        return messages.getString("ErrorRenaming");
+    }
+
+    public static String getErrorRenamingFilesMessage() {
+        return messages.getString("ErrorRenamingFiles");
+    }
+
 }

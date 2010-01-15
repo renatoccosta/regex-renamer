@@ -16,7 +16,6 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import javax.swing.ListCellRenderer;
 import org.apache.log4j.Logger;
 
 /**
@@ -353,9 +352,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             });
 
-            ListCellRenderer lcr = lstAntes.getCellRenderer();
-            logger.debug(lcr.getClass().getName());
-
         } catch (Exception ex) {
             logger.fatal(ex.getMessage(), ex);
         }
@@ -398,7 +394,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-                logger.error(ex);
+            logger.error(ex.getMessage(), ex);
         }
     }//GEN-LAST:event_btnPrevisualizarActionPerformed
 
@@ -480,7 +476,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-                logger.error(ex);
+            logger.error(ex);
         }
     }//GEN-LAST:event_btnAplicarActionPerformed
 
@@ -496,7 +492,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-                logger.error(ex);
+            logger.error(ex);
         }
     }//GEN-LAST:event_chkSubpastasActionPerformed
 
@@ -534,7 +530,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-                logger.error(ex);
+            logger.error(ex);
         }
     }//GEN-LAST:event_btnCimaActionPerformed
 
@@ -556,7 +552,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
-                logger.error(ex);
+            logger.error(ex);
         }
     }//GEN-LAST:event_btnBaixoActionPerformed
 

@@ -16,6 +16,7 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.*;
+import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,7 +56,8 @@ public class CaptureGroupElement extends ContentElement {
     }
 
     @Override
-    public String getContent(String find, String target, File file) {
+    public String getContent(String find, String target, File file) throws
+            RenamerException {
         if (patternFind == null) {
             patternFind = Pattern.compile(find);
         }
@@ -66,7 +68,9 @@ public class CaptureGroupElement extends ContentElement {
         try {
             return matcher.group(groupNumber);
         } catch (IllegalStateException e) {
-            return "";
+            throw new RenamerException(e);
+        } catch (IndexOutOfBoundsException e) {
+            throw new RenamerException(e);
         }
     }
 

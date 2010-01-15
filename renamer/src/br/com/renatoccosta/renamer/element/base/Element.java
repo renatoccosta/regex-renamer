@@ -16,6 +16,7 @@
 package br.com.renatoccosta.renamer.element.base;
 
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
+import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
 
 /**
@@ -49,7 +50,8 @@ public abstract class Element {
      * @param file Arquivo associado à string alvo.
      * @return Conteúdo do elemento
      */
-    public abstract String getContent(String find, String target, File file);
+    public abstract String getContent(String find, String target, File file)
+            throws RenamerException;
 
     public abstract void setParameters(String... content);
 
