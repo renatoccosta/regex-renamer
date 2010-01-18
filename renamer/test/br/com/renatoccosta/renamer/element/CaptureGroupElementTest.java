@@ -31,7 +31,7 @@ public class CaptureGroupElementTest extends TestCase {
         instance.setParameters("1");
     }
 
-    public void testGetContent() {
+    public void testGetContent() throws Exception {
         System.out.println("getContent");
 
         String find = ".*?(a+).*";

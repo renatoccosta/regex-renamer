@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="regex-renamer-debian-package" default="default" basedir="..">
+    <import file="../build.xml"/>
+
+    <target name="-post-init" unless="user.properties.file">
+        <property file="debian/build.properties"/>
+    </target>
+</project>

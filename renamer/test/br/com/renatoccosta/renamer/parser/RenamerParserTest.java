@@ -3,7 +3,6 @@ package br.com.renatoccosta.renamer.parser;
 import java.io.File;
 import junit.framework.TestCase;
 import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RecognitionException;
 
 /**
  *
@@ -25,7 +24,7 @@ public class RenamerParserTest extends TestCase {
         super.tearDown();
     }
 
-    public void testCompleto() throws RecognitionException {
+    public void testCompleto() throws Exception {
         System.out.println("testCompleto");
 
         String exemplo = "abc$1 ${idx:1:3}";
