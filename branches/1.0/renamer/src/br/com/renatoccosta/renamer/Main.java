@@ -41,8 +41,8 @@ public class Main {
             setLookAndFeel();
             loadMainForm(args);
         } catch (Exception ex) {
-            logger.error(ex);
             ex.printStackTrace();
+            logger.error(ex);
         }
     }
 
