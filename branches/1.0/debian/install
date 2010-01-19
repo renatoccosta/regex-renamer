@@ -1,0 +1,5 @@
+debian/regex-renamer.png usr/share/pixmaps
+debian/regex-renamer.xpm usr/share/pixmaps
+dist/regex-renamer.jar usr/share/regex-renamer
+debian/wrappers/regex-renamer usr/bin
+debian/regex-renamer.schemas usr/share/gconf/schemas
