@@ -388,14 +388,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             renamer.previewRename();
 
-            refreshLists();
-
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
 
             logger.error(ex.getMessage(), ex);
         }
+
+        refreshLists();
     }//GEN-LAST:event_btnPrevisualizarActionPerformed
 
     private void mnuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrirActionPerformed
