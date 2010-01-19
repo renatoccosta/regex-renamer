@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="regex-renamer-debian-package" default="default" basedir="..">
-    <import file="../build.xml"/>
+<project name="regex-renamer-debian-package" default="build" basedir="..">
+    <!--import file="../build.xml"/-->
 
-    <target name="-post-init" unless="user.properties.file">
+    <target name="-init">
         <property file="debian/build.properties"/>
     </target>
 
+    <target name="clean" depends="-init">
+        <property file="debian/build.properties"/>
+        <ant antfile="build.xml" target="clean" inheritall="true"/>
+    </target>
+
+    <target name="build" depends="-init">
+        <property file="debian/build.properties"/>
+        <ant antfile="build.xml" target="jar" inheritall="true"/>
+    </target>
+
+    <!-- =================================================================== -->
+
     <target name="-deb-init">
         <property file="debian/build.properties"/>
+        <property file="renamer/nbproject/project.properties"/>
         <mkdir dir="${package.dir}"/>
     </target>
 
     <target name="-source-tarball" depends="-deb-init">
-        <tar destfile="${package.dir}/${application.title}_1.0.orig.tar"
+        <tar destfile="${package.dir}/${application.title}_${version}.orig.tar"
             basedir="renamer" excludes="nbproject/private/**"/>
-        <gzip destfile="${package.dir}/${application.title}_1.0.orig.tar.gz"
-            src="${package.dir}/${application.title}_1.0.orig.tar"/>
-        <delete file="${package.dir}/${application.title}_1.0.orig.tar"/>
+        <gzip destfile="${package.dir}/${application.title}_${version}.orig.tar.gz"
+            src="${package.dir}/${application.title}_${version}.orig.tar"/>
+        <delete file="${package.dir}/${application.title}_${version}.orig.tar"/>
     </target>
 
-    <target name="debian-source-package" depends="-source-tarball">
-        <!--mkdir dir="${package.dir}/${application.title}-1.0"/-->
-        <copy todir="${package.dir}/${application.title}-1.0">
+    <target name="deb-source-package" depends="-source-tarball">
+        <!--mkdir dir="${package.dir}/${application.title}-${version}"/-->
+        <copy todir="${package.dir}/${application.title}-${version}">
             <fileset dir="renamer" excludes="nbproject/private/**"/>
         </copy>
-        <copy todir="${package.dir}/${application.title}-1.0/debian">
+        <copy todir="${package.dir}/${application.title}-${version}/debian">
             <fileset dir="debian"/>
         </copy>
-        <chmod file="${package.dir}/${application.title}-1.0/debian/rules" perm="755"/>
+        <chmod file="${package.dir}/${application.title}-${version}/debian/rules" perm="755"/>
     </target>
 
     <target name="deb-clean">

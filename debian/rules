@@ -5,7 +5,6 @@ include /usr/share/cdbs/1/class/ant.mk
 
 JAVA_HOME 		:= /usr/lib/jvm/default-java
 DEB_ANT_BUILDFILE 	:= debian/build.xml
-DEB_ANT_BUILD_TARGET 	:= jar
 
 build/regex-renamer::
 	cp resource/icon.PNG debian/regex-renamer.png
@@ -13,3 +12,6 @@ build/regex-renamer::
 
 cleanbuilddir/regex-renamer::
 	rm -f debian/regex-renamer.png
+
+binary-install/regex-renamer::
+	dh_gconf
