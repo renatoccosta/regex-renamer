@@ -1,3 +1,4 @@
+debian/regex-renamer.desktop usr/share/applications
 debian/regex-renamer.png usr/share/pixmaps
 debian/regex-renamer.xpm usr/share/pixmaps
 dist/regex-renamer.jar usr/share/regex-renamer
