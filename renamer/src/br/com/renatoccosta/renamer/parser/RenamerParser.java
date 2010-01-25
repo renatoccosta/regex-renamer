@@ -24,12 +24,24 @@ import org.antlr.runtime.TokenStream;
  */
 public class RenamerParser extends GramaticaParser {
 
+    private String errorMessage;
+
     public RenamerParser(TokenStream input, RecognizerSharedState state) {
         super(input, state);
     }
 
     public RenamerParser(TokenStream input) {
         super(input);
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    @Override
+    public void emitErrorMessage(String msg) {
+        super.emitErrorMessage(msg);
+        this.errorMessage = msg;
     }
 
 }
