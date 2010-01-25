@@ -37,7 +37,7 @@ public class FileListRenderer extends DefaultListCellRenderer implements
         super();
 //        setOpaque(true);
         //setPreferredSize(new Dimension(50, 16));
-        
+
         this.renamer = renamer;
     }
 
@@ -45,7 +45,7 @@ public class FileListRenderer extends DefaultListCellRenderer implements
     public Component getListCellRendererComponent(JList list, Object value,
             int index, boolean isSelected, boolean cellHasFocus) {
 
-        Component c = super.getListCellRendererComponent(list, value, index, 
+        Component c = super.getListCellRendererComponent(list, value, index,
                 isSelected, cellHasFocus);
 
 //        if (isSelected) {
@@ -58,7 +58,7 @@ public class FileListRenderer extends DefaultListCellRenderer implements
 
         if (renamer.getConflicts().containsKey(
                 renamer.getFileNamesAfter().get(index)) ||
-                Messages.getErrorRenamingMessage().equals(value)) {
+                value.toString().endsWith(Messages.getErrorRenamingMessage())) {
             setForeground(Color.red);
         }
 

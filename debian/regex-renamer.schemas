@@ -54,7 +54,7 @@
         <short>O caminho do comando</short>
         <long>O caminho do comando para iniciar quando o usuário selecionar o menu de contexto do Nautilus</long>
       </locale>
-      <default>java -jar /home/renato/Desenvolvimento/projetos_ativos/renamer/dist/renamer.jar</default>
+      <default>/usr/bin/regex-renamer</default>
     </schema>
     <schema>
       <key>/schemas/apps/nautilus-actions/configurations/a08011f2-3933-4c60-9caa-bec48201dc38/profile-main/parameters</key>
