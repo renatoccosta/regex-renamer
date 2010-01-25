@@ -1,0 +1,5 @@
+regex-renamer (1.0-1) karmic; urgency=low
+
+  * Initial release (LP: #0001)
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Sun, 17 Jan 2010 16:13:50 -0300
