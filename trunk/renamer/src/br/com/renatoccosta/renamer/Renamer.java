@@ -399,6 +399,7 @@ public class Renamer {
         try {
             instance.inicio();
             this.rootReplace = instance.root;
+            
         } catch (RecognitionException ex) {
             throw new RenamerException(ex);
         }
