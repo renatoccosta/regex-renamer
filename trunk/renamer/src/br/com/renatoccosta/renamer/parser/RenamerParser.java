@@ -15,6 +15,7 @@
  */
 package br.com.renatoccosta.renamer.parser;
 
+import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.TokenStream;
 
@@ -42,6 +43,14 @@ public class RenamerParser extends GramaticaParser {
     public void emitErrorMessage(String msg) {
         super.emitErrorMessage(msg);
         this.errorMessage = msg;
+    }
+
+    @Override
+    public void reportError(RecognitionException e) {
+        System.out.println(e.getClass().getName() + ":" + 
+                e.getUnexpectedType() + ":" +
+                e.token.getText());
+        super.reportError(e);
     }
 
 }
