@@ -75,15 +75,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnlBotoes" alignment="1" pref="579" max="32767" attributes="0"/>
+          <Component id="pnlBotoes" alignment="1" pref="872" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblArquivos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="450" max="32767" attributes="0"/>
+              <EmptySpace pref="704" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlArquivos" pref="515" max="32767" attributes="0"/>
+              <Component id="pnlArquivos" pref="804" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlOrdenacao" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -99,16 +99,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="chkSubpastas" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="txtAlvo" pref="393" max="32767" attributes="0"/>
+                      <Component id="txtAlvo" pref="657" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnArquivo" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="txtLocalizar" alignment="0" pref="506" max="32767" attributes="1"/>
-                  <Component id="txtSubstituir" alignment="0" pref="506" max="32767" attributes="1"/>
+                  <Component id="txtLocalizar" alignment="0" pref="771" max="32767" attributes="1"/>
+                  <Component id="txtSubstituir" alignment="0" pref="771" max="32767" attributes="1"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="pnlStatus" alignment="0" pref="579" max="32767" attributes="0"/>
+          <Component id="pnlStatus" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -137,7 +137,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnlOrdenacao" max="32767" attributes="0"/>
-                  <Component id="pnlArquivos" alignment="0" pref="220" max="32767" attributes="0"/>
+                  <Component id="pnlArquivos" alignment="0" pref="199" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlBotoes" min="-2" max="-2" attributes="0"/>
@@ -194,6 +194,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSubstituir">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSubstituirKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lblArquivos">
       <Properties>
@@ -290,7 +293,7 @@
                   <Component id="btnSortName" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnSortDate" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace pref="51" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -401,10 +404,10 @@
         <Property name="alignment" type="int" value="0"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JLabel" name="lblText">
+        <Component class="javax.swing.JLabel" name="lblStatus">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblText.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblStatus.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
         </Component>

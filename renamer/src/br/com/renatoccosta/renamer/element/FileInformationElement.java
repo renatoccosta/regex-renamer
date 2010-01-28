@@ -16,7 +16,10 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.ExpressionElement;
+import br.com.renatoccosta.renamer.i18n.Messages;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Elemento que imprime determinadas informações sobre o arquivo que está tendo
@@ -32,24 +35,43 @@ public class FileInformationElement extends ExpressionElement {
 
     public static final String SIZE = "size";
 
+    private String mode = DATE;
+
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
     @Override
     public void setParameters(String... content) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (content.length > 0) {
+            String mode = content[0];
+
+            if (FOLDER.equals(mode) || DATE.equals(mode) || SIZE.equals(mode)) {
+                this.mode = mode;
+            } else {
+                throw new IllegalArgumentException(
+                        Messages.getFilterElementInvalidParametersMessage());
+            }
+        }
     }
 
     @Override
     public String getContent(String find, String target, File file) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (DATE.equals(mode)) {
+            return sdf.format(new Date(file.lastModified()));
+        } else if (FOLDER.equals(mode)) {
+            return file.getParentFile().getName();
+        } else {
+            return new Long(file.length()).toString();
+        }
     }
 
     @Override
     public String[] getParameters() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new String[] {mode};
     }
 
     @Override
     public void resetState() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        
     }
 
 }

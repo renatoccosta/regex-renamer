@@ -55,6 +55,10 @@ public class Messages {
         return messages.getString("CaseElementInvalidParametersMessage");
     }
 
+    public static String getFileInfoElementInvalidParametersMessage() {
+        return messages.getString("FileInfoElementInvalidParametersMessage");
+    }
+
     public static String getInvalidElementMessage(String id) {
         return String.format(messages.getString("InvalidElementException"),
                 id);
