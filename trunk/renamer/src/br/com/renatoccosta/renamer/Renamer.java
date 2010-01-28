@@ -43,41 +43,30 @@ import org.antlr.runtime.RecognitionException;
 public class Renamer {
 
     private static final String TMP_SUFIX = "~";
-
     private File rootFile;
-
     private boolean includeSubFolders = false;
-
     private SortType sortType = SortType.FILE_NAME;
-
     private List<String> filesBefore = new ArrayList<String>();
-
     private List<String> filesAfter = new ArrayList<String>();
-
     /**
      * Map de nome do arquivo que possui conflitos com os indices de
      * sua ocorrência na lista filesAfter
      */
     private Map<String, List<Integer>> conflicts =
             new HashMap<String, List<Integer>>();
-
     private Pattern search;
-
     private Element rootReplace;
-
     /**
      * Indica que variáveis foram alteradas depois do método
      * {@code previewRename()} ter sido chamado.
      */
     private boolean dirty = true;
-
     /**
      * Indica que o preview foi realizado com sucesso e os arquivos podem ser
      * renomeados. Não significa que não possam ocorrer erros durante o processo
      * de renomear.
      */
     private boolean canRename = true;
-
     private Comparator<String> cmpFiles = new Comparator<String>() {
 
         public int compare(String o1, String o2) {
@@ -90,7 +79,6 @@ public class Renamer {
 
             return o1.compareTo(o2);
         }
-
     };
 
     /* ---------------------------------------------------------------------- */
@@ -293,7 +281,7 @@ public class Renamer {
         if (!canRename) {
             throw new RenamerException(Messages.getErrorRenamingFilesMessage());
         }
-        
+
         calculateConflicts();
 
         this.dirty = false;
@@ -398,8 +386,13 @@ public class Renamer {
 
         try {
             instance.inicio();
+
+            if (instance.getErrorMessage() != null) {
+                throw new RenamerException(instance.getErrorMessage());
+            }
+
             this.rootReplace = instance.root;
-            
+
         } catch (RecognitionException ex) {
             throw new RenamerException(ex);
         }
@@ -441,5 +434,4 @@ public class Renamer {
             FileUtil.sortFilesByDate(filesAfter);
         }
     }
-
 }
