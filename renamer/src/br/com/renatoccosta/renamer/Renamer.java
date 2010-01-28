@@ -33,6 +33,7 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.TokenStream;
 
 /**
  * Classe principal da aplicacao. Realiza toda a orquestracao do negocio
@@ -381,7 +382,7 @@ public class Renamer {
     private void parseReplace(String replace) throws RenamerException {
         RenamerLexer lexer = new RenamerLexer(replace);
 
-        CommonTokenStream cts = new CommonTokenStream(lexer);
+        TokenStream cts = new CommonTokenStream(lexer);
         RenamerParser instance = new RenamerParser(cts);
 
         try {
