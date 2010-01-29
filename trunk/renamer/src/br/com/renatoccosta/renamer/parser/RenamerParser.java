@@ -49,7 +49,7 @@ public class RenamerParser extends GramaticaParser {
     public void reportError(RecognitionException e) {
         System.out.println(e.getClass().getName() + ":" + 
                 e.getUnexpectedType() + ":" +
-                e.token.getText());
+                e.token != null ? e.token.getText() : "");
         super.reportError(e);
     }
 

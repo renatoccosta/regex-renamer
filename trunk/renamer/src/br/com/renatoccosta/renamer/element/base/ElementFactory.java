@@ -16,15 +16,16 @@
 package br.com.renatoccosta.renamer.element.base;
 
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.log4j.Logger;
 
 /**
  *
  * @author renato
  */
 public class ElementFactory {
+
+    private static Logger LOGGER = Logger.getLogger(ElementFactory.class);
 
     public static Element compile(String conteudo) throws
             ElementNotFoundException {
@@ -36,11 +37,9 @@ public class ElementFactory {
         try {
             ee = ElementsDirectory.getInstance().lookup(xpName).newInstance();
         } catch (InstantiationException ex) {
-            Logger.getLogger(ElementFactory.class.getName()).log(
-                    Level.SEVERE, null, ex);
+            LOGGER.error(ex.getMessage(), ex);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(ElementFactory.class.getName()).log(
-                    Level.SEVERE, null, ex);
+            LOGGER.error(ex.getMessage(), ex);
         }
 
         ee.setParameters(params);
