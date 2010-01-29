@@ -26,15 +26,13 @@ public class RuntimeRenamerException extends RecognitionException {
 
     protected String message;
 
-    public RuntimeRenamerException(String message) {
-        this.message = message;
-    }
-
     public RuntimeRenamerException(IntStream input) {
         super(input);
     }
 
-    public RuntimeRenamerException() {
+    public RuntimeRenamerException(IntStream input, String message) {
+        this(input);
+        this.message = message;
     }
 
     @Override

@@ -26,15 +26,12 @@ import org.antlr.runtime.IntStream;
  */
 public class ElementNotFoundException extends RuntimeRenamerException {
 
-    public ElementNotFoundException() {
+    public ElementNotFoundException(IntStream input, String message) {
+        super(input, Messages.getExpressionNotFoundMessage(message));
     }
 
     public ElementNotFoundException(IntStream input) {
         super(input);
-    }
-
-    public ElementNotFoundException(String xpName) {
-        super(Messages.getExpressionNotFoundMessage(xpName));
     }
 
 }

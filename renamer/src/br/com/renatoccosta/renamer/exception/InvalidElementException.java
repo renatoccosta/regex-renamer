@@ -23,15 +23,12 @@ import org.antlr.runtime.IntStream;
  */
 public class InvalidElementException extends RuntimeRenamerException {
 
-    public InvalidElementException() {
+    public InvalidElementException(IntStream input, String message) {
+        super(input, message);
     }
 
     public InvalidElementException(IntStream input) {
         super(input);
-    }
-
-    public InvalidElementException(String message) {
-        super(message);
     }
 
 }
