@@ -1,3 +1,10 @@
+regex-renamer (1.0-2) karmic; urgency=low
+
+  * Corrected build dependencies on Java. Now it uses default-jdk
+    package
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Fri, 22 Jan 2010 23:51:20 -0300
+
 regex-renamer (1.0-1) karmic; urgency=low
 
   * Initial release (LP: #0001)
