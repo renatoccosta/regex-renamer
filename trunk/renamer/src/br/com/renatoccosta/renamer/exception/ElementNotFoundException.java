@@ -16,9 +16,10 @@
 package br.com.renatoccosta.renamer.exception;
 
 import br.com.renatoccosta.renamer.i18n.Messages;
-import org.antlr.runtime.IntStream;
 
 /**
+ * Used to indicate that an element was identified during parse but it wasn't
+ * found
  * Exceção lançada sempre que um elemento foi identificado durante o parse, mas
  * o mesmo não foi encontrado no registro de elementos.
  * 
@@ -26,12 +27,19 @@ import org.antlr.runtime.IntStream;
  */
 public class ElementNotFoundException extends RuntimeRenamerException {
 
-    public ElementNotFoundException(IntStream input, String message) {
-        super(input, Messages.getExpressionNotFoundMessage(message));
+    public ElementNotFoundException(Throwable cause) {
+        super(cause);
     }
 
-    public ElementNotFoundException(IntStream input) {
-        super(input);
+    public ElementNotFoundException(String message, Throwable cause) {
+        super(Messages.getExpressionNotFoundMessage(message), cause);
+    }
+
+    public ElementNotFoundException(String message) {
+        super(Messages.getExpressionNotFoundMessage(message));
+    }
+
+    public ElementNotFoundException() {
     }
 
 }

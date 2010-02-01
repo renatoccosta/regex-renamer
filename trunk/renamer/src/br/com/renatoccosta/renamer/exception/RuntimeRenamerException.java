@@ -15,29 +15,25 @@
  */
 package br.com.renatoccosta.renamer.exception;
 
-import org.antlr.runtime.IntStream;
-import org.antlr.runtime.RecognitionException;
-
 /**
- *
+ * Base exception for the contruction of elements of the regex-renamer.
  * @author Renato Costa
  */
-public class RuntimeRenamerException extends RecognitionException {
+public class RuntimeRenamerException extends RenamerException {
 
-    protected String message;
-
-    public RuntimeRenamerException(IntStream input) {
-        super(input);
+    public RuntimeRenamerException() {
     }
 
-    public RuntimeRenamerException(IntStream input, String message) {
-        this(input);
-        this.message = message;
+    public RuntimeRenamerException(String message) {
+        super(message);
     }
 
-    @Override
-    public String getMessage() {
-        return message;
+    public RuntimeRenamerException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public RuntimeRenamerException(Throwable cause) {
+        super(cause);
     }
 
 }

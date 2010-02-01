@@ -16,7 +16,7 @@
 package br.com.renatoccosta.renamer.exception;
 
 /**
- *
+ * Base exception for the regex-renamer
  * @author renato
  */
 public class RenamerException extends Exception {

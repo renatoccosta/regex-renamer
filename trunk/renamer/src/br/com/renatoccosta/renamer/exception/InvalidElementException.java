@@ -15,20 +15,27 @@
  */
 package br.com.renatoccosta.renamer.exception;
 
-import org.antlr.runtime.IntStream;
-
 /**
- *
+ * Indicates that an element was used in an invalid position. It could be when
+ * it was trying to be added to another element but this was closed.
+ * 
  * @author Renato Costa
  */
 public class InvalidElementException extends RuntimeRenamerException {
 
-    public InvalidElementException(IntStream input, String message) {
-        super(input, message);
+    public InvalidElementException(Throwable cause) {
+        super(cause);
     }
 
-    public InvalidElementException(IntStream input) {
-        super(input);
+    public InvalidElementException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public InvalidElementException(String message) {
+        super(message);
+    }
+
+    public InvalidElementException() {
     }
 
 }

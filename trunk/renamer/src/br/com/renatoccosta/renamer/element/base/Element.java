@@ -15,7 +15,6 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
-import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
 
@@ -34,11 +33,7 @@ public abstract class Element {
      * @return Id do elemento ou null caso não seja possível obter o id
      */
     public String getId() {
-        try {
-            return ElementsDirectory.getInstance().lookup(this.getClass());
-        } catch (ElementNotFoundException ex) {
-            return null;
-        }
+        return ElementsDirectory.getInstance().lookup(this.getClass());
     }
 
     /**
