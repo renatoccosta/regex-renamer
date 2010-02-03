@@ -47,9 +47,6 @@ public class RenamerParser extends GramaticaParser {
 
     @Override
     public void reportError(RecognitionException e) {
-        System.out.println(e.getClass().getName() + ":" + 
-                e.getUnexpectedType() + ":" +
-                e.token != null ? e.token.getText() : "");
         super.reportError(e);
     }
 

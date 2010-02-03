@@ -10,6 +10,7 @@ import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -120,6 +121,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtSubstituir.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtSubstituirKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSubstituirKeyPressed(evt);
             }
         });
 
@@ -262,14 +266,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 872, Short.MAX_VALUE)
+            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblArquivos)
-                .addContainerGap(704, Short.MAX_VALUE))
+                .addContainerGap(413, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 804, Short.MAX_VALUE)
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -283,13 +287,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(chkSubpastas)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 657, Short.MAX_VALUE)
+                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnArquivo))
-                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
-                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE))
+                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE)
+                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 480, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,8 +577,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSortDateActionPerformed
 
     private void txtSubstituirKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubstituirKeyTyped
-
     }//GEN-LAST:event_txtSubstituirKeyTyped
+
+    private void txtSubstituirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubstituirKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE && evt.isControlDown()) {
+            try {
+                renamer.setReplace(txtSubstituir.getText().substring(0,
+                        txtSubstituir.getCaretPosition()));
+            } catch (RenamerException ex) {
+                logger.error(ex);
+            }
+        }
+    }//GEN-LAST:event_txtSubstituirKeyPressed
 
     private void validateFields() throws Exception {
         if (txtAlvo.getText().trim().equals("") ||
@@ -601,7 +615,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         return sc;
     }
 
-    private void configureRenamer(boolean refreshLists) throws RenamerException {
+    private void configureRenamer(boolean refreshLists) throws
+            RenamerException {
         if (!"".equals(txtAlvo.getText())) {
             renamer.setRootFiles(new File(txtAlvo.getText()),
                     chkSubpastas.isSelected());
