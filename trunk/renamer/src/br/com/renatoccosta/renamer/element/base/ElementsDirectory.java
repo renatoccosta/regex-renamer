@@ -54,6 +54,10 @@ public class ElementsDirectory {
         return discovery;
     }
 
+    public Map<String, Class<Element>> getMapId() {
+        return mapId;
+    }
+
     /**
      * Busca a classe correspondente ao id no map. Retorna null caso não
      * encontre.
