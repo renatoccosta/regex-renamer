@@ -386,7 +386,7 @@ public class Renamer {
         RenamerParser instance = new RenamerParser(cts);
 
         try {
-            instance.inicio();
+            instance.expression();
 
             if (instance.getErrorMessage() != null) {
                 throw new RenamerException(instance.getErrorMessage());
