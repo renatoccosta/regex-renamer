@@ -35,7 +35,14 @@ public class ElementFactory {
 
         Element ee = null;
         try {
-            ee = ElementsDirectory.getInstance().lookup(xpName).newInstance();
+            Class<Element> c = ElementsDirectory.getInstance().lookup(xpName);
+
+            if (c == null) {
+                throw new ElementNotFoundException(conteudo);
+            }
+
+            ee = c.newInstance();
+
         } catch (InstantiationException ex) {
             LOGGER.error(ex.getMessage(), ex);
         } catch (IllegalAccessException ex) {

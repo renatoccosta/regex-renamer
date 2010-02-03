@@ -1,11 +1,11 @@
 grammar Gramatica;
 
 tokens {
-	CLOSE_ELEMENT='/';
-	SEPCAMPO=':';
-	MARCADOR='$';
-	ENTRA_GRUPO='{';
-	SAI_GRUPO='}';
+	SLASH='/';
+	COLON=':';
+	DOLLAR='$';
+	OPEN_BRACKET='{';
+	CLOSE_BRACKET='}';
 	ESCAPE='\\';
 }
 
@@ -29,8 +29,24 @@ package br.com.renatoccosta.renamer.parser;
 } 
 
 @header {
+/**
+ * Copyright 2009 Renato Couto da Costa
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package br.com.renatoccosta.renamer.parser;
 
+import br.com.renatoccosta.renamer.exception.*;
 import br.com.renatoccosta.renamer.element.*;
 import br.com.renatoccosta.renamer.element.base.*;
 }
@@ -40,59 +56,76 @@ public StreamChangeElement root = new RootElement();
 private StreamChangeElement last = root;
 }
 
-inicio :
+expression :
 	(
 	literal {
-		Element elem = new LiteralElement($literal.text);		
-		last = last.add(elem);
+		try {
+			Element elem = new LiteralElement($literal.text);		
+			last = last.add(elem);
+		} catch (InvalidElementException ex) {
+			throw new RenamerSemanticException(input, ex);
+		}
 	} 
 	| 
-	grupo {
-		if ($grupo.elm != null) 
-			last = last.add($grupo.elm);
+	variableExpression {
+		if ($variableExpression.elm != null) {
+			try {
+				last = last.add($variableExpression.elm);
+			} catch (InvalidElementException ex) {
+				throw new RenamerSemanticException(input, ex);
+			}
+		}
 	}
 	)+ EOF;
 	
-grupo	returns [Element elm] :	
-	MARCADOR 
+variableExpression returns [Element elm] :	
+	DOLLAR 
 	(
-	NUMEROS {
-		$elm = new CaptureGroupElement(Integer.parseInt($NUMEROS.text));
+	NUMBERS {
+		$elm = new CaptureGroupElement(Integer.parseInt($NUMBERS.text));
 	} | 
-	subgrupo {
-		$elm = $subgrupo.elem;
+	group {
+		$elm = $group.elem;
 	} );
 
-subgrupo returns [Element elem] :	
-	ENTRA_GRUPO conteudo SAI_GRUPO {
-		$elem = $conteudo.elem;
+group returns [Element elem] :	
+	OPEN_BRACKET content CLOSE_BRACKET {
+		$elem = $content.elem;
 	};
 
-conteudo returns [Element elem] :
-	( closeElement 
+content returns [Element elem] :
+	( closeContent 
 	| 
-	otherElement {
-		$elem = ElementFactory.compile($conteudo.text);
+	expressionContent {
+		try {
+			$elem = ElementFactory.compile($content.text);
+		} catch (ElementNotFoundException ex) {
+			throw new RenamerSemanticException(input, ex);
+		}
 	} );
 	
-closeElement
+closeContent
 	:
-	CLOSE_ELEMENT LETRAS {
-		last.close($LETRAS.text);
+	SLASH LETTERS {
+		try {
+			last.close($LETTERS.text);
+		} catch (RuntimeRenamerException ex) {
+			throw new RenamerSemanticException(input, ex);
+		}
 	};
 
-otherElement
+expressionContent
 	:
-	LETRAS (SEPCAMPO literal)*;	
+	LETTERS (COLON literal)*;	
 	
 literal	:
 	(   ESCAPE ~( '\r' | '\n' )
-        |   ~( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\r' | '\n' )
+        |   ~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
         )+
 	;
 
-LETRAS
+LETTERS
 	:	('a'..'z' | 'A'..'Z')+;
-NUMEROS	:	 '1'..'9' '0'..'9'*;
-ESPACOS	:	' '+;
-QUALQUER:	~'\n';
+NUMBERS	:	 '1'..'9' '0'..'9'*;
+WS	:	' '+;
+ANY:	~'\n';
