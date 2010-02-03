@@ -15,6 +15,7 @@
  */
 package br.com.renatoccosta.renamer.parser;
 
+import org.antlr.runtime.MismatchedTokenException;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.TokenStream;
@@ -47,6 +48,11 @@ public class RenamerParser extends GramaticaParser {
 
     @Override
     public void reportError(RecognitionException e) {
+        if (e instanceof MismatchedTokenException) {
+            MismatchedTokenException me = (MismatchedTokenException)e;
+        }
+
+        System.out.println(e.getClass().getName());
         super.reportError(e);
     }
 
