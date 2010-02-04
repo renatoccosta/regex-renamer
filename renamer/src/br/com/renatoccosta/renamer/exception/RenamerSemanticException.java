@@ -49,4 +49,9 @@ public class RenamerSemanticException extends RecognitionException {
         return cause.getMessage();
     }
 
+    @Override
+    public Throwable getCause() {
+        return cause;
+    }
+
 }

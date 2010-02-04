@@ -27,19 +27,20 @@ import br.com.renatoccosta.renamer.i18n.Messages;
  */
 public class ElementNotFoundException extends RuntimeRenamerException {
 
-    public ElementNotFoundException(Throwable cause) {
-        super(cause);
+    private String element;
+
+    public ElementNotFoundException(String element, Throwable cause) {
+        super(Messages.getExpressionNotFoundMessage(element), cause);
+        this.element = element;
     }
 
-    public ElementNotFoundException(String message, Throwable cause) {
-        super(Messages.getExpressionNotFoundMessage(message), cause);
+    public ElementNotFoundException(String element) {
+        super(Messages.getExpressionNotFoundMessage(element));
+        this.element = element;
     }
 
-    public ElementNotFoundException(String message) {
-        super(Messages.getExpressionNotFoundMessage(message));
-    }
-
-    public ElementNotFoundException() {
+    public String getElement() {
+        return element;
     }
 
 }

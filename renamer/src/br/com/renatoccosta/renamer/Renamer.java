@@ -388,8 +388,10 @@ public class Renamer {
         try {
             instance.expression();
 
-            if (instance.getErrorMessage() != null) {
-                throw new RenamerException(instance.getErrorMessage());
+            if (!instance.getExceptions().isEmpty()) {
+                RecognitionException re = instance.getExceptions().get(
+                        instance.getExceptions().size()-1);
+                throw new RenamerException(re);
             }
 
             this.rootReplace = instance.root;
