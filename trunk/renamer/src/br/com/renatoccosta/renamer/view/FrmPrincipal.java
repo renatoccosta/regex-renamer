@@ -6,6 +6,7 @@
 package br.com.renatoccosta.renamer.view;
 
 import br.com.renatoccosta.renamer.*;
+import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.awt.event.AdjustmentEvent;
@@ -596,11 +597,23 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void txtSubstituirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubstituirKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE && evt.isControlDown()) {
             try {
-//                epu.showOptions(txtSubstituir.getText());
                 renamer.setReplace(txtSubstituir.getText().substring(0,
                         txtSubstituir.getCaretPosition()));
             } catch (RenamerException ex) {
-                logger.error(ex);
+                String expression = null;
+
+                Throwable e = ex.getCause();
+                while (e != null) {
+                    if (e instanceof ElementNotFoundException) {
+                        expression = ((ElementNotFoundException) e).getElement();
+                        break;
+                    }
+                    e = e.getCause();
+                }
+
+                if (expression != null) {
+                    epu.showOptions(expression);
+                }
             }
         }
     }//GEN-LAST:event_txtSubstituirKeyPressed

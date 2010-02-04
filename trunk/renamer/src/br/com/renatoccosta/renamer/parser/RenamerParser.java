@@ -15,7 +15,8 @@
  */
 package br.com.renatoccosta.renamer.parser;
 
-import org.antlr.runtime.MismatchedTokenException;
+import java.util.ArrayList;
+import java.util.List;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.TokenStream;
@@ -25,6 +26,8 @@ import org.antlr.runtime.TokenStream;
  * @author renato
  */
 public class RenamerParser extends GramaticaParser {
+
+    private List<RecognitionException> exceptions;
 
     private String errorMessage;
 
@@ -48,12 +51,19 @@ public class RenamerParser extends GramaticaParser {
 
     @Override
     public void reportError(RecognitionException e) {
-        if (e instanceof MismatchedTokenException) {
-            MismatchedTokenException me = (MismatchedTokenException)e;
-        }
-
+        exceptions.add(e);
         System.out.println(e.getClass().getName());
         super.reportError(e);
+    }
+
+    @Override
+    public void reset() {
+        super.reset();
+        exceptions = new ArrayList<RecognitionException>();
+    }
+
+    public List<RecognitionException> getExceptions() {
+        return exceptions;
     }
 
 }
