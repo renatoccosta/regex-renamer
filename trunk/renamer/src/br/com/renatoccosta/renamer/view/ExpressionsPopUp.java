@@ -16,10 +16,8 @@
  */
 package br.com.renatoccosta.renamer.view;
 
-import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -35,11 +33,7 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
 
     private static Logger logger = Logger.getLogger(FrmPrincipal.class);
 
-    private List<String> expressions = new ArrayList<String>();
-
     private JTextComponent tc;
-
-    private String text;
 
     /**
      * Constructs a new instance of ExpressionsPopUp passing the reference of
@@ -50,26 +44,22 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
      */
     public ExpressionsPopUp(JTextComponent tc) {
         this.tc = tc;
-        expressions.addAll(ElementsDirectory.getInstance().getMapId().keySet());
     }
 
     /**
      * Display the pop-up with the options that can complete the text of the
      * parameter
      */
-    public void showOptions(String text) {
+    public void showOptions(List<String> options) {
         this.removeAll();
-        this.text = text;
 
-        for (String exp : expressions) {
-            if (exp.startsWith(text)) {
-                JMenuItem mnu = createMenuItem(exp);
-                add(mnu);
-            }
+        for (String exp : options) {
+            JMenuItem mnu = createMenuItem(exp);
+            add(mnu);
         }
 
         show(tc.getParent(), tc.getX() + tc.getParent().getX(),
-                    tc.getY() + tc.getParent().getY());
+                tc.getY() + tc.getParent().getY());
     }
 
     /**
@@ -95,7 +85,7 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
     private JMenuItem createMenuItem(String exp) {
         JMenuItem mnu = new JMenuItem(exp);
         mnu.addActionListener(this);
-        
+
         return mnu;
     }
 

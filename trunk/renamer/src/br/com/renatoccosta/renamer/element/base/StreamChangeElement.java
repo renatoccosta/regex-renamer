@@ -15,10 +15,10 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.exception.ElementException;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
-import br.com.renatoccosta.renamer.exception.RuntimeRenamerException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +82,7 @@ public abstract class StreamChangeElement extends Element {
      *
      * @param id Id do elemento a ser fechado.
      */
-    public StreamChangeElement close(String id) throws RuntimeRenamerException {
+    public StreamChangeElement close(String id) throws ElementException {
         Class<Element> ce = ElementsDirectory.getInstance().lookup(id);
 
         if (ce == null) {

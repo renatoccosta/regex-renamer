@@ -17,6 +17,7 @@ package br.com.renatoccosta.renamer;
 
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.exception.ParseErrorsException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import br.com.renatoccosta.renamer.parser.RenamerLexer;
 import br.com.renatoccosta.renamer.parser.RenamerParser;
@@ -44,30 +45,41 @@ import org.antlr.runtime.TokenStream;
 public class Renamer {
 
     private static final String TMP_SUFIX = "~";
+
     private File rootFile;
+
     private boolean includeSubFolders = false;
+
     private SortType sortType = SortType.FILE_NAME;
+
     private List<String> filesBefore = new ArrayList<String>();
+
     private List<String> filesAfter = new ArrayList<String>();
+
     /**
      * Map de nome do arquivo que possui conflitos com os indices de
      * sua ocorrência na lista filesAfter
      */
     private Map<String, List<Integer>> conflicts =
             new HashMap<String, List<Integer>>();
+
     private Pattern search;
+
     private Element rootReplace;
+
     /**
      * Indica que variáveis foram alteradas depois do método
      * {@code previewRename()} ter sido chamado.
      */
     private boolean dirty = true;
+
     /**
      * Indica que o preview foi realizado com sucesso e os arquivos podem ser
      * renomeados. Não significa que não possam ocorrer erros durante o processo
      * de renomear.
      */
     private boolean canRename = true;
+
     private Comparator<String> cmpFiles = new Comparator<String>() {
 
         public int compare(String o1, String o2) {
@@ -80,6 +92,7 @@ public class Renamer {
 
             return o1.compareTo(o2);
         }
+
     };
 
     /* ---------------------------------------------------------------------- */
@@ -205,7 +218,7 @@ public class Renamer {
             lastReplace = this.rootReplace.toString();
         }
 
-        parseReplace(replace);
+        this.rootReplace = parseReplace(replace);
 
         if (!this.rootReplace.toString().equals(lastReplace)) {
             this.dirty = true;
@@ -373,13 +386,14 @@ public class Renamer {
     }
 
     /**
-     * Executa um parse na string de substituição, gerando os elementos
-     * correspondentes.
+     * Executes the parse in the substitution string, generating the
+     * corresponding elements.
      *
-     * @param replace String de substituição
-     * @throws ParseException Case exista um erro de sintaxe
+     * @param replace Substitution string
+     * @return Root element
+     * @throws ParseErrorsException If there was any error during the parse
      */
-    private void parseReplace(String replace) throws RenamerException {
+    private Element parseReplace(String replace) throws ParseErrorsException {
         RenamerLexer lexer = new RenamerLexer(replace);
 
         TokenStream cts = new CommonTokenStream(lexer);
@@ -387,18 +401,14 @@ public class Renamer {
 
         try {
             instance.expression();
-
-            if (!instance.getExceptions().isEmpty()) {
-                RecognitionException re = instance.getExceptions().get(
-                        instance.getExceptions().size()-1);
-                throw new RenamerException(re);
-            }
-
-            this.rootReplace = instance.root;
-
         } catch (RecognitionException ex) {
-            throw new RenamerException(ex);
         }
+
+        if (!instance.getExceptions().isEmpty()) {
+            throw new ParseErrorsException(instance.getExceptions());
+        }
+
+        return instance.root;
     }
 
     private void calculateConflicts() {
@@ -437,4 +447,5 @@ public class Renamer {
             FileUtil.sortFilesByDate(filesAfter);
         }
     }
+
 }
