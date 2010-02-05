@@ -7,7 +7,9 @@ package br.com.renatoccosta.renamer.view;
 
 import br.com.renatoccosta.renamer.*;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
+import br.com.renatoccosta.renamer.exception.ParseErrorsException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
+import br.com.renatoccosta.renamer.exception.RenamerSemanticException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
@@ -19,6 +21,8 @@ import java.io.InputStream;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import org.antlr.runtime.NoViableAltException;
+import org.antlr.runtime.RecognitionException;
 import org.apache.log4j.Logger;
 
 /**
@@ -600,19 +604,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 renamer.setReplace(txtSubstituir.getText().substring(0,
                         txtSubstituir.getCaretPosition()));
             } catch (RenamerException ex) {
-                String expression = null;
+                if (ex instanceof ParseErrorsException) {
+                    ParseErrorsException pee = (ParseErrorsException) ex;
+                    int pos = txtSubstituir.getCaretPosition();
 
-                Throwable e = ex.getCause();
-                while (e != null) {
-                    if (e instanceof ElementNotFoundException) {
-                        expression = ((ElementNotFoundException) e).getElement();
-                        break;
+                    if (AutoComplete.process(pee.getExceptions(), pos)) {
+                        epu.showOptions(expression);
                     }
-                    e = e.getCause();
-                }
-
-                if (expression != null) {
-                    epu.showOptions(expression);
                 }
             }
         }

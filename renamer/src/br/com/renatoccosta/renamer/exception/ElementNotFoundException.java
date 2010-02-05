@@ -20,12 +20,10 @@ import br.com.renatoccosta.renamer.i18n.Messages;
 /**
  * Used to indicate that an element was identified during parse but it wasn't
  * found
- * Exceção lançada sempre que um elemento foi identificado durante o parse, mas
- * o mesmo não foi encontrado no registro de elementos.
  * 
  * @author renato
  */
-public class ElementNotFoundException extends RuntimeRenamerException {
+public class ElementNotFoundException extends ElementException {
 
     private String element;
 

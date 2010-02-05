@@ -19,20 +19,20 @@ package br.com.renatoccosta.renamer.exception;
  * Base exception for the contruction of elements of the regex-renamer.
  * @author Renato Costa
  */
-public class RuntimeRenamerException extends RenamerException {
+public class ElementException extends RenamerException {
 
-    public RuntimeRenamerException() {
+    public ElementException() {
     }
 
-    public RuntimeRenamerException(String message) {
+    public ElementException(String message) {
         super(message);
     }
 
-    public RuntimeRenamerException(String message, Throwable cause) {
+    public ElementException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public RuntimeRenamerException(Throwable cause) {
+    public ElementException(Throwable cause) {
         super(cause);
     }
 
