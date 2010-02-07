@@ -363,7 +363,7 @@ public class GramaticaParser extends Parser {
 
             		try {
             			last.close((LETTERS6!=null?LETTERS6.getText():null));
-            		} catch (RuntimeRenamerException ex) {
+            		} catch (ElementException ex) {
             			throw new RenamerSemanticException(input, ex);
             		}
             	

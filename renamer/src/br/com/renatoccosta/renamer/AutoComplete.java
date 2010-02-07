@@ -16,8 +16,10 @@
  */
 package br.com.renatoccosta.renamer;
 
+import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.RenamerSemanticException;
+import java.util.ArrayList;
 import java.util.List;
 import org.antlr.runtime.NoViableAltException;
 import org.antlr.runtime.RecognitionException;
@@ -43,32 +45,34 @@ public class AutoComplete {
      */
     public static List<String> process(List<RecognitionException> errors,
             int carretPosition) {
+        List<String> options = new ArrayList<String>();
+
         for (RecognitionException re : errors) {
             if (re.charPositionInLine == carretPosition) {
                 if (re instanceof NoViableAltException) {
+                    //decisionNumber = 2 means that the parser found an error on
+                    //the content rule.
                     if (((NoViableAltException) re).decisionNumber == 2) {
-                        //executes the autocomplete
-                        }
+                        options.addAll(ElementsDirectory.getInstance().
+                                getMapId().keySet());
+                    }
+
                 } else if (re instanceof RenamerSemanticException &&
                         re.getCause() instanceof ElementNotFoundException) {
                     ElementNotFoundException enfe =
                             (ElementNotFoundException) re.getCause();
 
+                    for (String exp : ElementsDirectory.getInstance().
+                            getMapId().keySet()) {
+                        if (exp.startsWith(enfe.getElement())) {
+                            options.add(exp);
+                        }
+                    }
                 }
             }
         }
 
-//        expressions.addAll(ElementsDirectory.getInstance().getMapId().keySet());
-//        this.text = text;
-//
-//        for (String exp : expressions) {
-//            if (exp.startsWith(text)) {
-//                JMenuItem mnu = createMenuItem(exp);
-//                add(mnu);
-//            }
-//        }
-
-        return null;
+        return options;
     }
 
 }
