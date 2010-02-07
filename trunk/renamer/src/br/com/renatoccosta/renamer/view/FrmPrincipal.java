@@ -6,10 +6,8 @@
 package br.com.renatoccosta.renamer.view;
 
 import br.com.renatoccosta.renamer.*;
-import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.ParseErrorsException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
-import br.com.renatoccosta.renamer.exception.RenamerSemanticException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
@@ -18,11 +16,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
-import org.antlr.runtime.NoViableAltException;
-import org.antlr.runtime.RecognitionException;
 import org.apache.log4j.Logger;
 
 /**
@@ -608,8 +605,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     ParseErrorsException pee = (ParseErrorsException) ex;
                     int pos = txtSubstituir.getCaretPosition();
 
-                    if (AutoComplete.process(pee.getExceptions(), pos)) {
-                        epu.showOptions(expression);
+
+                    List<String> completeOptions = AutoComplete.process(
+                            pee.getExceptions(), pos);
+                    if (completeOptions != null) {
+                        epu.showOptions(completeOptions);
                     }
                 }
             }

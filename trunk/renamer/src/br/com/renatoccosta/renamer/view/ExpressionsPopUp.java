@@ -73,10 +73,11 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
             String textAfter = tc.getText(caretPosition,
                     tc.getText().length() - caretPosition);
             String textInsert = ((JMenuItem) e.getSource()).getText();
-            textInsert = textInsert.substring(text.length());
+            textInsert = stripCommonPart(textBefore, textInsert);
 
             tc.setText(textBefore + textInsert + textAfter);
             tc.setCaretPosition(caretPosition + textInsert.length());
+
         } catch (BadLocationException ex) {
             logger.error(ex.getMessage(), ex);
         }
@@ -87,6 +88,18 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
         mnu.addActionListener(this);
 
         return mnu;
+    }
+
+    private String stripCommonPart(String textBefore, String textInsert) {
+        for (int i = 0; i < textInsert.length(); i++) {
+            String compare = textInsert.substring(0, textInsert.length() - i);
+            
+            if (textBefore.endsWith(compare)) {
+                return textInsert.substring(textInsert.length() - i);
+            }
+        }
+
+        return "";
     }
 
 }
