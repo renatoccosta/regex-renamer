@@ -598,7 +598,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE && evt.isControlDown()) {
             List<String> completeOptions = renamer.queryAutoCompleteOptions(
                     txtSubstituir.getText(), txtSubstituir.getCaretPosition());
-            if (completeOptions != null) {
+            if (completeOptions != null && !completeOptions.isEmpty()) {
                 epu.showOptions(completeOptions);
             }
 

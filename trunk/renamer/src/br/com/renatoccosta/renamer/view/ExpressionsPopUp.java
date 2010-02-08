@@ -99,7 +99,7 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
             }
         }
 
-        return "";
+        return textInsert;
     }
 
 }
