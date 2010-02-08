@@ -50,9 +50,9 @@ public class AutoComplete {
         for (RecognitionException re : errors) {
             if (re.charPositionInLine == carretPosition) {
                 if (re instanceof NoViableAltException) {
-                    //decisionNumber = 2 means that the parser found an error on
+                    //decisionNumber = 3 means that the parser found an error on
                     //the content rule.
-                    if (((NoViableAltException) re).decisionNumber == 2) {
+                    if (((NoViableAltException) re).decisionNumber == 3) {
                         options.addAll(ElementsDirectory.getInstance().
                                 getMapId().keySet());
                     }
