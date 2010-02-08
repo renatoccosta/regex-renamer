@@ -6,7 +6,6 @@
 package br.com.renatoccosta.renamer.view;
 
 import br.com.renatoccosta.renamer.*;
-import br.com.renatoccosta.renamer.exception.ParseErrorsException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.awt.event.AdjustmentEvent;
@@ -597,22 +596,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void txtSubstituirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSubstituirKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE && evt.isControlDown()) {
-            try {
-                renamer.setReplace(txtSubstituir.getText().substring(0,
-                        txtSubstituir.getCaretPosition()));
-            } catch (RenamerException ex) {
-                if (ex instanceof ParseErrorsException) {
-                    ParseErrorsException pee = (ParseErrorsException) ex;
-                    int pos = txtSubstituir.getCaretPosition();
-
-
-                    List<String> completeOptions = AutoComplete.process(
-                            pee.getExceptions(), pos);
-                    if (completeOptions != null) {
-                        epu.showOptions(completeOptions);
-                    }
-                }
+            List<String> completeOptions = renamer.queryAutoCompleteOptions(
+                    txtSubstituir.getText(), txtSubstituir.getCaretPosition());
+            if (completeOptions != null) {
+                epu.showOptions(completeOptions);
             }
+
         }
     }//GEN-LAST:event_txtSubstituirKeyPressed
 

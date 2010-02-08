@@ -371,6 +371,31 @@ public class Renamer {
     }
 
     /**
+     * Executes the parse of the text and analyse the cursor position to 
+     * generate the auto complete options.
+     * 
+     * @param text Text to be parsed
+     * @param pos Position of the carret in the text
+     * @return List of auto-complete options or null if there was no options.
+     */
+    public List<String> queryAutoCompleteOptions(String text, int pos) {
+        try {
+            parseReplace(text);
+
+        } catch (RenamerException ex) {
+            if (ex instanceof ParseErrorsException) {
+                ParseErrorsException pee = (ParseErrorsException) ex;
+                int realPos = text.length() == pos ? -1 : pos;
+
+                return AutoComplete.process(pee.getExceptions(), realPos);
+            }
+        }
+
+        return null;
+    }
+
+    /* ---------------------------------------------------------------------- */
+    /**
      * Verifica se a string de localização do padrão de nome de arquivo é válida
      * como uma expressão regular
      * 
