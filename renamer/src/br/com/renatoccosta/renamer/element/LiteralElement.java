@@ -31,8 +31,13 @@ public class LiteralElement extends ContentElement {
     }
 
     @Override
-    public String[] getParameters() {
-        return new String[] {content};
+    public Class[] getParameterDataTypes() {
+        return new Class[]{String.class};
+    }
+
+    @Override
+    public String[] getParameterValues() {
+        return new String[]{content};
     }
 
     @Override

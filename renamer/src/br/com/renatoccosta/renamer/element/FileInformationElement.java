@@ -29,24 +29,21 @@ import java.util.Date;
  */
 public class FileInformationElement extends ExpressionElement {
 
-    public static final String FOLDER = "folder";
-
-    public static final String DATE = "date";
-
-    public static final String SIZE = "size";
-
-    private String mode = DATE;
+    private FileInformationEnum mode = FileInformationEnum.DATE;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     @Override
+    public Class[] getParameterDataTypes() {
+        return new Class[]{FileInformationEnum.class};
+    }
+
+    @Override
     public void setParameters(String... content) {
         if (content.length > 0) {
-            String mode = content[0];
-
-            if (FOLDER.equals(mode) || DATE.equals(mode) || SIZE.equals(mode)) {
-                this.mode = mode;
-            } else {
+            try {
+                mode = FileInformationEnum.valueOf(content[0]);
+            } catch (Exception e) {
                 throw new IllegalArgumentException(
                         Messages.getFilterElementInvalidParametersMessage());
             }
@@ -55,23 +52,33 @@ public class FileInformationElement extends ExpressionElement {
 
     @Override
     public String getContent(String find, String target, File file) {
-        if (DATE.equals(mode)) {
-            return sdf.format(new Date(file.lastModified()));
-        } else if (FOLDER.equals(mode)) {
-            return file.getParentFile().getName();
-        } else {
-            return new Long(file.length()).toString();
+        switch (mode) {
+            case DATE:
+                return sdf.format(new Date(file.lastModified()));
+            case FOLDER:
+                return file.getParentFile().getName();
+            case SIZE:
+                return new Long(file.length()).toString();
         }
+
+        return "";
     }
 
     @Override
-    public String[] getParameters() {
-        return new String[] {mode};
+    public String[] getParameterValues() {
+        return new String[]{mode.toString()};
     }
 
     @Override
     public void resetState() {
-        
     }
+
+}
+
+enum FileInformationEnum {
+
+    FOLDER,
+    DATE,
+    SIZE
 
 }

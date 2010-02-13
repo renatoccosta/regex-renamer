@@ -50,7 +50,9 @@ public abstract class Element {
 
     public abstract void setParameters(String... content);
 
-    public abstract String[] getParameters();
+    public abstract String[] getParameterValues();
+
+    public abstract Class[] getParameterDataTypes();
 
     @Override
     public abstract String toString();
@@ -69,7 +71,7 @@ public abstract class Element {
     protected String getParametersAsString() {
         StringBuffer sb = new StringBuffer();
 
-        for (String parm : getParameters()) {
+        for (String parm : getParameterValues()) {
             sb.append(parm);
             sb.append(":");
         }

@@ -46,8 +46,13 @@ public class CaptureGroupElement extends ContentElement {
     }
 
     @Override
-    public String[] getParameters() {
-        return new String[] {String.valueOf(groupNumber)};
+    public Class[] getParameterDataTypes() {
+        return new Class[]{Integer.class};
+    }
+
+    @Override
+    public String[] getParameterValues() {
+        return new String[]{String.valueOf(groupNumber)};
     }
 
     @Override
@@ -81,7 +86,6 @@ public class CaptureGroupElement extends ContentElement {
 
     @Override
     public void resetState() {
-        
     }
 
 }

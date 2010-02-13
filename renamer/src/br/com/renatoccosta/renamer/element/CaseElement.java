@@ -35,17 +35,22 @@ import org.apache.commons.lang.StringUtils;
  */
 public class CaseElement extends StreamChangeElement {
 
-    public static final String UPPER_CASE = "upper";
+    public static final String UPPER = "upper";
 
     public static final String LOWER_CASE = "lower";
 
     public static final String SWAP = "swap";
 
-    private String mode = LOWER_CASE;
+    private CaseEnum mode = CaseEnum.LOWER;
 
     @Override
-    public String[] getParameters() {
-        return new String[] {mode};
+    public Class[] getParameterDataTypes() {
+        return new Class[]{CaseEnum.class};
+    }
+
+    @Override
+    public String[] getParameterValues() {
+        return new String[]{mode.toString()};
     }
 
     /**
@@ -57,12 +62,9 @@ public class CaseElement extends StreamChangeElement {
     @Override
     public void setParameters(String... content) {
         if (content.length > 0) {
-            String mode = content[0];
-
-            if (UPPER_CASE.equals(mode) || LOWER_CASE.equals(mode) ||
-                    SWAP.equals(mode)) {
-                this.mode = mode;
-            } else {
+            try {
+                mode = CaseEnum.valueOf(content[0]);
+            } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException(
                         Messages.getCaseElementInvalidParametersMessage());
             }
@@ -71,15 +73,24 @@ public class CaseElement extends StreamChangeElement {
 
     @Override
     protected String convert(String src) {
-        if (UPPER_CASE.equals(mode)) {
-            return src.toUpperCase();
-        } else if (LOWER_CASE.equals(mode)) {
-            return src.toLowerCase();
-        } else if (SWAP.equals(mode)) {
-            return StringUtils.swapCase(src);
-        } else {
-            return src;
+        switch (mode) {
+            case UPPER:
+                return src.toUpperCase();
+            case LOWER:
+                return src.toLowerCase();
+            case SWAP:
+                return StringUtils.swapCase(src);
         }
+
+        return src;
     }
+
+}
+
+enum CaseEnum {
+
+    UPPER,
+    LOWER,
+    SWAP
 
 }
