@@ -35,12 +35,17 @@ public class Id3Element extends ExpressionElement {
     }
 
     @Override
-    public String[] getParameters() {
+    public String[] getParameterValues() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void resetState() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Class[] getParameterDataTypes() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
