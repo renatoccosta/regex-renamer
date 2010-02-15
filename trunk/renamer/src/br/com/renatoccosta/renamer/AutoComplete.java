@@ -21,8 +21,10 @@ import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.RenamerSemanticException;
 import java.util.ArrayList;
 import java.util.List;
+import org.antlr.runtime.EarlyExitException;
 import org.antlr.runtime.NoViableAltException;
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.TokenStream;
 
 /**
  * Class that has the rules to identify whether an auto-complete intention
@@ -55,6 +57,16 @@ public class AutoComplete {
                     if (((NoViableAltException) re).decisionNumber == 3) {
                         options.addAll(ElementsDirectory.getInstance().
                                 getMapId().keySet());
+                    }
+
+                } else if (re instanceof EarlyExitException) {
+                    EarlyExitException eee = (EarlyExitException) re;
+
+                    //decisionNumber = 4 means that the parser found an error on
+                    //the parameters rule
+                    if (eee.decisionNumber == 5) {
+                        TokenStream ts = (TokenStream) eee.input;
+                        System.out.println(ts.LT(-1));
                     }
 
                 } else if (re instanceof RenamerSemanticException &&
