@@ -23,7 +23,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-public class GramaticaLexer extends Lexer {
+public class GrammarLexer extends Lexer {
     public static final int DOLLAR=6;
     public static final int COLON=5;
     public static final int OPEN_BRACKET=7;
@@ -41,11 +41,11 @@ public class GramaticaLexer extends Lexer {
     // delegates
     // delegators
 
-    public GramaticaLexer() {;} 
-    public GramaticaLexer(CharStream input) {
+    public GrammarLexer() {;}
+    public GrammarLexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
-    public GramaticaLexer(CharStream input, RecognizerSharedState state) {
+    public GrammarLexer(CharStream input, RecognizerSharedState state) {
         super(input,state);
 
     }
