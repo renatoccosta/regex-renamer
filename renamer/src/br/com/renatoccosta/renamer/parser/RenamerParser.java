@@ -25,7 +25,7 @@ import org.antlr.runtime.TokenStream;
  *
  * @author renato
  */
-public class RenamerParser extends GramaticaParser {
+public class RenamerParser extends GrammarParser {
 
     private List<RecognitionException> exceptions;
 

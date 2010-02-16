@@ -27,7 +27,7 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-public class GramaticaParser extends Parser {
+public class GrammarParser extends Parser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "SLASH", "COLON", "DOLLAR", "OPEN_BRACKET", "CLOSE_BRACKET", "ESCAPE", "NUMBERS", "LETTERS", "WS", "ANY", "'\\r'", "'\\n'"
     };
@@ -49,16 +49,16 @@ public class GramaticaParser extends Parser {
     // delegators
 
 
-        public GramaticaParser(TokenStream input) {
+        public GrammarParser(TokenStream input) {
             this(input, new RecognizerSharedState());
         }
-        public GramaticaParser(TokenStream input, RecognizerSharedState state) {
+        public GrammarParser(TokenStream input, RecognizerSharedState state) {
             super(input, state);
              
         }
         
 
-    public String[] getTokenNames() { return GramaticaParser.tokenNames; }
+    public String[] getTokenNames() { return GrammarParser.tokenNames; }
     public String getGrammarFileName() { return "/home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g"; }
 
 
@@ -214,7 +214,7 @@ public class GramaticaParser extends Parser {
     public final Element literalExpression() throws RecognitionException {
         Element elm = null;
 
-        GramaticaParser.literal_return literal4 = null;
+        GrammarParser.literal_return literal4 = null;
 
 
         try {
@@ -322,7 +322,7 @@ public class GramaticaParser extends Parser {
     public final Element group() throws RecognitionException {
         Element elem = null;
 
-        GramaticaParser.content_return content7 = null;
+        GrammarParser.content_return content7 = null;
 
 
         try {
@@ -359,8 +359,8 @@ public class GramaticaParser extends Parser {
 
     // $ANTLR start "content"
     // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:99:1: content returns [Element elem] : ( closeContent | expressionContent ) ;
-    public final GramaticaParser.content_return content() throws RecognitionException {
-        GramaticaParser.content_return retval = new GramaticaParser.content_return();
+    public final GrammarParser.content_return content() throws RecognitionException {
+        GrammarParser.content_return retval = new GrammarParser.content_return();
         retval.start = input.LT(1);
 
         try {
@@ -523,8 +523,8 @@ public class GramaticaParser extends Parser {
 
     // $ANTLR start "literal"
     // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:124:1: literal : ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+ ;
-    public final GramaticaParser.literal_return literal() throws RecognitionException {
-        GramaticaParser.literal_return retval = new GramaticaParser.literal_return();
+    public final GrammarParser.literal_return literal() throws RecognitionException {
+        GrammarParser.literal_return retval = new GrammarParser.literal_return();
         retval.start = input.LT(1);
 
         try {

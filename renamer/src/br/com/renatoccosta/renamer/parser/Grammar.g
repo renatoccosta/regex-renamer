@@ -1,4 +1,4 @@
-grammar Gramatica;
+grammar Grammar;
 
 tokens {
 	SLASH='/';

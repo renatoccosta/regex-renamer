@@ -23,7 +23,7 @@ import org.antlr.runtime.RecognizerSharedState;
  *
  * @author renato
  */
-public class RenamerLexer extends GramaticaLexer {
+public class RenamerLexer extends GrammarLexer {
 
     public RenamerLexer(CharStream input, RecognizerSharedState state) {
         super(input, state);
