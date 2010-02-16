@@ -68,7 +68,8 @@ begin	:
 	})+
 	EOF;
 
-expression returns [Element elm] :
+expression returns [Element elm] 
+	:
 	(
 	literalExpression { $elm = $literalExpression.elm; }
 	| 
@@ -81,7 +82,8 @@ literalExpression returns [Element elm]
 		$elm = new LiteralElement($literal.text);
 	} ;	
 	
-variableExpression returns [Element elm] :	
+variableExpression returns [Element elm] 
+	:
 	DOLLAR 
 	(
 	NUMBERS {
@@ -91,12 +93,14 @@ variableExpression returns [Element elm] :
 		$elm = $group.elem;
 	} );
 
-group returns [Element elem] :	
+group returns [Element elem] 
+	:
 	OPEN_BRACKET content CLOSE_BRACKET {
 		$elem = $content.elem;
 	};
 
-content returns [Element elem] :
+content returns [Element elem] 
+	:
 	( closeContent 
 	| 
 	expressionContent {
@@ -117,14 +121,39 @@ closeContent
 		}
 	};
 
-expressionContent
+expressionContent returns [Element elem]
 	:
-	LETTERS (COLON literal)*;	
+	function {
+		try {
+			$elem = ElementFactory.compile($function.text);
+		} catch (ElementNotFoundException ex) {
+			throw new RenamerSemanticException(input, ex);
+		}
+	}
+	parameters {
+		$elem.setParameters($parameters.params);
+	};
+
+function:
+	LETTERS	
+	;
+	
+parameters returns [String[\] params]
+	:
+	{
+		List lstParam = new ArrayList();
+	}	
+	( COLON 
+	literal {
+		lstParam.add($literal.text);
+	}
+	)*
+	;
 	
 literal	:
 	(   ESCAPE ~( '\r' | '\n' )
-        	|   ~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
-        	)+;
+        |   ~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
+        )+;
 
 LETTERS	:	('a'..'z' | 'A'..'Z')+;
 
@@ -132,4 +161,4 @@ NUMBERS	:	 '1'..'9' '0'..'9'*;
 
 WS	:	' '+;
 
-ANY:	~'\n';
+ANY	:	~'\n';

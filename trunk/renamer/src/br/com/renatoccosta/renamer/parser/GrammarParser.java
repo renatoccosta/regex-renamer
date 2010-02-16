@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g 2010-02-16 02:46:58
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g 2010-02-16 15:48:37
 
 /**
  * Copyright 2009 Renato Couto da Costa
@@ -59,7 +59,7 @@ public class GrammarParser extends Parser {
         
 
     public String[] getTokenNames() { return GrammarParser.tokenNames; }
-    public String getGrammarFileName() { return "/home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g"; }
+    public String getGrammarFileName() { return "/home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g"; }
 
 
     public StreamChangeElement root = new RootElement();
@@ -68,16 +68,16 @@ public class GrammarParser extends Parser {
 
 
     // $ANTLR start "begin"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:59:1: begin : ( expression )+ EOF ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:59:1: begin : ( expression )+ EOF ;
     public final void begin() throws RecognitionException {
         Element expression1 = null;
 
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:59:7: ( ( expression )+ EOF )
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:60:2: ( expression )+ EOF
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:59:7: ( ( expression )+ EOF )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:60:2: ( expression )+ EOF
             {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:60:2: ( expression )+
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:60:2: ( expression )+
             int cnt1=0;
             loop1:
             do {
@@ -91,7 +91,7 @@ public class GrammarParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:60:3: expression
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:60:3: expression
             	    {
             	    pushFollow(FOLLOW_expression_in_begin75);
             	    expression1=expression();
@@ -137,7 +137,7 @@ public class GrammarParser extends Parser {
 
 
     // $ANTLR start "expression"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:71:1: expression returns [Element elm] : ( literalExpression | variableExpression ) ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:71:1: expression returns [Element elm] : ( literalExpression | variableExpression ) ;
     public final Element expression() throws RecognitionException {
         Element elm = null;
 
@@ -147,10 +147,10 @@ public class GrammarParser extends Parser {
 
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:71:34: ( ( literalExpression | variableExpression ) )
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:72:2: ( literalExpression | variableExpression )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:72:2: ( ( literalExpression | variableExpression ) )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:73:2: ( literalExpression | variableExpression )
             {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:72:2: ( literalExpression | variableExpression )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:73:2: ( literalExpression | variableExpression )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -168,9 +168,9 @@ public class GrammarParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:73:2: literalExpression
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:74:2: literalExpression
                     {
-                    pushFollow(FOLLOW_literalExpression_in_expression98);
+                    pushFollow(FOLLOW_literalExpression_in_expression100);
                     literalExpression2=literalExpression();
 
                     state._fsp--;
@@ -180,9 +180,9 @@ public class GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:75:2: variableExpression
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:76:2: variableExpression
                     {
-                    pushFollow(FOLLOW_variableExpression_in_expression107);
+                    pushFollow(FOLLOW_variableExpression_in_expression109);
                     variableExpression3=variableExpression();
 
                     state._fsp--;
@@ -210,7 +210,7 @@ public class GrammarParser extends Parser {
 
 
     // $ANTLR start "literalExpression"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:78:1: literalExpression returns [Element elm] : literal ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:79:1: literalExpression returns [Element elm] : literal ;
     public final Element literalExpression() throws RecognitionException {
         Element elm = null;
 
@@ -218,10 +218,10 @@ public class GrammarParser extends Parser {
 
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:79:2: ( literal )
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:80:2: literal
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:80:2: ( literal )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:81:2: literal
             {
-            pushFollow(FOLLOW_literal_in_literalExpression129);
+            pushFollow(FOLLOW_literal_in_literalExpression131);
             literal4=literal();
 
             state._fsp--;
@@ -245,7 +245,7 @@ public class GrammarParser extends Parser {
 
 
     // $ANTLR start "variableExpression"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:84:1: variableExpression returns [Element elm] : DOLLAR ( NUMBERS | group ) ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:85:1: variableExpression returns [Element elm] : DOLLAR ( NUMBERS | group ) ;
     public final Element variableExpression() throws RecognitionException {
         Element elm = null;
 
@@ -254,11 +254,11 @@ public class GrammarParser extends Parser {
 
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:84:42: ( DOLLAR ( NUMBERS | group ) )
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:85:2: DOLLAR ( NUMBERS | group )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:86:2: ( DOLLAR ( NUMBERS | group ) )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:87:2: DOLLAR ( NUMBERS | group )
             {
-            match(input,DOLLAR,FOLLOW_DOLLAR_in_variableExpression148); 
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:86:2: ( NUMBERS | group )
+            match(input,DOLLAR,FOLLOW_DOLLAR_in_variableExpression151); 
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:88:2: ( NUMBERS | group )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -276,9 +276,9 @@ public class GrammarParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:87:2: NUMBERS
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:89:2: NUMBERS
                     {
-                    NUMBERS5=(Token)match(input,NUMBERS,FOLLOW_NUMBERS_in_variableExpression155); 
+                    NUMBERS5=(Token)match(input,NUMBERS,FOLLOW_NUMBERS_in_variableExpression158); 
 
                     		elm = new CaptureGroupElement(Integer.parseInt((NUMBERS5!=null?NUMBERS5.getText():null)));
                     	
@@ -286,9 +286,9 @@ public class GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:90:2: group
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:92:2: group
                     {
-                    pushFollow(FOLLOW_group_in_variableExpression163);
+                    pushFollow(FOLLOW_group_in_variableExpression166);
                     group6=group();
 
                     state._fsp--;
@@ -318,7 +318,7 @@ public class GrammarParser extends Parser {
 
 
     // $ANTLR start "group"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:94:1: group returns [Element elem] : OPEN_BRACKET content CLOSE_BRACKET ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:96:1: group returns [Element elem] : OPEN_BRACKET content CLOSE_BRACKET ;
     public final Element group() throws RecognitionException {
         Element elem = null;
 
@@ -326,16 +326,16 @@ public class GrammarParser extends Parser {
 
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:94:30: ( OPEN_BRACKET content CLOSE_BRACKET )
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:95:2: OPEN_BRACKET content CLOSE_BRACKET
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:97:2: ( OPEN_BRACKET content CLOSE_BRACKET )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:98:2: OPEN_BRACKET content CLOSE_BRACKET
             {
-            match(input,OPEN_BRACKET,FOLLOW_OPEN_BRACKET_in_group181); 
-            pushFollow(FOLLOW_content_in_group183);
+            match(input,OPEN_BRACKET,FOLLOW_OPEN_BRACKET_in_group185); 
+            pushFollow(FOLLOW_content_in_group187);
             content7=content();
 
             state._fsp--;
 
-            match(input,CLOSE_BRACKET,FOLLOW_CLOSE_BRACKET_in_group185); 
+            match(input,CLOSE_BRACKET,FOLLOW_CLOSE_BRACKET_in_group189); 
 
             		elem = (content7!=null?content7.elem:null);
             	
@@ -358,16 +358,16 @@ public class GrammarParser extends Parser {
     };
 
     // $ANTLR start "content"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:99:1: content returns [Element elem] : ( closeContent | expressionContent ) ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:102:1: content returns [Element elem] : ( closeContent | expressionContent ) ;
     public final GrammarParser.content_return content() throws RecognitionException {
         GrammarParser.content_return retval = new GrammarParser.content_return();
         retval.start = input.LT(1);
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:99:32: ( ( closeContent | expressionContent ) )
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:100:2: ( closeContent | expressionContent )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:103:2: ( ( closeContent | expressionContent ) )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:104:2: ( closeContent | expressionContent )
             {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:100:2: ( closeContent | expressionContent )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:104:2: ( closeContent | expressionContent )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -385,9 +385,9 @@ public class GrammarParser extends Parser {
             }
             switch (alt4) {
                 case 1 :
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:100:4: closeContent
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:104:4: closeContent
                     {
-                    pushFollow(FOLLOW_closeContent_in_content202);
+                    pushFollow(FOLLOW_closeContent_in_content208);
                     closeContent();
 
                     state._fsp--;
@@ -396,9 +396,9 @@ public class GrammarParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:102:2: expressionContent
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:106:2: expressionContent
                     {
-                    pushFollow(FOLLOW_expressionContent_in_content210);
+                    pushFollow(FOLLOW_expressionContent_in_content216);
                     expressionContent();
 
                     state._fsp--;
@@ -434,16 +434,16 @@ public class GrammarParser extends Parser {
 
 
     // $ANTLR start "closeContent"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:110:1: closeContent : SLASH LETTERS ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:114:1: closeContent : SLASH LETTERS ;
     public final void closeContent() throws RecognitionException {
         Token LETTERS8=null;
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:111:2: ( SLASH LETTERS )
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:112:2: SLASH LETTERS
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:115:2: ( SLASH LETTERS )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:116:2: SLASH LETTERS
             {
-            match(input,SLASH,FOLLOW_SLASH_in_closeContent225); 
-            LETTERS8=(Token)match(input,LETTERS,FOLLOW_LETTERS_in_closeContent227); 
+            match(input,SLASH,FOLLOW_SLASH_in_closeContent231); 
+            LETTERS8=(Token)match(input,LETTERS,FOLLOW_LETTERS_in_closeContent233); 
 
             		try {
             			last.close((LETTERS8!=null?LETTERS8.getText():null));
@@ -467,14 +467,100 @@ public class GrammarParser extends Parser {
 
 
     // $ANTLR start "expressionContent"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:120:1: expressionContent : LETTERS ( COLON literal )* ;
-    public final void expressionContent() throws RecognitionException {
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:124:1: expressionContent returns [Element elem] : function parameters ;
+    public final Element expressionContent() throws RecognitionException {
+        Element elem = null;
+
+        GrammarParser.function_return function9 = null;
+
+        String[] parameters10 = null;
+
+
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:121:2: ( LETTERS ( COLON literal )* )
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:122:2: LETTERS ( COLON literal )*
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:125:2: ( function parameters )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:126:2: function parameters
             {
-            match(input,LETTERS,FOLLOW_LETTERS_in_expressionContent239); 
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:122:10: ( COLON literal )*
+            pushFollow(FOLLOW_function_in_expressionContent249);
+            function9=function();
+
+            state._fsp--;
+
+
+            		try {
+            			elem = ElementFactory.compile((function9!=null?input.toString(function9.start,function9.stop):null));
+            		} catch (ElementNotFoundException ex) {
+            			throw new RenamerSemanticException(input, ex);
+            		}
+            	
+            pushFollow(FOLLOW_parameters_in_expressionContent254);
+            parameters10=parameters();
+
+            state._fsp--;
+
+
+            		elem.setParameters(parameters10);
+            	
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return elem;
+    }
+    // $ANTLR end "expressionContent"
+
+    public static class function_return extends ParserRuleReturnScope {
+    };
+
+    // $ANTLR start "function"
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:137:1: function : LETTERS ;
+    public final GrammarParser.function_return function() throws RecognitionException {
+        GrammarParser.function_return retval = new GrammarParser.function_return();
+        retval.start = input.LT(1);
+
+        try {
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:137:9: ( LETTERS )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:138:2: LETTERS
+            {
+            match(input,LETTERS,FOLLOW_LETTERS_in_function264); 
+
+            }
+
+            retval.stop = input.LT(-1);
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return retval;
+    }
+    // $ANTLR end "function"
+
+
+    // $ANTLR start "parameters"
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:141:1: parameters returns [String[] params] : ( COLON literal )* ;
+    public final String[] parameters() throws RecognitionException {
+        String[] params = null;
+
+        GrammarParser.literal_return literal11 = null;
+
+
+        try {
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:142:2: ( ( COLON literal )* )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:143:2: ( COLON literal )*
+            {
+
+            		List lstParam = new ArrayList();
+            	
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:146:2: ( COLON literal )*
             loop5:
             do {
                 int alt5=2;
@@ -487,14 +573,17 @@ public class GrammarParser extends Parser {
 
                 switch (alt5) {
             	case 1 :
-            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:122:11: COLON literal
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:146:4: COLON literal
             	    {
-            	    match(input,COLON,FOLLOW_COLON_in_expressionContent242); 
-            	    pushFollow(FOLLOW_literal_in_expressionContent244);
-            	    literal();
+            	    match(input,COLON,FOLLOW_COLON_in_parameters288); 
+            	    pushFollow(FOLLOW_literal_in_parameters292);
+            	    literal11=literal();
 
             	    state._fsp--;
 
+
+            	    		lstParam.add((literal11!=null?input.toString(literal11.start,literal11.stop):null));
+            	    	
 
             	    }
             	    break;
@@ -514,24 +603,24 @@ public class GrammarParser extends Parser {
         }
         finally {
         }
-        return ;
+        return params;
     }
-    // $ANTLR end "expressionContent"
+    // $ANTLR end "parameters"
 
     public static class literal_return extends ParserRuleReturnScope {
     };
 
     // $ANTLR start "literal"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:124:1: literal : ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+ ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:153:1: literal : ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+ ;
     public final GrammarParser.literal_return literal() throws RecognitionException {
         GrammarParser.literal_return retval = new GrammarParser.literal_return();
         retval.start = input.LT(1);
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:124:9: ( ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+ )
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:125:2: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:153:9: ( ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+ )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:154:2: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+
             {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:125:2: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:154:2: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+
             int cnt6=0;
             loop6:
             do {
@@ -548,9 +637,9 @@ public class GrammarParser extends Parser {
 
                 switch (alt6) {
             	case 1 :
-            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:125:6: ESCAPE ~ ( '\\r' | '\\n' )
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:154:6: ESCAPE ~ ( '\\r' | '\\n' )
             	    {
-            	    match(input,ESCAPE,FOLLOW_ESCAPE_in_literal261); 
+            	    match(input,ESCAPE,FOLLOW_ESCAPE_in_literal314); 
             	    if ( (input.LA(1)>=SLASH && input.LA(1)<=ANY) ) {
             	        input.consume();
             	        state.errorRecovery=false;
@@ -564,7 +653,7 @@ public class GrammarParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:126:14: ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' )
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/Grammar.g:155:13: ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' )
             	    {
             	    if ( (input.LA(1)>=NUMBERS && input.LA(1)<=ANY) ) {
             	        input.consume();
@@ -611,24 +700,26 @@ public class GrammarParser extends Parser {
 
     public static final BitSet FOLLOW_expression_in_begin75 = new BitSet(new long[]{0x0000000000003E40L});
     public static final BitSet FOLLOW_EOF_in_begin82 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_literalExpression_in_expression98 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_variableExpression_in_expression107 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_literal_in_literalExpression129 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_DOLLAR_in_variableExpression148 = new BitSet(new long[]{0x0000000000000480L});
-    public static final BitSet FOLLOW_NUMBERS_in_variableExpression155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_group_in_variableExpression163 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_OPEN_BRACKET_in_group181 = new BitSet(new long[]{0x0000000000000810L});
-    public static final BitSet FOLLOW_content_in_group183 = new BitSet(new long[]{0x0000000000000100L});
-    public static final BitSet FOLLOW_CLOSE_BRACKET_in_group185 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_closeContent_in_content202 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_expressionContent_in_content210 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_SLASH_in_closeContent225 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_LETTERS_in_closeContent227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LETTERS_in_expressionContent239 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_COLON_in_expressionContent242 = new BitSet(new long[]{0x0000000000003E00L});
-    public static final BitSet FOLLOW_literal_in_expressionContent244 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_ESCAPE_in_literal261 = new BitSet(new long[]{0x0000000000003FF0L});
-    public static final BitSet FOLLOW_set_in_literal263 = new BitSet(new long[]{0x0000000000003E02L});
-    public static final BitSet FOLLOW_set_in_literal287 = new BitSet(new long[]{0x0000000000003E02L});
+    public static final BitSet FOLLOW_literalExpression_in_expression100 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_variableExpression_in_expression109 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_literal_in_literalExpression131 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_DOLLAR_in_variableExpression151 = new BitSet(new long[]{0x0000000000000480L});
+    public static final BitSet FOLLOW_NUMBERS_in_variableExpression158 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_group_in_variableExpression166 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_OPEN_BRACKET_in_group185 = new BitSet(new long[]{0x0000000000000810L});
+    public static final BitSet FOLLOW_content_in_group187 = new BitSet(new long[]{0x0000000000000100L});
+    public static final BitSet FOLLOW_CLOSE_BRACKET_in_group189 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_closeContent_in_content208 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_expressionContent_in_content216 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_SLASH_in_closeContent231 = new BitSet(new long[]{0x0000000000000800L});
+    public static final BitSet FOLLOW_LETTERS_in_closeContent233 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_function_in_expressionContent249 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_parameters_in_expressionContent254 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LETTERS_in_function264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_COLON_in_parameters288 = new BitSet(new long[]{0x0000000000003E00L});
+    public static final BitSet FOLLOW_literal_in_parameters292 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_ESCAPE_in_literal314 = new BitSet(new long[]{0x0000000000003FF0L});
+    public static final BitSet FOLLOW_set_in_literal316 = new BitSet(new long[]{0x0000000000003E02L});
+    public static final BitSet FOLLOW_set_in_literal339 = new BitSet(new long[]{0x0000000000003E02L});
 
 }

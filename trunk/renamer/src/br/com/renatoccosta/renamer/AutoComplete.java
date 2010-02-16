@@ -19,6 +19,7 @@ package br.com.renatoccosta.renamer;
 import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.RenamerSemanticException;
+import br.com.renatoccosta.renamer.parser.GrammarLexer;
 import java.util.ArrayList;
 import java.util.List;
 import org.antlr.runtime.EarlyExitException;
@@ -53,7 +54,7 @@ public class AutoComplete {
             if (re.charPositionInLine == carretPosition) {
                 if (re instanceof NoViableAltException) {
                     //decisionNumber = 3 means that the parser found an error on
-                    //the content rule.
+                    //the variableExpression rule
                     if (((NoViableAltException) re).decisionNumber == 3) {
                         options.addAll(ElementsDirectory.getInstance().
                                 getMapId().keySet());
@@ -61,11 +62,13 @@ public class AutoComplete {
 
                 } else if (re instanceof EarlyExitException) {
                     EarlyExitException eee = (EarlyExitException) re;
+                    TokenStream ts = (TokenStream) eee.input;
 
-                    //decisionNumber = 4 means that the parser found an error on
-                    //the parameters rule
-                    if (eee.decisionNumber == 5) {
-                        TokenStream ts = (TokenStream) eee.input;
+                    //decisionNumber = 6 means that the parser found an error on
+                    //the literal rule. If the last token is a colon, means
+                    //that is a parameter
+                    if ((eee.decisionNumber == 6) &&
+                            (ts.LA(-1) == GrammarLexer.COLON)) {
                         System.out.println(ts.LT(-1));
                     }
 
