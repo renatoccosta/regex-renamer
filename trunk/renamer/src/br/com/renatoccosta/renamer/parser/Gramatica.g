@@ -56,27 +56,30 @@ public StreamChangeElement root = new RootElement();
 private StreamChangeElement last = root;
 }
 
-expression :
-	(
-	literal {
-		try {
-			Element elem = new LiteralElement($literal.text);		
-			last = last.add(elem);
-		} catch (InvalidElementException ex) {
-			throw new RenamerSemanticException(input, ex);
-		}
-	} 
-	| 
-	variableExpression {
-		if ($variableExpression.elm != null) {
+begin	:	
+	(expression {
+		if ($expression.elm != null) {
 			try {
-				last = last.add($variableExpression.elm);
+				last = last.add($expression.elm);
 			} catch (InvalidElementException ex) {
 				throw new RenamerSemanticException(input, ex);
 			}
 		}
-	}
-	)+ EOF;
+	})+
+	EOF;
+
+expression returns [Element elm] :
+	(
+	literalExpression { $elm = $literalExpression.elm; }
+	| 
+	variableExpression { $elm = $variableExpression.elm; }
+	); 
+	
+literalExpression returns [Element elm]
+	:	
+	literal {
+		$elm = new LiteralElement($literal.text);
+	} ;	
 	
 variableExpression returns [Element elm] :	
 	DOLLAR 
@@ -109,7 +112,7 @@ closeContent
 	SLASH LETTERS {
 		try {
 			last.close($LETTERS.text);
-		} catch (RuntimeRenamerException ex) {
+		} catch (ElementException ex) {
 			throw new RenamerSemanticException(input, ex);
 		}
 	};
@@ -120,12 +123,13 @@ expressionContent
 	
 literal	:
 	(   ESCAPE ~( '\r' | '\n' )
-        |   ~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
-        )+
-	;
+        	|   ~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
+        	)+;
 
-LETTERS
-	:	('a'..'z' | 'A'..'Z')+;
+LETTERS	:	('a'..'z' | 'A'..'Z')+;
+
 NUMBERS	:	 '1'..'9' '0'..'9'*;
+
 WS	:	' '+;
+
 ANY:	~'\n';
