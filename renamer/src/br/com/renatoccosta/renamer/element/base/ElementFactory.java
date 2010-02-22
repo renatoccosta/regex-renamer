@@ -27,18 +27,18 @@ public class ElementFactory {
 
     private static Logger LOGGER = Logger.getLogger(ElementFactory.class);
 
-    public static Element compile(String conteudo) throws
+    public static Element compile(String xpName) throws
             ElementNotFoundException {
-        String campos[] = conteudo.split(":");
-        String xpName = campos[0];
-        String params[] = (String[]) ArrayUtils.remove(campos, 0);
+//        String campos[] = conteudo.split(":");
+//        String xpName = campos[0];
+//        String params[] = (String[]) ArrayUtils.remove(campos, 0);
 
         Element ee = null;
         try {
             Class<Element> c = ElementsDirectory.getInstance().lookup(xpName);
 
             if (c == null) {
-                throw new ElementNotFoundException(conteudo);
+                throw new ElementNotFoundException(xpName);
             }
 
             ee = c.newInstance();
@@ -49,7 +49,7 @@ public class ElementFactory {
             LOGGER.error(ex.getMessage(), ex);
         }
 
-        ee.setParameters(params);
+//        ee.setParameters(params);
 
         return ee;
     }

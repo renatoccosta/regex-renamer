@@ -1,5 +1,9 @@
 grammar Grammar;
 
+options {
+	output=AST;
+}
+
 tokens {
 	SLASH='/';
 	COLON=':';
@@ -53,10 +57,10 @@ import br.com.renatoccosta.renamer.element.base.*;
 
 @members {
 public StreamChangeElement root = new RootElement();
-private StreamChangeElement last = root;
+public StreamChangeElement last = root;
 }
 
-begin	:	
+begin	:
 	(expression {
 		if ($expression.elm != null) {
 			try {
@@ -101,21 +105,14 @@ group returns [Element elem]
 
 content returns [Element elem] 
 	:
-	( closeContent 
-	| 
-	expressionContent {
-		try {
-			$elem = ElementFactory.compile($content.text);
-		} catch (ElementNotFoundException ex) {
-			throw new RenamerSemanticException(input, ex);
-		}
-	} );
+	( closeContent | expressionContent )
+	;
 	
 closeContent
 	:
-	SLASH LETTERS {
+	SLASH function {
 		try {
-			last.close($LETTERS.text);
+			last.close($function.text);
 		} catch (ElementException ex) {
 			throw new RenamerSemanticException(input, ex);
 		}
@@ -140,15 +137,13 @@ function:
 	
 parameters returns [String[\] params]
 	:
-	{
-		List lstParam = new ArrayList();
-	}	
-	( COLON 
-	literal {
-		lstParam.add($literal.text);
-	}
-	)*
+	( COLON lstParam+=literal )*
+	{ $params = (String[]) $lstParam.toArray(new String[]{}); }
 	;
+	catch [RecognitionException ex] {
+		reportError(ex);
+		recover(input,ex);
+	}
 	
 literal	:
 	(   ESCAPE ~( '\r' | '\n' )
