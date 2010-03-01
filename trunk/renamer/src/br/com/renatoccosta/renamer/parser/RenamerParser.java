@@ -52,7 +52,7 @@ public class RenamerParser extends GrammarParser {
     @Override
     public void reportError(RecognitionException e) {
         exceptions.add(e);
-        System.out.println(e.getClass().getName());
+        System.out.println(getRuleInvocationStack().toString());
         super.reportError(e);
     }
 
@@ -64,6 +64,12 @@ public class RenamerParser extends GrammarParser {
 
     public List<RecognitionException> getExceptions() {
         return exceptions;
+    }
+
+    @Override
+    public List getRuleInvocationStack() {
+        return getRuleInvocationStack(new Throwable(),
+                this.getClass().getSuperclass().getName());
     }
 
 }
