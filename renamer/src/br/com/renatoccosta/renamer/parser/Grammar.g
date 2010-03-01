@@ -1,9 +1,5 @@
 grammar Grammar;
 
-options {
-	output=AST;
-}
-
 tokens {
 	SLASH='/';
 	COLON=':';
@@ -128,7 +124,8 @@ expressionContent returns [Element elem]
 		}
 	}
 	parameters {
-		$elem.setParameters($parameters.params);
+		if ($parameters.params != null)
+			$elem.setParameters($parameters.params);
 	};
 
 function:
@@ -136,14 +133,17 @@ function:
 	;
 	
 parameters returns [String[\] params]
-	:
-	( COLON lstParam+=literal )*
-	{ $params = (String[]) $lstParam.toArray(new String[]{}); }
-	;
-	catch [RecognitionException ex] {
-		reportError(ex);
-		recover(input,ex);
+	@init {
+		List<String> lstParam = new ArrayList<String>();
 	}
+	@after {
+		$params = lstParam.toArray(new String[]{}); 
+	}
+	:
+	( COLON literal {
+		lstParam.add($literal.text);
+	} )*
+	;
 	
 literal	:
 	(   ESCAPE ~( '\r' | '\n' )
