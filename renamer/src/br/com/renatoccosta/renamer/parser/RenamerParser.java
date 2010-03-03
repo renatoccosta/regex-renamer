@@ -45,7 +45,8 @@ public class RenamerParser extends GrammarParser {
 
     @Override
     public void emitErrorMessage(String msg) {
-        super.emitErrorMessage(msg);
+//        super.emitErrorMessage(msg);
+        System.out.println(msg);
         this.errorMessage = msg;
     }
 
@@ -53,6 +54,7 @@ public class RenamerParser extends GrammarParser {
     public void reportError(RecognitionException e) {
         exceptions.add(e);
         System.out.println(getRuleInvocationStack().toString());
+        System.out.println(e.getClass().getName());
         super.reportError(e);
     }
 

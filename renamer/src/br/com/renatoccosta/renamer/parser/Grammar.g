@@ -141,7 +141,9 @@ parameters returns [String[\] params]
 	}
 	:
 	( COLON literal {
-		lstParam.add($literal.text);
+		String literal = $literal.text;
+		if (literal != null)
+			lstParam.add(literal);
 	} )*
 	;
 	
