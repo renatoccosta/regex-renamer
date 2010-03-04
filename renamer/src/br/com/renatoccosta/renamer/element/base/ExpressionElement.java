@@ -19,7 +19,7 @@ package br.com.renatoccosta.renamer.element.base;
  *
  * @author renato
  */
-public abstract class ExpressionElement extends ContentElement {
+public abstract class ExpressionElement extends Element {
 
     /**
      * Retorna a representação original do elemento no formato:

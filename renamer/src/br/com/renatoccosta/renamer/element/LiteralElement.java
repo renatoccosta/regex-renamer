@@ -15,14 +15,14 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.ContentElement;
+import br.com.renatoccosta.renamer.element.base.Element;
 import java.io.File;
 
 /**
  *
  * @author renato
  */
-public class LiteralElement extends ContentElement {
+public class LiteralElement extends Element {
 
     private String content;
 

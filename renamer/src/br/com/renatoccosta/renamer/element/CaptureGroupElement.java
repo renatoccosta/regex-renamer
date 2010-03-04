@@ -15,7 +15,7 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.*;
+import br.com.renatoccosta.renamer.element.base.Element;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
 import java.util.regex.Matcher;
@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
  *
  * @author renato
  */
-public class CaptureGroupElement extends ContentElement {
+public class CaptureGroupElement extends Element {
 
     private int groupNumber = 0;
 
