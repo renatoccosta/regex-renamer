@@ -29,7 +29,7 @@ import java.util.List;
  *
  * @author Renato Costa
  */
-public abstract class StreamChangeElement extends Element {
+public abstract class StreamChangeElement extends ExpressionElement {
 
     protected boolean elementoAberto = true;
 
