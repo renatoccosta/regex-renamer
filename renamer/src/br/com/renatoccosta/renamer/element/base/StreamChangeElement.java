@@ -15,10 +15,10 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
-import br.com.renatoccosta.renamer.exception.ElementException;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
+import br.com.renatoccosta.renamer.exception.RuntimeRenamerException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ import java.util.List;
  *
  * @author Renato Costa
  */
-public abstract class StreamChangeElement extends ExpressionElement {
+public abstract class StreamChangeElement extends Element {
 
     protected boolean elementoAberto = true;
 
@@ -82,7 +82,7 @@ public abstract class StreamChangeElement extends ExpressionElement {
      *
      * @param id Id do elemento a ser fechado.
      */
-    public StreamChangeElement close(String id) throws ElementException {
+    public StreamChangeElement close(String id) throws RuntimeRenamerException {
         Class<Element> ce = ElementsDirectory.getInstance().lookup(id);
 
         if (ce == null) {

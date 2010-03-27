@@ -15,6 +15,7 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
 
@@ -33,7 +34,11 @@ public abstract class Element {
      * @return Id do elemento ou null caso não seja possível obter o id
      */
     public String getId() {
-        return ElementsDirectory.getInstance().lookup(this.getClass());
+        try {
+            return ElementsDirectory.getInstance().lookup(this.getClass());
+        } catch (ElementNotFoundException ex) {
+            return null;
+        }
     }
 
     /**
@@ -50,9 +55,7 @@ public abstract class Element {
 
     public abstract void setParameters(String... content);
 
-    public abstract String[] getParameterValues();
-
-    public abstract Class[] getParameterDataTypes();
+    public abstract String[] getParameters();
 
     @Override
     public abstract String toString();
@@ -71,7 +74,7 @@ public abstract class Element {
     protected String getParametersAsString() {
         StringBuffer sb = new StringBuffer();
 
-        for (String parm : getParameterValues()) {
+        for (String parm : getParameters()) {
             sb.append(parm);
             sb.append(":");
         }

@@ -15,9 +15,6 @@
  */
 package br.com.renatoccosta.renamer.parser;
 
-import java.util.ArrayList;
-import java.util.List;
-import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.RecognizerSharedState;
 import org.antlr.runtime.TokenStream;
 
@@ -25,9 +22,7 @@ import org.antlr.runtime.TokenStream;
  *
  * @author renato
  */
-public class RenamerParser extends GrammarParser {
-
-    private List<RecognitionException> exceptions;
+public class RenamerParser extends GramaticaParser {
 
     private String errorMessage;
 
@@ -45,33 +40,8 @@ public class RenamerParser extends GrammarParser {
 
     @Override
     public void emitErrorMessage(String msg) {
-//        super.emitErrorMessage(msg);
-        System.out.println(msg);
+        super.emitErrorMessage(msg);
         this.errorMessage = msg;
-    }
-
-    @Override
-    public void reportError(RecognitionException e) {
-        exceptions.add(e);
-        System.out.println(getRuleInvocationStack().toString());
-        System.out.println(e.getClass().getName());
-        super.reportError(e);
-    }
-
-    @Override
-    public void reset() {
-        super.reset();
-        exceptions = new ArrayList<RecognitionException>();
-    }
-
-    public List<RecognitionException> getExceptions() {
-        return exceptions;
-    }
-
-    @Override
-    public List getRuleInvocationStack() {
-        return getRuleInvocationStack(new Throwable(),
-                this.getClass().getSuperclass().getName());
     }
 
 }

@@ -15,7 +15,7 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.element.base.*;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
 import java.util.regex.Matcher;
@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
  *
  * @author renato
  */
-public class CaptureGroupElement extends Element {
+public class CaptureGroupElement extends ContentElement {
 
     private int groupNumber = 0;
 
@@ -46,13 +46,8 @@ public class CaptureGroupElement extends Element {
     }
 
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{Integer.class};
-    }
-
-    @Override
-    public String[] getParameterValues() {
-        return new String[]{String.valueOf(groupNumber)};
+    public String[] getParameters() {
+        return new String[] {String.valueOf(groupNumber)};
     }
 
     @Override
@@ -86,6 +81,7 @@ public class CaptureGroupElement extends Element {
 
     @Override
     public void resetState() {
+        
     }
 
 }

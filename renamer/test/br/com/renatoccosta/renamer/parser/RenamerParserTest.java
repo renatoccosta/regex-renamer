@@ -32,7 +32,7 @@ public class RenamerParserTest extends TestCase {
         CommonTokenStream cts = new CommonTokenStream(lexer);
         RenamerParser instance = new RenamerParser(cts);
 
-        instance.expression();
+        instance.inicio();
 
         String expected = "abcrenato 001";
         String actual = instance.root.getContent("(.+)", "renato",

@@ -27,22 +27,17 @@ import org.apache.commons.lang.StringUtils;
  */
 public class ReplaceElement extends StreamChangeElement {
 
-    private String[] de = new String[]{""};
+    private String[] de = new String[] {""};
 
-    private String[] para = new String[]{""};
-
-    @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{String.class};
-    }
+    private String[] para = new String[] {""};
 
     @Override
-    public String[] getParameterValues() {
+    public String[] getParameters() {
         String[] parms = new String[de.length + para.length];
 
-        for (int i = 0; i < parms.length; i += 2) {
-            parms[i] = de[i / 2];
-            parms[i + 1] = para[i / 2];
+        for (int i = 0; i < parms.length; i+=2) {
+            parms[i] = de[i/2];
+            parms[i+1] = para[i/2];
         }
 
         return parms;
@@ -59,9 +54,9 @@ public class ReplaceElement extends StreamChangeElement {
 
         para = new String[content.length / 2];
 
-        for (int i = 0; i < content.length; i += 2) {
-            de[i / 2] = content[i];
-            para[i / 2] = content[i + 1];
+        for (int i = 0; i < content.length; i+=2) {
+            de[i/2] = content[i];
+            para[i/2] = content[i+1];
         }
     }
 

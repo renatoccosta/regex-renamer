@@ -34,12 +34,7 @@ public class RootElement extends StreamChangeElement {
     }
 
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[] {};
-    }
-
-    @Override
-    public String[] getParameterValues() {
+    public String[] getParameters() {
         return new String[] {};
     }
 
