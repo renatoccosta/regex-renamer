@@ -16,8 +16,9 @@
 package br.com.renatoccosta.renamer.element.base;
 
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.log4j.Logger;
 
 /**
  *
@@ -25,31 +26,24 @@ import org.apache.log4j.Logger;
  */
 public class ElementFactory {
 
-    private static Logger LOGGER = Logger.getLogger(ElementFactory.class);
-
-    public static Element compile(String xpName) throws
+    public static Element compile(String conteudo) throws
             ElementNotFoundException {
-//        String campos[] = conteudo.split(":");
-//        String xpName = campos[0];
-//        String params[] = (String[]) ArrayUtils.remove(campos, 0);
+        String campos[] = conteudo.split(":");
+        String xpName = campos[0];
+        String params[] = (String[]) ArrayUtils.remove(campos, 0);
 
         Element ee = null;
         try {
-            Class<Element> c = ElementsDirectory.getInstance().lookup(xpName);
-
-            if (c == null) {
-                throw new ElementNotFoundException(xpName);
-            }
-
-            ee = c.newInstance();
-
+            ee = ElementsDirectory.getInstance().lookup(xpName).newInstance();
         } catch (InstantiationException ex) {
-            LOGGER.error(ex.getMessage(), ex);
+            Logger.getLogger(ElementFactory.class.getName()).log(
+                    Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            LOGGER.error(ex.getMessage(), ex);
+            Logger.getLogger(ElementFactory.class.getName()).log(
+                    Level.SEVERE, null, ex);
         }
 
-//        ee.setParameters(params);
+        ee.setParameters(params);
 
         return ee;
     }

@@ -15,6 +15,7 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -54,10 +55,6 @@ public class ElementsDirectory {
         return discovery;
     }
 
-    public Map<String, Class<Element>> getMapId() {
-        return mapId;
-    }
-
     /**
      * Busca a classe correspondente ao id no map. Retorna null caso não
      * encontre.
@@ -65,8 +62,11 @@ public class ElementsDirectory {
      * @param id Nome descritivo da classe
      * @return Classe do elemento ou null caso não encontre
      */
-    public Class<Element> lookup(String id) {
+    public Class<Element> lookup(String id) throws ElementNotFoundException {
         Class<Element> cl = mapId.get(id);
+        if (cl == null) {
+            throw new ElementNotFoundException(id);
+        }
         return cl;
     }
 
@@ -76,14 +76,15 @@ public class ElementsDirectory {
      * @param clasz Classe elemento
      * @return Id do elemento
      */
-    public String lookup(Class<? extends Element> clasz) {
+    public String lookup(Class<? extends Element> clasz) throws
+            ElementNotFoundException {
         for (Map.Entry<String, Class<Element>> entry : mapId.entrySet()) {
             if (entry.getValue().equals(clasz)) {
                 return entry.getKey();
             }
         }
 
-        return null;
+        throw new ElementNotFoundException(clasz.getName());
     }
 
     /**

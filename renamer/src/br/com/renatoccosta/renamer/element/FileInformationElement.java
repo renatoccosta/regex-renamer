@@ -16,10 +16,7 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.ExpressionElement;
-import br.com.renatoccosta.renamer.i18n.Messages;
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Elemento que imprime determinadas informações sobre o arquivo que está tendo
@@ -29,56 +26,30 @@ import java.util.Date;
  */
 public class FileInformationElement extends ExpressionElement {
 
-    private FileInformationEnum mode = FileInformationEnum.DATE;
+    public static final String FOLDER = "folder";
 
-    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public static final String DATE = "date";
 
-    @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{FileInformationEnum.class};
-    }
+    public static final String SIZE = "size";
 
     @Override
     public void setParameters(String... content) {
-        if (content.length > 0) {
-            try {
-                mode = FileInformationEnum.valueOf(content[0]);
-            } catch (Exception e) {
-                throw new IllegalArgumentException(
-                        Messages.getFilterElementInvalidParametersMessage());
-            }
-        }
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public String getContent(String find, String target, File file) {
-        switch (mode) {
-            case DATE:
-                return sdf.format(new Date(file.lastModified()));
-            case FOLDER:
-                return file.getParentFile().getName();
-            case SIZE:
-                return new Long(file.length()).toString();
-        }
-
-        return "";
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public String[] getParameterValues() {
-        return new String[]{mode.toString()};
+    public String[] getParameters() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void resetState() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
-
-}
-
-enum FileInformationEnum {
-
-    FOLDER,
-    DATE,
-    SIZE
 
 }

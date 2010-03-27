@@ -47,12 +47,7 @@ public class IndexedElement extends ExpressionElement {
     private int leadingZeros = 1;
 
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{Integer.class, Integer.class};
-    }
-
-    @Override
-    public String[] getParameterValues() {
+    public String[] getParameters() {
         return new String[]{String.valueOf(contOriginal),
                     String.valueOf(leadingZeros)};
     }

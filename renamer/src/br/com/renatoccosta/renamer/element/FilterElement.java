@@ -28,24 +28,30 @@ import org.apache.commons.lang.StringUtils;
  */
 public class FilterElement extends StreamChangeElement {
 
-    private FilterEnum mode = FilterEnum.SYMBOLS;
+    public static final String LETTERS = "l";
+
+    public static final String NUMBERS = "n";
+
+    public static final String SYMBOLS = "s";
+
+    public static final String WHITE_SPACE = "w";
+
+    private String mode = SYMBOLS;
 
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{FilterEnum.class};
-    }
-
-    @Override
-    public String[] getParameterValues() {
-        return new String[]{mode.toString()};
+    public String[] getParameters() {
+        return new String[] {mode};
     }
 
     @Override
     public void setParameters(String... content) {
         if (content.length > 0) {
-            try {
-                mode = FilterEnum.valueOf(content[0]);
-            } catch (IllegalArgumentException e) {
+            String mode = content[0];
+
+            if (LETTERS.equals(mode) || NUMBERS.equals(mode) ||
+                    SYMBOLS.equals(mode) || WHITE_SPACE.equals(mode)) {
+                this.mode = mode;
+            } else {
                 throw new IllegalArgumentException(
                         Messages.getFilterElementInvalidParametersMessage());
             }
@@ -54,55 +60,51 @@ public class FilterElement extends StreamChangeElement {
 
     @Override
     public String convert(String src) {
-        StringBuffer sb = new StringBuffer();
-        char[] caracs = src.toCharArray();
+        if (LETTERS.equals(mode)) {
+            StringBuffer sb = new StringBuffer();
 
-        switch (mode) {
-            case LETTERS:
-                for (int i = 0; i < caracs.length; i++) {
-                    char c = caracs[i];
-                    if (!Character.isLetter(c)) {
-                        sb.append(c);
-                    }
+            char[] caracs = src.toCharArray();
+            for (int i = 0; i < caracs.length; i++) {
+                char c = caracs[i];
+                if (!Character.isLetter(c)) {
+                    sb.append(c);
                 }
+            }
 
-                return sb.toString();
+            return sb.toString();
 
-            case NUMBERS:
-                for (int i = 0; i < caracs.length; i++) {
-                    char c = caracs[i];
-                    if (!Character.isDigit(c)) {
-                        sb.append(c);
-                    }
+        } else if (NUMBERS.equals(mode)) {
+            StringBuffer sb = new StringBuffer();
+
+            char[] caracs = src.toCharArray();
+            for (int i = 0; i < caracs.length; i++) {
+                char c = caracs[i];
+                if (!Character.isDigit(c)) {
+                    sb.append(c);
                 }
+            }
 
-                return sb.toString();
+            return sb.toString();
 
-            case SYMBOLS:
-                for (int i = 0; i < caracs.length; i++) {
-                    char c = caracs[i];
-                    if (Character.isLetterOrDigit(c) ||
-                            Character.isSpaceChar(c)) {
-                        sb.append(c);
-                    }
+        } else if (SYMBOLS.equals(mode)) {
+            StringBuffer sb = new StringBuffer();
+
+            char[] caracs = src.toCharArray();
+            for (int i = 0; i < caracs.length; i++) {
+                char c = caracs[i];
+                if (Character.isLetterOrDigit(c) ||
+                        Character.isSpaceChar(c)) {
+                    sb.append(c);
                 }
+            }
 
-                return sb.toString();
+            return sb.toString();
 
-            case WHITE_SPACE:
-                return StringUtils.deleteWhitespace(src);
+        } else if (WHITE_SPACE.equals(mode)) {
+            return StringUtils.deleteWhitespace(src);
+        } else {
+            return src;
         }
-
-        return src;
     }
-
-}
-
-enum FilterEnum {
-
-    LETTERS,
-    NUMBERS,
-    SYMBOLS,
-    WHITE_SPACE
 
 }

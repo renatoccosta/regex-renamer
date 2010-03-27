@@ -17,7 +17,6 @@ package br.com.renatoccosta.renamer;
 
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.element.base.Element;
-import br.com.renatoccosta.renamer.exception.ParseErrorsException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import br.com.renatoccosta.renamer.parser.RenamerLexer;
 import br.com.renatoccosta.renamer.parser.RenamerParser;
@@ -34,7 +33,6 @@ import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.TokenStream;
 
 /**
  * Classe principal da aplicacao. Realiza toda a orquestracao do negocio
@@ -218,7 +216,7 @@ public class Renamer {
             lastReplace = this.rootReplace.toString();
         }
 
-        this.rootReplace = parseReplace(replace);
+        parseReplace(replace);
 
         if (!this.rootReplace.toString().equals(lastReplace)) {
             this.dirty = true;
@@ -295,7 +293,7 @@ public class Renamer {
         if (!canRename) {
             throw new RenamerException(Messages.getErrorRenamingFilesMessage());
         }
-
+        
         calculateConflicts();
 
         this.dirty = false;
@@ -371,31 +369,6 @@ public class Renamer {
     }
 
     /**
-     * Executes the parse of the text and analyse the cursor position to 
-     * generate the auto complete options.
-     * 
-     * @param text Text to be parsed
-     * @param pos Position of the carret in the text
-     * @return List of auto-complete options or null if there was no options.
-     */
-    public List<String> queryAutoCompleteOptions(String text, int pos) {
-        try {
-            parseReplace(text);
-
-        } catch (RenamerException ex) {
-            if (ex instanceof ParseErrorsException) {
-                ParseErrorsException pee = (ParseErrorsException) ex;
-                int realPos = text.length() == pos ? -1 : pos;
-
-                return AutoComplete.process(pee.getExceptions(), realPos);
-            }
-        }
-
-        return null;
-    }
-
-    /* ---------------------------------------------------------------------- */
-    /**
      * Verifica se a string de localização do padrão de nome de arquivo é válida
      * como uma expressão regular
      * 
@@ -411,29 +384,25 @@ public class Renamer {
     }
 
     /**
-     * Executes the parse in the substitution string, generating the
-     * corresponding elements.
+     * Executa um parse na string de substituição, gerando os elementos
+     * correspondentes.
      *
-     * @param replace Substitution string
-     * @return Root element
-     * @throws ParseErrorsException If there was any error during the parse
+     * @param replace String de substituição
+     * @throws ParseException Case exista um erro de sintaxe
      */
-    private Element parseReplace(String replace) throws ParseErrorsException {
+    private void parseReplace(String replace) throws RenamerException {
         RenamerLexer lexer = new RenamerLexer(replace);
 
-        TokenStream cts = new CommonTokenStream(lexer);
+        CommonTokenStream cts = new CommonTokenStream(lexer);
         RenamerParser instance = new RenamerParser(cts);
 
         try {
-            instance.expression();
+            instance.inicio();
+            this.rootReplace = instance.root;
+            
         } catch (RecognitionException ex) {
+            throw new RenamerException(ex);
         }
-
-        if (!instance.getExceptions().isEmpty()) {
-            throw new ParseErrorsException(instance.getExceptions());
-        }
-
-        return instance.root;
     }
 
     private void calculateConflicts() {

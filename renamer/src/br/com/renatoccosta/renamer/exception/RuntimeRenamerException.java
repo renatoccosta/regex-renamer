@@ -13,24 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.renatoccosta.renamer.element.base;
+package br.com.renatoccosta.renamer.exception;
+
+import org.antlr.runtime.IntStream;
+import org.antlr.runtime.RecognitionException;
 
 /**
  *
- * @author renato
+ * @author Renato Costa
  */
-public abstract class ExpressionElement extends ContentElement {
+public class RuntimeRenamerException extends RecognitionException {
 
-    /**
-     * Retorna a representação original do elemento no formato:
-     *
-     * ${<elem_id>:<params>}
-     *
-     * @return Representação original do elemento
-     */
+    protected String message;
+
+    public RuntimeRenamerException(String message) {
+        this.message = message;
+    }
+
+    public RuntimeRenamerException(IntStream input) {
+        super(input);
+    }
+
+    public RuntimeRenamerException() {
+    }
+
     @Override
-    public String toString() {
-        return "${" + getId() + ":" + getParametersAsString() + "}";
+    public String getMessage() {
+        return message;
     }
 
 }

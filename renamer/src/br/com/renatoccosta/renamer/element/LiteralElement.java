@@ -15,14 +15,14 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.element.base.ContentElement;
 import java.io.File;
 
 /**
  *
  * @author renato
  */
-public class LiteralElement extends Element {
+public class LiteralElement extends ContentElement {
 
     private String content;
 
@@ -31,13 +31,8 @@ public class LiteralElement extends Element {
     }
 
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{String.class};
-    }
-
-    @Override
-    public String[] getParameterValues() {
-        return new String[]{content};
+    public String[] getParameters() {
+        return new String[] {content};
     }
 
     @Override

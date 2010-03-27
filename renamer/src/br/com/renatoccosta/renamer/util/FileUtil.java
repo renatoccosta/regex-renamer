@@ -55,8 +55,8 @@ public class FileUtil {
     private static Comparator<String> compFileDate = new Comparator<String>() {
 
         public int compare(String o1, String o2) {
-            int depth1 = o1.split("\\" + File.separator).length;
-            int depth2 = o2.split("\\" + File.separator).length;
+            int depth1 = o1.split(File.separator).length;
+            int depth2 = o2.split(File.separator).length;
 
             if (depth1 > depth2) {
                 return 1;
