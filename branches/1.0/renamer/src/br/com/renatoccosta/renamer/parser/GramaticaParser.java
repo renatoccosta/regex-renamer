@@ -1,21 +1,7 @@
-/**
- * Copyright 2009 Renato Couto da Costa
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g 2010-03-27 16:35:31
+
 package br.com.renatoccosta.renamer.parser;
 
-import br.com.renatoccosta.renamer.element.base.ElementFactory;
 import br.com.renatoccosta.renamer.element.*;
 import br.com.renatoccosta.renamer.element.base.*;
 
@@ -57,7 +43,7 @@ public class GramaticaParser extends Parser {
         
 
     public String[] getTokenNames() { return GramaticaParser.tokenNames; }
-    public String getGrammarFileName() { return "G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g"; }
+    public String getGrammarFileName() { return "/home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g"; }
 
 
     public StreamChangeElement root = new RootElement();
@@ -66,7 +52,7 @@ public class GramaticaParser extends Parser {
 
 
     // $ANTLR start "inicio"
-    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:28:1: inicio : ( literal | grupo )+ EOF ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:43:1: inicio : ( literal | grupo )+ EOF ;
     public final void inicio() throws RecognitionException {
         GramaticaParser.literal_return literal1 = null;
 
@@ -74,10 +60,10 @@ public class GramaticaParser extends Parser {
 
 
         try {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:28:8: ( ( literal | grupo )+ EOF )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:29:2: ( literal | grupo )+ EOF
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:43:8: ( ( literal | grupo )+ EOF )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:44:2: ( literal | grupo )+ EOF
             {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:29:2: ( literal | grupo )+
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:44:2: ( literal | grupo )+
             int cnt1=0;
             loop1:
             do {
@@ -94,7 +80,7 @@ public class GramaticaParser extends Parser {
 
                 switch (alt1) {
             	case 1 :
-            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:30:2: literal
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:45:2: literal
             	    {
             	    pushFollow(FOLLOW_literal_in_inicio76);
             	    literal1=literal();
@@ -103,13 +89,13 @@ public class GramaticaParser extends Parser {
 
 
             	    		Element elem = new LiteralElement((literal1!=null?input.toString(literal1.start,literal1.stop):null));		
-            	    		last = last.add(elem);;
+            	    		last = last.add(elem);
             	    	
 
             	    }
             	    break;
             	case 2 :
-            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:35:2: grupo
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:50:2: grupo
             	    {
             	    pushFollow(FOLLOW_grupo_in_inicio86);
             	    grupo2=grupo();
@@ -150,7 +136,7 @@ public class GramaticaParser extends Parser {
 
 
     // $ANTLR start "grupo"
-    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:41:1: grupo returns [Element elm] : MARCADOR ( NUMEROS | subgrupo ) ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:56:1: grupo returns [Element elm] : MARCADOR ( NUMEROS | subgrupo ) ;
     public final Element grupo() throws RecognitionException {
         Element elm = null;
 
@@ -159,11 +145,11 @@ public class GramaticaParser extends Parser {
 
 
         try {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:41:29: ( MARCADOR ( NUMEROS | subgrupo ) )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:42:2: MARCADOR ( NUMEROS | subgrupo )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:56:29: ( MARCADOR ( NUMEROS | subgrupo ) )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:57:2: MARCADOR ( NUMEROS | subgrupo )
             {
             match(input,MARCADOR,FOLLOW_MARCADOR_in_grupo109); 
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:43:2: ( NUMEROS | subgrupo )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:58:2: ( NUMEROS | subgrupo )
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -181,7 +167,7 @@ public class GramaticaParser extends Parser {
             }
             switch (alt2) {
                 case 1 :
-                    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:44:2: NUMEROS
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:59:2: NUMEROS
                     {
                     NUMEROS3=(Token)match(input,NUMEROS,FOLLOW_NUMEROS_in_grupo116); 
 
@@ -191,7 +177,7 @@ public class GramaticaParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:47:2: subgrupo
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:62:2: subgrupo
                     {
                     pushFollow(FOLLOW_subgrupo_in_grupo124);
                     subgrupo4=subgrupo();
@@ -223,7 +209,7 @@ public class GramaticaParser extends Parser {
 
 
     // $ANTLR start "subgrupo"
-    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:51:1: subgrupo returns [Element elem] : ENTRA_GRUPO conteudo SAI_GRUPO ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:66:1: subgrupo returns [Element elem] : ENTRA_GRUPO conteudo SAI_GRUPO ;
     public final Element subgrupo() throws RecognitionException {
         Element elem = null;
 
@@ -231,8 +217,8 @@ public class GramaticaParser extends Parser {
 
 
         try {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:51:33: ( ENTRA_GRUPO conteudo SAI_GRUPO )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:52:2: ENTRA_GRUPO conteudo SAI_GRUPO
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:66:33: ( ENTRA_GRUPO conteudo SAI_GRUPO )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:67:2: ENTRA_GRUPO conteudo SAI_GRUPO
             {
             match(input,ENTRA_GRUPO,FOLLOW_ENTRA_GRUPO_in_subgrupo142); 
             pushFollow(FOLLOW_conteudo_in_subgrupo144);
@@ -263,16 +249,16 @@ public class GramaticaParser extends Parser {
     };
 
     // $ANTLR start "conteudo"
-    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:56:1: conteudo returns [Element elem] : ( closeElement | otherElement ) ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:71:1: conteudo returns [Element elem] : ( closeElement | otherElement ) ;
     public final GramaticaParser.conteudo_return conteudo() throws RecognitionException {
         GramaticaParser.conteudo_return retval = new GramaticaParser.conteudo_return();
         retval.start = input.LT(1);
 
         try {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:56:33: ( ( closeElement | otherElement ) )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:57:2: ( closeElement | otherElement )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:71:33: ( ( closeElement | otherElement ) )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:72:2: ( closeElement | otherElement )
             {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:57:2: ( closeElement | otherElement )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:72:2: ( closeElement | otherElement )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -290,7 +276,7 @@ public class GramaticaParser extends Parser {
             }
             switch (alt3) {
                 case 1 :
-                    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:57:4: closeElement
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:72:4: closeElement
                     {
                     pushFollow(FOLLOW_closeElement_in_conteudo163);
                     closeElement();
@@ -301,7 +287,7 @@ public class GramaticaParser extends Parser {
                     }
                     break;
                 case 2 :
-                    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:59:2: otherElement
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:74:2: otherElement
                     {
                     pushFollow(FOLLOW_otherElement_in_conteudo171);
                     otherElement();
@@ -335,18 +321,18 @@ public class GramaticaParser extends Parser {
 
 
     // $ANTLR start "closeElement"
-    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:63:1: closeElement : CLOSE_ELEMENT LETRAS ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:78:1: closeElement : CLOSE_ELEMENT LETRAS ;
     public final void closeElement() throws RecognitionException {
         Token LETRAS6=null;
 
         try {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:64:2: ( CLOSE_ELEMENT LETRAS )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:65:2: CLOSE_ELEMENT LETRAS
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:79:2: ( CLOSE_ELEMENT LETRAS )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:80:2: CLOSE_ELEMENT LETRAS
             {
             match(input,CLOSE_ELEMENT,FOLLOW_CLOSE_ELEMENT_in_closeElement186); 
             LETRAS6=(Token)match(input,LETRAS,FOLLOW_LETRAS_in_closeElement188); 
 
-            		last.close((LETRAS6!=null?LETRAS6.getText():null));
+            		last = last.close((LETRAS6!=null?LETRAS6.getText():null));
             	
 
             }
@@ -364,14 +350,14 @@ public class GramaticaParser extends Parser {
 
 
     // $ANTLR start "otherElement"
-    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:69:1: otherElement : LETRAS ( SEPCAMPO literal )* ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:84:1: otherElement : LETRAS ( SEPCAMPO literal )* ;
     public final void otherElement() throws RecognitionException {
         try {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:70:2: ( LETRAS ( SEPCAMPO literal )* )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:2: LETRAS ( SEPCAMPO literal )*
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:85:2: ( LETRAS ( SEPCAMPO literal )* )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:86:2: LETRAS ( SEPCAMPO literal )*
             {
             match(input,LETRAS,FOLLOW_LETRAS_in_otherElement200); 
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:9: ( SEPCAMPO literal )*
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:86:9: ( SEPCAMPO literal )*
             loop4:
             do {
                 int alt4=2;
@@ -384,7 +370,7 @@ public class GramaticaParser extends Parser {
 
                 switch (alt4) {
             	case 1 :
-            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:71:10: SEPCAMPO literal
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:86:10: SEPCAMPO literal
             	    {
             	    match(input,SEPCAMPO,FOLLOW_SEPCAMPO_in_otherElement203); 
             	    pushFollow(FOLLOW_literal_in_otherElement205);
@@ -419,16 +405,16 @@ public class GramaticaParser extends Parser {
     };
 
     // $ANTLR start "literal"
-    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:73:1: literal : ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' ) )+ ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:88:1: literal : ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' ) )+ ;
     public final GramaticaParser.literal_return literal() throws RecognitionException {
         GramaticaParser.literal_return retval = new GramaticaParser.literal_return();
         retval.start = input.LT(1);
 
         try {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:73:9: ( ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' ) )+ )
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:74:2: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' ) )+
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:88:9: ( ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' ) )+ )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:89:2: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' ) )+
             {
-            // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:74:2: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' ) )+
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:89:2: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' ) )+
             int cnt5=0;
             loop5:
             do {
@@ -445,7 +431,7 @@ public class GramaticaParser extends Parser {
 
                 switch (alt5) {
             	case 1 :
-            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:74:6: ESCAPE ~ ( '\\r' | '\\n' )
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:89:6: ESCAPE ~ ( '\\r' | '\\n' )
             	    {
             	    match(input,ESCAPE,FOLLOW_ESCAPE_in_literal222); 
             	    if ( (input.LA(1)>=CLOSE_ELEMENT && input.LA(1)<=QUALQUER) ) {
@@ -461,7 +447,7 @@ public class GramaticaParser extends Parser {
             	    }
             	    break;
             	case 2 :
-            	    // G:\\Documents\\Projetos\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\Gramatica.g:75:13: ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' )
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-b1.0/renamer/src/br/com/renatoccosta/renamer/parser/Gramatica.g:90:13: ~ ( CLOSE_ELEMENT | SEPCAMPO | MARCADOR | ENTRA_GRUPO | SAI_GRUPO | ESCAPE | '\\r' | '\\n' )
             	    {
             	    if ( (input.LA(1)>=NUMEROS && input.LA(1)<=QUALQUER) ) {
             	        input.consume();
