@@ -1,0 +1,19 @@
+regex-renamer (1.0.1) karmic; urgency=low
+
+  * New upstream release v1.0.1
+    - Fixed error when adding elements after a closed element
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Sat, 27 Mar 2010 16:59:19 -0300
+
+regex-renamer (1.0-2) karmic; urgency=low
+
+  * Corrected build dependencies on Java. Now it uses default-jdk
+    package
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Fri, 22 Jan 2010 23:51:20 -0300
+
+regex-renamer (1.0-1) karmic; urgency=low
+
+  * Initial release (LP: #0001)
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Sun, 17 Jan 2010 16:13:50 -0300
