@@ -78,7 +78,7 @@ conteudo returns [Element elem] :
 closeElement
 	:
 	CLOSE_ELEMENT LETRAS {
-		last.close($LETRAS.text);
+		last = last.close($LETRAS.text);
 	};
 
 otherElement
