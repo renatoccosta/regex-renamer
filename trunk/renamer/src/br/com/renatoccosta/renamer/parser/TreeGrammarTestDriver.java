@@ -37,7 +37,7 @@ public class TreeGrammarTestDriver {
         CommonTokenStream tokens = new CommonTokenStream();
 
         InputStream stream = new ByteArrayInputStream(
-                "abc$1${idx:123}${filter}abc${/filter}${/idx}${idx/}".getBytes());
+                "${idx}${filter}${/filter}${/idx}".getBytes());
 
         ANTLRInputStream input = new ANTLRInputStream(stream);
         Lexer lexer = new GrammarLexer(input);
