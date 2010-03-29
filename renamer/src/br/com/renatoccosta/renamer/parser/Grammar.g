@@ -75,10 +75,11 @@ expression
 	; 
 	
 literalExpression
-	:	literal	->	^(LITERAL literal);	
+	:	literal	->	^(LITERAL literal)
+	;	
 	
 variableExpression
-	:	DOLLAR 
+	:	DOLLAR
 		(	NUMBERS 											->	^(CAPT_GROUP NUMBERS)
 		|	OPEN_BRACKET content CLOSE_BRACKET expression*
 				DOLLAR OPEN_BRACKET closeContent CLOSE_BRACKET	->	^(FUNCTION content expression* ^(CLOSE closeContent))

@@ -24,27 +24,37 @@ options {
  */
 package br.com.renatoccosta.renamer.parser;
 }
+
+@members {
+public StreamChangeElement root = new RootElement();
+public StreamChangeElement last = root;
+}
+
 //END: Header
 
 //START: Rules
 begin	
-	:	expression+ EOF
+	:	expression+ {	
+			last = last.add($expression.elem);
+		} EOF
 	;
 
-expression
+expression returns [Element elem] 
 	:
-		(	literalExpression 
-		| 	variableExpression
-		)
+		(	e=literalExpression 
+		| 	e=variableExpression
+		)	{ $elem = $e.elem; }
 	; 
 	
-literalExpression
-	:	^(LITERAL literal);	
+literalExpression returns [Element elem]
+	:	^(LITERAL literal)	{ $elem = new LiteralElement($literal.text); }
+	;	
 	
-variableExpression
-	:	^(CAPT_GROUP NUMBERS)
-	|	^(FUNCTION content expression* ^(CLOSE closeContent))
-	|	^(FUNCTION content)
+variableExpression returns [Element elem]
+	:	^(CAPT_GROUP NUMBERS)	{
+			$elem = new CaptureGroupElement(Integer.parseInt($NUMBERS.text));
+		}
+	|	^(FUNCTION content (expression* ^(CLOSE closeContent))?)
 	;
 
 content

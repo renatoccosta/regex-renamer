@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g 2010-03-28 22:36:21
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g 2010-03-29 00:26:20
 
 /**
  * Copyright 2009 Renato Couto da Costa
@@ -23,9 +23,7 @@ import org.antlr.runtime.tree.*;import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-import org.antlr.runtime.debug.*;
-import java.io.IOException;
-public class TreeGrammar extends DebugTreeParser {
+public class TreeGrammar extends TreeParser {
     public static final String[] tokenNames = new String[] {
         "<invalid>", "<EOR>", "<DOWN>", "<UP>", "SLASH", "COLON", "DOLLAR", "OPEN_BRACKET", "CLOSE_BRACKET", "ESCAPE", "LITERAL", "FUNCTION", "CAPT_GROUP", "CLOSE", "NUMBERS", "LETTERS", "WS", "ANY", "'\r'", "'\n'", "'\\r'", "'\\n'"
     };
@@ -52,70 +50,40 @@ public class TreeGrammar extends DebugTreeParser {
     // delegates
     // delegators
 
-    public static final String[] ruleNames = new String[] {
-        "invalidRule", "closeContent", "literalExpression", "parameter", 
-        "function", "variableExpression", "begin", "content", "expression", 
-        "literal"
-    };
-     
-        public int ruleLevel = 0;
-        public int getRuleLevel() { return ruleLevel; }
-        public void incRuleLevel() { ruleLevel++; }
-        public void decRuleLevel() { ruleLevel--; }
+
         public TreeGrammar(TreeNodeStream input) {
-            this(input, DebugEventSocketProxy.DEFAULT_DEBUGGER_PORT, new RecognizerSharedState());
+            this(input, new RecognizerSharedState());
         }
-        public TreeGrammar(TreeNodeStream input, int port, RecognizerSharedState state) {
+        public TreeGrammar(TreeNodeStream input, RecognizerSharedState state) {
             super(input, state);
-            DebugEventSocketProxy proxy =
-                new DebugEventSocketProxy(this, port, input.getTreeAdaptor());
-            setDebugListener(proxy);
-            try {
-                proxy.handshake();
-            }
-            catch (IOException ioe) {
-                reportError(ioe);
-            }
+             
         }
-    public TreeGrammar(TreeNodeStream input, DebugEventListener dbg) {
-        super(input, dbg, new RecognizerSharedState());
-
-    }
-    protected boolean evalPredicate(boolean result, String predicate) {
-        dbg.semanticPredicate(result, predicate);
-        return result;
-    }
-
+        
 
     public String[] getTokenNames() { return TreeGrammar.tokenNames; }
     public String getGrammarFileName() { return "/home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g"; }
 
 
+    public StreamChangeElement root = new RootElement();
+    public StreamChangeElement last = root;
+
+
 
     // $ANTLR start "begin"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:30:1: begin : ( expression )+ EOF ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:36:1: begin : ( expression )+ EOF ;
     public final void begin() throws RecognitionException {
-        try { dbg.enterRule(getGrammarFileName(), "begin");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(30, 1);
+        Element expression1 = null;
+
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:31:2: ( ( expression )+ EOF )
-            dbg.enterAlt(1);
-
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:31:4: ( expression )+ EOF
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:37:2: ( ( expression )+ EOF )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:37:4: ( expression )+ EOF
             {
-            dbg.location(31,4);
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:31:4: ( expression )+
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:37:4: ( expression )+
             int cnt1=0;
-            try { dbg.enterSubRule(1);
-
             loop1:
             do {
                 int alt1=2;
-                try { dbg.enterDecision(1);
-
                 int LA1_0 = input.LA(1);
 
                 if ( ((LA1_0>=LITERAL && LA1_0<=CAPT_GROUP)) ) {
@@ -123,17 +91,12 @@ public class TreeGrammar extends DebugTreeParser {
                 }
 
 
-                } finally {dbg.exitDecision(1);}
-
                 switch (alt1) {
             	case 1 :
-            	    dbg.enterAlt(1);
-
-            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:31:4: expression
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:37:4: expression
             	    {
-            	    dbg.location(31,4);
-            	    pushFollow(FOLLOW_expression_in_begin40);
-            	    expression();
+            	    pushFollow(FOLLOW_expression_in_begin47);
+            	    expression1=expression();
 
             	    state._fsp--;
 
@@ -145,16 +108,15 @@ public class TreeGrammar extends DebugTreeParser {
             	    if ( cnt1 >= 1 ) break loop1;
                         EarlyExitException eee =
                             new EarlyExitException(1, input);
-                        dbg.recognitionException(eee);
-
                         throw eee;
                 }
                 cnt1++;
             } while (true);
-            } finally {dbg.exitSubRule(1);}
 
-            dbg.location(31,16);
-            match(input,EOF,FOLLOW_EOF_in_begin43); 
+            	
+            			last = last.add(expression1);
+            		
+            match(input,EOF,FOLLOW_EOF_in_begin52); 
 
             }
 
@@ -165,40 +127,25 @@ public class TreeGrammar extends DebugTreeParser {
         }
         finally {
         }
-        dbg.location(32, 2);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "begin");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
         return ;
     }
     // $ANTLR end "begin"
 
 
     // $ANTLR start "expression"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:34:1: expression : ( literalExpression | variableExpression ) ;
-    public final void expression() throws RecognitionException {
-        try { dbg.enterRule(getGrammarFileName(), "expression");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(34, 1);
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:42:1: expression returns [Element elem] : (e= literalExpression | e= variableExpression ) ;
+    public final Element expression() throws RecognitionException {
+        Element elem = null;
+
+        Element e = null;
+
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:35:2: ( ( literalExpression | variableExpression ) )
-            dbg.enterAlt(1);
-
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:36:3: ( literalExpression | variableExpression )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:43:2: ( (e= literalExpression | e= variableExpression ) )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:44:3: (e= literalExpression | e= variableExpression )
             {
-            dbg.location(36,3);
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:36:3: ( literalExpression | variableExpression )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:44:3: (e= literalExpression | e= variableExpression )
             int alt2=2;
-            try { dbg.enterSubRule(2);
-            try { dbg.enterDecision(2);
-
             int LA2_0 = input.LA(1);
 
             if ( (LA2_0==LITERAL) ) {
@@ -211,20 +158,14 @@ public class TreeGrammar extends DebugTreeParser {
                 NoViableAltException nvae =
                     new NoViableAltException("", 2, 0, input);
 
-                dbg.recognitionException(nvae);
                 throw nvae;
             }
-            } finally {dbg.exitDecision(2);}
-
             switch (alt2) {
                 case 1 :
-                    dbg.enterAlt(1);
-
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:36:5: literalExpression
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:44:5: e= literalExpression
                     {
-                    dbg.location(36,5);
-                    pushFollow(FOLLOW_literalExpression_in_expression58);
-                    literalExpression();
+                    pushFollow(FOLLOW_literalExpression_in_expression74);
+                    e=literalExpression();
 
                     state._fsp--;
 
@@ -232,13 +173,10 @@ public class TreeGrammar extends DebugTreeParser {
                     }
                     break;
                 case 2 :
-                    dbg.enterAlt(2);
-
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:37:6: variableExpression
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:45:6: e= variableExpression
                     {
-                    dbg.location(37,6);
-                    pushFollow(FOLLOW_variableExpression_in_expression66);
-                    variableExpression();
+                    pushFollow(FOLLOW_variableExpression_in_expression84);
+                    e=variableExpression();
 
                     state._fsp--;
 
@@ -247,8 +185,8 @@ public class TreeGrammar extends DebugTreeParser {
                     break;
 
             }
-            } finally {dbg.exitSubRule(2);}
 
+             elem = e; 
 
             }
 
@@ -259,47 +197,36 @@ public class TreeGrammar extends DebugTreeParser {
         }
         finally {
         }
-        dbg.location(39, 2);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "expression");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
-        return ;
+        return elem;
     }
     // $ANTLR end "expression"
 
 
     // $ANTLR start "literalExpression"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:41:1: literalExpression : ^( LITERAL literal ) ;
-    public final void literalExpression() throws RecognitionException {
-        try { dbg.enterRule(getGrammarFileName(), "literalExpression");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(41, 1);
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:49:1: literalExpression returns [Element elem] : ^( LITERAL literal ) ;
+    public final Element literalExpression() throws RecognitionException {
+        Element elem = null;
+
+        TreeGrammar.literal_return literal2 = null;
+
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:42:2: ( ^( LITERAL literal ) )
-            dbg.enterAlt(1);
-
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:42:4: ^( LITERAL literal )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:50:2: ( ^( LITERAL literal ) )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:50:4: ^( LITERAL literal )
             {
-            dbg.location(42,4);
-            dbg.location(42,6);
-            match(input,LITERAL,FOLLOW_LITERAL_in_literalExpression84); 
+            match(input,LITERAL,FOLLOW_LITERAL_in_literalExpression108); 
 
             match(input, Token.DOWN, null); 
-            dbg.location(42,14);
-            pushFollow(FOLLOW_literal_in_literalExpression86);
-            literal();
+            pushFollow(FOLLOW_literal_in_literalExpression110);
+            literal2=literal();
 
             state._fsp--;
 
 
             match(input, Token.UP, null); 
+             elem = new LiteralElement((literal2!=null?(input.getTokenStream().toString(
+              input.getTreeAdaptor().getTokenStartIndex(literal2.start),
+              input.getTreeAdaptor().getTokenStopIndex(literal2.start))):null)); 
 
             }
 
@@ -310,150 +237,117 @@ public class TreeGrammar extends DebugTreeParser {
         }
         finally {
         }
-        dbg.location(42, 22);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "literalExpression");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
-        return ;
+        return elem;
     }
     // $ANTLR end "literalExpression"
 
 
     // $ANTLR start "variableExpression"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:44:1: variableExpression : ( ^( CAPT_GROUP NUMBERS ) | ^( FUNCTION content ( expression )* ^( CLOSE closeContent ) ) | ^( FUNCTION content ) );
-    public final void variableExpression() throws RecognitionException {
-        try { dbg.enterRule(getGrammarFileName(), "variableExpression");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(44, 1);
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:53:1: variableExpression returns [Element elem] : ( ^( CAPT_GROUP NUMBERS ) | ^( FUNCTION content ( ( expression )* ^( CLOSE closeContent ) )? ) );
+    public final Element variableExpression() throws RecognitionException {
+        Element elem = null;
+
+        CommonTree NUMBERS3=null;
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:45:2: ( ^( CAPT_GROUP NUMBERS ) | ^( FUNCTION content ( expression )* ^( CLOSE closeContent ) ) | ^( FUNCTION content ) )
-            int alt4=3;
-            try { dbg.enterDecision(4);
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:54:2: ( ^( CAPT_GROUP NUMBERS ) | ^( FUNCTION content ( ( expression )* ^( CLOSE closeContent ) )? ) )
+            int alt5=2;
+            int LA5_0 = input.LA(1);
 
-            try {
-                isCyclicDecision = true;
-                alt4 = dfa4.predict(input);
+            if ( (LA5_0==CAPT_GROUP) ) {
+                alt5=1;
             }
-            catch (NoViableAltException nvae) {
-                dbg.recognitionException(nvae);
+            else if ( (LA5_0==FUNCTION) ) {
+                alt5=2;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("", 5, 0, input);
+
                 throw nvae;
             }
-            } finally {dbg.exitDecision(4);}
-
-            switch (alt4) {
+            switch (alt5) {
                 case 1 :
-                    dbg.enterAlt(1);
-
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:45:4: ^( CAPT_GROUP NUMBERS )
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:54:4: ^( CAPT_GROUP NUMBERS )
                     {
-                    dbg.location(45,4);
-                    dbg.location(45,6);
-                    match(input,CAPT_GROUP,FOLLOW_CAPT_GROUP_in_variableExpression99); 
+                    match(input,CAPT_GROUP,FOLLOW_CAPT_GROUP_in_variableExpression131); 
 
                     match(input, Token.DOWN, null); 
-                    dbg.location(45,17);
-                    match(input,NUMBERS,FOLLOW_NUMBERS_in_variableExpression101); 
+                    NUMBERS3=(CommonTree)match(input,NUMBERS,FOLLOW_NUMBERS_in_variableExpression133); 
 
                     match(input, Token.UP, null); 
+
+                    			elem = new CaptureGroupElement(Integer.parseInt((NUMBERS3!=null?NUMBERS3.getText():null)));
+                    		
 
                     }
                     break;
                 case 2 :
-                    dbg.enterAlt(2);
-
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:46:4: ^( FUNCTION content ( expression )* ^( CLOSE closeContent ) )
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:57:4: ^( FUNCTION content ( ( expression )* ^( CLOSE closeContent ) )? )
                     {
-                    dbg.location(46,4);
-                    dbg.location(46,6);
-                    match(input,FUNCTION,FOLLOW_FUNCTION_in_variableExpression108); 
+                    match(input,FUNCTION,FOLLOW_FUNCTION_in_variableExpression142); 
 
                     match(input, Token.DOWN, null); 
-                    dbg.location(46,15);
-                    pushFollow(FOLLOW_content_in_variableExpression110);
+                    pushFollow(FOLLOW_content_in_variableExpression144);
                     content();
 
                     state._fsp--;
 
-                    dbg.location(46,23);
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:46:23: ( expression )*
-                    try { dbg.enterSubRule(3);
+                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:57:23: ( ( expression )* ^( CLOSE closeContent ) )?
+                    int alt4=2;
+                    int LA4_0 = input.LA(1);
 
-                    loop3:
-                    do {
-                        int alt3=2;
-                        try { dbg.enterDecision(3);
+                    if ( ((LA4_0>=LITERAL && LA4_0<=CLOSE)) ) {
+                        alt4=1;
+                    }
+                    switch (alt4) {
+                        case 1 :
+                            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:57:24: ( expression )* ^( CLOSE closeContent )
+                            {
+                            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:57:24: ( expression )*
+                            loop3:
+                            do {
+                                int alt3=2;
+                                int LA3_0 = input.LA(1);
 
-                        int LA3_0 = input.LA(1);
-
-                        if ( ((LA3_0>=LITERAL && LA3_0<=CAPT_GROUP)) ) {
-                            alt3=1;
-                        }
-
-
-                        } finally {dbg.exitDecision(3);}
-
-                        switch (alt3) {
-                    	case 1 :
-                    	    dbg.enterAlt(1);
-
-                    	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:46:23: expression
-                    	    {
-                    	    dbg.location(46,23);
-                    	    pushFollow(FOLLOW_expression_in_variableExpression112);
-                    	    expression();
-
-                    	    state._fsp--;
+                                if ( ((LA3_0>=LITERAL && LA3_0<=CAPT_GROUP)) ) {
+                                    alt3=1;
+                                }
 
 
-                    	    }
-                    	    break;
+                                switch (alt3) {
+                            	case 1 :
+                            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:57:24: expression
+                            	    {
+                            	    pushFollow(FOLLOW_expression_in_variableExpression147);
+                            	    expression();
 
-                    	default :
-                    	    break loop3;
-                        }
-                    } while (true);
-                    } finally {dbg.exitSubRule(3);}
-
-                    dbg.location(46,35);
-                    dbg.location(46,37);
-                    match(input,CLOSE,FOLLOW_CLOSE_in_variableExpression116); 
-
-                    match(input, Token.DOWN, null); 
-                    dbg.location(46,43);
-                    pushFollow(FOLLOW_closeContent_in_variableExpression118);
-                    closeContent();
-
-                    state._fsp--;
+                            	    state._fsp--;
 
 
-                    match(input, Token.UP, null); 
+                            	    }
+                            	    break;
 
-                    match(input, Token.UP, null); 
+                            	default :
+                            	    break loop3;
+                                }
+                            } while (true);
+
+                            match(input,CLOSE,FOLLOW_CLOSE_in_variableExpression151); 
+
+                            match(input, Token.DOWN, null); 
+                            pushFollow(FOLLOW_closeContent_in_variableExpression153);
+                            closeContent();
+
+                            state._fsp--;
+
+
+                            match(input, Token.UP, null); 
+
+                            }
+                            break;
 
                     }
-                    break;
-                case 3 :
-                    dbg.enterAlt(3);
-
-                    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:47:4: ^( FUNCTION content )
-                    {
-                    dbg.location(47,4);
-                    dbg.location(47,6);
-                    match(input,FUNCTION,FOLLOW_FUNCTION_in_variableExpression126); 
-
-                    match(input, Token.DOWN, null); 
-                    dbg.location(47,15);
-                    pushFollow(FOLLOW_content_in_variableExpression128);
-                    content();
-
-                    state._fsp--;
 
 
                     match(input, Token.UP, null); 
@@ -469,37 +363,19 @@ public class TreeGrammar extends DebugTreeParser {
         }
         finally {
         }
-        dbg.location(48, 2);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "variableExpression");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
-        return ;
+        return elem;
     }
     // $ANTLR end "variableExpression"
 
 
     // $ANTLR start "content"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:50:1: content : ^( function ( parameter )* ) ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:60:1: content : ^( function ( parameter )* ) ;
     public final void content() throws RecognitionException {
-        try { dbg.enterRule(getGrammarFileName(), "content");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(50, 1);
-
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:51:2: ( ^( function ( parameter )* ) )
-            dbg.enterAlt(1);
-
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:51:4: ^( function ( parameter )* )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:61:2: ( ^( function ( parameter )* ) )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:61:4: ^( function ( parameter )* )
             {
-            dbg.location(51,4);
-            dbg.location(51,6);
-            pushFollow(FOLLOW_function_in_content141);
+            pushFollow(FOLLOW_function_in_content169);
             function();
 
             state._fsp--;
@@ -507,32 +383,22 @@ public class TreeGrammar extends DebugTreeParser {
 
             if ( input.LA(1)==Token.DOWN ) {
                 match(input, Token.DOWN, null); 
-                dbg.location(51,15);
-                // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:51:15: ( parameter )*
-                try { dbg.enterSubRule(5);
-
-                loop5:
+                // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:61:15: ( parameter )*
+                loop6:
                 do {
-                    int alt5=2;
-                    try { dbg.enterDecision(5);
+                    int alt6=2;
+                    int LA6_0 = input.LA(1);
 
-                    int LA5_0 = input.LA(1);
-
-                    if ( ((LA5_0>=ESCAPE && LA5_0<=19)) ) {
-                        alt5=1;
+                    if ( ((LA6_0>=ESCAPE && LA6_0<=19)) ) {
+                        alt6=1;
                     }
 
 
-                    } finally {dbg.exitDecision(5);}
-
-                    switch (alt5) {
+                    switch (alt6) {
                 	case 1 :
-                	    dbg.enterAlt(1);
-
-                	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:51:15: parameter
+                	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:61:15: parameter
                 	    {
-                	    dbg.location(51,15);
-                	    pushFollow(FOLLOW_parameter_in_content143);
+                	    pushFollow(FOLLOW_parameter_in_content171);
                 	    parameter();
 
                 	    state._fsp--;
@@ -542,10 +408,9 @@ public class TreeGrammar extends DebugTreeParser {
                 	    break;
 
                 	default :
-                	    break loop5;
+                	    break loop6;
                     }
                 } while (true);
-                } finally {dbg.exitSubRule(5);}
 
 
                 match(input, Token.UP, null); 
@@ -560,36 +425,19 @@ public class TreeGrammar extends DebugTreeParser {
         }
         finally {
         }
-        dbg.location(52, 2);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "content");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
         return ;
     }
     // $ANTLR end "content"
 
 
     // $ANTLR start "closeContent"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:54:1: closeContent : function ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:64:1: closeContent : function ;
     public final void closeContent() throws RecognitionException {
-        try { dbg.enterRule(getGrammarFileName(), "closeContent");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(54, 1);
-
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:55:2: ( function )
-            dbg.enterAlt(1);
-
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:55:4: function
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:65:2: ( function )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:65:4: function
             {
-            dbg.location(55,4);
-            pushFollow(FOLLOW_function_in_closeContent157);
+            pushFollow(FOLLOW_function_in_closeContent185);
             function();
 
             state._fsp--;
@@ -604,36 +452,19 @@ public class TreeGrammar extends DebugTreeParser {
         }
         finally {
         }
-        dbg.location(56, 2);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "closeContent");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
         return ;
     }
     // $ANTLR end "closeContent"
 
 
     // $ANTLR start "function"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:58:1: function : LETTERS ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:68:1: function : LETTERS ;
     public final void function() throws RecognitionException {
-        try { dbg.enterRule(getGrammarFileName(), "function");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(58, 1);
-
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:59:2: ( LETTERS )
-            dbg.enterAlt(1);
-
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:59:4: LETTERS
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:69:2: ( LETTERS )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:69:4: LETTERS
             {
-            dbg.location(59,4);
-            match(input,LETTERS,FOLLOW_LETTERS_in_function168); 
+            match(input,LETTERS,FOLLOW_LETTERS_in_function196); 
 
             }
 
@@ -644,36 +475,19 @@ public class TreeGrammar extends DebugTreeParser {
         }
         finally {
         }
-        dbg.location(60, 2);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "function");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
         return ;
     }
     // $ANTLR end "function"
 
 
     // $ANTLR start "parameter"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:62:1: parameter : literal ;
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:72:1: parameter : literal ;
     public final void parameter() throws RecognitionException {
-        try { dbg.enterRule(getGrammarFileName(), "parameter");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(62, 1);
-
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:63:2: ( literal )
-            dbg.enterAlt(1);
-
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:63:4: literal
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:73:2: ( literal )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:73:4: literal
             {
-            dbg.location(63,4);
-            pushFollow(FOLLOW_literal_in_parameter181);
+            pushFollow(FOLLOW_literal_in_parameter209);
             literal();
 
             state._fsp--;
@@ -688,72 +502,49 @@ public class TreeGrammar extends DebugTreeParser {
         }
         finally {
         }
-        dbg.location(64, 2);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "parameter");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
         return ;
     }
     // $ANTLR end "parameter"
 
+    public static class literal_return extends TreeRuleReturnScope {
+    };
 
     // $ANTLR start "literal"
-    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:66:1: literal : ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+ ;
-    public final void literal() throws RecognitionException {
-        try { dbg.enterRule(getGrammarFileName(), "literal");
-        if ( getRuleLevel()==0 ) {dbg.commence();}
-        incRuleLevel();
-        dbg.location(66, 1);
+    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:76:1: literal : ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+ ;
+    public final TreeGrammar.literal_return literal() throws RecognitionException {
+        TreeGrammar.literal_return retval = new TreeGrammar.literal_return();
+        retval.start = input.LT(1);
 
         try {
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:67:2: ( ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+ )
-            dbg.enterAlt(1);
-
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:68:3: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:77:2: ( ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+ )
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:78:3: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+
             {
-            dbg.location(68,3);
-            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:68:3: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+
-            int cnt6=0;
-            try { dbg.enterSubRule(6);
-
-            loop6:
+            // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:78:3: ( ESCAPE ~ ( '\\r' | '\\n' ) | ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' ) )+
+            int cnt7=0;
+            loop7:
             do {
-                int alt6=3;
-                try { dbg.enterDecision(6);
+                int alt7=3;
+                int LA7_0 = input.LA(1);
 
-                int LA6_0 = input.LA(1);
-
-                if ( (LA6_0==ESCAPE) ) {
-                    alt6=1;
+                if ( (LA7_0==ESCAPE) ) {
+                    alt7=1;
                 }
-                else if ( ((LA6_0>=LITERAL && LA6_0<=19)) ) {
-                    alt6=2;
+                else if ( ((LA7_0>=LITERAL && LA7_0<=19)) ) {
+                    alt7=2;
                 }
 
 
-                } finally {dbg.exitDecision(6);}
-
-                switch (alt6) {
+                switch (alt7) {
             	case 1 :
-            	    dbg.enterAlt(1);
-
-            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:68:7: ESCAPE ~ ( '\\r' | '\\n' )
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:78:7: ESCAPE ~ ( '\\r' | '\\n' )
             	    {
-            	    dbg.location(68,7);
-            	    match(input,ESCAPE,FOLLOW_ESCAPE_in_literal200); 
-            	    dbg.location(68,14);
+            	    match(input,ESCAPE,FOLLOW_ESCAPE_in_literal228); 
             	    if ( (input.LA(1)>=SLASH && input.LA(1)<=19) ) {
             	        input.consume();
             	        state.errorRecovery=false;
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        dbg.recognitionException(mse);
             	        throw mse;
             	    }
 
@@ -761,18 +552,14 @@ public class TreeGrammar extends DebugTreeParser {
             	    }
             	    break;
             	case 2 :
-            	    dbg.enterAlt(2);
-
-            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:69:13: ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' )
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:79:13: ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' )
             	    {
-            	    dbg.location(69,13);
             	    if ( (input.LA(1)>=LITERAL && input.LA(1)<=19) ) {
             	        input.consume();
             	        state.errorRecovery=false;
             	    }
             	    else {
             	        MismatchedSetException mse = new MismatchedSetException(null,input);
-            	        dbg.recognitionException(mse);
             	        throw mse;
             	    }
 
@@ -781,16 +568,13 @@ public class TreeGrammar extends DebugTreeParser {
             	    break;
 
             	default :
-            	    if ( cnt6 >= 1 ) break loop6;
+            	    if ( cnt7 >= 1 ) break loop7;
                         EarlyExitException eee =
-                            new EarlyExitException(6, input);
-                        dbg.recognitionException(eee);
-
+                            new EarlyExitException(7, input);
                         throw eee;
                 }
-                cnt6++;
+                cnt7++;
             } while (true);
-            } finally {dbg.exitSubRule(6);}
 
 
             }
@@ -802,110 +586,35 @@ public class TreeGrammar extends DebugTreeParser {
         }
         finally {
         }
-        dbg.location(71, 2);
-
-        }
-        finally {
-            dbg.exitRule(getGrammarFileName(), "literal");
-            decRuleLevel();
-            if ( getRuleLevel()==0 ) {dbg.terminate();}
-        }
-
-        return ;
+        return retval;
     }
     // $ANTLR end "literal"
 
     // Delegated rules
 
 
-    protected DFA4 dfa4 = new DFA4(this);
-    static final String DFA4_eotS =
-        "\14\uffff";
-    static final String DFA4_eofS =
-        "\14\uffff";
-    static final String DFA4_minS =
-        "\1\13\1\uffff\1\2\1\17\1\2\1\3\1\4\3\3\2\uffff";
-    static final String DFA4_maxS =
-        "\1\14\1\uffff\1\2\1\17\1\2\3\23\1\15\1\23\2\uffff";
-    static final String DFA4_acceptS =
-        "\1\uffff\1\1\10\uffff\1\2\1\3";
-    static final String DFA4_specialS =
-        "\14\uffff}>";
-    static final String[] DFA4_transitionS = {
-            "\1\2\1\1",
-            "",
-            "\1\3",
-            "\1\4",
-            "\1\5",
-            "\1\10\5\uffff\1\6\12\7",
-            "\20\11",
-            "\1\10\5\uffff\1\6\12\7",
-            "\1\13\6\uffff\4\12",
-            "\1\10\5\uffff\1\6\12\7",
-            "",
-            ""
-    };
-
-    static final short[] DFA4_eot = DFA.unpackEncodedString(DFA4_eotS);
-    static final short[] DFA4_eof = DFA.unpackEncodedString(DFA4_eofS);
-    static final char[] DFA4_min = DFA.unpackEncodedStringToUnsignedChars(DFA4_minS);
-    static final char[] DFA4_max = DFA.unpackEncodedStringToUnsignedChars(DFA4_maxS);
-    static final short[] DFA4_accept = DFA.unpackEncodedString(DFA4_acceptS);
-    static final short[] DFA4_special = DFA.unpackEncodedString(DFA4_specialS);
-    static final short[][] DFA4_transition;
-
-    static {
-        int numStates = DFA4_transitionS.length;
-        DFA4_transition = new short[numStates][];
-        for (int i=0; i<numStates; i++) {
-            DFA4_transition[i] = DFA.unpackEncodedString(DFA4_transitionS[i]);
-        }
-    }
-
-    class DFA4 extends DFA {
-
-        public DFA4(BaseRecognizer recognizer) {
-            this.recognizer = recognizer;
-            this.decisionNumber = 4;
-            this.eot = DFA4_eot;
-            this.eof = DFA4_eof;
-            this.min = DFA4_min;
-            this.max = DFA4_max;
-            this.accept = DFA4_accept;
-            this.special = DFA4_special;
-            this.transition = DFA4_transition;
-        }
-        public String getDescription() {
-            return "44:1: variableExpression : ( ^( CAPT_GROUP NUMBERS ) | ^( FUNCTION content ( expression )* ^( CLOSE closeContent ) ) | ^( FUNCTION content ) );";
-        }
-        public void error(NoViableAltException nvae) {
-            dbg.recognitionException(nvae);
-        }
-    }
  
 
-    public static final BitSet FOLLOW_expression_in_begin40 = new BitSet(new long[]{0x0000000000001C00L});
-    public static final BitSet FOLLOW_EOF_in_begin43 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_literalExpression_in_expression58 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_variableExpression_in_expression66 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LITERAL_in_literalExpression84 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_literal_in_literalExpression86 = new BitSet(new long[]{0x0000000000000008L});
-    public static final BitSet FOLLOW_CAPT_GROUP_in_variableExpression99 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_NUMBERS_in_variableExpression101 = new BitSet(new long[]{0x0000000000000008L});
-    public static final BitSet FOLLOW_FUNCTION_in_variableExpression108 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_content_in_variableExpression110 = new BitSet(new long[]{0x0000000000003C00L});
-    public static final BitSet FOLLOW_expression_in_variableExpression112 = new BitSet(new long[]{0x0000000000003C00L});
-    public static final BitSet FOLLOW_CLOSE_in_variableExpression116 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_closeContent_in_variableExpression118 = new BitSet(new long[]{0x0000000000000008L});
-    public static final BitSet FOLLOW_FUNCTION_in_variableExpression126 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_content_in_variableExpression128 = new BitSet(new long[]{0x0000000000000008L});
-    public static final BitSet FOLLOW_function_in_content141 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_parameter_in_content143 = new BitSet(new long[]{0x00000000000FFE08L});
-    public static final BitSet FOLLOW_function_in_closeContent157 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_LETTERS_in_function168 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_literal_in_parameter181 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ESCAPE_in_literal200 = new BitSet(new long[]{0x00000000000FFFF0L});
-    public static final BitSet FOLLOW_set_in_literal202 = new BitSet(new long[]{0x00000000000FFE02L});
-    public static final BitSet FOLLOW_set_in_literal225 = new BitSet(new long[]{0x00000000000FFE02L});
+    public static final BitSet FOLLOW_expression_in_begin47 = new BitSet(new long[]{0x0000000000001C00L});
+    public static final BitSet FOLLOW_EOF_in_begin52 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_literalExpression_in_expression74 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_variableExpression_in_expression84 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LITERAL_in_literalExpression108 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_literal_in_literalExpression110 = new BitSet(new long[]{0x0000000000000008L});
+    public static final BitSet FOLLOW_CAPT_GROUP_in_variableExpression131 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_NUMBERS_in_variableExpression133 = new BitSet(new long[]{0x0000000000000008L});
+    public static final BitSet FOLLOW_FUNCTION_in_variableExpression142 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_content_in_variableExpression144 = new BitSet(new long[]{0x0000000000003C08L});
+    public static final BitSet FOLLOW_expression_in_variableExpression147 = new BitSet(new long[]{0x0000000000003C00L});
+    public static final BitSet FOLLOW_CLOSE_in_variableExpression151 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_closeContent_in_variableExpression153 = new BitSet(new long[]{0x0000000000000008L});
+    public static final BitSet FOLLOW_function_in_content169 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_parameter_in_content171 = new BitSet(new long[]{0x00000000000FFE08L});
+    public static final BitSet FOLLOW_function_in_closeContent185 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_LETTERS_in_function196 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_literal_in_parameter209 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ESCAPE_in_literal228 = new BitSet(new long[]{0x00000000000FFFF0L});
+    public static final BitSet FOLLOW_set_in_literal230 = new BitSet(new long[]{0x00000000000FFE02L});
+    public static final BitSet FOLLOW_set_in_literal253 = new BitSet(new long[]{0x00000000000FFE02L});
 
 }
