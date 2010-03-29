@@ -1,4 +1,9 @@
+//START: Header
 grammar Grammar;
+
+options {
+	output=AST;
+}
 
 tokens {
 	SLASH='/';
@@ -7,6 +12,11 @@ tokens {
 	OPEN_BRACKET='{';
 	CLOSE_BRACKET='}';
 	ESCAPE='\\';
+	//fake tokens to add imaginary nodes to ast
+	LITERAL='LITERAL';
+	FUNCTION='FUNCTION';
+	CAPT_GROUP='CAPT_GROUP';
+	CLOSE='CLOSE';
 }
 
 @lexer::header{
@@ -45,117 +55,67 @@ package br.com.renatoccosta.renamer.parser;
  * limitations under the License.
  */
 package br.com.renatoccosta.renamer.parser;
-
-import br.com.renatoccosta.renamer.exception.*;
-import br.com.renatoccosta.renamer.element.*;
-import br.com.renatoccosta.renamer.element.base.*;
 }
 
-@members {
-public StreamChangeElement root = new RootElement();
-public StreamChangeElement last = root;
+@rulecatch {
+
+
 }
+//END: Header
 
-begin	:
-	(expression {
-		if ($expression.elm != null) {
-			try {
-				last = last.add($expression.elm);
-			} catch (InvalidElementException ex) {
-				throw new RenamerSemanticException(input, ex);
-			}
-		}
-	})+
-	EOF;
+//START: Rules
+begin	
+	:	expression+ EOF;
 
-expression returns [Element elm] 
+expression
 	:
-	(
-	literalExpression { $elm = $literalExpression.elm; }
-	| 
-	variableExpression { $elm = $variableExpression.elm; }
-	); 
+		(	literalExpression 
+		| 	variableExpression
+		)
+	; 
 	
-literalExpression returns [Element elm]
-	:	
-	literal {
-		$elm = new LiteralElement($literal.text);
-	} ;	
+literalExpression
+	:	literal	->	^(LITERAL literal);	
 	
-variableExpression returns [Element elm] 
-	:
-	DOLLAR 
-	(
-	NUMBERS {
-		$elm = new CaptureGroupElement(Integer.parseInt($NUMBERS.text));
-	} | 
-	group {
-		$elm = $group.elem;
-	} );
+variableExpression
+	:	DOLLAR 
+		(	NUMBERS 											->	^(CAPT_GROUP NUMBERS)
+		|	OPEN_BRACKET content CLOSE_BRACKET expression*
+				DOLLAR OPEN_BRACKET closeContent CLOSE_BRACKET	->	^(FUNCTION content expression* ^(CLOSE closeContent))
+		|	OPEN_BRACKET content SLASH CLOSE_BRACKET 			->	^(FUNCTION content)
+		)
+	;
 
-group returns [Element elem] 
-	:
-	OPEN_BRACKET content CLOSE_BRACKET {
-		$elem = $content.elem;
-	};
-
-content returns [Element elem] 
-	:
-	( closeContent | expressionContent )
+content
+	:	function parameter*	->	^(function parameter*)
 	;
 	
 closeContent
-	:
-	SLASH function {
-		try {
-			last.close($function.text);
-		} catch (ElementException ex) {
-			throw new RenamerSemanticException(input, ex);
-		}
-	};
+	:	SLASH! function^
+	;
 
-expressionContent returns [Element elem]
-	:
-	function {
-		try {
-			$elem = ElementFactory.compile($function.text);
-		} catch (ElementNotFoundException ex) {
-			throw new RenamerSemanticException(input, ex);
-		}
-	}
-	parameters {
-		if ($parameters.params != null)
-			$elem.setParameters($parameters.params);
-	};
-
-function:
-	LETTERS	
+function
+	:	LETTERS	
 	;
 	
-parameters returns [String[\] params]
-	@init {
-		List<String> lstParam = new ArrayList<String>();
-	}
-	@after {
-		$params = lstParam.toArray(new String[]{}); 
-	}
-	:
-	( COLON literal {
-		String literal = $literal.text;
-		if (literal != null)
-			lstParam.add(literal);
-	} )*
+parameter
+	:	COLON! literal^
 	;
 	
-literal	:
-	(   ESCAPE ~( '\r' | '\n' )
+literal	
+	:
+		(   ESCAPE ~( '\r' | '\n' )
         |   ~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
-        )+;
+        )+
+	;
+//END: Rules
 
+//START: Tokens
 LETTERS	:	('a'..'z' | 'A'..'Z')+;
 
 NUMBERS	:	 '1'..'9' '0'..'9'*;
 
-WS	:	' '+;
+WS		:	' '+;
 
-ANY	:	~'\n';
+ANY		:	~'\n';
+//END: Tokens
