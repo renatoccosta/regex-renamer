@@ -1,0 +1,18 @@
+#summary Requirements intended for the version 2.0 of Regex-Renamer
+#labels Phase-Requirements
+
+= Introduction =
+
+This page shows a list of requirements intended to be implemented on the version 2.0 of Regex-Renamer
+
+
+= Details =
+
+  * Auto complete
+  * Replace Colours
+    * Black -> No Match
+    * Blue -> Match
+    * Red -> Filename conflict
+  * Progress bar on rename execution
+    * Display summary after rename
+  * Refresh contents after rename
