@@ -23,6 +23,10 @@ options {
  * limitations under the License.
  */
 package br.com.renatoccosta.renamer.parser;
+
+import br.com.renatoccosta.renamer.exception.*;
+import br.com.renatoccosta.renamer.element.*;
+import br.com.renatoccosta.renamer.element.base.*;
 }
 
 @members {
@@ -47,22 +51,39 @@ expression returns [Element elem]
 	; 
 	
 literalExpression returns [Element elem]
-	:	^(LITERAL literal)	{ $elem = new LiteralElement($literal.text); }
+	:	^(LITERAL literal)	{ 
+			$elem = new LiteralElement($literal.text); 
+		}
 	;	
 	
 variableExpression returns [Element elem]
 	:	^(CAPT_GROUP NUMBERS)	{
 			$elem = new CaptureGroupElement(Integer.parseInt($NUMBERS.text));
 		}
-	|	^(FUNCTION content (expression* ^(CLOSE closeContent))?)
+	|	^(FUNCTION content (expression* ^(CLOSE closeContent))?)	{
+			$elem = $content.elem;
+		}
 	;
 
-content
-	:	^(function parameter*)
+content returns [Element elem]
+	@init {
+		List<String> lstParam = new ArrayList<String>();
+	}
+	:	^(function parameter*	{			
+			if ($parameter.text != null) {
+				lstParam.add($parameter.text);
+			}
+		}
+	)	{
+			$elem = ElementFactory.compile($function.text);
+			$elem.setParameters(lstParam.toArray(new String[]{})); 
+		}
 	;
 	
 closeContent
-	:	function
+	:	function	{
+			last.close($function.text);
+		}
 	;
 
 function
@@ -75,8 +96,8 @@ parameter
 	
 literal	
 	:
-		(   ESCAPE ~( '\r' | '\n' )
-        |   ~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
+		(	ESCAPE ~( '\r' | '\n' )
+        |	~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
         )+
 	;
 //END: Rules
