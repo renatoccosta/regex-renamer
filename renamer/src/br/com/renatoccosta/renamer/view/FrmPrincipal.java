@@ -66,7 +66,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblAlvo = new javax.swing.JLabel();
         txtAlvo = new javax.swing.JTextField();
         btnArquivo = new javax.swing.JButton();
-        chkSubpastas = new javax.swing.JCheckBox();
         lblLocalizar = new javax.swing.JLabel();
         txtLocalizar = new javax.swing.JTextField();
         lblSubstituir = new javax.swing.JLabel();
@@ -87,10 +86,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         btnAplicar = new javax.swing.JButton();
         pnlStatus = new javax.swing.JPanel();
         lblStatus = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
         barMenu = new javax.swing.JMenuBar();
         mnuArquivo = new javax.swing.JMenu();
-        mnuAbrir = new javax.swing.JMenuItem();
-        mnuSalvar = new javax.swing.JMenuItem();
+        mnuOpen = new javax.swing.JMenuItem();
+        mnuSave = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JSeparator();
+        mnuExit = new javax.swing.JMenuItem();
+        mnuOptions = new javax.swing.JMenu();
+        mnuOrderName = new javax.swing.JMenuItem();
+        mnuOrderDate = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JSeparator();
+        mnuIncludeType = new javax.swing.JCheckBoxMenuItem();
+        mnuSubfolders = new javax.swing.JCheckBoxMenuItem();
         mnuHelp = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -104,17 +112,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         lblAlvo.setText(bundle.getString("FrmPrincipal.lblAlvo.text")); // NOI18N
 
+        btnArquivo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/open.png"))); // NOI18N
         btnArquivo.setText(bundle.getString("FrmPrincipal.btnArquivo.text")); // NOI18N
         btnArquivo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnArquivoActionPerformed(evt);
-            }
-        });
-
-        chkSubpastas.setText(bundle.getString("FrmPrincipal.chkSubpastas.text")); // NOI18N
-        chkSubpastas.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chkSubpastasActionPerformed(evt);
             }
         });
 
@@ -123,11 +125,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         lblSubstituir.setText(bundle.getString("FrmPrincipal.lblSubstituir.text")); // NOI18N
 
         txtSubstituir.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSubstituirKeyPressed(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtSubstituirKeyTyped(evt);
+            }
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSubstituirKeyPressed(evt);
             }
         });
 
@@ -157,7 +159,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pnlArquivos.setRightComponent(pnlDepois);
 
-        btnCima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/up.gif"))); // NOI18N
+        btnCima.setIcon(new javax.swing.ImageIcon(getClass().getResource("/up.png"))); // NOI18N
         btnCima.setText(bundle.getString("FrmPrincipal.btnCima.text")); // NOI18N
         btnCima.setToolTipText(bundle.getString("FrmPrincipal.btnCima.toolTipText")); // NOI18N
         btnCima.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +168,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnBaixo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/down.gif"))); // NOI18N
+        btnBaixo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/down.png"))); // NOI18N
         btnBaixo.setText(bundle.getString("FrmPrincipal.btnBaixo.text")); // NOI18N
         btnBaixo.setToolTipText(bundle.getString("FrmPrincipal.btnBaixo.toolTipText")); // NOI18N
         btnBaixo.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +177,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnSortName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/az.gif"))); // NOI18N
+        btnSortName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/az.png"))); // NOI18N
         btnSortName.setText(bundle.getString("FrmPrincipal.btnSortName.text")); // NOI18N
         btnSortName.setToolTipText(bundle.getString("FrmPrincipal.btnSortName.toolTipText")); // NOI18N
         btnSortName.addActionListener(new java.awt.event.ActionListener() {
@@ -184,7 +186,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnSortDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar.gif"))); // NOI18N
+        btnSortDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar.png"))); // NOI18N
         btnSortDate.setText(bundle.getString("FrmPrincipal.btnSortDate.text")); // NOI18N
         btnSortDate.setToolTipText(bundle.getString("FrmPrincipal.btnSortDate.toolTipText")); // NOI18N
         btnSortDate.addActionListener(new java.awt.event.ActionListener() {
@@ -216,9 +218,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnSortName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSortDate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
+        pnlBotoes.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+
+        btnPrevisualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/preview.png"))); // NOI18N
         btnPrevisualizar.setText(bundle.getString("FrmPrincipal.btnPrevisualizar.text")); // NOI18N
         btnPrevisualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -227,6 +232,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         });
         pnlBotoes.add(btnPrevisualizar);
 
+        btnAplicar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/apply.png"))); // NOI18N
         btnAplicar.setText(bundle.getString("FrmPrincipal.btnAplicar.text")); // NOI18N
         btnAplicar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,23 +249,68 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         mnuArquivo.setText(bundle.getString("FrmPrincipal.mnuArquivo.text")); // NOI18N
 
-        mnuAbrir.setText(bundle.getString("FrmPrincipal.mnuAbrir.text")); // NOI18N
-        mnuAbrir.addActionListener(new java.awt.event.ActionListener() {
+        mnuOpen.setIcon(new javax.swing.ImageIcon(getClass().getResource("/open.png"))); // NOI18N
+        mnuOpen.setText(bundle.getString("FrmPrincipal.mnuOpen.text")); // NOI18N
+        mnuOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuAbrirActionPerformed(evt);
+                mnuOpenActionPerformed(evt);
             }
         });
-        mnuArquivo.add(mnuAbrir);
+        mnuArquivo.add(mnuOpen);
 
-        mnuSalvar.setText(bundle.getString("FrmPrincipal.mnuSalvar.text")); // NOI18N
-        mnuSalvar.addActionListener(new java.awt.event.ActionListener() {
+        mnuSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/save.png"))); // NOI18N
+        mnuSave.setText(bundle.getString("FrmPrincipal.mnuSave.text")); // NOI18N
+        mnuSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnuSalvarActionPerformed(evt);
+                mnuSaveActionPerformed(evt);
             }
         });
-        mnuArquivo.add(mnuSalvar);
+        mnuArquivo.add(mnuSave);
+        mnuArquivo.add(jSeparator2);
+
+        mnuExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit.png"))); // NOI18N
+        mnuExit.setText(bundle.getString("FrmPrincipal.mnuExit.text")); // NOI18N
+        mnuArquivo.add(mnuExit);
 
         barMenu.add(mnuArquivo);
+
+        mnuOptions.setText(bundle.getString("FrmPrincipal.mnuOptions.text")); // NOI18N
+
+        mnuOrderName.setIcon(new javax.swing.ImageIcon(getClass().getResource("/az.png"))); // NOI18N
+        mnuOrderName.setText(bundle.getString("FrmPrincipal.mnuOrderName.text")); // NOI18N
+        mnuOrderName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSortNameActionPerformed(evt);
+            }
+        });
+        mnuOptions.add(mnuOrderName);
+
+        mnuOrderDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/calendar.png"))); // NOI18N
+        mnuOrderDate.setText(bundle.getString("FrmPrincipal.mnuOrderDate.text")); // NOI18N
+        mnuOrderDate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSortDateActionPerformed(evt);
+            }
+        });
+        mnuOptions.add(mnuOrderDate);
+        mnuOptions.add(jSeparator1);
+
+        mnuIncludeType.setSelected(true);
+        mnuIncludeType.setText(bundle.getString("FrmPrincipal.mnuIncludeType.text")); // NOI18N
+        mnuIncludeType.setIcon(new javax.swing.ImageIcon(getClass().getResource("/type.png"))); // NOI18N
+        mnuOptions.add(mnuIncludeType);
+
+        mnuSubfolders.setSelected(true);
+        mnuSubfolders.setText(bundle.getString("FrmPrincipal.mnuSubfolders.text")); // NOI18N
+        mnuSubfolders.setIcon(new javax.swing.ImageIcon(getClass().getResource("/subfolder.png"))); // NOI18N
+        mnuSubfolders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkSubpastasActionPerformed(evt);
+            }
+        });
+        mnuOptions.add(mnuSubfolders);
+
+        barMenu.add(mnuOptions);
 
         mnuHelp.setText(bundle.getString("FrmPrincipal.mnuHelp.text")); // NOI18N
         barMenu.add(mnuHelp);
@@ -270,34 +321,37 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(pnlBotoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblArquivos)
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addContainerGap(409, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlOrdenacao, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(lblAlvo)
+                .addGap(46, 46, 46)
+                .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnArquivo)
+                .addContainerGap())
+            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblSubstituir)
-                    .addComponent(lblLocalizar)
-                    .addComponent(lblAlvo))
+                    .addComponent(lblLocalizar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(chkSubpastas)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtAlvo, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnArquivo))
-                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE))
+                    .addComponent(txtLocalizar, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE)
+                    .addComponent(txtSubstituir, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
+            .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -308,8 +362,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(txtAlvo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnArquivo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(chkSubpastas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLocalizar)
                     .addComponent(txtLocalizar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -317,12 +369,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSubstituir)
                     .addComponent(txtSubstituir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(lblArquivos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnlOrdenacao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE))
+                    .addComponent(pnlArquivos, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -330,7 +384,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-587)/2, (screenSize.height-481)/2, 587, 481);
+        setBounds((screenSize.width-587)/2, (screenSize.height-496)/2, 587, 496);
     }// </editor-fold>//GEN-END:initComponents
 
     private void initComponentsLocal() {
@@ -423,7 +477,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         refreshLists();
     }//GEN-LAST:event_btnPrevisualizarActionPerformed
 
-    private void mnuAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAbrirActionPerformed
+    private void mnuOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuOpenActionPerformed
         final JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
@@ -445,9 +499,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 logger.error(ex);
             }
         }
-    }//GEN-LAST:event_mnuAbrirActionPerformed
+    }//GEN-LAST:event_mnuOpenActionPerformed
 
-    private void mnuSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalvarActionPerformed
+    private void mnuSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSaveActionPerformed
         final JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
@@ -483,7 +537,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 logger.error(ex);
             }
         }
-    }//GEN-LAST:event_mnuSalvarActionPerformed
+    }//GEN-LAST:event_mnuSaveActionPerformed
 
     private void btnAplicarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAplicarActionPerformed
         try {
@@ -698,7 +752,9 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnPrevisualizar;
     private javax.swing.JButton btnSortDate;
     private javax.swing.JButton btnSortName;
-    private javax.swing.JCheckBox chkSubpastas;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblAlvo;
     private javax.swing.JLabel lblArquivos;
     private javax.swing.JLabel lblLocalizar;
@@ -706,10 +762,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblSubstituir;
     private javax.swing.JList lstAntes;
     private javax.swing.JList lstDepois;
-    private javax.swing.JMenuItem mnuAbrir;
     private javax.swing.JMenu mnuArquivo;
+    private javax.swing.JMenuItem mnuExit;
     private javax.swing.JMenu mnuHelp;
-    private javax.swing.JMenuItem mnuSalvar;
+    private javax.swing.JCheckBoxMenuItem mnuIncludeType;
+    private javax.swing.JMenuItem mnuOpen;
+    private javax.swing.JMenu mnuOptions;
+    private javax.swing.JMenuItem mnuOrderDate;
+    private javax.swing.JMenuItem mnuOrderName;
+    private javax.swing.JMenuItem mnuSave;
+    private javax.swing.JCheckBoxMenuItem mnuSubfolders;
     private javax.swing.JScrollPane pnlAntes;
     private javax.swing.JSplitPane pnlArquivos;
     private javax.swing.JPanel pnlBotoes;

@@ -76,7 +76,7 @@ content returns [Element elem]
 		}
 	)	{
 			$elem = ElementFactory.compile($function.text);
-			$elem.setParameters(lstParam.toArray(new String[]{})); 
+			$elem.setParameters($parameter.text); 
 		}
 	;
 	
@@ -90,14 +90,14 @@ function
 	:	LETTERS	
 	;
 	
-parameter
+parameter 
 	:	literal
 	;
 	
 literal	
 	:
 		(	ESCAPE ~( '\r' | '\n' )
-        |	~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
-        )+
+		|	~( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\r' | '\n' )
+		)+
 	;
 //END: Rules

@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g 2010-04-05 20:43:39
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g 2010-04-17 17:52:25
 
 /**
  * Copyright 2009 Renato Couto da Costa
@@ -449,7 +449,9 @@ public class TreeGrammar extends TreeParser {
             			elem = ElementFactory.compile((function6!=null?(input.getTokenStream().toString(
               input.getTreeAdaptor().getTokenStartIndex(function6.start),
               input.getTreeAdaptor().getTokenStopIndex(function6.start))):null));
-            			elem.setParameters(lstParam.toArray(new String[]{})); 
+            			elem.setParameters((parameter5!=null?(input.getTokenStream().toString(
+              input.getTreeAdaptor().getTokenStartIndex(parameter5.start),
+              input.getTreeAdaptor().getTokenStopIndex(parameter5.start))):null)); 
             		
 
             }
@@ -541,7 +543,7 @@ public class TreeGrammar extends TreeParser {
             // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:94:2: ( literal )
             // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:94:4: literal
             {
-            pushFollow(FOLLOW_literal_in_parameter229);
+            pushFollow(FOLLOW_literal_in_parameter230);
             literal();
 
             state._fsp--;
@@ -592,7 +594,7 @@ public class TreeGrammar extends TreeParser {
             	case 1 :
             	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:99:5: ESCAPE ~ ( '\\r' | '\\n' )
             	    {
-            	    match(input,ESCAPE,FOLLOW_ESCAPE_in_literal246); 
+            	    match(input,ESCAPE,FOLLOW_ESCAPE_in_literal247); 
             	    if ( (input.LA(1)>=SLASH && input.LA(1)<=19) ) {
             	        input.consume();
             	        state.errorRecovery=false;
@@ -606,7 +608,7 @@ public class TreeGrammar extends TreeParser {
             	    }
             	    break;
             	case 2 :
-            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:100:11: ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' )
+            	    // /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g:100:5: ~ ( SLASH | COLON | DOLLAR | OPEN_BRACKET | CLOSE_BRACKET | ESCAPE | '\\r' | '\\n' )
             	    {
             	    if ( (input.LA(1)>=LITERAL && input.LA(1)<=19) ) {
             	        input.consume();
@@ -666,9 +668,9 @@ public class TreeGrammar extends TreeParser {
     public static final BitSet FOLLOW_parameter_in_content183 = new BitSet(new long[]{0x00000000000FFE08L});
     public static final BitSet FOLLOW_function_in_closeContent203 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_LETTERS_in_function216 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_literal_in_parameter229 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ESCAPE_in_literal246 = new BitSet(new long[]{0x00000000000FFFF0L});
-    public static final BitSet FOLLOW_set_in_literal248 = new BitSet(new long[]{0x00000000000FFE02L});
-    public static final BitSet FOLLOW_set_in_literal269 = new BitSet(new long[]{0x00000000000FFE02L});
+    public static final BitSet FOLLOW_literal_in_parameter230 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ESCAPE_in_literal247 = new BitSet(new long[]{0x00000000000FFFF0L});
+    public static final BitSet FOLLOW_set_in_literal249 = new BitSet(new long[]{0x00000000000FFE02L});
+    public static final BitSet FOLLOW_set_in_literal264 = new BitSet(new long[]{0x00000000000FFE02L});
 
 }
