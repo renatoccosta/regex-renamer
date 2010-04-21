@@ -31,6 +31,8 @@ public class SavedCriteria {
 
     private boolean includeSubfolders = false;
 
+    private boolean includeType = false;
+
     public SavedCriteria() {
     }
 
@@ -70,6 +72,14 @@ public class SavedCriteria {
 
     public void setIncludeSubfolders(boolean includeSubfolders) {
         this.includeSubfolders = includeSubfolders;
+    }
+
+    public boolean isIncludeType() {
+        return includeType;
+    }
+
+    public void setIncludeType(boolean includeType) {
+        this.includeType = includeType;
     }
 
 }

@@ -4,10 +4,10 @@
   <NonVisualComponents>
     <Menu class="javax.swing.JMenuBar" name="barMenu">
       <SubComponents>
-        <Menu class="javax.swing.JMenu" name="mnuArquivo">
+        <Menu class="javax.swing.JMenu" name="mnuFile">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.mnuArquivo.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.mnuFile.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <SubComponents>
@@ -155,43 +155,43 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnlBotoes" alignment="1" pref="577" max="32767" attributes="0"/>
+          <Component id="pnlButtons" alignment="1" pref="579" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblArquivos" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="409" max="32767" attributes="0"/>
+              <Component id="lblBeforeAfter" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="450" max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlArquivos" pref="509" max="32767" attributes="0"/>
+              <Component id="pnlFiles" pref="515" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOrdenacao" min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="pnlOrder" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblAlvo" min="-2" max="-2" attributes="0"/>
+              <Component id="lblTarget" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-              <Component id="txtAlvo" pref="394" max="32767" attributes="0"/>
+              <Component id="txtTarget" pref="395" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnArquivo" min="-2" max="-2" attributes="0"/>
+              <Component id="btnFile" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="pnlStatus" alignment="0" pref="577" max="32767" attributes="0"/>
+          <Component id="pnlStatus" alignment="0" pref="579" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="lblSubstituir" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblLocalizar" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblReplace" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblFind" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtLocalizar" alignment="0" pref="476" max="32767" attributes="1"/>
-                  <Component id="txtSubstituir" alignment="0" pref="476" max="32767" attributes="1"/>
+                  <Component id="txtFind" alignment="0" pref="506" max="32767" attributes="1"/>
+                  <Component id="txtReplace" alignment="0" pref="506" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="jSeparator3" alignment="0" pref="577" max="32767" attributes="0"/>
+          <Component id="jSeparator3" alignment="0" pref="579" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -199,31 +199,31 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblAlvo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtAlvo" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnArquivo" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblTarget" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtTarget" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFile" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblLocalizar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtLocalizar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblFind" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtFind" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lblSubstituir" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtSubstituir" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblReplace" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtReplace" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jSeparator3" min="-2" pref="10" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="lblArquivos" min="-2" max="-2" attributes="0"/>
+              <Component id="lblBeforeAfter" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlOrdenacao" max="32767" attributes="0"/>
-                  <Component id="pnlArquivos" alignment="0" pref="192" max="32767" attributes="0"/>
+                  <Component id="pnlOrder" max="32767" attributes="0"/>
+                  <Component id="pnlFiles" alignment="0" pref="209" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlBotoes" min="-2" max="-2" attributes="0"/>
+              <Component id="pnlButtons" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlStatus" min="-2" pref="28" max="-2" attributes="0"/>
           </Group>
@@ -231,58 +231,60 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JLabel" name="lblAlvo">
+    <Component class="javax.swing.JLabel" name="lblTarget">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblAlvo.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblTarget.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtAlvo">
+    <Component class="javax.swing.JTextField" name="txtTarget">
     </Component>
-    <Component class="javax.swing.JButton" name="btnArquivo">
+    <Component class="javax.swing.JButton" name="btnFile">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/open.png"/>
         </Property>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnArquivo.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnFile.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnArquivoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnFileActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblLocalizar">
+    <Component class="javax.swing.JLabel" name="lblFind">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblLocalizar.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblFind.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtLocalizar">
+    <Component class="javax.swing.JTextField" name="txtFind">
     </Component>
-    <Component class="javax.swing.JLabel" name="lblSubstituir">
+    <Component class="javax.swing.JLabel" name="lblReplace">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblSubstituir.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblReplace.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtSubstituir">
+    <Component class="javax.swing.JTextField" name="txtReplace">
       <Events>
-        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSubstituirKeyTyped"/>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtSubstituirKeyPressed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtReplaceKeyTyped"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtReplaceKeyPressed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblArquivos">
+    <Component class="javax.swing.JSeparator" name="jSeparator3">
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblBeforeAfter">
       <Properties>
         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblArquivos.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+          <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.lblBeforeAfter.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
         </Property>
       </Properties>
     </Component>
-    <Container class="javax.swing.JSplitPane" name="pnlArquivos">
+    <Container class="javax.swing.JSplitPane" name="pnlFiles">
       <Properties>
         <Property name="dividerLocation" type="int" value="260"/>
         <Property name="continuousLayout" type="boolean" value="true"/>
@@ -290,7 +292,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JSplitPaneSupportLayout"/>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="pnlAntes">
+        <Container class="javax.swing.JScrollPane" name="pnlBefore">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -314,7 +316,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JScrollPane" name="pnlDepois">
+        <Container class="javax.swing.JScrollPane" name="pnlAfter">
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -343,7 +345,7 @@
         </Container>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="pnlOrdenacao">
+    <Container class="javax.swing.JPanel" name="pnlOrder">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -352,8 +354,8 @@
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                       <Component id="btnSortDate" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
                       <Component id="btnSortName" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
-                      <Component id="btnCima" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
-                      <Component id="btnBaixo" alignment="0" pref="32" max="32767" attributes="1"/>
+                      <Component id="btnUp" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
+                      <Component id="btnDown" alignment="0" pref="32" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace pref="6" max="32767" attributes="0"/>
               </Group>
@@ -363,49 +365,49 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnCima" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnUp" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="btnBaixo" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="btnDown" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="btnSortName" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnSortDate" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnCima">
+        <Component class="javax.swing.JButton" name="btnUp">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/up.png"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnCima.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnUp.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnCima.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnUp.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCimaActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnBaixo">
+        <Component class="javax.swing.JButton" name="btnDown">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/down.png"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnBaixo.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnDown.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnBaixo.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnDown.toolTipText" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBaixoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDownActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSortName">
@@ -442,36 +444,36 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="pnlBotoes">
+    <Container class="javax.swing.JPanel" name="pnlButtons">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
         <Property name="alignment" type="int" value="2"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnPrevisualizar">
+        <Component class="javax.swing.JButton" name="btnPreview">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/preview.png"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnPrevisualizar.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnPreview.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPrevisualizarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPreviewActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnAplicar">
+        <Component class="javax.swing.JButton" name="btnApply">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/apply.png"/>
             </Property>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnAplicar.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+              <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.btnApply.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAplicarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApplyActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -498,7 +500,5 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JSeparator" name="jSeparator3">
-    </Component>
   </SubComponents>
 </Form>
