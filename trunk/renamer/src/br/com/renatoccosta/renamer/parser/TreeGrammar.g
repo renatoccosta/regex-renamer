@@ -33,7 +33,6 @@ import br.com.renatoccosta.renamer.element.base.*;
 public StreamChangeElement root = new RootElement();
 public StreamChangeElement last = root;
 }
-
 //END: Header
 
 //START: Rules
@@ -42,6 +41,13 @@ begin
 			last = last.add($expression.elem);
 		} EOF
 	;
+	catch[RecognitionException e] {
+		reportError(e);
+		recover(input,e);
+	}
+	catch[ElementException e] {
+		throw new RenamerSemanticException(input, e);
+	}
 
 expression returns [Element elem] 
 	:
@@ -79,12 +85,26 @@ content returns [Element elem]
 			$elem.setParameters($parameter.text); 
 		}
 	;
+	catch[RecognitionException e] {
+		reportError(e);
+		recover(input,e);
+	}
+	catch[ElementException e] {
+		throw new RenamerSemanticException(input, e);
+	}
 	
 closeContent
 	:	function	{
 			last.close($function.text);
 		}
 	;
+	catch[RecognitionException e] {
+		reportError(e);
+		recover(input,e);
+	}
+	catch[ElementException e] {
+		throw new RenamerSemanticException(input, e);
+	}
 
 function
 	:	LETTERS	
