@@ -63,13 +63,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        grpCriteria = new javax.swing.ButtonGroup();
         lblTarget = new javax.swing.JLabel();
         txtTarget = new javax.swing.JTextField();
         btnFile = new javax.swing.JButton();
         lblFind = new javax.swing.JLabel();
+        btnFindRegex = new javax.swing.JToggleButton();
+        btnFindAll = new javax.swing.JToggleButton();
+        btnFindSelected = new javax.swing.JToggleButton();
+        lblExpression = new javax.swing.JLabel();
         txtFind = new javax.swing.JTextField();
         lblReplace = new javax.swing.JLabel();
         txtReplace = new javax.swing.JTextField();
+        btnFunctions = new javax.swing.JButton();
         jSeparator3 = new javax.swing.JSeparator();
         lblBeforeAfter = new javax.swing.JLabel();
         pnlFiles = new javax.swing.JSplitPane();
@@ -122,6 +128,36 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         lblFind.setText(bundle.getString("FrmPrincipal.lblFind.text")); // NOI18N
 
+        grpCriteria.add(btnFindRegex);
+        btnFindRegex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/regex.png"))); // NOI18N
+        btnFindRegex.setSelected(true);
+        btnFindRegex.setText(bundle.getString("FrmPrincipal.btnFindRegex.text")); // NOI18N
+        btnFindRegex.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindRegexActionPerformed(evt);
+            }
+        });
+
+        grpCriteria.add(btnFindAll);
+        btnFindAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/all.png"))); // NOI18N
+        btnFindAll.setText(bundle.getString("FrmPrincipal.btnFindAll.text")); // NOI18N
+        btnFindAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindAllActionPerformed(evt);
+            }
+        });
+
+        grpCriteria.add(btnFindSelected);
+        btnFindSelected.setIcon(new javax.swing.ImageIcon(getClass().getResource("/selected.png"))); // NOI18N
+        btnFindSelected.setText(bundle.getString("FrmPrincipal.btnFindSelected.text")); // NOI18N
+        btnFindSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFindSelectedActionPerformed(evt);
+            }
+        });
+
+        lblExpression.setText(bundle.getString("FrmPrincipal.lblExpression.text")); // NOI18N
+
         lblReplace.setText(bundle.getString("FrmPrincipal.lblReplace.text")); // NOI18N
 
         txtReplace.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -133,9 +169,12 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
 
+        btnFunctions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/function.png"))); // NOI18N
+        btnFunctions.setText(bundle.getString("FrmPrincipal.btnFunctions.text")); // NOI18N
+
         lblBeforeAfter.setText(bundle.getString("FrmPrincipal.lblBeforeAfter.text")); // NOI18N
 
-        pnlFiles.setDividerLocation(260);
+        pnlFiles.setDividerLocation(250);
         pnlFiles.setContinuousLayout(true);
 
         lstAntes.setModel(new RenamerBeforeListModel(renamer));
@@ -218,7 +257,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnSortName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSortDate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pnlButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
@@ -321,37 +360,44 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblBeforeAfter)
-                .addContainerGap(450, Short.MAX_VALUE))
+            .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblTarget)
-                .addGap(46, 46, 46)
-                .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 395, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnFile)
-                .addContainerGap())
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(lblBeforeAfter)
+                .addContainerGap(409, Short.MAX_VALUE))
+            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblReplace)
-                    .addComponent(lblFind))
+                    .addComponent(lblTarget)
+                    .addComponent(lblFind)
+                    .addComponent(lblExpression))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFind, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE)
-                    .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 506, Short.MAX_VALUE))
+                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFile))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFunctions))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnFindRegex)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFindAll)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnFindSelected)))
                 .addContainerGap())
-            .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -364,19 +410,26 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblFind)
-                    .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnFindRegex)
+                    .addComponent(btnFindAll)
+                    .addComponent(btnFindSelected))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblExpression))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblReplace)
-                    .addComponent(txtReplace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(txtReplace, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFunctions))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBeforeAfter)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 209, Short.MAX_VALUE))
+                    .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -384,7 +437,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-587)/2, (screenSize.height-496)/2, 587, 496);
+        setBounds((screenSize.width-587)/2, (screenSize.height-574)/2, 587, 574);
     }// </editor-fold>//GEN-END:initComponents
 
     private void initComponentsLocal() {
@@ -659,6 +712,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtReplaceKeyPressed
 
+    private void btnFindRegexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindRegexActionPerformed
+        txtFind.setEnabled(true);
+    }//GEN-LAST:event_btnFindRegexActionPerformed
+
+    private void btnFindAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindAllActionPerformed
+        txtFind.setEnabled(false);
+    }//GEN-LAST:event_btnFindAllActionPerformed
+
+    private void btnFindSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindSelectedActionPerformed
+        txtFind.setEnabled(false);
+    }//GEN-LAST:event_btnFindSelectedActionPerformed
+
     private void validateFields() throws Exception {
         if (txtTarget.getText().trim().equals("") ||
                 txtFind.getText().trim().equals("") ||
@@ -750,14 +815,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnApply;
     private javax.swing.JButton btnDown;
     private javax.swing.JButton btnFile;
+    private javax.swing.JToggleButton btnFindAll;
+    private javax.swing.JToggleButton btnFindRegex;
+    private javax.swing.JToggleButton btnFindSelected;
+    private javax.swing.JButton btnFunctions;
     private javax.swing.JButton btnPreview;
     private javax.swing.JButton btnSortDate;
     private javax.swing.JButton btnSortName;
     private javax.swing.JButton btnUp;
+    private javax.swing.ButtonGroup grpCriteria;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JLabel lblBeforeAfter;
+    private javax.swing.JLabel lblExpression;
     private javax.swing.JLabel lblFind;
     private javax.swing.JLabel lblReplace;
     private javax.swing.JLabel lblStatus;
