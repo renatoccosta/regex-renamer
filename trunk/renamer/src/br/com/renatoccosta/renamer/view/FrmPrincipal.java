@@ -6,6 +6,7 @@
 package br.com.renatoccosta.renamer.view;
 
 import br.com.renatoccosta.renamer.*;
+import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.awt.event.AdjustmentEvent;
@@ -15,8 +16,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import org.apache.log4j.Logger;
@@ -171,6 +174,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         btnFunctions.setIcon(new javax.swing.ImageIcon(getClass().getResource("/function.png"))); // NOI18N
         btnFunctions.setText(bundle.getString("FrmPrincipal.btnFunctions.text")); // NOI18N
+        btnFunctions.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFunctionsActionPerformed(evt);
+            }
+        });
 
         lblBeforeAfter.setText(bundle.getString("FrmPrincipal.lblBeforeAfter.text")); // NOI18N
 
@@ -257,7 +265,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnSortName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSortDate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pnlButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
@@ -360,19 +368,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblBeforeAfter)
-                .addContainerGap(409, Short.MAX_VALUE))
-            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                .addContainerGap(413, Short.MAX_VALUE))
+            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -382,13 +390,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblExpression))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                        .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFile))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                        .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFunctions))
                     .addGroup(layout.createSequentialGroup()
@@ -429,7 +437,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                    .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -452,7 +460,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void initAppIcon() throws IOException {
         //icone da aplicação
-        InputStream is = this.getClass().getResourceAsStream("/icon.PNG");
+        InputStream is = this.getClass().getResourceAsStream("/icon.png");
         this.setIconImage(ImageIO.read(is));
     }
 
@@ -706,7 +714,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             List<String> completeOptions = renamer.queryAutoCompleteOptions(
                     txtReplace.getText(), txtReplace.getCaretPosition());
             if (completeOptions != null && !completeOptions.isEmpty()) {
-                epu.showOptions(completeOptions);
+                epu.showOptions(completeOptions,(JComponent) evt.getSource());
             }
 
         }
@@ -723,6 +731,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnFindSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindSelectedActionPerformed
         txtFind.setEnabled(false);
     }//GEN-LAST:event_btnFindSelectedActionPerformed
+
+    private void btnFunctionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFunctionsActionPerformed
+        List elems = new ArrayList(ElementsDirectory.getInstance().getMapId().
+                keySet());
+        if (elems != null && !elems.isEmpty()) {
+            epu.showOptions(elems,(JComponent) evt.getSource());
+        }
+    }//GEN-LAST:event_btnFunctionsActionPerformed
 
     private void validateFields() throws Exception {
         if (txtTarget.getText().trim().equals("") ||
