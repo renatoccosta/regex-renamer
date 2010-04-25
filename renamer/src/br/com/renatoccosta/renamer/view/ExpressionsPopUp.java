@@ -19,6 +19,7 @@ package br.com.renatoccosta.renamer.view;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.text.BadLocationException;
@@ -50,7 +51,8 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
      * Display the pop-up with the options that can complete the text of the
      * parameter
      */
-    public void showOptions(List<String> options) {
+    public void showOptions(List<String> options,
+            JComponent relativePlacement) {
         this.removeAll();
 
         for (String exp : options) {
@@ -58,8 +60,9 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
             add(mnu);
         }
 
-        show(tc.getParent(), tc.getX() + tc.getParent().getX(),
-                tc.getY() + tc.getParent().getY());
+        show(relativePlacement.getParent(),
+                relativePlacement.getX() + relativePlacement.getParent().getX(),
+                relativePlacement.getY() + relativePlacement.getParent().getY());
     }
 
     /**
