@@ -157,21 +157,21 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnlButtons" alignment="1" pref="581" max="32767" attributes="0"/>
+          <Component id="pnlButtons" alignment="1" pref="577" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlFiles" pref="513" max="32767" attributes="0"/>
+              <Component id="pnlFiles" pref="509" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlOrder" min="-2" pref="38" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
-          <Component id="pnlStatus" alignment="0" pref="581" max="32767" attributes="0"/>
+          <Component id="pnlStatus" alignment="0" pref="577" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblBeforeAfter" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="413" max="32767" attributes="0"/>
+              <EmptySpace pref="409" max="32767" attributes="0"/>
           </Group>
-          <Component id="jSeparator3" alignment="1" pref="581" max="32767" attributes="0"/>
+          <Component id="jSeparator3" alignment="1" pref="577" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -182,14 +182,14 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtFind" alignment="1" pref="475" max="32767" attributes="1"/>
+                  <Component id="txtFind" alignment="1" pref="471" max="32767" attributes="1"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtTarget" pref="393" max="32767" attributes="0"/>
+                      <Component id="txtTarget" pref="389" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnFile" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="txtReplace" pref="376" max="32767" attributes="1"/>
+                      <Component id="txtReplace" pref="372" max="32767" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnFunctions" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -239,7 +239,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="pnlOrder" max="32767" attributes="1"/>
-                  <Component id="pnlFiles" alignment="1" pref="233" max="32767" attributes="2"/>
+                  <Component id="pnlFiles" alignment="1" pref="229" max="32767" attributes="2"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="pnlButtons" min="-2" max="-2" attributes="0"/>
@@ -460,7 +460,7 @@
                   <Component id="btnSortName" min="-2" pref="32" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnSortDate" min="-2" pref="32" max="-2" attributes="0"/>
-                  <EmptySpace pref="63" max="32767" attributes="0"/>
+                  <EmptySpace pref="59" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

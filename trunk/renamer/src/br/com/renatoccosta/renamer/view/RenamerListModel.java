@@ -47,7 +47,7 @@ public abstract class RenamerListModel extends AbstractListModel {
      * @return Diferença entre o nome do arquivo e a raiz.
      */
     protected String stripFileName(String file) {
-        return StringUtils.difference(renamer.getRootFile().getAbsolutePath(),
+        return StringUtils.difference(renamer.getRootFolder().getAbsolutePath(),
                 file);
     }
 

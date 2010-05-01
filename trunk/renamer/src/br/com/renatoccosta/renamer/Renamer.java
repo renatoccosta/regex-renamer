@@ -50,9 +50,11 @@ public class Renamer {
 
     private static final String TMP_SUFIX = "~";
 
-    private File rootFile;
+    private File rootFolder;
 
     private boolean includeSubFolders = false;
+
+    private CriteriaTypeEnum type = CriteriaTypeEnum.REGULAR_EXPRESSION;
 
     private SortType sortType = SortType.FILE_NAME;
 
@@ -106,46 +108,9 @@ public class Renamer {
     public Renamer() {
     }
 
-    /**
-     * Cria uma instancia do renomeador.
-     *
-     * @param files Pasta ou Arquivo a ser renomeado. Se for uma pasta, todos os
-     * arquivos desta e das subpastas serão considerados.
-     *
-     * @throws RenamerException Caso exista algum erro no caminho dos arquivos
-     */
-    public Renamer(File files) throws
-            RenamerException {
-        setRootFiles(files, true);
-    }
-
-    /**
-     * Cria uma instancia do renomeador.
-     *
-     * @param files Pasta ou Arquivo a ser renomeado. Se for uma pasta, todos os
-     * arquivos desta e das subpastas serão considerados.
-     *
-     * @param search String com o padrao de localizacao dos nomes dos
-     * arquivos a serem alterados. Utiliza a notacao de regex do Java.
-     *
-     * @param replace String com o padrao de substituicao para o nome de
-     * destino dos arquivos que se encaixarem no padrao de localizacao. Utiliza
-     * a notacao de regex do Java alem das extensoes definidas.
-     *
-     * @throws RenamerException Caso exista algum erro de sintaxe nas strings de
-     * localizar e substituir.
-     */
-    public Renamer(File files, String search, String replace) throws
-            RenamerException {
-        this(files);
-        setSearch(search);
-        setReplace(replace);
-        previewRename();
-    }
-
     /* ---------------------------------------------------------------------- */
-    public File getRootFile() {
-        return rootFile;
+    public File getRootFolder() {
+        return rootFolder;
     }
 
     /**
@@ -172,31 +137,35 @@ public class Renamer {
         return sortType;
     }
 
+    public boolean isIncludeSubFolders() {
+        return includeSubFolders;
+    }
+
     public boolean isReady() {
         return !this.filesBefore.isEmpty() && this.search != null &&
                 this.rootReplace != null;
     }
 
-    public void setRootFiles(File rootFile, boolean includeSubFolders) throws
+    public void setRootFolder(File rootFolder, boolean includeSubFolders) throws
             RenamerException {
-        if (rootFile.equals(this.rootFile) && includeSubFolders ==
+        if (rootFolder.equals(this.rootFolder) && includeSubFolders ==
                 this.includeSubFolders) {
             return;
         }
 
-        if (!rootFile.exists()) {
+        if (!rootFolder.exists()) {
             throw new RenamerException(
                     Messages.getFileNotFoundMessage());
         }
 
-        this.rootFile = rootFile;
+        this.rootFolder = rootFolder;
         this.includeSubFolders = includeSubFolders;
 
         this.filesBefore.clear();
         this.filesAfter.clear();
         this.conflicts.clear();
 
-        List<String> flattenedFiles = FileUtil.flattenFiles(rootFile,
+        List<String> flattenedFiles = FileUtil.flattenFiles(rootFolder,
                 includeSubFolders);
         this.filesBefore.addAll(flattenedFiles);
         this.filesAfter.addAll(flattenedFiles);
@@ -204,6 +173,14 @@ public class Renamer {
         sortFiles();
 
         this.dirty = true;
+    }
+
+    public void setIncludeSubFolders(boolean includeSubFolders) {
+        if (includeSubFolders == this.includeSubFolders) {
+            return;
+        }
+
+        this.includeSubFolders = includeSubFolders;
     }
 
     public void setSearch(String search) throws RenamerException {
