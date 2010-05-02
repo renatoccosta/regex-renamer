@@ -137,19 +137,38 @@ public class Renamer {
         return sortType;
     }
 
+    public CriteriaTypeEnum getType() {
+        return type;
+    }
+
     public boolean isIncludeSubFolders() {
         return includeSubFolders;
     }
 
+    /**
+     * Validates if all the requirements for the rename are filled depending
+     * on the chosen criteria.
+     * @return Whether it is ready for rename or not.
+     */
     public boolean isReady() {
+        boolean r1;
+
+        switch (type) {
+            case SELECTED_FILES:
+                
+                break;
+            case REGULAR_EXPRESSION:
+                break;
+            default:
+        }
+
         return !this.filesBefore.isEmpty() && this.search != null &&
                 this.rootReplace != null;
     }
 
-    public void setRootFolder(File rootFolder, boolean includeSubFolders) throws
+    public void setRootFolder(File rootFolder) throws
             RenamerException {
-        if (rootFolder.equals(this.rootFolder) && includeSubFolders ==
-                this.includeSubFolders) {
+        if (rootFolder.equals(this.rootFolder)) {
             return;
         }
 
@@ -159,18 +178,8 @@ public class Renamer {
         }
 
         this.rootFolder = rootFolder;
-        this.includeSubFolders = includeSubFolders;
 
-        this.filesBefore.clear();
-        this.filesAfter.clear();
-        this.conflicts.clear();
-
-        List<String> flattenedFiles = FileUtil.flattenFiles(rootFolder,
-                includeSubFolders);
-        this.filesBefore.addAll(flattenedFiles);
-        this.filesAfter.addAll(flattenedFiles);
-
-        sortFiles();
+        fillFileLists();
 
         this.dirty = true;
     }
@@ -181,6 +190,10 @@ public class Renamer {
         }
 
         this.includeSubFolders = includeSubFolders;
+
+        fillFileLists();
+
+        this.dirty = true;
     }
 
     public void setSearch(String search) throws RenamerException {
@@ -209,6 +222,11 @@ public class Renamer {
     public void setSortType(SortType sortType) {
         this.sortType = sortType;
         sortFiles();
+    }
+
+    public void setType(CriteriaTypeEnum type) {
+        this.type = type;
+        this.dirty = true;
     }
 
     /* ---------------------------------------------------------------------- */
@@ -462,6 +480,21 @@ public class Renamer {
         } else {
             FileUtil.sortFilesByDate(filesBefore);
             FileUtil.sortFilesByDate(filesAfter);
+        }
+    }
+
+    private void fillFileLists() {
+        this.filesBefore.clear();
+        this.filesAfter.clear();
+        this.conflicts.clear();
+
+        if (rootFolder != null) {
+            List<String> flattenedFiles = FileUtil.flattenFiles(rootFolder,
+                    includeSubFolders);
+            this.filesBefore.addAll(flattenedFiles);
+            this.filesAfter.addAll(flattenedFiles);
+
+            sortFiles();
         }
     }
 
