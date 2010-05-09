@@ -51,10 +51,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         initComponentsLocal();
 
         txtTarget.setText(path);
-        try {
-            renamer.setRootFolder(new File(path), false);
-        } catch (RenamerException ex) {
-        }
     }
 
     /** This method is called from within the constructor to
@@ -768,9 +764,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void configureRenamer(boolean refreshLists) throws
             RenamerException {
+        renamer.setIncludeSubFolders(mnuSubfolders.isSelected());
+
         if (!"".equals(txtTarget.getText())) {
-            renamer.setRootFolder(new File(txtTarget.getText()),
-                    mnuSubfolders.isSelected());
+            renamer.setRootFolder(new File(txtTarget.getText()));
         }
 
         if (!"".equals(txtReplace.getText())) {

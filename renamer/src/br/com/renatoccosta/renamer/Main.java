@@ -46,7 +46,9 @@ public class Main {
         }
     }
 
-    public static void loadLog4J() throws IOException {
+    /* ---------------------------------------------------------------------- */
+
+    private static void loadLog4J() throws IOException {
         Properties props = new Properties();
         props.load(new FileInputStream("log4j.properties"));
         PropertyConfigurator.configure(props);
