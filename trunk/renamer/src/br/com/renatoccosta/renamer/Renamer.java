@@ -39,6 +39,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.TokenStream;
 import org.antlr.runtime.tree.CommonTree;
 import org.antlr.runtime.tree.CommonTreeNodeStream;
+import org.apache.log4j.Logger;
 
 /**
  * Classe principal da aplicacao. Realiza toda a orquestracao do negocio
@@ -48,15 +49,21 @@ import org.antlr.runtime.tree.CommonTreeNodeStream;
  */
 public class Renamer {
 
+    private static final Logger LOGGER = Logger.getLogger(Renamer.class);
+
     private static final String TMP_SUFIX = "~";
 
     private File rootFolder;
 
     private boolean includeSubFolders = false;
 
+    private boolean includeExtensions = false;
+
     private CriteriaTypeEnum type = CriteriaTypeEnum.REGULAR_EXPRESSION;
 
     private SortType sortType = SortType.FILE_NAME;
+
+    private int[] selectedFiles = new int[] {};
 
     private List<String> filesBefore = new ArrayList<String>();
 
@@ -145,25 +152,8 @@ public class Renamer {
         return includeSubFolders;
     }
 
-    /**
-     * Validates if all the requirements for the rename are filled depending
-     * on the chosen criteria.
-     * @return Whether it is ready for rename or not.
-     */
-    public boolean isReady() {
-        boolean r1;
-
-        switch (type) {
-            case SELECTED_FILES:
-                
-                break;
-            case REGULAR_EXPRESSION:
-                break;
-            default:
-        }
-
-        return !this.filesBefore.isEmpty() && this.search != null &&
-                this.rootReplace != null;
+    public boolean isIncludeExtensions() {
+        return includeExtensions;
     }
 
     public void setRootFolder(File rootFolder) throws
@@ -229,6 +219,11 @@ public class Renamer {
         this.dirty = true;
     }
 
+    public void setIncludeExtensions(boolean includeExtensions) {
+        this.includeExtensions = includeExtensions;
+        this.dirty = true;
+    }
+
     /* ---------------------------------------------------------------------- */
     public void moveFilesUp(int startIndex, int endIndex) {
         if (startIndex <= 0) {
@@ -253,10 +248,42 @@ public class Renamer {
     }
 
     /**
-     * Realiza a transformação dos nomes dos arquivos, sem efetivamente
-     * renomeá-los. Preenche a lista com os nomes de destino. Este método deve
-     * ser chamado antes de qualquer outro método desta classe, pois ele prepara
-     * todo o estado desta classe.
+     * Validates if all the requirements for the rename are filled depending
+     * on the chosen criteria.
+     * @return Whether it is ready for rename or not.
+     */
+    public boolean isReady() {
+        boolean r1 = !this.filesBefore.isEmpty() && this.rootReplace != null;
+        boolean r2 = false;
+
+        switch (type) {
+            case SELECTED_FILES:
+                r2 = selectedFiles.length > 0;
+                break;
+            case REGULAR_EXPRESSION:
+                r2 = this.search != null;
+                break;
+            default:
+                r2 = true;
+        }
+
+        return r1 && r2;
+    }
+
+    /**
+     * Verifica se existem conflitos de nomes de arquivos destino.
+     * @return True caso existam.
+     */
+    public boolean hasConflicts() throws RenamerException {
+        return !conflicts.isEmpty();
+    }
+
+    /**
+     * This is the core method of this class.
+     * It executes the renaming process in memory, without actually renaming the
+     * files. It fills the destination file list with the new names. This method
+     * needs to be called before the files are actually renamed because it
+     * verifies for any conflict that may happen.
      */
     public void previewRename() throws RenamerException {
         if (!isReady()) {
@@ -278,11 +305,9 @@ public class Renamer {
                 try {
                     target = rootReplace.getContent(search.pattern(),
                             f.getName(), f);
-                } catch (RenamerException ex) {
+                } catch (Exception ex) {
                     target = Messages.getErrorRenamingMessage();
-                    canRename = false;
-                } catch (RuntimeException ex) {
-                    target = Messages.getErrorRenamingMessage();
+                    LOGGER.error(ex);
                     canRename = false;
                 }
             }
@@ -359,14 +384,6 @@ public class Renamer {
             File file = new File(strFile + TMP_SUFIX);
             file.renameTo(new File(filesAfter.get(i)));
         }
-    }
-
-    /**
-     * Verifica se existem conflitos de nomes de arquivos destino.
-     * @return True caso existam.
-     */
-    public boolean hasConflicts() throws RenamerException {
-        return !conflicts.isEmpty();
     }
 
     /**
