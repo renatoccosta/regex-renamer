@@ -53,6 +53,8 @@ public class Renamer {
 
     private static final String TMP_SUFIX = "~";
 
+    private static final String SEARCH_ALL = "(.*)";
+
     private File rootFolder;
 
     private boolean includeSubFolders = false;
@@ -215,7 +217,18 @@ public class Renamer {
     }
 
     public void setType(CriteriaTypeEnum type) {
+        if (this.type.equals(type)) {
+            return;
+        }
+
         this.type = type;
+
+        try {
+            parseSearch(SEARCH_ALL);
+        } catch (RenamerException ex) {
+            throw new IllegalArgumentException(ex);
+        }
+
         this.dirty = true;
     }
 
@@ -263,7 +276,7 @@ public class Renamer {
             case REGULAR_EXPRESSION:
                 r2 = this.search != null;
                 break;
-            default:
+            default: //all files
                 r2 = true;
         }
 
@@ -293,9 +306,10 @@ public class Renamer {
         filesAfter.clear();
         rootReplace.resetState();
         canRename = true;
+        List<String> preRenameFiles = fillPreRenameList();
 
         //iteração na lista de arquivos
-        for (String strFile : filesBefore) {
+        for (String strFile : preRenameFiles) {
             File f = new File(strFile);
 
             String target = f.getName();
@@ -384,6 +398,8 @@ public class Renamer {
             File file = new File(strFile + TMP_SUFIX);
             file.renameTo(new File(filesAfter.get(i)));
         }
+
+        fillFileLists();
     }
 
     /**
@@ -513,6 +529,25 @@ public class Renamer {
 
             sortFiles();
         }
+    }
+
+    private List<String> fillPreRenameList() {
+        List<String> lst = null;
+
+        switch (type) {
+            case SELECTED_FILES:
+                lst = new ArrayList<String>(selectedFiles.length);
+
+                for (int i : selectedFiles) {
+                    lst.add(filesBefore.get(i));
+                }
+
+                break;
+            default: //all other options
+                lst = filesBefore;
+        }
+
+        return lst;
     }
 
 }

@@ -9,6 +9,7 @@ import br.com.renatoccosta.renamer.*;
 import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
+import java.awt.FileDialog;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
 import java.awt.event.KeyEvent;
@@ -261,7 +262,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnSortName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSortDate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         pnlButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
@@ -313,6 +314,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         mnuExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exit.png"))); // NOI18N
         mnuExit.setText(bundle.getString("FrmPrincipal.mnuExit.text")); // NOI18N
+        mnuExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuExitActionPerformed(evt);
+            }
+        });
         mnuFile.add(mnuExit);
 
         barMenu.add(mnuFile);
@@ -364,19 +370,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 509, Short.MAX_VALUE)
+                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblBeforeAfter)
-                .addContainerGap(409, Short.MAX_VALUE))
-            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 577, Short.MAX_VALUE)
+                .addContainerGap(419, Short.MAX_VALUE))
+            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -386,13 +392,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblExpression))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE)
+                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 389, Short.MAX_VALUE)
+                        .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFile))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                        .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFunctions))
                     .addGroup(layout.createSequentialGroup()
@@ -433,7 +439,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE))
+                    .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -495,7 +501,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
         final JFileChooser fc = new JFileChooser(txtTarget.getText());
-        fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+        fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
         int returnVal = fc.showOpenDialog(this);
 
@@ -608,6 +614,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 configureRenamer(false);
                 renamer.rename();
             }
+
+            refreshLists();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(),
                     Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
@@ -709,7 +717,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
             List<String> completeOptions = renamer.queryAutoCompleteOptions(
                     txtReplace.getText(), txtReplace.getCaretPosition());
             if (completeOptions != null && !completeOptions.isEmpty()) {
-                epu.showOptions(completeOptions,(JComponent) evt.getSource());
+                epu.showOptions(completeOptions, (JComponent) evt.getSource());
             }
 
         }
@@ -731,15 +739,34 @@ public class FrmPrincipal extends javax.swing.JFrame {
         List elems = new ArrayList(ElementsDirectory.getInstance().getMapId().
                 keySet());
         if (elems != null && !elems.isEmpty()) {
-            epu.showOptions(elems,(JComponent) evt.getSource());
+            epu.showOptions(elems, (JComponent) evt.getSource());
         }
     }//GEN-LAST:event_btnFunctionsActionPerformed
+
+    private void mnuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuExitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mnuExitActionPerformed
 
     private void validateFields() throws Exception {
         if (txtTarget.getText().trim().equals("") ||
                 txtFind.getText().trim().equals("") ||
                 txtReplace.getText().trim().equals("")) {
             throw new Exception(Messages.getFieldValidationMessage());
+        }
+    }
+
+    /**
+     * Valida se a seleção está contígua
+     *
+     * @param selectedIndices Array de indices dos elementos selecionados
+     * @throws RenamerException
+     */
+    private void validadeSelection(int[] selectedIndices) throws
+            RenamerException {
+        int qtd = selectedIndices[selectedIndices.length - 1] - selectedIndices[0];
+
+        if (qtd != selectedIndices.length - 1) {
+            throw new RenamerException(Messages.getContiguousSelectionMessage());
         }
     }
 
@@ -780,21 +807,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         if (refreshLists) {
             refreshLists();
-        }
-    }
-
-    /**
-     * Valida se a seleção está contígua
-     *
-     * @param selectedIndices Array de indices dos elementos selecionados
-     * @throws RenamerException
-     */
-    private void validadeSelection(int[] selectedIndices) throws
-            RenamerException {
-        int qtd = selectedIndices[selectedIndices.length - 1] - selectedIndices[0];
-
-        if (qtd != selectedIndices.length - 1) {
-            throw new RenamerException(Messages.getContiguousSelectionMessage());
         }
     }
 
