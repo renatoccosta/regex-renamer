@@ -400,6 +400,8 @@ public class Renamer {
         }
 
         fillFileLists();
+        
+        this.dirty = true;
     }
 
     /**
