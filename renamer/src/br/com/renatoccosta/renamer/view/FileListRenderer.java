@@ -35,9 +35,6 @@ public class FileListRenderer extends DefaultListCellRenderer implements
 
     public FileListRenderer(Renamer renamer) {
         super();
-//        setOpaque(true);
-        //setPreferredSize(new Dimension(50, 16));
-
         this.renamer = renamer;
     }
 
@@ -48,21 +45,17 @@ public class FileListRenderer extends DefaultListCellRenderer implements
         Component c = super.getListCellRendererComponent(list, value, index,
                 isSelected, cellHasFocus);
 
-//        if (isSelected) {
-//            setBackground(list.getSelectionBackground());
-//            setForeground(list.getSelectionForeground());
-//        } else {
-//            setBackground(list.getBackground());
-//            setForeground(list.getForeground());
-//        }
+        //if the filename was changed, it's displayed in blue
+        if (!renamer.getFileNamesBefore().get(index).endsWith(value.toString())) {
+            setForeground(Color.BLUE);
+        }
 
+        //if the filename is conflicting with another file, it's displayed in red
         if (renamer.getConflicts().containsKey(
                 renamer.getFileNamesAfter().get(index)) ||
                 value.toString().endsWith(Messages.getErrorRenamingMessage())) {
-            setForeground(Color.red);
+            setForeground(Color.RED);
         }
-
-//        setText(value.toString());
 
         return c;
     }
