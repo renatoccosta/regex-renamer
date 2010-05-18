@@ -65,7 +65,7 @@ public class Renamer {
 
     private SortType sortType = SortType.FILE_NAME;
 
-    private int[] selectedFiles = new int[] {};
+    private int[] selectedFiles = new int[]{};
 
     private List<String> filesBefore = new ArrayList<String>();
 
@@ -400,7 +400,7 @@ public class Renamer {
         }
 
         fillFileLists();
-        
+
         this.dirty = true;
     }
 
@@ -452,33 +452,32 @@ public class Renamer {
      * @return Root element
      * @throws ParseErrorsException If there was any error during the parse
      */
-    private Element parseReplace(String replace) throws ParseErrorsException {
-        RenamerLexer lexer = new RenamerLexer(replace);
-
-        TokenStream cts = new CommonTokenStream(lexer);
-        RenamerParser parser = new RenamerParser(cts);
-
-        RenamerParser.begin_return br = null;
+    private Element parseReplace(String replace) throws RenamerException {
         try {
+            RenamerLexer lexer = new RenamerLexer(replace);
+
+            TokenStream cts = new CommonTokenStream(lexer);
+            RenamerParser parser = new RenamerParser(cts);
+
+            RenamerParser.begin_return br = null;
             br = parser.begin();
-        } catch (RecognitionException ex) {
-        }
 
-        if (!parser.getExceptions().isEmpty()) {
-            throw new ParseErrorsException(parser.getExceptions());
-        }
+            if (!parser.getExceptions().isEmpty()) {
+                throw new ParseErrorsException(parser.getExceptions());
+            }
 
-        CommonTree t = (CommonTree) br.getTree();
-        CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
-        nodes.setTokenStream(cts);
-        TreeGrammar tg = new TreeGrammar(nodes);
+            CommonTree t = (CommonTree) br.getTree();
+            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
+            nodes.setTokenStream(cts);
+            TreeGrammar tg = new TreeGrammar(nodes);
 
-        try {
             tg.begin();
-        } catch (RecognitionException ex) {
-        }
 
-        return tg.root;
+            return tg.root;
+
+        } catch (RecognitionException ex) {
+            throw new RenamerException(ex);
+        }
     }
 
     private void calculateConflicts() {
