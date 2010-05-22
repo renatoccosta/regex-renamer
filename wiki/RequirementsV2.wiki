@@ -8,11 +8,15 @@ This page shows a list of requirements intended to be implemented on the version
 
 = Details =
 
-  * Auto complete
+  * New user interface
+    * New Tango project iconset
+  * Option for renaming all files listed, selected or based on regex expression
+  * Small changes on the replace language
+  * Auto complete - postponed for the next version
   * Replace Colours
     * Black -> No Match
     * Blue -> Match
     * Red -> Filename conflict
-  * Progress bar on rename execution
+  * Progress bar on rename execution - postponed for the next version
     * Display summary after rename
   * Refresh contents after rename
