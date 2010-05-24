@@ -82,7 +82,7 @@ content returns [Element elem]
 		}
 	)	{
 			$elem = ElementFactory.compile($function.text);
-			$elem.setParameters($parameter.text); 
+			$elem.setParameters(lstParam.toArray(new String[]{})); 
 		}
 	;
 	catch[RecognitionException e] {
