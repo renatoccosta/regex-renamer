@@ -1,4 +1,4 @@
-// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g 2010-04-21 22:56:07
+// $ANTLR 3.2 Sep 23, 2009 12:02:23 /home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g 2010-05-23 21:32:36
 
 /**
  * Copyright 2009 Renato Couto da Costa
@@ -456,9 +456,7 @@ public class TreeGrammar extends TreeParser {
             			elem = ElementFactory.compile((function6!=null?(input.getTokenStream().toString(
               input.getTreeAdaptor().getTokenStartIndex(function6.start),
               input.getTreeAdaptor().getTokenStopIndex(function6.start))):null));
-            			elem.setParameters((parameter5!=null?(input.getTokenStream().toString(
-              input.getTreeAdaptor().getTokenStartIndex(parameter5.start),
-              input.getTreeAdaptor().getTokenStopIndex(parameter5.start))):null)); 
+            			elem.setParameters(lstParam.toArray(new String[]{})); 
             		
 
             }
