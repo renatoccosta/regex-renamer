@@ -453,31 +453,32 @@ public class Renamer {
      * @throws ParseErrorsException If there was any error during the parse
      */
     private Element parseReplace(String replace) throws RenamerException {
-        try {
-            RenamerLexer lexer = new RenamerLexer(replace);
-
-            TokenStream cts = new CommonTokenStream(lexer);
-            RenamerParser parser = new RenamerParser(cts);
-
-            RenamerParser.begin_return br = null;
-            br = parser.begin();
-
-            if (!parser.getExceptions().isEmpty()) {
-                throw new ParseErrorsException(parser.getExceptions());
-            }
-
-            CommonTree t = (CommonTree) br.getTree();
-            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
-            nodes.setTokenStream(cts);
-            TreeGrammar tg = new TreeGrammar(nodes);
-
-            tg.begin();
-
-            return tg.root;
-
-        } catch (RecognitionException ex) {
-            throw new RenamerException(ex);
-        }
+//        try {
+//            RenamerLexer lexer = new RenamerLexer(replace);
+//
+//            TokenStream cts = new CommonTokenStream(lexer);
+//            RenamerParser parser = new RenamerParser(cts);
+//
+//            RenamerParser.begin_return br = null;
+//            br = parser.begin();
+//
+//            if (!parser.getExceptions().isEmpty()) {
+//                throw new ParseErrorsException(parser.getExceptions());
+//            }
+//
+//            CommonTree t = (CommonTree) br.getTree();
+//            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
+//            nodes.setTokenStream(cts);
+//            TreeGrammar tg = new TreeGrammar(nodes);
+//
+//            tg.begin();
+//
+//            return tg.root;
+//
+//        } catch (RecognitionException ex) {
+//            throw new RenamerException(ex);
+//        }
+        return null;
     }
 
     private void calculateConflicts() {

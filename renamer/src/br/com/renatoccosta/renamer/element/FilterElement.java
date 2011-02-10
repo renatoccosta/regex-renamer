@@ -15,46 +15,76 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
+import br.com.renatoccosta.renamer.element.base.CompositeElement;
+import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Elemento que remove determinados caracteres do conteúdo dos próximos
- * elementos. As opções de caracteres podem ser: letras, números e símbolos.
- * Espaços em branco não são removidos.
+ * Element that remove certain characters from it's content based on the mode.
+ * The mode can be:
+ * - letters: remove all letters from text
+ * - numbers: remove all numbers
+ * - symbols: remove all characters that are neither letters nor numbers
+ * - whitespace: remove all whitespaces (all other modes don't remove whitespaces)
+ *
+ * e.g:
+ * Replace: <filter mode='numbers'>123abc<filter/>
+ * Result: abc
  *
  * @author Renato Costa
  */
-public class FilterElement extends StreamChangeElement {
+public class FilterElement extends CompositeElement {
+
+    private enum FilterEnum {
+
+        LETTERS,
+        NUMBERS,
+        SYMBOLS,
+        WHITE_SPACE
+
+    }
 
     private FilterEnum mode = FilterEnum.SYMBOLS;
 
-    @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{FilterEnum.class};
-    }
+    /* ---------------------------------------------------------------------- */
 
     @Override
-    public String[] getParameterValues() {
-        return new String[]{mode.toString()};
-    }
-
-    @Override
-    public void setParameters(String... content) {
-        if (content.length > 0) {
-            try {
-                mode = FilterEnum.valueOf(content[0]);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException(
-                        Messages.getFilterElementInvalidParametersMessage());
-            }
+    public String getParameter(String name) throws InvalidParameterException {
+        if ("mode".equals(name)) {
+            return this.mode.toString();
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
         }
     }
 
     @Override
+    public void setParameter(String name, String value) throws
+            InvalidParameterException {
+        if ("mode".equals(name)) {
+            this.mode = convertModeValue(value);
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
+        }
+    }
+
+    @Override
+    public String[] getParameterValues() {
+        return new String[] {this.mode.toString()};
+    }
+
+    @Override
+    public String[] getParameterNames() {
+        return new String[]{"mode"};
+    }
+
+    /* ---------------------------------------------------------------------- */
+    
+    @Override
     public String convert(String src) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         char[] caracs = src.toCharArray();
 
         switch (mode) {
@@ -81,8 +111,8 @@ public class FilterElement extends StreamChangeElement {
             case SYMBOLS:
                 for (int i = 0; i < caracs.length; i++) {
                     char c = caracs[i];
-                    if (Character.isLetterOrDigit(c) ||
-                            Character.isSpaceChar(c)) {
+                    if (Character.isLetterOrDigit(c)
+                            || Character.isSpaceChar(c)) {
                         sb.append(c);
                     }
                 }
@@ -96,13 +126,16 @@ public class FilterElement extends StreamChangeElement {
         return src;
     }
 
-}
+    /* ---------------------------------------------------------------------- */
 
-enum FilterEnum {
-
-    LETTERS,
-    NUMBERS,
-    SYMBOLS,
-    WHITE_SPACE
+    private FilterEnum convertModeValue(String value) throws
+            InvalidParameterException {
+        try {
+            return FilterEnum.valueOf(value);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidParameterException(
+                    Messages.getCaseElementInvalidParametersMessage());
+        }
+    }
 
 }

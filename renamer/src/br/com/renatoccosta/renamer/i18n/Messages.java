@@ -64,6 +64,11 @@ public class Messages {
                 id);
     }
 
+    public static String getEmptyElementChildsMessage(String id) {
+        return String.format(messages.getString("EmptyElementChildsException"),
+                id);
+    }
+
     public static String getErrorCaption() {
         return messages.getString("Error");
     }
@@ -102,6 +107,16 @@ public class Messages {
 
     public static String getErrorRenamingFilesMessage() {
         return messages.getString("ErrorRenamingFiles");
+    }
+
+    public static String getParameterWrongDataTypeInteger(String paramName) {
+        return String.format(messages.getString(
+                "ParameterWrongDataTypeInteger"), paramName);
+    }
+
+    public static String getInvalidParameterName(String paramName) {
+        return String.format(messages.getString("InvalidParameterName"),
+                paramName);
     }
 
 }

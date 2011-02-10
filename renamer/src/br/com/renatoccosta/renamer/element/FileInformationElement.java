@@ -15,40 +15,71 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.ExpressionElement;
+import br.com.renatoccosta.renamer.element.base.EmptyElement;
+import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * Elemento que imprime determinadas informações sobre o arquivo que está tendo
- * seu nome alterado.
+ * Element that prints information about the file that it's being changed
+ *
+ * e.g.
+ * Replace: <file mode='date'/>
+ * Result: 2011-01-25
  *
  * @author Renato Costa
  */
-public class FileInformationElement extends ExpressionElement {
+public class FileInformationElement extends EmptyElement {
+
+    private enum FileInformationEnum {
+
+        FOLDER,
+        DATE,
+        SIZE
+
+    }
 
     private FileInformationEnum mode = FileInformationEnum.DATE;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+    /* ---------------------------------------------------------------------- */
+
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{FileInformationEnum.class};
+    public void setParameter(String name, String value) throws
+            InvalidParameterException {
+        if ("mode".equals(name)) {
+            this.mode = convertModeValue(value);
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
+        }
     }
 
     @Override
-    public void setParameters(String... content) {
-        if (content.length > 0) {
-            try {
-                mode = FileInformationEnum.valueOf(content[0]);
-            } catch (Exception e) {
-                throw new IllegalArgumentException(
-                        Messages.getFilterElementInvalidParametersMessage());
-            }
+    public String getParameter(String name) throws
+            InvalidParameterException {
+        if ("mode".equals(name)) {
+            return this.mode.toString();
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
         }
     }
+
+    @Override
+    public String[] getParameterValues() {
+        return new String[]{mode.toString()};
+    }
+
+    @Override
+    public String[] getParameterNames() {
+        return new String[] {"mode"};
+    }
+
+    /* ---------------------------------------------------------------------- */
 
     @Override
     public String getContent(String find, String target, File file) {
@@ -65,20 +96,19 @@ public class FileInformationElement extends ExpressionElement {
     }
 
     @Override
-    public String[] getParameterValues() {
-        return new String[]{mode.toString()};
-    }
-
-    @Override
     public void resetState() {
     }
 
-}
+    /* ---------------------------------------------------------------------- */
 
-enum FileInformationEnum {
-
-    FOLDER,
-    DATE,
-    SIZE
+    private FileInformationEnum convertModeValue(String value) throws
+            InvalidParameterException {
+        try {
+            return FileInformationEnum.valueOf(value);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidParameterException(
+                    Messages.getCaseElementInvalidParametersMessage());
+        }
+    }
 
 }

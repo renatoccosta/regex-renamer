@@ -1,15 +1,19 @@
 package br.com.renatoccosta.renamer.parser;
 
-import java.io.File;
 import junit.framework.TestCase;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.Lexer;
+import org.antlr.runtime.tree.CommonTreeNodeStream;
+import org.antlr.runtime.tree.Tree;
 
 /**
  *
  * @author Renato
  */
 public class RenamerParserTest extends TestCase {
-    
+
     public RenamerParserTest(String testName) {
         super(testName);
     }
@@ -27,18 +31,24 @@ public class RenamerParserTest extends TestCase {
     public void testCompleto() throws Exception {
         System.out.println("testCompleto");
 
-        String exemplo = "abc$1 ${idx:1:3}";
-        RenamerLexer lexer = new RenamerLexer(exemplo);
-        CommonTokenStream cts = new CommonTokenStream(lexer);
-        RenamerParser instance = new RenamerParser(cts);
+        String replaceString = "1234<abc pro='prop1'>1234</abc>123456";
 
-        instance.expression();
+        CharStream input = new ANTLRStringStream(replaceString);
+        Lexer lex = new RenamerLexer(input);
 
-        String expected = "abcrenato 001";
-        String actual = instance.root.getContent("(.+)", "renato",
-                new File("teste.txt"));
+        CommonTokenStream tokens = new CommonTokenStream(lex);
+        RenamerParser parser = new RenamerParser(tokens);
+        RenamerParser.document_return root = parser.document();
 
-        assertEquals(expected, actual);
+        System.out.println("tree=" + ((Tree) root.tree).toStringTree());
+
+        CommonTreeNodeStream nodes = new CommonTreeNodeStream((Tree) root.tree);
+        RenamerTreeParser walker = new RenamerTreeParser(nodes);
+        walker.document();
+
+        walker.
+
+        assertTrue(true);
     }
 
 }

@@ -15,8 +15,6 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
-import br.com.renatoccosta.renamer.exception.ElementException;
-import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
@@ -24,16 +22,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Elemento que não gera conteúdo após sua aplicação na substituição, e sim
- * altera o conteúdo dos elementos contidos.
+ * Element that contains child elements and may change the contents of then
+ * upon execution.
  *
  * @author Renato Costa
  */
-public abstract class StreamChangeElement extends ExpressionElement {
+public abstract class CompositeElement extends Element {
 
     protected boolean elementoAberto = true;
 
-    protected StreamChangeElement parent;
+    protected CompositeElement parent;
 
     protected List<Element> childs = new ArrayList<Element>();
 
@@ -45,64 +43,26 @@ public abstract class StreamChangeElement extends ExpressionElement {
         this.elementoAberto = elementoAberto;
     }
 
-    public StreamChangeElement getParent() {
+    public CompositeElement getParent() {
         return parent;
     }
 
-    public void setParent(StreamChangeElement parent) {
+    public void setParent(CompositeElement parent) {
         this.parent = parent;
     }
 
     /**
-     * Adiciona um elemento à cadeia.
+     * Add an element as a child. Other classes may override this method to add
+     * further functionality
      */
-    public StreamChangeElement add(Element element) throws
+    public void add(Element element) throws
             InvalidElementException {
-        if (elementoAberto) {
-            //quando este está aberto, o elemento é adicionado como filho
-            childs.add(element);
+        childs.add(element);
 
-            if (element instanceof StreamChangeElement) {
-                StreamChangeElement sce = (StreamChangeElement) element;
-                sce.setParent(this);
-                return sce;
-            } else {
-                return this;
-            }
-        } else {
-            //quando este está fechado, não pode adicionar novos elementos
-            throw new InvalidElementException(element.getId());
+        if (element instanceof CompositeElement) {
+            CompositeElement sce = (CompositeElement) element;
+            sce.setParent(this);
         }
-    }
-
-    /**
-     * Fecha o StreamChangeElement, não aceitando mais filhos.
-     * Será lançado um InvalidElementException caso o fechamento seja executado
-     * em um momento errado.
-     *
-     * @param id Id do elemento a ser fechado.
-     */
-    public StreamChangeElement close(String id) throws ElementException {
-        Class<Element> ce = ElementsDirectory.getInstance().lookup(id);
-
-        if (ce == null) {
-            throw new ElementNotFoundException(id);
-        }
-
-        //itera nos pais até encontrar o elemento igual ao parâmetro.
-        //caso não encontre, lança um InvalidElementException
-        if (this.getClass().equals(ce)) {
-            elementoAberto = false;
-        } else {
-            if (parent != null) {
-                parent.close(id);
-                elementoAberto = false;
-            } else {
-                throw new InvalidElementException(id);
-            }
-        }
-
-        return this.parent;
     }
 
     /**
@@ -118,7 +78,7 @@ public abstract class StreamChangeElement extends ExpressionElement {
     @Override
     public String getContent(String find, String target, File file) throws
             RenamerException {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         for (Element element : childs) {
             sb.append(element.getContent(find, target, file));
@@ -145,22 +105,26 @@ public abstract class StreamChangeElement extends ExpressionElement {
 
     @Override
     public String toString() {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
-        sb.append("${").append(getId());
+        sb.append("<").append(getId());
 
-        String params = getParametersAsString();
-        if (!"".equals(params)) {
-            sb.append(":").append(params);
+        String values[] = getParameterValues();
+        for (int i = 0; i < getParameterNames().length; i++) {
+            String paramName = getParameterNames()[i];
+            String value = values[i];
+
+            sb.append(" ").append(paramName).append("=").
+                    append("'").append(value).append("'");
         }
 
-        sb.append("}");
+        sb.append(">");
 
         for (Element element : childs) {
             sb.append(element.toString());
         }
 
-        sb.append("${/").append(getId()).append("}");
+        sb.append("</").append(getId()).append(">");
 
         return sb.toString();
     }

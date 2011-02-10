@@ -15,59 +15,65 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
+import br.com.renatoccosta.renamer.element.base.CompositeElement;
+import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import org.apache.commons.lang.StringUtils;
 
 /**
+ * Element that replaces all the occurrences of a character with another one
  * Elemento que substitui todas as ocorrências de um caractere por outro no
  * conteúdo dos próximos elementos.
  *
  * @author Renato Costa
  */
-public class ReplaceElement extends StreamChangeElement {
+public class ReplaceElement extends CompositeElement {
 
-    private String[] de = new String[]{""};
+    private String from;
 
-    private String[] para = new String[]{""};
+    private String to;
+
+    /* ---------------------------------------------------------------------- */
+    @Override
+    public void setParameter(String name, String value) throws
+            InvalidParameterException {
+        if ("from".equals(name)) {
+            this.from = value;
+        } else if ("to".equals(name)) {
+            this.to = value;
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
+        }
+    }
 
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{String.class};
+    public String getParameter(String name) throws InvalidParameterException {
+        if ("from".equals(name)) {
+            return this.from;
+        } else if ("to".equals(name)) {
+            return this.to;
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
+        }
+    }
+
+    @Override
+    public String[] getParameterNames() {
+        return new String[]{"from", "to"};
     }
 
     @Override
     public String[] getParameterValues() {
-        String[] parms = new String[de.length + para.length];
-
-        for (int i = 0; i < parms.length; i += 2) {
-            parms[i] = de[i / 2];
-            parms[i + 1] = para[i / 2];
-        }
-
-        return parms;
+        return new String[]{from, to};
     }
 
-    @Override
-    public void setParameters(String... content) {
-        if (content.length % 2 > 0) {
-            throw new IllegalArgumentException(
-                    Messages.getReplaceElementInvalidNumberParametersMessage());
-        }
-
-        de = new String[content.length / 2];
-
-        para = new String[content.length / 2];
-
-        for (int i = 0; i < content.length; i += 2) {
-            de[i / 2] = content[i];
-            para[i / 2] = content[i + 1];
-        }
-    }
-
+    /* ---------------------------------------------------------------------- */
+    
     @Override
     public String convert(String src) {
-        return StringUtils.replaceEach(src, de, para);
+        return StringUtils.replace(src, from, to);
     }
 
 }
