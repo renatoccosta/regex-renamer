@@ -16,12 +16,12 @@
 package br.com.renatoccosta.renamer.element.base;
 
 /**
- * Implementação concreta que é utilizada como raiz da árvore que representa
- * a estrutura dos elementos criados no parse da string de localização.
- *
+ * Concrete implementation that is used as the tree's root which represents
+ * the element's structure created on the parse process.
+ * 
  * @author Renato Costa
  */
-public class RootElement extends StreamChangeElement {
+public class RootElement extends CompositeElement {
 
     @Override
     public String getId() {
@@ -34,17 +34,22 @@ public class RootElement extends StreamChangeElement {
     }
 
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[] {};
-    }
-
-    @Override
     public String[] getParameterValues() {
         return new String[] {};
     }
 
     @Override
-    public void setParameters(String... content) {
+    public void setParameter(String name, String value) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getParameter(String name) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String[] getParameterNames() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

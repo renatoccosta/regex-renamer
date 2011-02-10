@@ -68,8 +68,8 @@ public class TreeGrammar extends TreeParser {
     public String getGrammarFileName() { return "/home/renato/Desenvolvimento/projetos_ativos/rr-trunk/renamer/src/br/com/renatoccosta/renamer/parser/TreeGrammar.g"; }
 
 
-    public StreamChangeElement root = new RootElement();
-    public StreamChangeElement last = root;
+    public CompositeElement root = new RootElement();
+    public CompositeElement last = root;
 
 
 

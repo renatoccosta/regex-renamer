@@ -15,37 +15,38 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.StreamChangeElement;
+import br.com.renatoccosta.renamer.element.base.CompositeElement;
+import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Elemento que altera o caso dos caracteres dos próximos elementos.
- * Pode ser alteração para maiúscula, minúscula ou sem alterações.
+ * Element that changes the case of it's content text. It can upper case,
+ * lower case or swap case.
  *
- * Ex: ${case:upper}
- * Coloca em maiúscula
- * aBc -> ABC
- *
- * Ex: ${case:none}
- * Não altera
- * aBc -> aBc
+ * e.g.
+ * Replace: <case mode='upper'>aBc</case>
+ * Result: ABC
  *
  * @author Renato Costa
  */
-public class CaseElement extends StreamChangeElement {
+public class CaseElement extends CompositeElement {
 
-    public static final String UPPER = "upper";
+    private enum CaseEnum {
 
-    public static final String LOWER_CASE = "lower";
+        UPPER,
+        LOWER,
+        SWAP
 
-    public static final String SWAP = "swap";
+    }
 
     private CaseEnum mode = CaseEnum.LOWER;
 
+    /* ---------------------------------------------------------------------- */
+    
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{CaseEnum.class};
+    public String[] getParameterNames() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -53,23 +54,29 @@ public class CaseElement extends StreamChangeElement {
         return new String[]{mode.toString()};
     }
 
-    /**
-     * Itens do array:
-     * 0 -> (Opcional) Modo. Padrão é 'none'
-     *
-     * @param content Parâmetros
-     */
     @Override
-    public void setParameters(String... content) {
-        if (content.length > 0) {
-            try {
-                mode = CaseEnum.valueOf(content[0]);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException(
-                        Messages.getCaseElementInvalidParametersMessage());
-            }
+    public String getParameter(String name) throws
+            InvalidParameterException {
+        if ("mode".equals(name)) {
+            return this.mode.toString();
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
         }
     }
+
+    @Override
+    public void setParameter(String name, String value) throws
+            InvalidParameterException {
+        if ("mode".equals(name)) {
+            this.mode = convertModeValue(value);
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
+        }
+    }
+
+    /* ---------------------------------------------------------------------- */
 
     @Override
     protected String convert(String src) {
@@ -85,12 +92,16 @@ public class CaseElement extends StreamChangeElement {
         return src;
     }
 
-}
+    /* ---------------------------------------------------------------------- */
 
-enum CaseEnum {
-
-    UPPER,
-    LOWER,
-    SWAP
+    private CaseEnum convertModeValue(String value) throws
+            InvalidParameterException {
+        try {
+            return CaseEnum.valueOf(value);
+        } catch (IllegalArgumentException e) {
+            throw new InvalidParameterException(
+                    Messages.getCaseElementInvalidParametersMessage());
+        }
+    }
 
 }

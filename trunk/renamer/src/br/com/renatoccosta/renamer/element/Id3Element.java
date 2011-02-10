@@ -15,22 +15,31 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.ExpressionElement;
+import br.com.renatoccosta.renamer.element.base.EmptyElement;
+import br.com.renatoccosta.renamer.exception.InvalidParameterException;
+import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
 
 /**
  *
  * @author Renato Costa
  */
-public class Id3Element extends ExpressionElement {
+public class Id3Element extends EmptyElement {
 
     @Override
-    public void setParameters(String... content) {
+    public String getContent(String find, String target, File file) throws
+            RenamerException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public String getContent(String find, String target, File file) {
+    public void setParameter(String name, String value) throws
+            InvalidParameterException {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getParameter(String name) throws InvalidParameterException {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
@@ -40,12 +49,12 @@ public class Id3Element extends ExpressionElement {
     }
 
     @Override
-    public void resetState() {
+    public String[] getParameterNames() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Class[] getParameterDataTypes() {
+    public void resetState() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

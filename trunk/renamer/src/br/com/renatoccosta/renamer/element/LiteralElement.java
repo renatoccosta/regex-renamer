@@ -15,24 +15,39 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.element.base.EmptyElement;
+import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import java.io.File;
 
 /**
- *
+ * Element that represents a string literal in the replace string
+ * 
  * @author renato
  */
-public class LiteralElement extends Element {
+public class LiteralElement extends EmptyElement {
 
     private String content;
 
+    /* ---------------------------------------------------------------------- */
     public LiteralElement(String content) {
         this.content = content;
     }
 
+    /* ---------------------------------------------------------------------- */
     @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{String.class};
+    public void setParameter(String name, String value) throws
+            InvalidParameterException {
+        this.content = value;
+    }
+
+    @Override
+    public String getParameter(String name) throws InvalidParameterException {
+        return content;
+    }
+
+    @Override
+    public String[] getParameterNames() {
+        return new String[]{"content"};
     }
 
     @Override
@@ -40,10 +55,7 @@ public class LiteralElement extends Element {
         return new String[]{content};
     }
 
-    @Override
-    public void setParameters(String... content) {
-        this.content = content[0];
-    }
+    /* ---------------------------------------------------------------------- */
 
     @Override
     public String getContent(String find, String target, File file) {
@@ -51,12 +63,12 @@ public class LiteralElement extends Element {
     }
 
     @Override
-    public String toString() {
-        return content;
+    public void resetState() {
     }
 
     @Override
-    public void resetState() {
+    public String toString() {
+        return content;
     }
 
 }

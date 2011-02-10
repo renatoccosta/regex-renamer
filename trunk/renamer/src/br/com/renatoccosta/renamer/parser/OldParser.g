@@ -1,4 +1,4 @@
-tree grammar TreeGrammar;
+tree grammar OldParser;
 
 options {
 	tokenVocab=Grammar;

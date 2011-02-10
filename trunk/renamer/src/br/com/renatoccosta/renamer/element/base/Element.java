@@ -15,12 +15,14 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.exception.InvalidElementException;
+import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
 
 /**
- * Classe base que representa um elemento na string de substituição. Cada
- * elemento aponta para o próximo, formando uma cadeia de elementos.
+ * Base class that represents an element on the substitution string. Each
+ * element points to the next one, making a chain of elements.
  * 
  * @author renato
  */
@@ -48,11 +50,40 @@ public abstract class Element {
     public abstract String getContent(String find, String target, File file)
             throws RenamerException;
 
-    public abstract void setParameters(String... content);
+//    /**
+//     * Sets the value of the parameters. The order of the parameters are
+//     * specified in the documentation of the variable expression
+//     *
+//     * @param content Array of values of the parameters
+//     */
+//    public abstract void setParameters(String... content);
+
+    /**
+     * Sets the value of the specified parameter
+     *
+     * @param name Parameter name
+     * @param value Parameter value as a string
+     */
+    public abstract void setParameter(String name, String value) throws
+            InvalidParameterException;
+
+    /**
+     * Gets the value of the specified parameter
+     *
+     * @param name Parameter name
+     * @return Parameter value
+     */
+    public abstract String getParameter(String name) throws
+            InvalidParameterException;
 
     public abstract String[] getParameterValues();
 
-    public abstract Class[] getParameterDataTypes();
+    public abstract String[] getParameterNames();
+
+//    public abstract Class[] getParameterDataTypes();
+
+    public abstract void add(Element element) throws
+            InvalidElementException;
 
     @Override
     public abstract String toString();
@@ -63,25 +94,25 @@ public abstract class Element {
      */
     public abstract void resetState();
 
-    /**
-     * Converte o array de parâmetros na string separada por ':'
-     * 
-     * @return Parâmetros separados por ':'
-     */
-    protected String getParametersAsString() {
-        StringBuffer sb = new StringBuffer();
-
-        for (String parm : getParameterValues()) {
-            sb.append(parm);
-            sb.append(":");
-        }
-
-        //remove o ':' do final
-        if (sb.length() > 0) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-
-        return sb.toString();
-    }
+//    /**
+//     * Converte o array de parâmetros na string separada por ':'
+//     *
+//     * @return Parâmetros separados por ':'
+//     */
+//    protected String getParametersAsString() {
+//        StringBuilder sb = new StringBuilder();
+//
+//        for (String parm : getParameterValues()) {
+//            sb.append(parm);
+//            sb.append(":");
+//        }
+//
+//        //remove o ':' do final
+//        if (sb.length() > 0) {
+//            sb.deleteCharAt(sb.length() - 1);
+//        }
+//
+//        return sb.toString();
+//    }
 
 }

@@ -15,28 +15,34 @@
  */
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.element.base.EmptyElement;
+import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
+import br.com.renatoccosta.renamer.i18n.Messages;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Elemento que representa um grupo de captura da expressão regular definida no
- * localizar. Seu conteúdo é o texto do grupo de captura.
+ * Element that represents a capturing group of the regular expression defined
+ * on the search string. It's content is the text of the capture group. The '0'
+ * index means the whole string and 1,2,3... means the group numbers.
  *
- * Ex: $1
- * Localizar: ([0-9]*).+
- * Texto: 1teste
- * Retorno: 1
+ * e.g.
+ * Text: 123abc
+ * Search: ([0-9]+).*
+ * Replace: <group idx='1'/>
+ * Result: 123
  *
  * @author renato
  */
-public class CaptureGroupElement extends Element {
+public class CaptureGroupElement extends EmptyElement {
 
     private int groupNumber = 0;
 
     private Pattern patternFind;
+
+    /* ---------------------------------------------------------------------- */
 
     public CaptureGroupElement() {
     }
@@ -45,24 +51,55 @@ public class CaptureGroupElement extends Element {
         this.groupNumber = groupNumber;
     }
 
-    @Override
-    public Class[] getParameterDataTypes() {
-        return new Class[]{Integer.class};
-    }
+    /* ---------------------------------------------------------------------- */
 
     @Override
     public String[] getParameterValues() {
-        return new String[]{String.valueOf(groupNumber)};
+        return new String[]{Integer.toString(groupNumber)};
     }
 
     @Override
-    public void setParameters(String... groupNumber) {
-        this.groupNumber = Integer.parseInt(groupNumber[0]);
+    public void setParameter(String name, String value) throws
+            InvalidParameterException {
+        if ("groupNumer".equals(name)) {
+            try {
+                this.groupNumber = Integer.parseInt(value);
+
+                if (groupNumber < 0) {
+                    throw new InvalidParameterException(
+                            Messages.getParameterWrongDataTypeInteger(name));
+                }
+            } catch (NumberFormatException ex) {
+                throw new InvalidParameterException(
+                        Messages.getParameterWrongDataTypeInteger(name));
+            }
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
+        }
     }
+
+    @Override
+    public String getParameter(String name) throws InvalidParameterException {
+        if ("groupNumer".equals(name)) {
+            return Integer.toString(this.groupNumber);
+        } else {
+            throw new InvalidParameterException(
+                    Messages.getInvalidParameterName(name));
+        }
+    }
+
+    @Override
+    public String[] getParameterNames() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    /* ---------------------------------------------------------------------- */
 
     @Override
     public String getContent(String find, String target, File file) throws
             RenamerException {
+
         if (patternFind == null) {
             patternFind = Pattern.compile(find);
         }
@@ -77,11 +114,6 @@ public class CaptureGroupElement extends Element {
         } catch (IndexOutOfBoundsException e) {
             throw new RenamerException(e);
         }
-    }
-
-    @Override
-    public String toString() {
-        return "$" + groupNumber;
     }
 
     @Override
