@@ -16,6 +16,8 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.EmptyElement;
+import br.com.renatoccosta.renamer.element.meta.ElementType;
+import br.com.renatoccosta.renamer.element.meta.Parameter;
 import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.i18n.Messages;
@@ -36,9 +38,11 @@ import java.util.regex.Pattern;
  *
  * @author renato
  */
+@ElementType(alias="group")
 public class CaptureGroupElement extends EmptyElement {
 
-    private int groupNumber = 0;
+    @Parameter
+    private int idx = 0;
 
     private Pattern patternFind;
 
@@ -48,24 +52,25 @@ public class CaptureGroupElement extends EmptyElement {
     }
 
     public CaptureGroupElement(int groupNumber) {
-        this.groupNumber = groupNumber;
+        this.idx = groupNumber;
     }
 
     /* ---------------------------------------------------------------------- */
 
     @Override
     public String[] getParameterValues() {
-        return new String[]{Integer.toString(groupNumber)};
+        return new String[]{Integer.toString(idx)};
     }
 
     @Override
     public void setParameter(String name, String value) throws
             InvalidParameterException {
-        if ("groupNumer".equals(name)) {
-            try {
-                this.groupNumber = Integer.parseInt(value);
 
-                if (groupNumber < 0) {
+        if ("idx".equals(name)) {
+            try {
+                this.idx = Integer.parseInt(value);
+
+                if (idx < 0) {
                     throw new InvalidParameterException(
                             Messages.getParameterWrongDataTypeInteger(name));
                 }
@@ -81,8 +86,8 @@ public class CaptureGroupElement extends EmptyElement {
 
     @Override
     public String getParameter(String name) throws InvalidParameterException {
-        if ("groupNumer".equals(name)) {
-            return Integer.toString(this.groupNumber);
+        if ("idx".equals(name)) {
+            return Integer.toString(this.idx);
         } else {
             throw new InvalidParameterException(
                     Messages.getInvalidParameterName(name));
@@ -108,7 +113,7 @@ public class CaptureGroupElement extends EmptyElement {
         matcher.find();
 
         try {
-            return matcher.group(groupNumber);
+            return matcher.group(idx);
         } catch (IllegalStateException e) {
             throw new RenamerException(e);
         } catch (IndexOutOfBoundsException e) {
