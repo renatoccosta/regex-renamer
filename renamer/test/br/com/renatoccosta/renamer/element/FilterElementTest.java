@@ -27,7 +27,7 @@ public class FilterElementTest extends TestCase {
         System.out.println("setParameters");
 
         FilterElement instance = new FilterElement();
-        instance.setParameters("s");
+//        instance.setParameters("s");
     }
 
     public void testSetParametersInvalido() {
@@ -36,7 +36,7 @@ public class FilterElementTest extends TestCase {
         FilterElement instance = new FilterElement();
 
         try {
-            instance.setParameters("a");
+//            instance.setParameters("a");
             fail("Não foi lançada uma exceção");
             
         } catch (IllegalArgumentException e) {
@@ -49,7 +49,7 @@ public class FilterElementTest extends TestCase {
 
         String src = "r1e2n3a4t5o";
         FilterElement instance = new FilterElement();
-        instance.setParameters("n");
+//        instance.setParameters("n");
 
         String expResult = "renato";
         String result = instance.convert(src);
@@ -62,7 +62,7 @@ public class FilterElementTest extends TestCase {
 
         String src = "r1e2n3a4t5o";
         FilterElement instance = new FilterElement();
-        instance.setParameters("l");
+//        instance.setParameters("l");
 
         String expResult = "12345";
         String result = instance.convert(src);
@@ -75,7 +75,7 @@ public class FilterElementTest extends TestCase {
 
         String src = "r1!e2@n3#a4$t5%o";
         FilterElement instance = new FilterElement();
-        instance.setParameters("s");
+//        instance.setParameters("s");
 
         String expResult = "r1e2n3a4t5o";
         String result = instance.convert(src);
@@ -88,7 +88,7 @@ public class FilterElementTest extends TestCase {
 
         String src = "renato costa";
         FilterElement instance = new FilterElement();
-        instance.setParameters("w");
+//        instance.setParameters("w");
 
         String expResult = "renatocosta";
         String result = instance.convert(src);

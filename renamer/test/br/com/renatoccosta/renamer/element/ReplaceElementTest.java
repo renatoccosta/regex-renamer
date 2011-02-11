@@ -27,7 +27,7 @@ public class ReplaceElementTest extends TestCase {
 
         ReplaceElement instance = new ReplaceElement();
 
-        instance.setParameters("a", "4");
+//        instance.setParameters("a", "4");
     }
 
     public void testSetParametersInvalido() {
@@ -36,7 +36,7 @@ public class ReplaceElementTest extends TestCase {
         ReplaceElement instance = new ReplaceElement();
 
         try {
-            instance.setParameters("a");
+//            instance.setParameters("a");
             fail("Não foi lançada uma exceção");
         } catch (IllegalArgumentException e) {
             assertTrue(true);
@@ -48,7 +48,7 @@ public class ReplaceElementTest extends TestCase {
 
         String src = "renato";
         ReplaceElement instance = new ReplaceElement();
-        instance.setParameters("e", "3", "a", "4", "o", "0");
+//        instance.setParameters("e", "3", "a", "4", "o", "0");
 
         String expResult = "r3n4t0";
         String result = instance.convert(src);

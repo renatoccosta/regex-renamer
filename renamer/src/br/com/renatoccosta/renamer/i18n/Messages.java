@@ -119,4 +119,9 @@ public class Messages {
                 paramName);
     }
 
+    public static String getInvalidParameterValue(String paramName) {
+        return String.format(messages.getString("InvalidParameterValue"),
+                paramName);
+    }
+
 }

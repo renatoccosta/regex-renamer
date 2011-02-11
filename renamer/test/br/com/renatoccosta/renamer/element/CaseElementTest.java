@@ -26,7 +26,7 @@ public class CaseElementTest extends TestCase {
         System.out.println("setParameters");
 
         CaseElement instance = new CaseElement();
-        instance.setParameters("upper");
+//        instance.setParameters("upper");
     }
 
     public void testSetParametersInvalido() {
@@ -35,7 +35,7 @@ public class CaseElementTest extends TestCase {
         CaseElement instance = new CaseElement();
 
         try {
-            instance.setParameters("test");
+//            instance.setParameters("test");
             fail("Não foi lançada uma exceção");
         } catch (IllegalArgumentException e) {
             assertTrue(true);
@@ -47,7 +47,7 @@ public class CaseElementTest extends TestCase {
 
         String src = "renATO";
         CaseElement instance = new CaseElement();
-        instance.setParameters("upper");
+//        instance.setParameters("upper");
 
         String expResult = "RENATO";
         String result = instance.convert(src);
@@ -60,7 +60,7 @@ public class CaseElementTest extends TestCase {
 
         String src = "renATO";
         CaseElement instance = new CaseElement();
-        instance.setParameters("lower");
+//        instance.setParameters("lower");
 
         String expResult = "renato";
         String result = instance.convert(src);
@@ -73,7 +73,7 @@ public class CaseElementTest extends TestCase {
 
         String src = "renATO";
         CaseElement instance = new CaseElement();
-        instance.setParameters("swap");
+//        instance.setParameters("swap");
 
         String expResult = "RENato";
         String result = instance.convert(src);

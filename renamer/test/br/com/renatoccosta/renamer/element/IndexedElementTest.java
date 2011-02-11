@@ -27,7 +27,7 @@ public class IndexedElementTest extends TestCase {
         System.out.println("setParameters");
 
         IndexedElement instance = new IndexedElement();
-        instance.setParameters("1", "2");
+//        instance.setParameters("1", "2");
     }
 
     public void testGetContent() {
@@ -37,7 +37,7 @@ public class IndexedElementTest extends TestCase {
         String target = "";
         File file = null;
         IndexedElement instance = new IndexedElement();
-        instance.setParameters("1", "2");
+//        instance.setParameters("1", "2");
 
         assertEquals("01", instance.getContent(find, target, file));
 

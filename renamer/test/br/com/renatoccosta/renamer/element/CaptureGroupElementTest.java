@@ -28,7 +28,7 @@ public class CaptureGroupElementTest extends TestCase {
         System.out.println("setParameters");
         CaptureGroupElement instance = new CaptureGroupElement();
 
-        instance.setParameters("1");
+//        instance.setParameters("1");
     }
 
     public void testGetContent() throws Exception {
@@ -38,7 +38,7 @@ public class CaptureGroupElementTest extends TestCase {
         String target = "renaaaato";
         File file = null;
         CaptureGroupElement instance = new CaptureGroupElement();
-        instance.setParameters("1");
+//        instance.setParameters("1");
 
         String expResult = "aaaa";
         String result = instance.getContent(find, target, file);
