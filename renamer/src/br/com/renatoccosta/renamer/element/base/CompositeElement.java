@@ -15,9 +15,11 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.element.meta.Parameter;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,20 +85,22 @@ public abstract class CompositeElement extends Element {
 
     @Override
     public String toString() {
+
         StringBuilder sb = new StringBuilder();
 
         sb.append("<").append(getId());
 
-        String values[] = getParameterValues();
-        for (int i = 0; i < getParameterNames().length; i++) {
-            String paramName = getParameterNames()[i];
-            String value = values[i];
-
-            sb.append(" ").append(paramName).append("=").
-                    append("'").append(value).append("'");
+        Field[] fields = this.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            Parameter p = field.getAnnotation(Parameter.class);
+            if (p != null) {
+                try {
+                    sb.append(" ").append(p.alias()).append("='").append(
+                            field.get(this).toString()).append("'");
+                } catch (IllegalAccessException ex) {
+                }
+            }
         }
-
-        sb.append(">");
 
         for (Element element : childs) {
             sb.append(element.toString());
@@ -104,7 +108,7 @@ public abstract class CompositeElement extends Element {
 
         sb.append("</").append(getId()).append(">");
 
-        return sb.toString();
+        return sb.toString();        
     }
 
 }

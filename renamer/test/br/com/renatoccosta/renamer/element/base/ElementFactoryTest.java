@@ -44,24 +44,23 @@ public class ElementFactoryTest extends TestCase {
     public void testSetPrimitiveProperty() throws Exception {
         System.out.println("setProperty");
 
-        Element element = new CaptureGroupElement();
+        CaptureGroupElement element = new CaptureGroupElement();
         String name = "idx";
         String value = "1";
         ElementFactory.setParameter(element, name, value);
 
-        assertEquals("1", element.getParameter(name));
+        assertEquals(1, element.getIdx());
     }
 
     public void testSetEnumProperty() throws Exception {
         System.out.println("setProperty");
 
-        Element element = new CaseElement();
+        CaseElement element = new CaseElement();
         String name = "mode";
         String value = "upper";
         ElementFactory.setParameter(element, name, value);
 
-        assertEquals(CaseElement.CaseEnum.UPPER.toString(),
-                element.getParameter(name));
+        assertEquals(CaseElement.CaseEnum.UPPER, element.getMode());
     }
 
 }

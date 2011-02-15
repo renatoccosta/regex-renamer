@@ -16,8 +16,8 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.CompositeElement;
-import br.com.renatoccosta.renamer.exception.InvalidParameterException;
-import br.com.renatoccosta.renamer.i18n.Messages;
+import br.com.renatoccosta.renamer.element.meta.ElementType;
+import br.com.renatoccosta.renamer.element.meta.Parameter;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -34,9 +34,10 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author Renato Costa
  */
+@ElementType(id="filter")
 public class FilterElement extends CompositeElement {
 
-    private enum FilterEnum {
+    public enum FilterEnum {
 
         LETTERS,
         NUMBERS,
@@ -45,39 +46,17 @@ public class FilterElement extends CompositeElement {
 
     }
 
+    @Parameter
     private FilterEnum mode = FilterEnum.SYMBOLS;
 
     /* ---------------------------------------------------------------------- */
 
-    @Override
-    public String getParameter(String name) throws InvalidParameterException {
-        if ("mode".equals(name)) {
-            return this.mode.toString();
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
+    public FilterEnum getMode() {
+        return mode;
     }
 
-    @Override
-    public void setParameter(String name, String value) throws
-            InvalidParameterException {
-        if ("mode".equals(name)) {
-            this.mode = convertModeValue(value);
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
-    }
-
-    @Override
-    public String[] getParameterValues() {
-        return new String[] {this.mode.toString()};
-    }
-
-    @Override
-    public String[] getParameterNames() {
-        return new String[]{"mode"};
+    public void setMode(FilterEnum mode) {
+        this.mode = mode;
     }
 
     /* ---------------------------------------------------------------------- */
@@ -124,18 +103,6 @@ public class FilterElement extends CompositeElement {
         }
 
         return src;
-    }
-
-    /* ---------------------------------------------------------------------- */
-
-    private FilterEnum convertModeValue(String value) throws
-            InvalidParameterException {
-        try {
-            return FilterEnum.valueOf(value);
-        } catch (IllegalArgumentException e) {
-            throw new InvalidParameterException(
-                    Messages.getCaseElementInvalidParametersMessage());
-        }
     }
 
 }

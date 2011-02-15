@@ -16,8 +16,10 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.element.meta.Parameter;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
 import br.com.renatoccosta.renamer.i18n.Messages;
+import java.lang.reflect.Field;
 
 /**
  *
@@ -33,19 +35,25 @@ public abstract class EmptyElement extends Element {
 
     @Override
     public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//
-//        sb.append("<").append(getId());
-//
-//        String params = getParametersAsString();
-//        if (!"".equals(params)) {
-//            sb.append(":").append(params);
-//        }
-//
-//        sb.append("/>");
+        StringBuilder sb = new StringBuilder();
 
-//        return sb.toString();
-        return null;
+        sb.append("<").append(getId());
+
+        Field[] fields = this.getClass().getDeclaredFields();
+        for (Field field : fields) {
+            Parameter p = field.getAnnotation(Parameter.class);
+            if (p != null) {
+                try {
+                    sb.append(" ").append(p.alias()).append("='").append(
+                            field.get(this).toString()).append("'");
+                } catch (IllegalAccessException ex) {
+                }
+            }
+        }
+
+        sb.append("/>");
+
+        return sb.toString();
     }
 
 }

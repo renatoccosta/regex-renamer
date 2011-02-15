@@ -16,8 +16,8 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.EmptyElement;
-import br.com.renatoccosta.renamer.exception.InvalidParameterException;
-import br.com.renatoccosta.renamer.i18n.Messages;
+import br.com.renatoccosta.renamer.element.meta.ElementType;
+import br.com.renatoccosta.renamer.element.meta.Parameter;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,9 +31,10 @@ import java.util.Date;
  *
  * @author Renato Costa
  */
+@ElementType(id="file")
 public class FileInformationElement extends EmptyElement {
 
-    private enum FileInformationEnum {
+    public enum FileInformationEnum {
 
         FOLDER,
         DATE,
@@ -41,42 +42,19 @@ public class FileInformationElement extends EmptyElement {
 
     }
 
+    @Parameter
     private FileInformationEnum mode = FileInformationEnum.DATE;
 
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     /* ---------------------------------------------------------------------- */
 
-    @Override
-    public void setParameter(String name, String value) throws
-            InvalidParameterException {
-        if ("mode".equals(name)) {
-            this.mode = convertModeValue(value);
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
+    public FileInformationEnum getMode() {
+        return mode;
     }
 
-    @Override
-    public String getParameter(String name) throws
-            InvalidParameterException {
-        if ("mode".equals(name)) {
-            return this.mode.toString();
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
-    }
-
-    @Override
-    public String[] getParameterValues() {
-        return new String[]{mode.toString()};
-    }
-
-    @Override
-    public String[] getParameterNames() {
-        return new String[] {"mode"};
+    public void setMode(FileInformationEnum mode) {
+        this.mode = mode;
     }
 
     /* ---------------------------------------------------------------------- */
@@ -93,22 +71,6 @@ public class FileInformationElement extends EmptyElement {
         }
 
         return "";
-    }
-
-    @Override
-    public void resetState() {
-    }
-
-    /* ---------------------------------------------------------------------- */
-
-    private FileInformationEnum convertModeValue(String value) throws
-            InvalidParameterException {
-        try {
-            return FileInformationEnum.valueOf(value);
-        } catch (IllegalArgumentException e) {
-            throw new InvalidParameterException(
-                    Messages.getCaseElementInvalidParametersMessage());
-        }
     }
 
 }

@@ -16,8 +16,8 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.CompositeElement;
-import br.com.renatoccosta.renamer.exception.InvalidParameterException;
-import br.com.renatoccosta.renamer.i18n.Messages;
+import br.com.renatoccosta.renamer.element.meta.ElementType;
+import br.com.renatoccosta.renamer.element.meta.Parameter;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -27,46 +27,31 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author Renato Costa
  */
+@ElementType(id="replace")
 public class ReplaceElement extends CompositeElement {
 
+    @Parameter
     private String from;
 
+    @Parameter
     private String to;
 
     /* ---------------------------------------------------------------------- */
-    @Override
-    public void setParameter(String name, String value) throws
-            InvalidParameterException {
-        if ("from".equals(name)) {
-            this.from = value;
-        } else if ("to".equals(name)) {
-            this.to = value;
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
+    
+    public String getFrom() {
+        return from;
     }
 
-    @Override
-    public String getParameter(String name) throws InvalidParameterException {
-        if ("from".equals(name)) {
-            return this.from;
-        } else if ("to".equals(name)) {
-            return this.to;
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
+    public void setFrom(String from) {
+        this.from = from;
     }
 
-    @Override
-    public String[] getParameterNames() {
-        return new String[]{"from", "to"};
+    public String getTo() {
+        return to;
     }
 
-    @Override
-    public String[] getParameterValues() {
-        return new String[]{from, to};
+    public void setTo(String to) {
+        this.to = to;
     }
 
     /* ---------------------------------------------------------------------- */
