@@ -1,7 +1,7 @@
 
-package br.com.renatoccosta.renamer.element;
+package br.com.renatoccosta.renamer.element.base;
 
-import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
+import br.com.renatoccosta.renamer.element.CaseElement;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import junit.framework.TestCase;
 
@@ -9,9 +9,9 @@ import junit.framework.TestCase;
  *
  * @author Renato Costa
  */
-public class ElementDiscoveryTest extends TestCase {
+public class ElementsDirectoryTest extends TestCase {
     
-    public ElementDiscoveryTest(String testName) {
+    public ElementsDirectoryTest(String testName) {
         super(testName);
     }
 

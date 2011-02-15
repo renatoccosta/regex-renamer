@@ -22,35 +22,15 @@ public class ReplaceElementTest extends TestCase {
         super.tearDown();
     }
 
-    public void testSetParameters() {
-        System.out.println("setParameters");
-
-        ReplaceElement instance = new ReplaceElement();
-
-//        instance.setParameters("a", "4");
-    }
-
-    public void testSetParametersInvalido() {
-        System.out.println("setParameters");
-
-        ReplaceElement instance = new ReplaceElement();
-
-        try {
-//            instance.setParameters("a");
-            fail("Não foi lançada uma exceção");
-        } catch (IllegalArgumentException e) {
-            assertTrue(true);
-        }
-    }
-
     public void testConvert() {
         System.out.println("convert");
 
         String src = "renato";
         ReplaceElement instance = new ReplaceElement();
-//        instance.setParameters("e", "3", "a", "4", "o", "0");
+        instance.setFrom("e");
+        instance.setTo("3");
 
-        String expResult = "r3n4t0";
+        String expResult = "r3nato";
         String result = instance.convert(src);
 
         assertEquals(expResult, result);
