@@ -35,20 +35,25 @@ import br.com.renatoccosta.renamer.element.base.*;
 }
 
 @members {
-public StreamChangeElement root = new RootElement();
-public StreamChangeElement last = root;
+public CompositeElement root = new RootElement();
+}
+
+@rulecatch {
+catch (ElementException re) {
+	throw new RenamerSemanticException(input, re);
+}
 }
 
 document
 	: 
 	( element 
 		{
-			last = last.add($element.elem);
+			root.add($element.elem);
 		}
 	| text=PCDATA 
 		{ 
 			System.out.println($text.text); 
-			last = last.add(new LiteralElement($text.text));
+			root.add(new LiteralElement($text.text));
 		} 
 	)+ ;
 
@@ -61,7 +66,7 @@ element returns [Element elem]
             ( ^(ATTRIBUTE attrName=GENERIC_ID value=ATTR_VALUE)
                 { 
                 	System.out.print(" "+$attrName.text+"="+$value.text); 
-                	$elem.setAttribute($attrName.text, $value.text);
+                	ElementFactory.setParameter($elem, $attrName.text, $value.text);
                 }
             )*
             { 

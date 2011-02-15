@@ -16,6 +16,8 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.CompositeElement;
+import br.com.renatoccosta.renamer.element.meta.ElementType;
+import br.com.renatoccosta.renamer.element.meta.Parameter;
 import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import org.apache.commons.lang.StringUtils;
@@ -30,9 +32,10 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author Renato Costa
  */
+@ElementType(alias="case")
 public class CaseElement extends CompositeElement {
 
-    private enum CaseEnum {
+    public enum CaseEnum {
 
         UPPER,
         LOWER,
@@ -40,10 +43,19 @@ public class CaseElement extends CompositeElement {
 
     }
 
+    @Parameter
     private CaseEnum mode = CaseEnum.LOWER;
 
     /* ---------------------------------------------------------------------- */
-    
+
+    public CaseEnum getMode() {
+        return mode;
+    }
+
+    public void setMode(CaseEnum mode) {
+        this.mode = mode;
+    }
+
     @Override
     public String[] getParameterNames() {
         throw new UnsupportedOperationException("Not supported yet.");

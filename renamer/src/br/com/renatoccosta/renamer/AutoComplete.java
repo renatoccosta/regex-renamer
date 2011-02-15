@@ -19,7 +19,6 @@ package br.com.renatoccosta.renamer;
 import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.RenamerSemanticException;
-import br.com.renatoccosta.renamer.parser.GrammarLexer;
 import java.util.ArrayList;
 import java.util.List;
 import org.antlr.runtime.EarlyExitException;
@@ -67,10 +66,10 @@ public class AutoComplete {
                     //decisionNumber = 6 means that the parser found an error on
                     //the literal rule. If the last token is a colon, means
                     //that is a parameter
-                    if ((eee.decisionNumber == 6) &&
-                            (ts.LA(-1) == GrammarLexer.COLON)) {
-                        System.out.println(ts.LT(-1));
-                    }
+//                    if ((eee.decisionNumber == 6) &&
+//                            (ts.LA(-1) == GrammarLexer.COLON)) {
+//                        System.out.println(ts.LT(-1));
+//                    }
 
                 } else if (re instanceof RenamerSemanticException &&
                         re.getCause() instanceof ElementNotFoundException) {

@@ -20,7 +20,8 @@ import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.lang.reflect.Field;
-import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.BeanUtilsBean;
+import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.log4j.Logger;
 
@@ -31,6 +32,29 @@ import org.apache.log4j.Logger;
 public class ElementFactory {
 
     private static Logger LOGGER = Logger.getLogger(ElementFactory.class);
+
+    private static BeanUtilsBean utilsBean = new BeanUtilsBean(
+            new ConvertUtilsBean() {
+
+                @Override
+                public Object convert(String value, Class clazz) {
+                    if (clazz.isEnum()) {
+                        for (Object en : clazz.getEnumConstants()) {
+                            if (value.toString().equalsIgnoreCase(
+                                    en.toString())) {
+                                return en;
+                            }
+                        }
+
+                        return null;
+                        
+                    } else {
+                        return super.convert(value, clazz);
+                    }
+
+                }
+
+            });
 
     public static Element compile(String alias) throws
             ElementNotFoundException {
@@ -59,25 +83,25 @@ public class ElementFactory {
         return ee;
     }
 
-    public static void setProperty(Element element, String name, String value)
+    public static void setParameter(Element element, String name, String value)
             throws InvalidParameterException {
         try {
             Field f = element.getClass().getDeclaredField(name);
 
             if (f.getAnnotation(Parameter.class) != null) {
-                Object v = ConvertUtils.convert(value, f.getType());
+                Object v = utilsBean.getConvertUtils().convert(
+                        value, f.getType());
                 PropertyUtils.setProperty(element, name, v);
             } else {
                 throw createInvalidParameter(name, null);
             }
 
         } catch (Exception ex) {
-                throw createInvalidParameter(name, ex);
+            throw createInvalidParameter(name, ex);
         }
     }
 
     /* ---------------------------------------------------------------------- */
-
     private static InvalidParameterException createInvalidParameter(
             String paramName, Exception rootCause) {
         if (rootCause == null) {

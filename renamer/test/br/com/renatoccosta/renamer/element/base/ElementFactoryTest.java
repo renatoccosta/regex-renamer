@@ -17,6 +17,8 @@
 
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.element.CaptureGroupElement;
+import br.com.renatoccosta.renamer.element.CaseElement;
 import junit.framework.TestCase;
 
 /**
@@ -29,24 +31,37 @@ public class ElementFactoryTest extends TestCase {
         super(testName);
     }
 
-    public void testCompile() throws Exception {
-        System.out.println("compile");
-        String alias = "";
-        Element expResult = null;
-        Element result = ElementFactory.compile(alias);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+//    public void testCompile() throws Exception {
+//        System.out.println("compile");
+//        String alias = "";
+//        Element expResult = null;
+//        Element result = ElementFactory.compile(alias);
+//        assertEquals(expResult, result);
+//        // TODO review the generated test code and remove the default call to fail.
+//        fail("The test case is a prototype.");
+//    }
+
+    public void testSetPrimitiveProperty() throws Exception {
+        System.out.println("setProperty");
+
+        Element element = new CaptureGroupElement();
+        String name = "idx";
+        String value = "1";
+        ElementFactory.setParameter(element, name, value);
+
+        assertEquals("1", element.getParameter(name));
     }
 
-    public void testSetProperty() throws Exception {
+    public void testSetEnumProperty() throws Exception {
         System.out.println("setProperty");
-        Element element = null;
-        String name = "";
-        String value = "";
-        ElementFactory.setProperty(element, name, value);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        Element element = new CaseElement();
+        String name = "mode";
+        String value = "upper";
+        ElementFactory.setParameter(element, name, value);
+
+        assertEquals(CaseElement.CaseEnum.UPPER.toString(),
+                element.getParameter(name));
     }
 
 }

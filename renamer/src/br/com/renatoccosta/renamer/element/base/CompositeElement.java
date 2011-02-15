@@ -31,25 +31,7 @@ public abstract class CompositeElement extends Element {
 
     protected boolean elementoAberto = true;
 
-    protected CompositeElement parent;
-
     protected List<Element> childs = new ArrayList<Element>();
-
-    public boolean isElementoAberto() {
-        return elementoAberto;
-    }
-
-    public void setElementoAberto(boolean elementoAberto) {
-        this.elementoAberto = elementoAberto;
-    }
-
-    public CompositeElement getParent() {
-        return parent;
-    }
-
-    public void setParent(CompositeElement parent) {
-        this.parent = parent;
-    }
 
     /**
      * Add an element as a child. Other classes may override this method to add
@@ -58,11 +40,7 @@ public abstract class CompositeElement extends Element {
     public void add(Element element) throws
             InvalidElementException {
         childs.add(element);
-
-        if (element instanceof CompositeElement) {
-            CompositeElement sce = (CompositeElement) element;
-            sce.setParent(this);
-        }
+        element.setParent(this);
     }
 
     /**

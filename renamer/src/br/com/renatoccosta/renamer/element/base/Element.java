@@ -28,6 +28,8 @@ import java.io.File;
  */
 public abstract class Element {
 
+    protected CompositeElement parent;
+
     /**
      * Retorna o id do elemento. Este id é utilizado para identificação na
      * string de substituição
@@ -49,14 +51,6 @@ public abstract class Element {
      */
     public abstract String getContent(String find, String target, File file)
             throws RenamerException;
-
-//    /**
-//     * Sets the value of the parameters. The order of the parameters are
-//     * specified in the documentation of the variable expression
-//     *
-//     * @param content Array of values of the parameters
-//     */
-//    public abstract void setParameters(String... content);
 
     /**
      * Sets the value of the specified parameter
@@ -80,6 +74,14 @@ public abstract class Element {
 
     public abstract String[] getParameterNames();
 
+    public CompositeElement getParent() {
+        return parent;
+    }
+
+    public void setParent(CompositeElement parent) {
+        this.parent = parent;
+    }
+
 //    public abstract Class[] getParameterDataTypes();
 
     public abstract void add(Element element) throws
@@ -93,26 +95,5 @@ public abstract class Element {
      * de quando foram criados.
      */
     public abstract void resetState();
-
-//    /**
-//     * Converte o array de parâmetros na string separada por ':'
-//     *
-//     * @return Parâmetros separados por ':'
-//     */
-//    protected String getParametersAsString() {
-//        StringBuilder sb = new StringBuilder();
-//
-//        for (String parm : getParameterValues()) {
-//            sb.append(parm);
-//            sb.append(":");
-//        }
-//
-//        //remove o ':' do final
-//        if (sb.length() > 0) {
-//            sb.deleteCharAt(sb.length() - 1);
-//        }
-//
-//        return sb.toString();
-//    }
 
 }

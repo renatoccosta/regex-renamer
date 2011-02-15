@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:45:30 F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g 2011-02-01 17:06:02
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g 2011-02-14 16:56:13
 
 /**
  * Copyright 2009 Renato Couto da Costa
@@ -66,22 +66,21 @@ public class RenamerTreeParser extends TreeParser {
 
 
     public CompositeElement root = new RootElement();
-    public CompositeElement last = root;
 
 
 
     // $ANTLR start "document"
-    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:42:1: document : ( element | text= PCDATA )+ ;
+    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:47:1: document : ( element | text= PCDATA )+ ;
     public final void document() throws RecognitionException {
         Tree text=null;
         Element element1 = null;
 
 
         try {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:43:2: ( ( element | text= PCDATA )+ )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:44:2: ( element | text= PCDATA )+
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:48:2: ( ( element | text= PCDATA )+ )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:49:2: ( element | text= PCDATA )+
             {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:44:2: ( element | text= PCDATA )+
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:49:2: ( element | text= PCDATA )+
             int cnt1=0;
             loop1:
             do {
@@ -98,26 +97,26 @@ public class RenamerTreeParser extends TreeParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:44:4: element
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:49:4: element
             	    {
-            	    pushFollow(FOLLOW_element_in_document73);
+            	    pushFollow(FOLLOW_element_in_document79);
             	    element1=element();
 
             	    state._fsp--;
 
 
-            	    			last = last.add(element1);
+            	    			root.add(element1);
             	    		
 
             	    }
             	    break;
             	case 2 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:48:4: text= PCDATA
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:53:4: text= PCDATA
             	    {
-            	    text=(Tree)match(input,PCDATA,FOLLOW_PCDATA_in_document85); 
+            	    text=(Tree)match(input,PCDATA,FOLLOW_PCDATA_in_document91); 
             	     
             	    			System.out.println((text!=null?text.getText():null)); 
-            	    			last = last.add(new LiteralElement((text!=null?text.getText():null)));
+            	    			root.add(new LiteralElement((text!=null?text.getText():null)));
             	    		
 
             	    }
@@ -136,9 +135,9 @@ public class RenamerTreeParser extends TreeParser {
             }
 
         }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
+
+        catch (ElementException re) {
+        	throw new RenamerSemanticException(input, re);
         }
         finally {
         }
@@ -148,7 +147,7 @@ public class RenamerTreeParser extends TreeParser {
 
 
     // $ANTLR start "element"
-    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:55:1: element returns [Element elem] : ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* ) ;
+    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:60:1: element returns [Element elem] : ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* ) ;
     public final Element element() throws RecognitionException {
         Element elem = null;
 
@@ -160,18 +159,18 @@ public class RenamerTreeParser extends TreeParser {
 
 
         try {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:56:5: ( ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* ) )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:56:7: ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:61:5: ( ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* ) )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:61:7: ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* )
             {
-            match(input,ELEMENT,FOLLOW_ELEMENT_in_element114); 
+            match(input,ELEMENT,FOLLOW_ELEMENT_in_element120); 
 
             match(input, Token.DOWN, null); 
-            name=(Tree)match(input,GENERIC_ID,FOLLOW_GENERIC_ID_in_element118); 
+            name=(Tree)match(input,GENERIC_ID,FOLLOW_GENERIC_ID_in_element124); 
              
                         	System.out.print("<"+(name!=null?name.getText():null)); 
                         	elem = ElementFactory.compile((name!=null?name.getText():null));
                         
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:61:13: ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )*
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:66:13: ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )*
             loop2:
             do {
                 int alt2=2;
@@ -184,18 +183,18 @@ public class RenamerTreeParser extends TreeParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:61:15: ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE )
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:66:15: ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE )
             	    {
-            	    match(input,ATTRIBUTE,FOLLOW_ATTRIBUTE_in_element149); 
+            	    match(input,ATTRIBUTE,FOLLOW_ATTRIBUTE_in_element155); 
 
             	    match(input, Token.DOWN, null); 
-            	    attrName=(Tree)match(input,GENERIC_ID,FOLLOW_GENERIC_ID_in_element153); 
-            	    value=(Tree)match(input,ATTR_VALUE,FOLLOW_ATTR_VALUE_in_element157); 
+            	    attrName=(Tree)match(input,GENERIC_ID,FOLLOW_GENERIC_ID_in_element159); 
+            	    value=(Tree)match(input,ATTR_VALUE,FOLLOW_ATTR_VALUE_in_element163); 
 
             	    match(input, Token.UP, null); 
             	     
             	                    	System.out.print(" "+(attrName!=null?attrName.getText():null)+"="+(value!=null?value.getText():null)); 
-            	                    	elem.setAttribute((attrName!=null?attrName.getText():null), (value!=null?value.getText():null));
+            	                    	ElementFactory.setParameter(elem, (attrName!=null?attrName.getText():null), (value!=null?value.getText():null));
             	                    
 
             	    }
@@ -209,7 +208,7 @@ public class RenamerTreeParser extends TreeParser {
              
                         	System.out.println(">"); 
                         
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:70:13: (e1= element | text= PCDATA )*
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:75:13: (e1= element | text= PCDATA )*
             loop3:
             do {
                 int alt3=3;
@@ -225,9 +224,9 @@ public class RenamerTreeParser extends TreeParser {
 
                 switch (alt3) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:70:15: e1= element
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:75:15: e1= element
             	    {
-            	    pushFollow(FOLLOW_element_in_element223);
+            	    pushFollow(FOLLOW_element_in_element229);
             	    e1=element();
 
             	    state._fsp--;
@@ -239,12 +238,12 @@ public class RenamerTreeParser extends TreeParser {
             	    }
             	    break;
             	case 2 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:74:15: text= PCDATA
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:79:15: text= PCDATA
             	    {
-            	    text=(Tree)match(input,PCDATA,FOLLOW_PCDATA_in_element256); 
+            	    text=(Tree)match(input,PCDATA,FOLLOW_PCDATA_in_element262); 
             	     
             	                    	System.out.println((text!=null?text.getText():null)); 
-            	                    	last = last.add(new LiteralElement((text!=null?text.getText():null)));
+            	                    	elem.add(new LiteralElement((text!=null?text.getText():null)));
             	                    
 
             	    }
@@ -257,7 +256,6 @@ public class RenamerTreeParser extends TreeParser {
 
              
                         	System.out.println("</"+(name!=null?name.getText():null)+">"); 
-                        	elem.close((name!=null?name.getText():null));
                         
 
             match(input, Token.UP, null); 
@@ -265,9 +263,9 @@ public class RenamerTreeParser extends TreeParser {
             }
 
         }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
+
+        catch (ElementException re) {
+        	throw new RenamerSemanticException(input, re);
         }
         finally {
         }
@@ -280,14 +278,14 @@ public class RenamerTreeParser extends TreeParser {
 
  
 
-    public static final BitSet FOLLOW_element_in_document73 = new BitSet(new long[]{0x0000000000010402L});
-    public static final BitSet FOLLOW_PCDATA_in_document85 = new BitSet(new long[]{0x0000000000010402L});
-    public static final BitSet FOLLOW_ELEMENT_in_element114 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_GENERIC_ID_in_element118 = new BitSet(new long[]{0x0000000000030408L});
-    public static final BitSet FOLLOW_ATTRIBUTE_in_element149 = new BitSet(new long[]{0x0000000000000004L});
-    public static final BitSet FOLLOW_GENERIC_ID_in_element153 = new BitSet(new long[]{0x0000000000000200L});
-    public static final BitSet FOLLOW_ATTR_VALUE_in_element157 = new BitSet(new long[]{0x0000000000000008L});
-    public static final BitSet FOLLOW_element_in_element223 = new BitSet(new long[]{0x0000000000010408L});
-    public static final BitSet FOLLOW_PCDATA_in_element256 = new BitSet(new long[]{0x0000000000010408L});
+    public static final BitSet FOLLOW_element_in_document79 = new BitSet(new long[]{0x0000000000010402L});
+    public static final BitSet FOLLOW_PCDATA_in_document91 = new BitSet(new long[]{0x0000000000010402L});
+    public static final BitSet FOLLOW_ELEMENT_in_element120 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_GENERIC_ID_in_element124 = new BitSet(new long[]{0x0000000000030408L});
+    public static final BitSet FOLLOW_ATTRIBUTE_in_element155 = new BitSet(new long[]{0x0000000000000004L});
+    public static final BitSet FOLLOW_GENERIC_ID_in_element159 = new BitSet(new long[]{0x0000000000000200L});
+    public static final BitSet FOLLOW_ATTR_VALUE_in_element163 = new BitSet(new long[]{0x0000000000000008L});
+    public static final BitSet FOLLOW_element_in_element229 = new BitSet(new long[]{0x0000000000010408L});
+    public static final BitSet FOLLOW_PCDATA_in_element262 = new BitSet(new long[]{0x0000000000010408L});
 
 }
