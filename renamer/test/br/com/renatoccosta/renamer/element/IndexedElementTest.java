@@ -23,13 +23,6 @@ public class IndexedElementTest extends TestCase {
         super.tearDown();
     }
 
-    public void testSetParameters() {
-        System.out.println("setParameters");
-
-        IndexedElement instance = new IndexedElement();
-//        instance.setParameters("1", "2");
-    }
-
     public void testGetContent() {
         System.out.println("getContent");
 
@@ -37,7 +30,8 @@ public class IndexedElementTest extends TestCase {
         String target = "";
         File file = null;
         IndexedElement instance = new IndexedElement();
-//        instance.setParameters("1", "2");
+        instance.setInit(1);
+        instance.setLeading(2);
 
         assertEquals("01", instance.getContent(find, target, file));
 

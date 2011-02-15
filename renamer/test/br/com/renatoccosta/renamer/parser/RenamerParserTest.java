@@ -31,7 +31,7 @@ public class RenamerParserTest extends TestCase {
     public void testCompleto() throws Exception {
         System.out.println("testCompleto");
 
-        String replaceString = "1234<abc pro='prop1'>1234</abc>123456";
+        String replaceString = "1234<case mode='upper'>abc</case>123456";
 
         CharStream input = new ANTLRStringStream(replaceString);
         Lexer lex = new RenamerLexer(input);

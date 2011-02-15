@@ -23,33 +23,12 @@ public class FilterElementTest extends TestCase {
         super.tearDown();
     }
 
-    public void testSetParameters() {
-        System.out.println("setParameters");
-
-        FilterElement instance = new FilterElement();
-//        instance.setParameters("s");
-    }
-
-    public void testSetParametersInvalido() {
-        System.out.println("setParametersInvalido");
-
-        FilterElement instance = new FilterElement();
-
-        try {
-//            instance.setParameters("a");
-            fail("Não foi lançada uma exceção");
-            
-        } catch (IllegalArgumentException e) {
-            assertTrue(true);
-        }
-    }
-
     public void testConvertFilterNumbers() {
         System.out.println("convertFilterNumbers");
 
         String src = "r1e2n3a4t5o";
         FilterElement instance = new FilterElement();
-//        instance.setParameters("n");
+        instance.setMode(FilterElement.FilterEnum.NUMBERS);
 
         String expResult = "renato";
         String result = instance.convert(src);
@@ -62,7 +41,7 @@ public class FilterElementTest extends TestCase {
 
         String src = "r1e2n3a4t5o";
         FilterElement instance = new FilterElement();
-//        instance.setParameters("l");
+        instance.setMode(FilterElement.FilterEnum.LETTERS);
 
         String expResult = "12345";
         String result = instance.convert(src);
@@ -88,7 +67,7 @@ public class FilterElementTest extends TestCase {
 
         String src = "renato costa";
         FilterElement instance = new FilterElement();
-//        instance.setParameters("w");
+        instance.setMode(FilterElement.FilterEnum.WHITE_SPACE);
 
         String expResult = "renatocosta";
         String result = instance.convert(src);

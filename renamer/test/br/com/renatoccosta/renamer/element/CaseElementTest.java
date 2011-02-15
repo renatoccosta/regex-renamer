@@ -22,32 +22,12 @@ public class CaseElementTest extends TestCase {
         super.tearDown();
     }
 
-    public void testSetParameters() {
-        System.out.println("setParameters");
-
-        CaseElement instance = new CaseElement();
-//        instance.setParameters("upper");
-    }
-
-    public void testSetParametersInvalido() {
-        System.out.println("setParametersInvalido");
-
-        CaseElement instance = new CaseElement();
-
-        try {
-//            instance.setParameters("test");
-            fail("Não foi lançada uma exceção");
-        } catch (IllegalArgumentException e) {
-            assertTrue(true);
-        }
-    }
-
     public void testConvertUpper() {
         System.out.println("convertUpper");
 
         String src = "renATO";
         CaseElement instance = new CaseElement();
-//        instance.setParameters("upper");
+        instance.setMode(CaseElement.CaseEnum.UPPER);
 
         String expResult = "RENATO";
         String result = instance.convert(src);
@@ -60,7 +40,7 @@ public class CaseElementTest extends TestCase {
 
         String src = "renATO";
         CaseElement instance = new CaseElement();
-//        instance.setParameters("lower");
+        instance.setMode(CaseElement.CaseEnum.LOWER);
 
         String expResult = "renato";
         String result = instance.convert(src);
@@ -73,7 +53,7 @@ public class CaseElementTest extends TestCase {
 
         String src = "renATO";
         CaseElement instance = new CaseElement();
-//        instance.setParameters("swap");
+        instance.setMode(CaseElement.CaseEnum.SWAP);
 
         String expResult = "RENato";
         String result = instance.convert(src);
