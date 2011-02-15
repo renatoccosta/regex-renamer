@@ -16,7 +16,6 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.EmptyElement;
-import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import java.io.File;
 
 /**
@@ -34,36 +33,10 @@ public class LiteralElement extends EmptyElement {
     }
 
     /* ---------------------------------------------------------------------- */
-    @Override
-    public void setParameter(String name, String value) throws
-            InvalidParameterException {
-        this.content = value;
-    }
-
-    @Override
-    public String getParameter(String name) throws InvalidParameterException {
-        return content;
-    }
-
-    @Override
-    public String[] getParameterNames() {
-        return new String[]{"content"};
-    }
-
-    @Override
-    public String[] getParameterValues() {
-        return new String[]{content};
-    }
-
-    /* ---------------------------------------------------------------------- */
 
     @Override
     public String getContent(String find, String target, File file) {
         return content;
-    }
-
-    @Override
-    public void resetState() {
     }
 
     @Override

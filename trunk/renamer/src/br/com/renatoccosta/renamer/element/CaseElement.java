@@ -18,8 +18,6 @@ package br.com.renatoccosta.renamer.element;
 import br.com.renatoccosta.renamer.element.base.CompositeElement;
 import br.com.renatoccosta.renamer.element.meta.ElementType;
 import br.com.renatoccosta.renamer.element.meta.Parameter;
-import br.com.renatoccosta.renamer.exception.InvalidParameterException;
-import br.com.renatoccosta.renamer.i18n.Messages;
 import org.apache.commons.lang.StringUtils;
 
 /**
@@ -32,7 +30,7 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author Renato Costa
  */
-@ElementType(alias="case")
+@ElementType(id="case")
 public class CaseElement extends CompositeElement {
 
     public enum CaseEnum {
@@ -56,38 +54,6 @@ public class CaseElement extends CompositeElement {
         this.mode = mode;
     }
 
-    @Override
-    public String[] getParameterNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String[] getParameterValues() {
-        return new String[]{mode.toString()};
-    }
-
-    @Override
-    public String getParameter(String name) throws
-            InvalidParameterException {
-        if ("mode".equals(name)) {
-            return this.mode.toString();
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
-    }
-
-    @Override
-    public void setParameter(String name, String value) throws
-            InvalidParameterException {
-        if ("mode".equals(name)) {
-            this.mode = convertModeValue(value);
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
-    }
-
     /* ---------------------------------------------------------------------- */
 
     @Override
@@ -102,18 +68,6 @@ public class CaseElement extends CompositeElement {
         }
 
         return src;
-    }
-
-    /* ---------------------------------------------------------------------- */
-
-    private CaseEnum convertModeValue(String value) throws
-            InvalidParameterException {
-        try {
-            return CaseEnum.valueOf(value);
-        } catch (IllegalArgumentException e) {
-            throw new InvalidParameterException(
-                    Messages.getCaseElementInvalidParametersMessage());
-        }
     }
 
 }

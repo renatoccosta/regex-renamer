@@ -30,6 +30,7 @@ public abstract class Element {
 
     protected CompositeElement parent;
 
+    /* ---------------------------------------------------------------------- */
     /**
      * Retorna o id do elemento. Este id é utilizado para identificação na
      * string de substituição
@@ -40,6 +41,15 @@ public abstract class Element {
         return ElementsDirectory.getInstance().lookup(this.getClass());
     }
 
+    public CompositeElement getParent() {
+        return parent;
+    }
+
+    public void setParent(CompositeElement parent) {
+        this.parent = parent;
+    }
+
+    /* ---------------------------------------------------------------------- */
     /**
      * Retorna a string de acordo com a transformação do elemento
      *
@@ -52,48 +62,17 @@ public abstract class Element {
     public abstract String getContent(String find, String target, File file)
             throws RenamerException;
 
-    /**
-     * Sets the value of the specified parameter
-     *
-     * @param name Parameter name
-     * @param value Parameter value as a string
-     */
-    public abstract void setParameter(String name, String value) throws
-            InvalidParameterException;
-
-    /**
-     * Gets the value of the specified parameter
-     *
-     * @param name Parameter name
-     * @return Parameter value
-     */
-    public abstract String getParameter(String name) throws
-            InvalidParameterException;
-
-    public abstract String[] getParameterValues();
-
-    public abstract String[] getParameterNames();
-
-    public CompositeElement getParent() {
-        return parent;
-    }
-
-    public void setParent(CompositeElement parent) {
-        this.parent = parent;
-    }
-
-//    public abstract Class[] getParameterDataTypes();
-
     public abstract void add(Element element) throws
             InvalidElementException;
-
-    @Override
-    public abstract String toString();
 
     /**
      * Volta o valor das variáveis internas de cada elemento para as originais
      * de quando foram criados.
      */
-    public abstract void resetState();
+    public void resetState() {
+    }
+
+    @Override
+    public abstract String toString();
 
 }

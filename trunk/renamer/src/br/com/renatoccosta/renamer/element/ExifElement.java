@@ -16,7 +16,6 @@
 package br.com.renatoccosta.renamer.element;
 
 import br.com.renatoccosta.renamer.element.base.EmptyElement;
-import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import java.io.File;
 
 /**
@@ -26,36 +25,7 @@ import java.io.File;
 public class ExifElement extends EmptyElement {
 
     @Override
-    public void setParameter(String name, String value) throws
-            InvalidParameterException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String getParameter(String name) throws
-            InvalidParameterException {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String[] getParameterNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String[] getParameterValues() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    /* ---------------------------------------------------------------------- */
-
-    @Override
     public String getContent(String find, String target, File file) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void resetState() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 

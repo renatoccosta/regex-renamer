@@ -33,24 +33,4 @@ public class RootElement extends CompositeElement {
         return src;
     }
 
-    @Override
-    public String[] getParameterValues() {
-        return new String[] {};
-    }
-
-    @Override
-    public void setParameter(String name, String value) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String getParameter(String name) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String[] getParameterNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
 }

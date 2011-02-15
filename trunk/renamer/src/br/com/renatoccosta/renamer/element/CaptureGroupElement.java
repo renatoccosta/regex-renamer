@@ -18,9 +18,7 @@ package br.com.renatoccosta.renamer.element;
 import br.com.renatoccosta.renamer.element.base.EmptyElement;
 import br.com.renatoccosta.renamer.element.meta.ElementType;
 import br.com.renatoccosta.renamer.element.meta.Parameter;
-import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
-import br.com.renatoccosta.renamer.i18n.Messages;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -38,7 +36,7 @@ import java.util.regex.Pattern;
  *
  * @author renato
  */
-@ElementType(alias="group")
+@ElementType(id = "group")
 public class CaptureGroupElement extends EmptyElement {
 
     @Parameter
@@ -47,7 +45,6 @@ public class CaptureGroupElement extends EmptyElement {
     private Pattern patternFind;
 
     /* ---------------------------------------------------------------------- */
-
     public CaptureGroupElement() {
     }
 
@@ -56,59 +53,19 @@ public class CaptureGroupElement extends EmptyElement {
     }
 
     /* ---------------------------------------------------------------------- */
-
     public int getIdx() {
         return idx;
     }
 
     public void setIdx(int idx) {
+        if (idx < 0) {
+            throw new IndexOutOfBoundsException();
+        }
+
         this.idx = idx;
     }
 
-    @Override
-    public String[] getParameterValues() {
-        return new String[]{Integer.toString(idx)};
-    }
-
-    @Override
-    public void setParameter(String name, String value) throws
-            InvalidParameterException {
-
-        if ("idx".equals(name)) {
-            try {
-                this.idx = Integer.parseInt(value);
-
-                if (idx < 0) {
-                    throw new InvalidParameterException(
-                            Messages.getParameterWrongDataTypeInteger(name));
-                }
-            } catch (NumberFormatException ex) {
-                throw new InvalidParameterException(
-                        Messages.getParameterWrongDataTypeInteger(name));
-            }
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
-    }
-
-    @Override
-    public String getParameter(String name) throws InvalidParameterException {
-        if ("idx".equals(name)) {
-            return Integer.toString(this.idx);
-        } else {
-            throw new InvalidParameterException(
-                    Messages.getInvalidParameterName(name));
-        }
-    }
-
-    @Override
-    public String[] getParameterNames() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     /* ---------------------------------------------------------------------- */
-
     @Override
     public String getContent(String find, String target, File file) throws
             RenamerException {
@@ -127,10 +84,6 @@ public class CaptureGroupElement extends EmptyElement {
         } catch (IndexOutOfBoundsException e) {
             throw new RenamerException(e);
         }
-    }
-
-    @Override
-    public void resetState() {
     }
 
 }

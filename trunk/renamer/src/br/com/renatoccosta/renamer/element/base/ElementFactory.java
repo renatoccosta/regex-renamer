@@ -58,10 +58,6 @@ public class ElementFactory {
 
     public static Element compile(String alias) throws
             ElementNotFoundException {
-//        String campos[] = conteudo.split(":");
-//        String xpName = campos[0];
-//        String params[] = (String[]) ArrayUtils.remove(campos, 0);
-
         Element ee = null;
         try {
             Class<Element> c = ElementsDirectory.getInstance().lookup(alias);
@@ -77,8 +73,6 @@ public class ElementFactory {
         } catch (IllegalAccessException ex) {
             LOGGER.error(ex.getMessage(), ex);
         }
-
-//        ee.setParameters(params);
 
         return ee;
     }

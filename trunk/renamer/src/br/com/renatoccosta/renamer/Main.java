@@ -15,6 +15,7 @@
  */
 package br.com.renatoccosta.renamer;
 
+import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
 import br.com.renatoccosta.renamer.view.FrmPrincipal;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -38,10 +39,10 @@ public class Main {
     public static void main(String[] args) {
         try {
             loadLog4J();
+            loadElements();
             setLookAndFeel();
             loadMainForm(args);
         } catch (Exception ex) {
-            ex.printStackTrace();
             logger.error(ex);
         }
     }
@@ -68,6 +69,11 @@ public class Main {
         } else {
             new FrmPrincipal().setVisible(true);
         }
+    }
+
+    private static void loadElements() {
+        //force class initialization
+        ElementsDirectory.getInstance();
     }
 
 }

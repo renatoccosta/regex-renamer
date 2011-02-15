@@ -15,24 +15,30 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.element.meta.ElementType;
+import java.io.IOException;
+import java.net.URL;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
+import org.scannotation.AnnotationDB;
+import org.scannotation.ClasspathUrlFinder;
 
 /**
- * Classe que mantém um map entre o id de cada elemento e sua classe associada.
- * É utilizada pelo ElementFactory para criar instâncias dos elementos definidos
- * na string de substituição.
- * Ao ser inicializada, esta classe preenche o map com os elementos internos e
- * os externos (plug-ins).
+ * Class that keeps the references of the element's id and it's respective
+ * classes.
+ * The classpath is searched for all classes that have the 'ElementType'
+ * annotation. When a class is found, it's put in the map. The class will be
+ * loaded only when it's needed.
  *
  * @author Renato Costa
  */
 public class ElementsDirectory {
+
+    private static final Logger LOGGER = Logger.getLogger(
+            ElementsDirectory.class);
 
     private static ElementsDirectory discovery = new ElementsDirectory();
 
@@ -46,7 +52,7 @@ public class ElementsDirectory {
      * Carrega os elementos internos e externos no map
      */
     private ElementsDirectory() {
-        loadInternalElements();
+        loadElements();
         loadExternalElements();
     }
 
@@ -90,17 +96,32 @@ public class ElementsDirectory {
      * Os elementos internos são carregados a partir do arquivo de recurso que
      * informa todos os ids e suas respectivas classes.
      */
-    private void loadInternalElements() {
-        Set keys = directory.keySet();
-        for (Iterator it = keys.iterator(); it.hasNext();) {
-            try {
-                String id = (String) it.next();
-                Class classElm = Class.forName(directory.getString(id));
-                mapId.put(id, classElm);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(ElementsDirectory.class.getName()).log(
-                        Level.SEVERE, null, ex);
+    private void loadElements() {
+        try {
+            //scan the classpath for annotated classes
+            URL[] urls = ClasspathUrlFinder.findClassPaths();
+            AnnotationDB db = new AnnotationDB();
+            db.setScanFieldAnnotations(false);
+            db.setScanMethodAnnotations(false);
+            db.setScanParameterAnnotations(false);
+            db.scanArchives(urls);
+
+            //grabs only the 'ElementType' annotated classes
+            Set<String> elements = db.getAnnotationIndex().get(
+                    ElementType.class.getName());
+
+            //loads the class and query it's alias
+            for (String className : elements) {
+                Class c = Class.forName(className);
+                ElementType et = (ElementType) c.getAnnotation(
+                        ElementType.class);
+                mapId.put(et.id(), c);
             }
+
+        } catch (IOException ex) {
+            LOGGER.error(ex.getMessage(), ex);
+        } catch (ClassNotFoundException ex) {
+            LOGGER.error(ex.getMessage(), ex);
         }
     }
 
