@@ -57,6 +57,14 @@ public class CaptureGroupElement extends EmptyElement {
 
     /* ---------------------------------------------------------------------- */
 
+    public int getIdx() {
+        return idx;
+    }
+
+    public void setIdx(int idx) {
+        this.idx = idx;
+    }
+
     @Override
     public String[] getParameterValues() {
         return new String[]{Integer.toString(idx)};

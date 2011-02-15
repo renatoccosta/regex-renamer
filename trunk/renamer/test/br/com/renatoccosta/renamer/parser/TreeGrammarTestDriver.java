@@ -16,9 +16,8 @@
  */
 package br.com.renatoccosta.renamer.parser;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import org.antlr.runtime.ANTLRInputStream;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CharStream;
 import org.antlr.runtime.CommonTokenStream;
 import org.antlr.runtime.Lexer;
 import org.antlr.runtime.tree.CommonTree;
@@ -36,28 +35,25 @@ public class TreeGrammarTestDriver {
     public static void main(String[] args) throws Exception {
         CommonTokenStream tokens = new CommonTokenStream();
 
-        InputStream stream = new ByteArrayInputStream(
-                "${idx}${filter}${/filter}${/idx}".getBytes());
-
-        ANTLRInputStream input = new ANTLRInputStream(stream);
-        Lexer lexer = new GrammarLexer(input);
+        CharStream input = new ANTLRStringStream(
+                "${idx}${filter}${/filter}${/idx}");
+        Lexer lexer = new RenamerLexer(input);
         tokens.setTokenSource(lexer);
 
-        GrammarParser parser = new GrammarParser(tokens);
-        GrammarParser.begin_return example = parser.begin();
+        RenamerParser parser = new RenamerParser(tokens);
+        RenamerParser.document_return example = parser.document();
 
         CommonTreeNodeStream nodes;
 
         CommonTree tree = (CommonTree) example.getTree();
         nodes = new CommonTreeNodeStream(tree);
 
-        TreeGrammar walker = new TreeGrammar(nodes);
+        RenamerTreeParser walker = new RenamerTreeParser(nodes);
 
-        walker.begin();
+        walker.document();
         System.out.println(example.toString());
 
         System.exit(0);
-
     }
 
 }
