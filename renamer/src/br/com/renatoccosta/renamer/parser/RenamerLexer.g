@@ -21,6 +21,7 @@ package br.com.renatoccosta.renamer.parser;
 
 @members {
     boolean tagMode = false;
+    boolean atrMode = false;
 }
 
 TAG_START_OPEN : '<' { tagMode = true; } ;
@@ -34,11 +35,11 @@ TAG_EMPTY_CLOSE : { tagMode }?=> '/>' { tagMode = false; } ;
 ATTR_EQ : { tagMode }?=> '=' ;
 
 ATTR_VALUE : { tagMode }?=>
-        ( '"' (~'"')* '"'
-        | '\'' (~'\'')* '\''
-        )
+	( '"' (~'"')* '"'
+	| '\'' (~'\'')* '\''
+	)
     ;
-
+    
 PCDATA : { !tagMode }?=> (~'<')+ ;
 
 GENERIC_ID

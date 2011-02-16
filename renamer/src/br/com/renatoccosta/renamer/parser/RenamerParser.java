@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:45:30 F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g 2011-01-28 17:10:44
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g 2011-02-16 13:24:46
 
 /**
  * Copyright 2009 Renato Couto da Costa
@@ -459,7 +459,7 @@ public class RenamerParser extends Parser {
 
 
             // AST REWRITE
-            // elements: ATTR_VALUE, GENERIC_ID
+            // elements: GENERIC_ID, ATTR_VALUE
             // token labels: 
             // rule labels: retval
             // token list labels: 
@@ -511,7 +511,7 @@ public class RenamerParser extends Parser {
     };
 
     // $ANTLR start "endTag"
-    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:52:1: endTag : TAG_END_OPEN GENERIC_ID TAG_CLOSE ;
+    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:53:1: endTag : TAG_END_OPEN GENERIC_ID TAG_CLOSE ;
     public final RenamerParser.endTag_return endTag() throws RecognitionException {
         RenamerParser.endTag_return retval = new RenamerParser.endTag_return();
         retval.start = input.LT(1);
@@ -527,20 +527,20 @@ public class RenamerParser extends Parser {
         Object TAG_CLOSE17_tree=null;
 
         try {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:53:2: ( TAG_END_OPEN GENERIC_ID TAG_CLOSE )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:53:4: TAG_END_OPEN GENERIC_ID TAG_CLOSE
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:54:2: ( TAG_END_OPEN GENERIC_ID TAG_CLOSE )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:54:4: TAG_END_OPEN GENERIC_ID TAG_CLOSE
             {
             root_0 = (Object)adaptor.nil();
 
-            TAG_END_OPEN15=(Token)match(input,TAG_END_OPEN,FOLLOW_TAG_END_OPEN_in_endTag243); 
+            TAG_END_OPEN15=(Token)match(input,TAG_END_OPEN,FOLLOW_TAG_END_OPEN_in_endTag244); 
             TAG_END_OPEN15_tree = (Object)adaptor.create(TAG_END_OPEN15);
             adaptor.addChild(root_0, TAG_END_OPEN15_tree);
 
-            GENERIC_ID16=(Token)match(input,GENERIC_ID,FOLLOW_GENERIC_ID_in_endTag245); 
+            GENERIC_ID16=(Token)match(input,GENERIC_ID,FOLLOW_GENERIC_ID_in_endTag246); 
             GENERIC_ID16_tree = (Object)adaptor.create(GENERIC_ID16);
             adaptor.addChild(root_0, GENERIC_ID16_tree);
 
-            TAG_CLOSE17=(Token)match(input,TAG_CLOSE,FOLLOW_TAG_CLOSE_in_endTag247); 
+            TAG_CLOSE17=(Token)match(input,TAG_CLOSE,FOLLOW_TAG_CLOSE_in_endTag248); 
             TAG_CLOSE17_tree = (Object)adaptor.create(TAG_CLOSE17);
             adaptor.addChild(root_0, TAG_CLOSE17_tree);
 
@@ -571,7 +571,7 @@ public class RenamerParser extends Parser {
     };
 
     // $ANTLR start "emptyElement"
-    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:55:1: emptyElement : TAG_START_OPEN GENERIC_ID ( attribute )* TAG_EMPTY_CLOSE -> ^( ELEMENT GENERIC_ID ( attribute )* ) ;
+    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:56:1: emptyElement : TAG_START_OPEN GENERIC_ID ( attribute )* TAG_EMPTY_CLOSE -> ^( ELEMENT GENERIC_ID ( attribute )* ) ;
     public final RenamerParser.emptyElement_return emptyElement() throws RecognitionException {
         RenamerParser.emptyElement_return retval = new RenamerParser.emptyElement_return();
         retval.start = input.LT(1);
@@ -592,16 +592,16 @@ public class RenamerParser extends Parser {
         RewriteRuleTokenStream stream_GENERIC_ID=new RewriteRuleTokenStream(adaptor,"token GENERIC_ID");
         RewriteRuleSubtreeStream stream_attribute=new RewriteRuleSubtreeStream(adaptor,"rule attribute");
         try {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:56:2: ( TAG_START_OPEN GENERIC_ID ( attribute )* TAG_EMPTY_CLOSE -> ^( ELEMENT GENERIC_ID ( attribute )* ) )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:56:4: TAG_START_OPEN GENERIC_ID ( attribute )* TAG_EMPTY_CLOSE
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:57:2: ( TAG_START_OPEN GENERIC_ID ( attribute )* TAG_EMPTY_CLOSE -> ^( ELEMENT GENERIC_ID ( attribute )* ) )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:57:4: TAG_START_OPEN GENERIC_ID ( attribute )* TAG_EMPTY_CLOSE
             {
-            TAG_START_OPEN18=(Token)match(input,TAG_START_OPEN,FOLLOW_TAG_START_OPEN_in_emptyElement257);  
+            TAG_START_OPEN18=(Token)match(input,TAG_START_OPEN,FOLLOW_TAG_START_OPEN_in_emptyElement258);  
             stream_TAG_START_OPEN.add(TAG_START_OPEN18);
 
-            GENERIC_ID19=(Token)match(input,GENERIC_ID,FOLLOW_GENERIC_ID_in_emptyElement259);  
+            GENERIC_ID19=(Token)match(input,GENERIC_ID,FOLLOW_GENERIC_ID_in_emptyElement260);  
             stream_GENERIC_ID.add(GENERIC_ID19);
 
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:56:30: ( attribute )*
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:57:30: ( attribute )*
             loop5:
             do {
                 int alt5=2;
@@ -614,9 +614,9 @@ public class RenamerParser extends Parser {
 
                 switch (alt5) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:56:30: attribute
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:57:30: attribute
             	    {
-            	    pushFollow(FOLLOW_attribute_in_emptyElement261);
+            	    pushFollow(FOLLOW_attribute_in_emptyElement262);
             	    attribute20=attribute();
 
             	    state._fsp--;
@@ -631,7 +631,7 @@ public class RenamerParser extends Parser {
                 }
             } while (true);
 
-            TAG_EMPTY_CLOSE21=(Token)match(input,TAG_EMPTY_CLOSE,FOLLOW_TAG_EMPTY_CLOSE_in_emptyElement264);  
+            TAG_EMPTY_CLOSE21=(Token)match(input,TAG_EMPTY_CLOSE,FOLLOW_TAG_EMPTY_CLOSE_in_emptyElement265);  
             stream_TAG_EMPTY_CLOSE.add(TAG_EMPTY_CLOSE21);
 
 
@@ -647,15 +647,15 @@ public class RenamerParser extends Parser {
             RewriteRuleSubtreeStream stream_retval=new RewriteRuleSubtreeStream(adaptor,"rule retval",retval!=null?retval.tree:null);
 
             root_0 = (Object)adaptor.nil();
-            // 56:57: -> ^( ELEMENT GENERIC_ID ( attribute )* )
+            // 57:57: -> ^( ELEMENT GENERIC_ID ( attribute )* )
             {
-                // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:56:60: ^( ELEMENT GENERIC_ID ( attribute )* )
+                // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:57:60: ^( ELEMENT GENERIC_ID ( attribute )* )
                 {
                 Object root_1 = (Object)adaptor.nil();
                 root_1 = (Object)adaptor.becomeRoot((Object)adaptor.create(ELEMENT, "ELEMENT"), root_1);
 
                 adaptor.addChild(root_1, stream_GENERIC_ID.nextNode());
-                // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:56:81: ( attribute )*
+                // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerParser.g:57:81: ( attribute )*
                 while ( stream_attribute.hasNext() ) {
                     adaptor.addChild(root_1, stream_attribute.nextTree());
 
@@ -764,12 +764,12 @@ public class RenamerParser extends Parser {
     public static final BitSet FOLLOW_GENERIC_ID_in_attribute217 = new BitSet(new long[]{0x0000000000000100L});
     public static final BitSet FOLLOW_ATTR_EQ_in_attribute219 = new BitSet(new long[]{0x0000000000000200L});
     public static final BitSet FOLLOW_ATTR_VALUE_in_attribute221 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_END_OPEN_in_endTag243 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_GENERIC_ID_in_endTag245 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_TAG_CLOSE_in_endTag247 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_TAG_START_OPEN_in_emptyElement257 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_GENERIC_ID_in_emptyElement259 = new BitSet(new long[]{0x0000000000002080L});
-    public static final BitSet FOLLOW_attribute_in_emptyElement261 = new BitSet(new long[]{0x0000000000002080L});
-    public static final BitSet FOLLOW_TAG_EMPTY_CLOSE_in_emptyElement264 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TAG_END_OPEN_in_endTag244 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_GENERIC_ID_in_endTag246 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_TAG_CLOSE_in_endTag248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_TAG_START_OPEN_in_emptyElement258 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_GENERIC_ID_in_emptyElement260 = new BitSet(new long[]{0x0000000000002080L});
+    public static final BitSet FOLLOW_attribute_in_emptyElement262 = new BitSet(new long[]{0x0000000000002080L});
+    public static final BitSet FOLLOW_TAG_EMPTY_CLOSE_in_emptyElement265 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:45:30 F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g 2011-01-27 15:16:00
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g 2011-02-16 13:23:20
 
 /**
  * Copyright 2009 Renato Couto da Costa
@@ -39,6 +39,7 @@ public class RenamerLexer extends Lexer {
     public static final int WS=15;
 
         boolean tagMode = false;
+        boolean atrMode = false;
 
 
     // delegates
@@ -59,8 +60,8 @@ public class RenamerLexer extends Lexer {
         try {
             int _type = TAG_START_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:26:16: ( '<' )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:26:18: '<'
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:27:16: ( '<' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:27:18: '<'
             {
             match('<'); 
              tagMode = true; 
@@ -80,8 +81,8 @@ public class RenamerLexer extends Lexer {
         try {
             int _type = TAG_END_OPEN;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:28:14: ( '</' )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:28:16: '</'
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:29:14: ( '</' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:29:16: '</'
             {
             match("</"); 
 
@@ -102,8 +103,8 @@ public class RenamerLexer extends Lexer {
         try {
             int _type = TAG_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:30:11: ({...}? => '>' )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:30:13: {...}? => '>'
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:31:11: ({...}? => '>' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:31:13: {...}? => '>'
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "TAG_CLOSE", " tagMode ");
@@ -126,8 +127,8 @@ public class RenamerLexer extends Lexer {
         try {
             int _type = TAG_EMPTY_CLOSE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:32:17: ({...}? => '/>' )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:32:19: {...}? => '/>'
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:33:17: ({...}? => '/>' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:33:19: {...}? => '/>'
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "TAG_EMPTY_CLOSE", " tagMode ");
@@ -151,8 +152,8 @@ public class RenamerLexer extends Lexer {
         try {
             int _type = ATTR_EQ;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:34:9: ({...}? => '=' )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:34:11: {...}? => '='
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:35:9: ({...}? => '=' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:35:11: {...}? => '='
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "ATTR_EQ", " tagMode ");
@@ -174,13 +175,13 @@ public class RenamerLexer extends Lexer {
         try {
             int _type = ATTR_VALUE;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:36:12: ({...}? => ( '\"' (~ '\"' )* '\"' | '\\'' (~ '\\'' )* '\\'' ) )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:36:14: {...}? => ( '\"' (~ '\"' )* '\"' | '\\'' (~ '\\'' )* '\\'' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:37:12: ({...}? => ( '\"' (~ '\"' )* '\"' | '\\'' (~ '\\'' )* '\\'' ) )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:37:14: {...}? => ( '\"' (~ '\"' )* '\"' | '\\'' (~ '\\'' )* '\\'' )
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "ATTR_VALUE", " tagMode ");
             }
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:37:9: ( '\"' (~ '\"' )* '\"' | '\\'' (~ '\\'' )* '\\'' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:38:2: ( '\"' (~ '\"' )* '\"' | '\\'' (~ '\\'' )* '\\'' )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -198,10 +199,10 @@ public class RenamerLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:37:11: '\"' (~ '\"' )* '\"'
+                    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:38:4: '\"' (~ '\"' )* '\"'
                     {
                     match('\"'); 
-                    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:37:15: (~ '\"' )*
+                    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:38:8: (~ '\"' )*
                     loop1:
                     do {
                         int alt1=2;
@@ -214,7 +215,7 @@ public class RenamerLexer extends Lexer {
 
                         switch (alt1) {
                     	case 1 :
-                    	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:37:16: ~ '\"'
+                    	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:38:9: ~ '\"'
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -239,10 +240,10 @@ public class RenamerLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:38:11: '\\'' (~ '\\'' )* '\\''
+                    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:39:4: '\\'' (~ '\\'' )* '\\''
                     {
                     match('\''); 
-                    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:38:16: (~ '\\'' )*
+                    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:39:9: (~ '\\'' )*
                     loop2:
                     do {
                         int alt2=2;
@@ -255,7 +256,7 @@ public class RenamerLexer extends Lexer {
 
                         switch (alt2) {
                     	case 1 :
-                    	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:38:17: ~ '\\''
+                    	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:39:10: ~ '\\''
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -298,13 +299,13 @@ public class RenamerLexer extends Lexer {
         try {
             int _type = PCDATA;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:42:8: ({...}? => (~ '<' )+ )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:42:10: {...}? => (~ '<' )+
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:43:8: ({...}? => (~ '<' )+ )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:43:10: {...}? => (~ '<' )+
             {
             if ( !(( !tagMode )) ) {
                 throw new FailedPredicateException(input, "PCDATA", " !tagMode ");
             }
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:42:26: (~ '<' )+
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:43:26: (~ '<' )+
             int cnt4=0;
             loop4:
             do {
@@ -318,7 +319,7 @@ public class RenamerLexer extends Lexer {
 
                 switch (alt4) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:42:27: ~ '<'
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:43:27: ~ '<'
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<=';')||(input.LA(1)>='=' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -358,8 +359,8 @@ public class RenamerLexer extends Lexer {
         try {
             int _type = GENERIC_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:45:5: ({...}? => ( LETTER | '_' | ':' ) ( NAMECHAR )* )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:45:7: {...}? => ( LETTER | '_' | ':' ) ( NAMECHAR )*
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:46:5: ({...}? => ( LETTER | '_' | ':' ) ( NAMECHAR )* )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:46:7: {...}? => ( LETTER | '_' | ':' ) ( NAMECHAR )*
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "GENERIC_ID", " tagMode ");
@@ -373,7 +374,7 @@ public class RenamerLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:46:29: ( NAMECHAR )*
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:47:29: ( NAMECHAR )*
             loop5:
             do {
                 int alt5=2;
@@ -386,7 +387,7 @@ public class RenamerLexer extends Lexer {
 
                 switch (alt5) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:46:30: NAMECHAR
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:47:30: NAMECHAR
             	    {
             	    mNAMECHAR(); 
 
@@ -412,7 +413,7 @@ public class RenamerLexer extends Lexer {
     // $ANTLR start "NAMECHAR"
     public final void mNAMECHAR() throws RecognitionException {
         try {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:50:5: ( LETTER | DIGIT | '.' | '-' | '_' | ':' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:51:5: ( LETTER | DIGIT | '.' | '-' | '_' | ':' )
             // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:
             {
             if ( (input.LA(1)>='-' && input.LA(1)<='.')||(input.LA(1)>='0' && input.LA(1)<=':')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
@@ -436,8 +437,8 @@ public class RenamerLexer extends Lexer {
     // $ANTLR start "DIGIT"
     public final void mDIGIT() throws RecognitionException {
         try {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:54:5: ( '0' .. '9' )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:54:10: '0' .. '9'
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:55:5: ( '0' .. '9' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:55:10: '0' .. '9'
             {
             matchRange('0','9'); 
 
@@ -452,7 +453,7 @@ public class RenamerLexer extends Lexer {
     // $ANTLR start "LETTER"
     public final void mLETTER() throws RecognitionException {
         try {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:58:5: ( 'a' .. 'z' | 'A' .. 'Z' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:59:5: ( 'a' .. 'z' | 'A' .. 'Z' )
             // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:
             {
             if ( (input.LA(1)>='A' && input.LA(1)<='Z')||(input.LA(1)>='a' && input.LA(1)<='z') ) {
@@ -478,8 +479,8 @@ public class RenamerLexer extends Lexer {
         try {
             int _type = WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:62:5: ({...}? => ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' ) )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:62:8: {...}? => ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:63:5: ({...}? => ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' ) )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerLexer.g:63:8: {...}? => ( ' ' | '\\r' | '\\t' | '\\u000C' | '\\n' )
             {
             if ( !(( tagMode )) ) {
                 throw new FailedPredicateException(input, "WS", " tagMode ");

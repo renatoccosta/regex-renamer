@@ -45,9 +45,6 @@ public class ElementsDirectory {
     private Map<String, Class<Element>> mapId =
             new HashMap<String, Class<Element>>();
 
-    private ResourceBundle directory = ResourceBundle.getBundle(
-            "br/com/renatoccosta/renamer/element/base/ElementsDirectory");
-
     /**
      * Carrega os elementos internos e externos no map
      */
