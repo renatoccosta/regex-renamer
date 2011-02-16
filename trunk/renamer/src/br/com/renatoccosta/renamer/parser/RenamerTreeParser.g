@@ -23,8 +23,7 @@ tokens {
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific langu
- age governing permissions and
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package br.com.renatoccosta.renamer.parser;
@@ -60,17 +59,18 @@ document
 element returns [Element elem]
     : ^( ELEMENT name=GENERIC_ID
             { 
-            	System.out.print("<"+$name.text); 
+            	//System.out.print("<"+$name.text); 
             	$elem = ElementFactory.compile($name.text);
             }
             ( ^(ATTRIBUTE attrName=GENERIC_ID value=ATTR_VALUE)
                 { 
-                	System.out.print(" "+$attrName.text+"="+$value.text); 
-                	ElementFactory.setParameter($elem, $attrName.text, $value.text);
+                	//System.out.print(" "+$attrName.text+"="+$value.text); 
+                	String cleanValue = $value.text.substring(1, $value.text.length()-1);
+                	ElementFactory.setParameter($elem, $attrName.text, cleanValue);
                 }
             )*
             { 
-            	System.out.println(">"); 
+            	//System.out.println(">"); 
             }
             ( e1=element
             	{
@@ -78,12 +78,12 @@ element returns [Element elem]
             	}
             | text=PCDATA
                 { 
-                	System.out.println($text.text); 
+                	//System.out.println($text.text); 
                 	$elem.add(new LiteralElement($text.text));
                 }
             )*
             { 
-            	System.out.println("</"+$name.text+">"); 
+            	//System.out.println("</"+$name.text+">"); 
             }
         )
     ;

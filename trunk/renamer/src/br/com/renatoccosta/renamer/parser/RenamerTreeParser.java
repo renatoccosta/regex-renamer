@@ -1,4 +1,4 @@
-// $ANTLR 3.3 Nov 30, 2010 12:45:30 F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g 2011-02-14 16:56:13
+// $ANTLR 3.3 Nov 30, 2010 12:45:30 F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g 2011-02-16 13:43:19
 
 /**
  * Copyright 2009 Renato Couto da Costa
@@ -12,8 +12,7 @@
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific langu
- age governing permissions and
+ * See the License for the specific language governing permissions and
  * limitations under the License.
  */
 package br.com.renatoccosta.renamer.parser;
@@ -70,17 +69,17 @@ public class RenamerTreeParser extends TreeParser {
 
 
     // $ANTLR start "document"
-    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:47:1: document : ( element | text= PCDATA )+ ;
+    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:46:1: document : ( element | text= PCDATA )+ ;
     public final void document() throws RecognitionException {
         Tree text=null;
         Element element1 = null;
 
 
         try {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:48:2: ( ( element | text= PCDATA )+ )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:49:2: ( element | text= PCDATA )+
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:47:2: ( ( element | text= PCDATA )+ )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:48:2: ( element | text= PCDATA )+
             {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:49:2: ( element | text= PCDATA )+
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:48:2: ( element | text= PCDATA )+
             int cnt1=0;
             loop1:
             do {
@@ -97,7 +96,7 @@ public class RenamerTreeParser extends TreeParser {
 
                 switch (alt1) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:49:4: element
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:48:4: element
             	    {
             	    pushFollow(FOLLOW_element_in_document79);
             	    element1=element();
@@ -111,7 +110,7 @@ public class RenamerTreeParser extends TreeParser {
             	    }
             	    break;
             	case 2 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:53:4: text= PCDATA
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:52:4: text= PCDATA
             	    {
             	    text=(Tree)match(input,PCDATA,FOLLOW_PCDATA_in_document91); 
             	     
@@ -147,7 +146,7 @@ public class RenamerTreeParser extends TreeParser {
 
 
     // $ANTLR start "element"
-    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:60:1: element returns [Element elem] : ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* ) ;
+    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:59:1: element returns [Element elem] : ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* ) ;
     public final Element element() throws RecognitionException {
         Element elem = null;
 
@@ -159,18 +158,18 @@ public class RenamerTreeParser extends TreeParser {
 
 
         try {
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:61:5: ( ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* ) )
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:61:7: ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:60:5: ( ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* ) )
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:60:7: ^( ELEMENT name= GENERIC_ID ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )* (e1= element | text= PCDATA )* )
             {
             match(input,ELEMENT,FOLLOW_ELEMENT_in_element120); 
 
             match(input, Token.DOWN, null); 
             name=(Tree)match(input,GENERIC_ID,FOLLOW_GENERIC_ID_in_element124); 
              
-                        	System.out.print("<"+(name!=null?name.getText():null)); 
+                        	//System.out.print("<"+(name!=null?name.getText():null)); 
                         	elem = ElementFactory.compile((name!=null?name.getText():null));
                         
-            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:66:13: ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )*
+            // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:65:13: ( ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE ) )*
             loop2:
             do {
                 int alt2=2;
@@ -183,7 +182,7 @@ public class RenamerTreeParser extends TreeParser {
 
                 switch (alt2) {
             	case 1 :
-            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:66:15: ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE )
+            	    // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:65:15: ^( ATTRIBUTE attrName= GENERIC_ID value= ATTR_VALUE )
             	    {
             	    match(input,ATTRIBUTE,FOLLOW_ATTRIBUTE_in_element155); 
 
@@ -193,8 +192,9 @@ public class RenamerTreeParser extends TreeParser {
 
             	    match(input, Token.UP, null); 
             	     
-            	                    	System.out.print(" "+(attrName!=null?attrName.getText():null)+"="+(value!=null?value.getText():null)); 
-            	                    	ElementFactory.setParameter(elem, (attrName!=null?attrName.getText():null), (value!=null?value.getText():null));
+            	                    	//System.out.print(" "+(attrName!=null?attrName.getText():null)+"="+(value!=null?value.getText():null)); 
+            	                    	String cleanValue = (value!=null?value.getText():null).substring(1, (value!=null?value.getText():null).length()-1);
+            	                    	ElementFactory.setParameter(elem, (attrName!=null?attrName.getText():null), cleanValue);
             	                    
 
             	    }
@@ -206,7 +206,7 @@ public class RenamerTreeParser extends TreeParser {
             } while (true);
 
              
-                        	System.out.println(">"); 
+                        	//System.out.println(">"); 
                         
             // F:\\Documents\\Projetos\\rr-trunk\\renamer\\src\\br\\com\\renatoccosta\\renamer\\parser\\RenamerTreeParser.g:75:13: (e1= element | text= PCDATA )*
             loop3:
@@ -242,7 +242,7 @@ public class RenamerTreeParser extends TreeParser {
             	    {
             	    text=(Tree)match(input,PCDATA,FOLLOW_PCDATA_in_element262); 
             	     
-            	                    	System.out.println((text!=null?text.getText():null)); 
+            	                    	//System.out.println((text!=null?text.getText():null)); 
             	                    	elem.add(new LiteralElement((text!=null?text.getText():null)));
             	                    
 
@@ -255,7 +255,7 @@ public class RenamerTreeParser extends TreeParser {
             } while (true);
 
              
-                        	System.out.println("</"+(name!=null?name.getText():null)+">"); 
+                        	//System.out.println("</"+(name!=null?name.getText():null)+">"); 
                         
 
             match(input, Token.UP, null); 

@@ -15,10 +15,13 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.element.meta.Parameter;
 import br.com.renatoccosta.renamer.exception.InvalidElementException;
-import br.com.renatoccosta.renamer.exception.InvalidParameterException;
 import br.com.renatoccosta.renamer.exception.RenamerException;
 import java.io.File;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import org.apache.commons.beanutils.PropertyUtils;
 
 /**
  * Base class that represents an element on the substitution string. Each
@@ -73,6 +76,29 @@ public abstract class Element {
     }
 
     @Override
-    public abstract String toString();
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("<").append(getId());
+
+        Field[] fields = this.getClass().getDeclaredFields();
+        for (Field f : fields) {
+            Parameter p = f.getAnnotation(Parameter.class);
+            if (p != null) {
+                String alias = p.alias().equals("") ? f.getName() : p.alias();
+
+                try {
+                    sb.append(" ").append(alias).append("='").append(
+                            PropertyUtils.getProperty(this, f.getName())).
+                            append("'");
+                } catch (IllegalAccessException ex) {
+                } catch (InvocationTargetException ex) {
+                } catch (NoSuchMethodException ex) {
+                }
+            }
+        }
+
+        return sb.toString();
+    }
 
 }

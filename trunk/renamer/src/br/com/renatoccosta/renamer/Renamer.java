@@ -19,9 +19,6 @@ import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.element.base.Element;
 import br.com.renatoccosta.renamer.exception.ParseErrorsException;
 import br.com.renatoccosta.renamer.i18n.Messages;
-import br.com.renatoccosta.renamer.parser.RenamerLexer;
-import br.com.renatoccosta.renamer.parser.RenamerParser;
-import br.com.renatoccosta.renamer.parser.TreeGrammar;
 import br.com.renatoccosta.renamer.util.ArrayUtil;
 import br.com.renatoccosta.renamer.util.FileUtil;
 import java.io.File;
@@ -34,17 +31,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
-import org.antlr.runtime.CommonTokenStream;
-import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.TokenStream;
-import org.antlr.runtime.tree.CommonTree;
-import org.antlr.runtime.tree.CommonTreeNodeStream;
 import org.apache.log4j.Logger;
 
 /**
- * Classe principal da aplicacao. Realiza toda a orquestracao do negocio
- * (renomear arquivos) da aplicacao.
- *
+ * Main class of the application. It's responsible for all the business rules of
+ * renaming the files
+ * 
  * @author Renato Costa
  */
 public class Renamer {

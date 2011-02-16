@@ -46,7 +46,7 @@ public class RenamerParserTest extends TestCase {
         RenamerTreeParser walker = new RenamerTreeParser(nodes);
         walker.document();
 
-        assertTrue(true);
+        assertNotNull(walker.root);
     }
 
 }
