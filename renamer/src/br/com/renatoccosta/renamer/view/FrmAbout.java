@@ -21,6 +21,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
+import org.apache.commons.lang.StringUtils;
 
 /**
  *
@@ -31,7 +32,7 @@ public class FrmAbout extends javax.swing.JDialog {
     public FrmAbout(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        ((JPanel)this.getContentPane()).setOpaque(false);
+        initLocal();
     }
 
     @Override
@@ -133,21 +134,21 @@ public class FrmAbout extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnlDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
-                    .addComponent(pnlInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(pnlDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                    .addComponent(pnlInfo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(imgLogo)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblTitle)
                             .addComponent(lblSubtitle)))
-                    .addComponent(btnOk, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtBlog)
-                    .addComponent(txtHomepage)
-                    .addComponent(txtDeveloper))
+                    .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtBlog, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtHomepage, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtDeveloper, javax.swing.GroupLayout.Alignment.LEADING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -162,9 +163,9 @@ public class FrmAbout extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(imgLogo)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(pnlDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnlDescription, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(txtDeveloper)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtHomepage)
@@ -203,5 +204,22 @@ public class FrmAbout extends javax.swing.JDialog {
     private javax.swing.JLabel txtHomepage;
     private javax.swing.JTextArea txtInfo;
     // End of variables declaration//GEN-END:variables
+
+    private void initLocal() {
+        ((JPanel)this.getContentPane()).setOpaque(false);
+
+        txtDeveloper.setText(StringUtils.replace(txtDeveloper.getText(),
+                "${devname}", "Renato Couto da Costa"));
+
+        String vmachine = System.getProperty("java.runtime.name") + " " +
+                System.getProperty("java.runtime.version");
+
+        String so = System.getProperty("os.name") + " " +
+                System.getProperty("os.arch");
+
+        txtInfo.setText(StringUtils.replaceEach(txtInfo.getText(),
+                new String[] {"${vmachine}", "${so}"},
+                new String[] {vmachine, so}));
+    }
 
 }
