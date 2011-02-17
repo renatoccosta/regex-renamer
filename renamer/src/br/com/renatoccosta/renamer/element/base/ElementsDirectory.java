@@ -20,7 +20,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.Set;
 import org.apache.log4j.Logger;
 import org.scannotation.AnnotationDB;
@@ -45,13 +44,13 @@ public class ElementsDirectory {
     private Map<String, Class<Element>> mapId =
             new HashMap<String, Class<Element>>();
 
-    /**
-     * Carrega os elementos internos e externos no map
-     */
+    /* ---------------------------------------------------------------------- */
+
     private ElementsDirectory() {
         loadElements();
-        loadExternalElements();
     }
+
+    /* ---------------------------------------------------------------------- */
 
     public static ElementsDirectory getInstance() {
         return discovery;
@@ -60,6 +59,8 @@ public class ElementsDirectory {
     public Map<String, Class<Element>> getMapId() {
         return mapId;
     }
+
+    /* ---------------------------------------------------------------------- */
 
     /**
      * Busca a classe correspondente ao id no map. Retorna null caso não
@@ -89,6 +90,8 @@ public class ElementsDirectory {
         return null;
     }
 
+    /* ---------------------------------------------------------------------- */
+    
     /**
      * Os elementos internos são carregados a partir do arquivo de recurso que
      * informa todos os ids e suas respectivas classes.
@@ -120,13 +123,6 @@ public class ElementsDirectory {
         } catch (ClassNotFoundException ex) {
             LOGGER.error(ex.getMessage(), ex);
         }
-    }
-
-    /**
-     * Os elementos externos são carregados utilizando um classloader
-     * personalizado.
-     */
-    private static void loadExternalElements() {
     }
 
 }

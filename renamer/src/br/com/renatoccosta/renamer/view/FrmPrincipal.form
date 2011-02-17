@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
@@ -124,6 +124,25 @@
               <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.mnuHelp.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuContents">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.mnuContents.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="mnuAbout">
+              <Properties>
+                <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+                  <ResourceString bundle="br/com/renatoccosta/renamer/i18n/Messages.properties" key="FrmPrincipal.mnuAbout.text" replaceFormat="java.util.ResourceBundle.getBundle(&quot;{bundleNameSlashes}&quot;).getString(&quot;{key}&quot;)"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAboutActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
         </Menu>
       </SubComponents>
     </Menu>
@@ -163,16 +182,16 @@
           <Component id="pnlButtons" alignment="1" pref="579" max="32767" attributes="0"/>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlFiles" pref="515" max="32767" attributes="0"/>
+              <Component id="pnlFiles" pref="521" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pnlOrder" min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="pnlOrder" min="-2" pref="32" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Component id="pnlStatus" alignment="0" pref="579" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblBeforeAfter" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="450" max="32767" attributes="0"/>
+              <EmptySpace pref="474" max="32767" attributes="0"/>
           </Group>
           <Component id="jSeparator3" alignment="1" pref="579" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
@@ -185,14 +204,14 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txtFind" alignment="1" pref="501" max="32767" attributes="1"/>
+                  <Component id="txtFind" alignment="1" pref="499" max="32767" attributes="1"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="txtTarget" pref="408" max="32767" attributes="0"/>
+                      <Component id="txtTarget" pref="402" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnFile" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="txtReplace" pref="394" max="32767" attributes="1"/>
+                      <Component id="txtReplace" pref="386" max="32767" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnFunctions" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -377,7 +396,7 @@
     </Component>
     <Container class="javax.swing.JSplitPane" name="pnlFiles">
       <Properties>
-        <Property name="dividerLocation" type="int" value="250"/>
+        <Property name="dividerLocation" type="int" value="265"/>
         <Property name="continuousLayout" type="boolean" value="true"/>
       </Properties>
 
@@ -448,7 +467,7 @@
                       <Component id="btnUp" alignment="0" min="0" pref="0" max="32767" attributes="1"/>
                       <Component id="btnDown" alignment="0" pref="32" max="32767" attributes="1"/>
                   </Group>
-                  <EmptySpace pref="6" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

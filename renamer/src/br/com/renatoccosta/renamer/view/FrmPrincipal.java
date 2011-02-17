@@ -106,6 +106,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnuIncludeType = new javax.swing.JCheckBoxMenuItem();
         mnuSubfolders = new javax.swing.JCheckBoxMenuItem();
         mnuHelp = new javax.swing.JMenu();
+        mnuContents = new javax.swing.JMenuItem();
+        mnuAbout = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("br/com/renatoccosta/renamer/i18n/Messages"); // NOI18N
@@ -179,7 +181,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         lblBeforeAfter.setText(bundle.getString("FrmPrincipal.lblBeforeAfter.text")); // NOI18N
 
-        pnlFiles.setDividerLocation(250);
+        pnlFiles.setDividerLocation(265);
         pnlFiles.setContinuousLayout(true);
 
         lstAntes.setModel(new RenamerBeforeListModel(renamer));
@@ -249,7 +251,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(btnSortName, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                     .addComponent(btnUp, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                     .addComponent(btnDown, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, Short.MAX_VALUE))
-                .addContainerGap(6, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlOrderLayout.setVerticalGroup(
             pnlOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -371,6 +373,18 @@ public class FrmPrincipal extends javax.swing.JFrame {
         barMenu.add(mnuOptions);
 
         mnuHelp.setText(bundle.getString("FrmPrincipal.mnuHelp.text")); // NOI18N
+
+        mnuContents.setText(bundle.getString("FrmPrincipal.mnuContents.text")); // NOI18N
+        mnuHelp.add(mnuContents);
+
+        mnuAbout.setText(bundle.getString("FrmPrincipal.mnuAbout.text")); // NOI18N
+        mnuAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAboutActionPerformed(evt);
+            }
+        });
+        mnuHelp.add(mnuAbout);
+
         barMenu.add(mnuHelp);
 
         setJMenuBar(barMenu);
@@ -382,15 +396,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
             .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 515, Short.MAX_VALUE)
+                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnlOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblBeforeAfter)
-                .addContainerGap(450, Short.MAX_VALUE))
+                .addContainerGap(474, Short.MAX_VALUE))
             .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -401,13 +415,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblExpression))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE)
+                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                        .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 402, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFile))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                        .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 386, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFunctions))
                     .addGroup(layout.createSequentialGroup()
@@ -756,6 +770,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_mnuExitActionPerformed
 
+    private void mnuAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAboutActionPerformed
+        FrmAbout about = new FrmAbout(this, true);
+        about.setVisible(true);
+    }//GEN-LAST:event_mnuAboutActionPerformed
+
     private void validateFields() throws Exception {
         if (txtTarget.getText().trim().equals("") ||
                 txtFind.getText().trim().equals("") ||
@@ -871,6 +890,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel lblTarget;
     private javax.swing.JList lstAntes;
     private javax.swing.JList lstDepois;
+    private javax.swing.JMenuItem mnuAbout;
+    private javax.swing.JMenuItem mnuContents;
     private javax.swing.JMenuItem mnuExit;
     private javax.swing.JMenu mnuFile;
     private javax.swing.JMenu mnuHelp;
