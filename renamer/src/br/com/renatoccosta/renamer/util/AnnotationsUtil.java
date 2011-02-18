@@ -14,22 +14,31 @@
  *  limitations under the License.
  *  under the License.
  */
-package br.com.renatoccosta.renamer.element.meta;
+package br.com.renatoccosta.renamer.util;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Renato Costa
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target(java.lang.annotation.ElementType.TYPE)
-public @interface ElementType {
+public class AnnotationsUtil {
 
-    String id();
+    public static Field[] extractAnnotatedFields(Class clazz, 
+            Class<? extends Annotation> annot) {
+        List<Field> ret = new ArrayList<Field>();
 
-    String description() default "";
+        Field[] fields = clazz.getDeclaredFields();
+        for (Field f : fields) {
+            if (f.getAnnotation(annot) != null) {
+                ret.add(f);
+            }
+        }
+
+        return ret.toArray(new Field[] {});
+    }
 
 }

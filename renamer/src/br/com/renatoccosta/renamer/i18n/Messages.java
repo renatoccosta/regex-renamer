@@ -23,104 +23,110 @@ import java.util.ResourceBundle;
  */
 public class Messages {
 
-    private static ResourceBundle messages = ResourceBundle.getBundle(
+    private static ResourceBundle bundle = ResourceBundle.getBundle(
             "br/com/renatoccosta/renamer/i18n/Messages");
 
+    /* ---------------------------------------------------------------------- */
+    
+    public static ResourceBundle getBundle() {
+        return bundle;
+    }
+
     public static String getTitle() {
-        return messages.getString("FrmPrincipal.title");
+        return bundle.getString("FrmPrincipal.title");
     }
 
     public static String getFieldValidationMessage() {
-        return messages.getString("FieldValidation");
+        return bundle.getString("FieldValidation");
     }
 
     public static String getConflictMessage() {
-        return messages.getString("Conflict");
+        return bundle.getString("Conflict");
     }
 
     public static String getExpressionNotFoundMessage(String xpName) {
-        return String.format(messages.getString("ExpressionNotFoundException"),
+        return String.format(bundle.getString("ExpressionNotFoundException"),
                 xpName);
     }
 
     public static String getReplaceElementInvalidNumberParametersMessage() {
-        return messages.getString("ReplaceElementInvalidNumberParametersMessage");
+        return bundle.getString("ReplaceElementInvalidNumberParametersMessage");
     }
 
     public static String getFilterElementInvalidParametersMessage() {
-        return messages.getString("FilterElementInvalidParametersMessage");
+        return bundle.getString("FilterElementInvalidParametersMessage");
     }
 
     public static String getCaseElementInvalidParametersMessage() {
-        return messages.getString("CaseElementInvalidParametersMessage");
+        return bundle.getString("CaseElementInvalidParametersMessage");
     }
 
     public static String getFileInfoElementInvalidParametersMessage() {
-        return messages.getString("FileInfoElementInvalidParametersMessage");
+        return bundle.getString("FileInfoElementInvalidParametersMessage");
     }
 
     public static String getInvalidElementMessage(String id) {
-        return String.format(messages.getString("InvalidElementException"),
+        return String.format(bundle.getString("InvalidElementException"),
                 id);
     }
 
     public static String getEmptyElementChildsMessage(String id) {
-        return String.format(messages.getString("EmptyElementChildsException"),
+        return String.format(bundle.getString("EmptyElementChildsException"),
                 id);
     }
 
     public static String getErrorCaption() {
-        return messages.getString("Error");
+        return bundle.getString("Error");
     }
 
     public static String getSaveCaption() {
-        return messages.getString("FrmPrincipal.mnuSalvar.text");
+        return bundle.getString("FrmPrincipal.mnuSalvar.text");
     }
 
     public static String getNotReadyMessage() {
-        return messages.getString("NotReady");
+        return bundle.getString("NotReady");
     }
 
     public static String getFileNotFoundMessage() {
-        return messages.getString("FileNotFound");
+        return bundle.getString("FileNotFound");
     }
 
     public static String getConfirmRenameMessage() {
-        return messages.getString("ConfirmRename");
+        return bundle.getString("ConfirmRename");
     }
 
     public static String getConfirmReplaceMessage(String fileName) {
-        return String.format(messages.getString("ConfirmReplace"), fileName);
+        return String.format(bundle.getString("ConfirmReplace"), fileName);
     }
 
     public static String getOutOfBoundsMessage() {
-        return messages.getString("OutOfBoundsMessage");
+        return bundle.getString("OutOfBoundsMessage");
     }
 
     public static String getContiguousSelectionMessage() {
-        return messages.getString("ContiguousSelectionMessage");
+        return bundle.getString("ContiguousSelectionMessage");
     }
 
     public static String getErrorRenamingMessage() {
-        return messages.getString("ErrorRenaming");
+        return bundle.getString("ErrorRenaming");
     }
 
     public static String getErrorRenamingFilesMessage() {
-        return messages.getString("ErrorRenamingFiles");
+        return bundle.getString("ErrorRenamingFiles");
     }
 
     public static String getParameterWrongDataTypeInteger(String paramName) {
-        return String.format(messages.getString(
+        return String.format(bundle.getString(
                 "ParameterWrongDataTypeInteger"), paramName);
     }
 
     public static String getInvalidParameterName(String paramName) {
-        return String.format(messages.getString("InvalidParameterName"),
+        return String.format(bundle.getString("InvalidParameterName"),
                 paramName);
     }
 
     public static String getInvalidParameterValue(String paramName) {
-        return String.format(messages.getString("InvalidParameterValue"),
+        return String.format(bundle.getString("InvalidParameterValue"),
                 paramName);
     }
 

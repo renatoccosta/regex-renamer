@@ -23,6 +23,8 @@
 
 package br.com.renatoccosta.renamer.view;
 
+import br.com.renatoccosta.renamer.element.base.Element;
+
 /**
  *
  * @author Renato Couto da Costa
@@ -32,6 +34,8 @@ public class FrmElementParameters extends javax.swing.JDialog {
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
+
+    /* ---------------------------------------------------------------------- */
 
     /** Creates new form FrmProperties */
     public FrmElementParameters(java.awt.Frame parent, boolean modal) {
@@ -43,6 +47,17 @@ public class FrmElementParameters extends javax.swing.JDialog {
     public int getReturnStatus() {
         return returnStatus;
     }
+
+    /**
+     * Sets the element class to display it's parameters
+     *
+     * @param elementClass Element Class
+     */
+    public void setElementClass(Class<Element> elementClass) {
+        tblParams.setModel(new ElementParametersTableModel(elementClass));
+    }
+
+    /* ---------------------------------------------------------------------- */
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -62,53 +77,54 @@ public class FrmElementParameters extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
 
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("br/com/renatoccosta/renamer/i18n/Messages"); // NOI18N
+        setTitle(bundle.getString("FrmElementParameters.title")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
             }
         });
 
-        okButton.setText("OK");
+        okButton.setText(bundle.getString("FrmElementParameters.okButton.text")); // NOI18N
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
             }
         });
 
-        cancelButton.setText("Cancel");
+        cancelButton.setText(bundle.getString("FrmElementParameters.cancelButton.text")); // NOI18N
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
             }
         });
 
-        lblSummary.setText("Fill up the functions paramters or leave blank for default values:");
+        lblSummary.setText(bundle.getString("FrmElementParameters.lblSummary.text")); // NOI18N
 
         tblParams.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "teste", "teste2"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Float.class, java.lang.Boolean.class
+            boolean[] canEdit = new boolean [] {
+                true, false
             };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         tblParams.setColumnSelectionAllowed(true);
         tblParams.getTableHeader().setReorderingAllowed(false);
         pnlParams.setViewportView(tblParams);
         tblParams.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tblParams.getColumnModel().getColumn(0).setHeaderValue(bundle.getString("FrmElementParameters.tblParams.columnModel.title0")); // NOI18N
+        tblParams.getColumnModel().getColumn(1).setHeaderValue(bundle.getString("FrmElementParameters.tblParams.columnModel.title1")); // NOI18N
 
-        lblDescription.setText("Description:");
+        lblDescription.setText(bundle.getString("FrmElementParameters.lblDescription.text")); // NOI18N
 
         jTextArea1.setColumns(20);
         jTextArea1.setEditable(false);
@@ -153,7 +169,8 @@ public class FrmElementParameters extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-388)/2, (screenSize.height-394)/2, 388, 394);
     }// </editor-fold>//GEN-END:initComponents
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
@@ -175,22 +192,7 @@ public class FrmElementParameters extends javax.swing.JDialog {
         dispose();
     }
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FrmElementParameters dialog = new FrmElementParameters(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+    /* ---------------------------------------------------------------------- */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
