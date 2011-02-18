@@ -532,7 +532,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     private void initExpressionPopUp() {
-        this.epu = new ExpressionsPopUp(txtReplace);
+        FrmElementParameters frm = new FrmElementParameters(this, true);
+        this.epu = new ExpressionsPopUp(txtReplace, frm);
     }
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed

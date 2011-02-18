@@ -29,6 +29,27 @@ import java.lang.annotation.Target;
 @Target(java.lang.annotation.ElementType.FIELD)
 public @interface Parameter {
 
+    /**
+     * Field alias to be used on the text representation
+     * i.e: Field: index, Alias: idx
+     * <group idx='1'/>
+     *
+     * @return Alias
+     */
     String alias() default "";
+
+    /**
+     * Field name to be displayed on user interfaces
+     *
+     * @return Caption
+     */
+    String caption() default "";
+
+    /**
+     * Brief description of the parameter to help user know how to use it
+     *
+     * @return Description
+     */
+    String description() default "";
 
 }

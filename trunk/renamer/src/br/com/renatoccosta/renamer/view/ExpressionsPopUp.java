@@ -16,13 +16,14 @@
  */
 package br.com.renatoccosta.renamer.view;
 
+import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.element.base.ElementsDirectory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import org.apache.log4j.Logger;
 
@@ -36,6 +37,8 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
 
     private JTextComponent tc;
 
+    private FrmElementParameters frm;
+
     /**
      * Constructs a new instance of ExpressionsPopUp passing the reference of
      * the textComponent that will have it's text completed whenever
@@ -43,8 +46,9 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
      *
      * @param tc textComponent that will be completed.
      */
-    public ExpressionsPopUp(JTextComponent tc) {
+    public ExpressionsPopUp(JTextComponent tc, FrmElementParameters frm) {
         this.tc = tc;
+        this.frm = frm;
     }
 
     /**
@@ -70,20 +74,26 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
      * textComponent reference.
      */
     public void actionPerformed(ActionEvent e) {
-        try {
-            int caretPosition = tc.getCaretPosition();
-            String textBefore = tc.getText(0, caretPosition);
-            String textAfter = tc.getText(caretPosition,
-                    tc.getText().length() - caretPosition);
-            String textInsert = ((JMenuItem) e.getSource()).getText();
-            textInsert = stripCommonPart(textBefore, textInsert);
+        String elementName = ((JMenuItem) e.getSource()).getText();
+        Class<Element> elementClass = ElementsDirectory.getInstance().lookup(
+                elementName);
+        frm.setElementClass(elementClass);
 
-            tc.setText(textBefore + textInsert + textAfter);
-            tc.setCaretPosition(caretPosition + textInsert.length());
-
-        } catch (BadLocationException ex) {
-            logger.error(ex.getMessage(), ex);
-        }
+        frm.setVisible(true);
+//        try {
+//            int caretPosition = tc.getCaretPosition();
+//            String textBefore = tc.getText(0, caretPosition);
+//            String textAfter = tc.getText(caretPosition,
+//                    tc.getText().length() - caretPosition);
+//            String textInsert = ((JMenuItem) e.getSource()).getText();
+//            textInsert = stripCommonPart(textBefore, textInsert);
+//
+//            tc.setText(textBefore + textInsert + textAfter);
+//            tc.setCaretPosition(caretPosition + textInsert.length());
+//
+//        } catch (BadLocationException ex) {
+//            logger.error(ex.getMessage(), ex);
+//        }
     }
 
     private JMenuItem createMenuItem(String exp) {
@@ -96,7 +106,7 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
     private String stripCommonPart(String textBefore, String textInsert) {
         for (int i = 0; i < textInsert.length(); i++) {
             String compare = textInsert.substring(0, textInsert.length() - i);
-            
+
             if (textBefore.endsWith(compare)) {
                 return textInsert.substring(textInsert.length() - i);
             }
