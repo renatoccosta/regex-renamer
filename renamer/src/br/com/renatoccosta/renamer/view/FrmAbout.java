@@ -118,6 +118,9 @@ public class FrmAbout extends javax.swing.JDialog {
         txtBlog.setFont(new java.awt.Font("Tahoma", 0, 14));
         txtBlog.setText(bundle.getString("FrmAbout.txtBlog.text")); // NOI18N
 
+        pnlInfo.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        pnlInfo.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
         txtInfo.setColumns(20);
         txtInfo.setRows(3);
         txtInfo.setText(bundle.getString("FrmAbout.txtInfo.text")); // NOI18N

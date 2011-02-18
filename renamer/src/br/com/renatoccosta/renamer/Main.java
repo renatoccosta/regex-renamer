@@ -27,7 +27,7 @@ import org.apache.log4j.PropertyConfigurator;
 
 /**
  *
- * @author cyk1
+ * @author Renato
  */
 public class Main {
 

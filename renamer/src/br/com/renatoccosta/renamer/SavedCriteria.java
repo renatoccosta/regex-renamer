@@ -17,11 +17,11 @@ package br.com.renatoccosta.renamer;
 
 /**
  *
- * @author renato
+ * @author Renato
  */
 public class SavedCriteria {
 
-    public static final String FILE_EXT = ".xml";
+    public static final String FILE_EXT = "rrc";
 
     private String path;
 
