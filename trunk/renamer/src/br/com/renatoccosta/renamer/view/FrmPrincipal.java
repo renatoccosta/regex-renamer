@@ -1,7 +1,17 @@
-/*
- * FrmPrincipal.java
+/**
+ * Copyright 2009 Renato Couto da Costa
  *
- * Created on 28/09/2009, 09:43:12
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package br.com.renatoccosta.renamer.view;
 
@@ -22,11 +32,12 @@ import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import org.apache.log4j.Logger;
 
 /**
  *
- * @author cyk1
+ * @author Renato
  */
 public class FrmPrincipal extends javax.swing.JFrame {
 
@@ -39,6 +50,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private boolean lockSelect = false;
 
     private boolean lockScroll = false;
+
+    private JFileChooser fcCriteria = null;
 
     /** Creates new form FrmPrincipal */
     public FrmPrincipal() {
@@ -564,8 +577,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPreviewActionPerformed
 
     private void mnuOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuOpenActionPerformed
-        final JFileChooser fc = new JFileChooser();
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        JFileChooser fc = createCriteriaFileChooser();
 
         int returnVal = fc.showOpenDialog(this);
 
@@ -588,8 +600,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuOpenActionPerformed
 
     private void mnuSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSaveActionPerformed
-        final JFileChooser fc = new JFileChooser();
-        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        JFileChooser fc = createCriteriaFileChooser();
 
         int returnVal = fc.showSaveDialog(this);
 
@@ -607,8 +618,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
                         salvar = false;
                     }
                 } else if (!file.getName().endsWith(SavedCriteria.FILE_EXT)) {
-                    file = new File(file.getAbsolutePath() +
-                            SavedCriteria.FILE_EXT);
+                    file = new File(file.getAbsolutePath() + "."
+                            + SavedCriteria.FILE_EXT);
                 }
 
                 if (salvar) {
@@ -775,10 +786,22 @@ public class FrmPrincipal extends javax.swing.JFrame {
         about.setVisible(true);
     }//GEN-LAST:event_mnuAboutActionPerformed
 
+    private JFileChooser createCriteriaFileChooser() {
+        if (fcCriteria == null) {
+            fcCriteria = new JFileChooser();
+            fcCriteria.setFileSelectionMode(JFileChooser.FILES_ONLY);
+            FileNameExtensionFilter fnef = new FileNameExtensionFilter(
+                    "regex-renamer Saved Criterias", SavedCriteria.FILE_EXT);
+            fcCriteria.setFileFilter(fnef);
+        }
+
+        return fcCriteria;
+    }
+
     private void validateFields() throws Exception {
-        if (txtTarget.getText().trim().equals("") ||
-                txtFind.getText().trim().equals("") ||
-                txtReplace.getText().trim().equals("")) {
+        if (txtTarget.getText().trim().equals("")
+                || txtFind.getText().trim().equals("")
+                || txtReplace.getText().trim().equals("")) {
             throw new Exception(Messages.getFieldValidationMessage());
         }
     }
