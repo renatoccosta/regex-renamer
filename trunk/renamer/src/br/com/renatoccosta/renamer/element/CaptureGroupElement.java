@@ -31,12 +31,13 @@ import java.util.regex.Pattern;
  * e.g.
  * Text: 123abc
  * Search: ([0-9]+).*
- * Replace: <group idx='1'/>
+ * Replace: &lt;group idx='1'/&gt;
  * Result: 123
  *
  * @author renato
  */
-@ElementType(id = "group")
+@ElementType(id = "group",
+i18n = "br.com.renatoccosta.renamer.i18n.Messages")
 public class CaptureGroupElement extends EmptyElement {
 
     @Parameter
