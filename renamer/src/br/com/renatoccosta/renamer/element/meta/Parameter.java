@@ -31,22 +31,35 @@ public @interface Parameter {
 
     /**
      * Field alias to be used on the text representation
-     * i.e: Field: index, Alias: idx
-     * <group idx='1'/>
+     * i.e: Field name: index, Alias: idx
+     * &lt;group idx='1'/&gt;
+     *
+     * <p>This attribute can't be internationalized</p>
      *
      * @return Alias
      */
     String alias() default "";
 
     /**
-     * Field name to be displayed on user interfaces
+     * Field name to be displayed on user interfaces.
+     * 
+     * <p>Can point to the i18n key on the resource file, defined in the
+     * <code>ElementType</code> annotation. If this attribute is not set,
+     * it will point to the default key:
+     * <code>element.[id].param.[paramName].caption</code></p>
      *
      * @return Caption
      */
     String caption() default "";
 
     /**
-     * Brief description of the parameter to help user know how to use it
+     * Brief description of the parameter to help user know how to use it.
+     * It will be displayed for the end user.
+     *
+     * <p>Can point to the i18n key on the resource file, defined in the
+     * <code>ElementType</code> annotation. If this attribute is not set,
+     * it will point to the default key:
+     * <code>element.[id].param.[paramName].description</code></p></p>
      *
      * @return Description
      */
