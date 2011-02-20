@@ -39,7 +39,7 @@ public class MetaParameter {
     }
 
     public String getAlias() {
-        return param.alias();
+        return param.alias().equals("") ? field.getName() : param.alias();
     }
 
     public String getCaption() {
@@ -50,10 +50,20 @@ public class MetaParameter {
         }
 
         if (parent.bundle != null) {
+            //if the bundle is set, means that the i18n is set.
+            //tries to query the i18n string value
             try {
                 caption = parent.bundle.getString(caption);
-            } catch (Exception e) {
+            } catch (Exception e1) {
                 //key doesn't exists
+                //tries to query the default key
+                try {
+                    caption = parent.bundle.getString(getDefaultI18nKey() +
+                           getAlias() + ".caption");
+                } catch (Exception e2) {
+                    //the default key doesn't exists either
+                    //will return the original value
+                }
             }
         }
 
@@ -66,12 +76,26 @@ public class MetaParameter {
         if (parent.bundle != null) {
             try {
                 description = parent.bundle.getString(description);
-            } catch (Exception e) {
+            } catch (Exception e1) {
                 //key doesn't exists
+                //tries to query the default key
+                try {
+                    description = parent.bundle.getString(getDefaultI18nKey() +
+                           getAlias() + ".description");
+                } catch (Exception e2) {
+                    //the default key doesn't exists either
+                    //will return the original value
+                }
             }
         }
 
         return description;
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    protected String getDefaultI18nKey() {
+        return parent.getDefaultI18nKey() + ".param.";
     }
 
 }
