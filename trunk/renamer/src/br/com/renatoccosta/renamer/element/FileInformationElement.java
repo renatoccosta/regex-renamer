@@ -31,7 +31,8 @@ import java.util.Date;
  *
  * @author Renato Costa
  */
-@ElementType(id="file")
+@ElementType(id="file",
+i18n = "br.com.renatoccosta.renamer.i18n.Messages")
 public class FileInformationElement extends EmptyElement {
 
     public enum FileInformationEnum {

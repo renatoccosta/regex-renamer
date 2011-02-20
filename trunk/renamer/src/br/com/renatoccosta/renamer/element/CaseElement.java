@@ -30,7 +30,8 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author Renato Costa
  */
-@ElementType(id="case")
+@ElementType(id="case",
+i18n = "br.com.renatoccosta.renamer.i18n.Messages")
 public class CaseElement extends CompositeElement {
 
     public enum CaseEnum {

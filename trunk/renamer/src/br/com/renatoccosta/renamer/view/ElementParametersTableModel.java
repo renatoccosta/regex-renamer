@@ -17,11 +17,8 @@
 package br.com.renatoccosta.renamer.view;
 
 import br.com.renatoccosta.renamer.element.base.Element;
-import br.com.renatoccosta.renamer.element.meta.Parameter;
+import br.com.renatoccosta.renamer.element.meta.MetaElement;
 import br.com.renatoccosta.renamer.i18n.Messages;
-import br.com.renatoccosta.renamer.util.AnnotationsUtil;
-import java.lang.reflect.Field;
-import java.util.ResourceBundle;
 import javax.swing.table.AbstractTableModel;
 
 /**
@@ -30,9 +27,9 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ElementParametersTableModel extends AbstractTableModel {
 
-    private Class<Element> elementClazz;
+    private MetaElement me;
 
-    private Field[] parameters;
+//    private Field[] parameters;
 
     private String[] columnNames = new String[]{
         Messages.getBundle().getString("parameter.name"),
@@ -40,9 +37,8 @@ public class ElementParametersTableModel extends AbstractTableModel {
 
     /* ---------------------------------------------------------------------- */
     public ElementParametersTableModel(Class<Element> elementClazz) {
-        this.elementClazz = elementClazz;
-        parameters = AnnotationsUtil.extractAnnotatedFields(elementClazz,
-                Parameter.class);
+//        this.elementClazz = elementClazz;
+        this.me = new MetaElement(elementClazz);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -56,15 +52,13 @@ public class ElementParametersTableModel extends AbstractTableModel {
     }
 
     public int getRowCount() {
-        return parameters.length;
+        return me.getParams().size();
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (columnIndex == 0) {
             //column titles
-            Field f = parameters[rowIndex];
-            Parameter p = f.getAnnotation(Parameter.class);
-            return p.caption().equals("") ? f.getName() : p.caption();
+            return me.getParams().get(rowIndex).getCaption();
         } else {
             //column values
             return "";
