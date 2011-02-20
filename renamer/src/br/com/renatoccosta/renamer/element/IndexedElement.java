@@ -33,7 +33,8 @@ import java.io.File;
  *
  * @author renato
  */
-@ElementType(id = "idx")
+@ElementType(id = "idx",
+i18n = "br.com.renatoccosta.renamer.i18n.Messages")
 public class IndexedElement extends EmptyElement {
 
     @Parameter

@@ -34,7 +34,8 @@ import org.apache.commons.lang.StringUtils;
  *
  * @author Renato Costa
  */
-@ElementType(id="filter")
+@ElementType(id="filter",
+i18n = "br.com.renatoccosta.renamer.i18n.Messages")
 public class FilterElement extends CompositeElement {
 
     public enum FilterEnum {
