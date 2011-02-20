@@ -61,10 +61,20 @@ public class MetaElement {
         String description = elementType.description();
 
         if (bundle != null) {
+            //if the bundle is set, means that the i18n is set.
+            //tries to query the i18n string value
             try {
                 description = bundle.getString(description);
-            } catch (Exception e) {
+            } catch (Exception e1) {
                 //key doesn't exists
+                //tries to query the default key
+                try {
+                    description = bundle.getString(getDefaultI18nKey()
+                            + ".description");
+                } catch (Exception e2) {
+                    //the default key doesn't exists either
+                    //will return the original value
+                }
             }
         }
 
@@ -73,6 +83,12 @@ public class MetaElement {
 
     public List<MetaParameter> getParams() {
         return params;
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    protected String getDefaultI18nKey() {
+        return "element." + getId();
     }
 
 }

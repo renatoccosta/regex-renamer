@@ -46,7 +46,7 @@ public @interface Parameter {
      * <p>Can point to the i18n key on the resource file, defined in the
      * <code>ElementType</code> annotation. If this attribute is not set,
      * it will point to the default key:
-     * <code>element.[id].param.[paramName].caption</code></p>
+     * <code>element.[id].param.[paramAlias].caption</code></p>
      *
      * @return Caption
      */
@@ -59,7 +59,7 @@ public @interface Parameter {
      * <p>Can point to the i18n key on the resource file, defined in the
      * <code>ElementType</code> annotation. If this attribute is not set,
      * it will point to the default key:
-     * <code>element.[id].param.[paramName].description</code></p></p>
+     * <code>element.[id].param.[paramAlias].description</code></p></p>
      *
      * @return Description
      */
