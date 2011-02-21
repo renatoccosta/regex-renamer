@@ -29,15 +29,12 @@ public class ElementParametersTableModel extends AbstractTableModel {
 
     private MetaElement me;
 
-//    private Field[] parameters;
-
     private String[] columnNames = new String[]{
         Messages.getBundle().getString("parameter.name"),
         Messages.getBundle().getString("parameter.value")};
 
     /* ---------------------------------------------------------------------- */
     public ElementParametersTableModel(Class<Element> elementClazz) {
-//        this.elementClazz = elementClazz;
         this.me = new MetaElement(elementClazz);
     }
 
@@ -73,6 +70,21 @@ public class ElementParametersTableModel extends AbstractTableModel {
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         super.setValueAt(aValue, rowIndex, columnIndex);
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return super.getColumnClass(columnIndex);
+    }
+
+    public Class<?> getCellClass(int rowIndex, int columnIndex) {
+        if (columnIndex == 0) {
+            //column titles
+            return me.getParams().get(rowIndex).getField().getType();
+        } else {
+            //column values
+            return String.class;
+        }
     }
 
     /* ---------------------------------------------------------------------- */

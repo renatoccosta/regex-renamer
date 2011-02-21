@@ -32,10 +32,18 @@ public class MetaParameter {
 
     private MetaElement parent;
 
+    /* ---------------------------------------------------------------------- */
+
     public MetaParameter(MetaElement parent, Field f) {
         this.field = f;
         this.param = f.getAnnotation(Parameter.class);
         this.parent = parent;
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    public Field getField() {
+        return field;
     }
 
     public String getAlias() {
@@ -44,10 +52,6 @@ public class MetaParameter {
 
     public String getCaption() {
         String caption = param.caption();
-
-        if (caption.equals("")) {
-            return field.getName();
-        }
 
         if (parent.bundle != null) {
             //if the bundle is set, means that the i18n is set.
@@ -65,6 +69,10 @@ public class MetaParameter {
                     //will return the original value
                 }
             }
+        }
+
+        if (caption.equals("")) {
+            return field.getName();
         }
 
         return caption;
