@@ -15,6 +15,7 @@
  */
 package br.com.renatoccosta.renamer.element.base;
 
+import br.com.renatoccosta.renamer.element.meta.MetaElement;
 import br.com.renatoccosta.renamer.element.meta.Parameter;
 import br.com.renatoccosta.renamer.exception.ElementNotFoundException;
 import br.com.renatoccosta.renamer.exception.InvalidParameterException;
@@ -47,7 +48,7 @@ public class ElementFactory {
                         }
 
                         return null;
-                        
+
                     } else {
                         return super.convert(value, clazz);
                     }
@@ -77,26 +78,35 @@ public class ElementFactory {
         return ee;
     }
 
-    public static void setParameter(Element element, String name, String value)
+    public static void setParameter(Element element, String paramName,
+            Object value) throws InvalidParameterException {
+        MetaElement me = MetaElement.getInstance(element.getClass());
+        Field f = me.getParamByName(paramName).getField();
+        
+        setParameter(element, f, value);
+    }
+
+    public static void setParameter(Element element, Field field, Object value)
             throws InvalidParameterException {
         try {
-            Field f = element.getClass().getDeclaredField(name);
+            //for security reasons, only parameters can be set with this method
+            if (field.getAnnotation(Parameter.class) != null) {
+                if (value instanceof String) {
+                    value = utilsBean.getConvertUtils().convert(
+                            value, field.getType());
+                }
 
-            if (f.getAnnotation(Parameter.class) != null) {
-                Object v = utilsBean.getConvertUtils().convert(
-                        value, f.getType());
-                PropertyUtils.setProperty(element, name, v);
+                PropertyUtils.setProperty(element, field.getName(), value);
             } else {
-                throw createInvalidParameter(name, null);
+                throw createInvalidParameterException(field.getName(), null);
             }
-
         } catch (Exception ex) {
-            throw createInvalidParameter(name, ex);
+            throw createInvalidParameterException(field.getName(), ex);
         }
     }
 
     /* ---------------------------------------------------------------------- */
-    private static InvalidParameterException createInvalidParameter(
+    private static InvalidParameterException createInvalidParameterException(
             String paramName, Exception rootCause) {
         if (rootCause == null) {
             return new InvalidParameterException(
