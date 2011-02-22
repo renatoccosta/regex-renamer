@@ -17,7 +17,7 @@
 package br.com.renatoccosta.renamer.view;
 
 import javax.swing.DefaultCellEditor;
-import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.TableCellEditor;
@@ -27,7 +27,13 @@ import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 /**
- *
+ * Table that can have different data types for each cell. It is possible by
+ * acessing the method <code>ElementParametersTableModel.getCellClass(col, row)</code>
+ * if the model is of this specific class.
+ * 
+ * This table also create an <code>EnumEditor</code> that displays a combobox
+ * with the enumeration items of the cell's data type.
+ * 
  * @author Renato Costa
  */
 public class JPropertyTable extends JTable {
@@ -35,9 +41,18 @@ public class JPropertyTable extends JTable {
     static class EnumEditor extends DefaultCellEditor {
 
         public EnumEditor() {
-            super(new JCheckBox());
-            JCheckBox checkBox = (JCheckBox) getComponent();
-            checkBox.setHorizontalAlignment(JCheckBox.CENTER);
+            super(new JComboBox());
+        }
+
+        public void setEnum(Class<Enum> enumClass) {
+            JComboBox combo = (JComboBox) editorComponent;
+            combo.removeAllItems();
+
+            Enum[] es = enumClass.getEnumConstants();
+
+            for (Enum enumeration : es) {
+                combo.addItem(enumeration);
+            }
         }
 
     }
@@ -68,14 +83,23 @@ public class JPropertyTable extends JTable {
 
         if (editor == null) {
             TableModel model = getModel();
+            Class<?> clazz;
 
             if (model instanceof ElementParametersTableModel) {
-                editor = getDefaultEditor(
-                        ((ElementParametersTableModel) model).getCellClass(
-                        row, column));
+                clazz = ((ElementParametersTableModel) model).getCellClass(
+                        convertRowIndexToModel(row),
+                        convertColumnIndexToModel(column));
             } else {
-                editor = getDefaultEditor(getColumnClass(column));
+                clazz = getColumnClass(column);
             }
+
+            editor = getDefaultEditor(clazz);
+
+            if (editor instanceof EnumEditor) {
+                EnumEditor ee = (EnumEditor) editor;
+                ee.setEnum((Class<Enum>) clazz);
+            }
+
         }
 
         return editor;
@@ -99,6 +123,15 @@ public class JPropertyTable extends JTable {
         }
 
         return renderer;
+    }
+
+    /* ---------------------------------------------------------------------- */
+    @Override
+    protected void createDefaultEditors() {
+        super.createDefaultEditors();
+
+        // Enumerations
+        setDefaultEditor(Enum.class, new EnumEditor());
     }
 
 }

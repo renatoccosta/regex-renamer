@@ -78,7 +78,7 @@ public class ElementParametersTableModel extends AbstractTableModel {
     }
 
     public Class<?> getCellClass(int rowIndex, int columnIndex) {
-        if (columnIndex == 0) {
+        if (columnIndex == 1) {
             //column titles
             return me.getParams().get(rowIndex).getField().getType();
         } else {
