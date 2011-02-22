@@ -17,6 +17,7 @@
 package br.com.renatoccosta.renamer.view;
 
 import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.element.meta.MetaElement;
 
 /**
  *
@@ -47,6 +48,9 @@ public class FrmElementParameters extends javax.swing.JDialog {
      * @param elementClass Element Class
      */
     public void setElementClass(Class<Element> elementClass) {
+        MetaElement me = MetaElement.getInstance(elementClass);
+
+        lblSummary.setText(me.getDescription());
         tblParams.setModel(new ElementParametersTableModel(elementClass));
     }
 
