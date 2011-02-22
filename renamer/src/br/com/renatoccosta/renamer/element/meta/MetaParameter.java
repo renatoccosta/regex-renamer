@@ -34,7 +34,7 @@ public class MetaParameter {
 
     /* ---------------------------------------------------------------------- */
 
-    public MetaParameter(MetaElement parent, Field f) {
+    protected MetaParameter(MetaElement parent, Field f) {
         this.field = f;
         this.param = f.getAnnotation(Parameter.class);
         this.parent = parent;

@@ -17,9 +17,13 @@
 package br.com.renatoccosta.renamer.view;
 
 import br.com.renatoccosta.renamer.element.base.Element;
+import br.com.renatoccosta.renamer.element.base.ElementFactory;
 import br.com.renatoccosta.renamer.element.meta.MetaElement;
+import br.com.renatoccosta.renamer.element.meta.MetaParameter;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import javax.swing.table.AbstractTableModel;
+import org.apache.commons.beanutils.PropertyUtils;
+import org.apache.commons.lang.ClassUtils;
 
 /**
  *
@@ -27,7 +31,11 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ElementParametersTableModel extends AbstractTableModel {
 
+    private Element element;
+
     private MetaElement me;
+
+    private MetaParameter[] params;
 
     private String[] columnNames = new String[]{
         Messages.getBundle().getString("parameter.name"),
@@ -35,10 +43,20 @@ public class ElementParametersTableModel extends AbstractTableModel {
 
     /* ---------------------------------------------------------------------- */
     public ElementParametersTableModel(Class<Element> elementClazz) {
-        this.me = new MetaElement(elementClazz);
+        this.me = MetaElement.getInstance(elementClazz);
+        this.params = me.getParams();
+        try {
+            this.element = elementClazz.newInstance();
+        } catch (Exception ex) {
+            throw new IllegalArgumentException(ex);
+        }
     }
 
     /* ---------------------------------------------------------------------- */
+    public Element getElement() {
+        return element;
+    }
+
     public int getColumnCount() {
         return 2;
     }
@@ -49,16 +67,21 @@ public class ElementParametersTableModel extends AbstractTableModel {
     }
 
     public int getRowCount() {
-        return me.getParams().size();
+        return params.length;
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
         if (columnIndex == 0) {
             //column titles
-            return me.getParams().get(rowIndex).getCaption();
+            return params[rowIndex].getCaption();
         } else {
-            //column values
-            return "";
+            try {
+                //column values
+                return PropertyUtils.getProperty(element,
+                        params[rowIndex].getField().getName());
+            } catch (Exception ex) {
+                throw new IllegalArgumentException(ex);
+            }
         }
     }
 
@@ -69,7 +92,17 @@ public class ElementParametersTableModel extends AbstractTableModel {
 
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        super.setValueAt(aValue, rowIndex, columnIndex);
+        if (columnIndex == 1) {
+            try {
+                //column titles
+                ElementFactory.setParameter(element,
+                        params[rowIndex].getField(), aValue);
+            } catch (Exception ex) {
+                throw new IllegalArgumentException(ex);
+            }
+        } else {
+            super.setValueAt(aValue, rowIndex, columnIndex);
+        }
     }
 
     @Override
@@ -79,10 +112,11 @@ public class ElementParametersTableModel extends AbstractTableModel {
 
     public Class<?> getCellClass(int rowIndex, int columnIndex) {
         if (columnIndex == 1) {
-            //column titles
-            return me.getParams().get(rowIndex).getField().getType();
-        } else {
             //column values
+            return ClassUtils.primitiveToWrapper(
+                    params[rowIndex].getField().getType());
+        } else {
+            //column titles
             return String.class;
         }
     }
