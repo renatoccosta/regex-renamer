@@ -53,8 +53,21 @@ public class ElementParametersTableModel extends AbstractTableModel {
     }
 
     /* ---------------------------------------------------------------------- */
-    public Element getElement() {
-        return element;
+    public Class<?> getCellClass(int rowIndex, int columnIndex) {
+        if (columnIndex == 1) {
+            //column values
+            return ClassUtils.primitiveToWrapper(
+                    params[rowIndex].getField().getType());
+        } else {
+            //column titles
+            return String.class;
+        }
+    }
+
+    @Override
+    public Class<?> getColumnClass(int columnIndex) {
+        return columnIndex == 0 ? String.class
+                : super.getColumnClass(columnIndex);
     }
 
     public int getColumnCount() {
@@ -66,8 +79,16 @@ public class ElementParametersTableModel extends AbstractTableModel {
         return columnNames[column];
     }
 
+    public Element getElement() {
+        return element;
+    }
+
     public int getRowCount() {
         return params.length;
+    }
+
+    public String getRowDescription(int rowIndex) {
+        return params[rowIndex].getDescription();
     }
 
     public Object getValueAt(int rowIndex, int columnIndex) {
@@ -102,22 +123,6 @@ public class ElementParametersTableModel extends AbstractTableModel {
             }
         } else {
             super.setValueAt(aValue, rowIndex, columnIndex);
-        }
-    }
-
-    @Override
-    public Class<?> getColumnClass(int columnIndex) {
-        return super.getColumnClass(columnIndex);
-    }
-
-    public Class<?> getCellClass(int rowIndex, int columnIndex) {
-        if (columnIndex == 1) {
-            //column values
-            return ClassUtils.primitiveToWrapper(
-                    params[rowIndex].getField().getType());
-        } else {
-            //column titles
-            return String.class;
         }
     }
 
