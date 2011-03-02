@@ -73,6 +73,10 @@
     -->
 
     <target name="-pre-compile">
+        <propertyfile file="${src.dir}/version-info.properties">
+            <entry key="version.build" type="int" value="1" operation="+" />
+            <entry key="version.date" type="date" value="now" pattern="yyyy/MM/dd HH:mm"/>
+        </propertyfile>
         <copy todir="${build.dir}">
             <fileset dir="${resource.dir}"/>
         </copy>

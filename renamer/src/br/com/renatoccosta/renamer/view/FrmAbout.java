@@ -16,8 +16,10 @@
  */
 package br.com.renatoccosta.renamer.view;
 
+import br.com.renatoccosta.renamer.util.VersionInfoUtil;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
@@ -191,7 +193,7 @@ public class FrmAbout extends javax.swing.JDialog {
 
     /** Closes the dialog */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-	doClose();
+        doClose();
     }//GEN-LAST:event_closeDialog
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -209,20 +211,26 @@ public class FrmAbout extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void initLocal() {
-        ((JPanel)this.getContentPane()).setOpaque(false);
+        ((JPanel) this.getContentPane()).setOpaque(false);
 
         txtDeveloper.setText(StringUtils.replace(txtDeveloper.getText(),
                 "${devname}", "Renato Couto da Costa"));
 
-        String vmachine = System.getProperty("java.runtime.name") + " " +
-                System.getProperty("java.runtime.version");
+        String version = VersionInfoUtil.getVersionNumber();
 
-        String so = System.getProperty("os.name") + " " +
-                System.getProperty("os.arch");
+        SimpleDateFormat sdf = new SimpleDateFormat("E, dd MMMM yyyy HH:mm");
+        String date = sdf.format(VersionInfoUtil.getVersionDate());
+
+        String vmachine = System.getProperty("java.runtime.name") + " "
+                + System.getProperty("java.runtime.version");
+
+        String so = System.getProperty("os.name") + " "
+                + System.getProperty("os.arch");
 
         txtInfo.setText(StringUtils.replaceEach(txtInfo.getText(),
-                new String[] {"${vmachine}", "${so}"},
-                new String[] {vmachine, so}));
+                new String[]{"${version}", "${versionDate}",
+                    "${vmachine}", "${so}"},
+                new String[]{version, date, vmachine, so}));
     }
 
 }
