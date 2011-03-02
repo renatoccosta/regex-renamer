@@ -21,9 +21,7 @@ import br.com.renatoccosta.renamer.element.meta.Parameter;
 import org.apache.commons.lang.StringUtils;
 
 /**
- * Element that replaces all the occurrences of a character with another one
- * Elemento que substitui todas as ocorrências de um caractere por outro no
- * conteúdo dos próximos elementos.
+ * Element that replaces all the occurrences of a character with another one.
  *
  * @author Renato Costa
  */
