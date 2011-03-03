@@ -52,6 +52,10 @@ public class FrmElementParameters extends javax.swing.JDialog {
         return returnStatus;
     }
 
+    public Element getElement() {
+        return ((ElementParametersTableModel)tblParams.getModel()).getElement();
+    }
+
     /**
      * Sets the element class to display it's parameters
      *
@@ -185,7 +189,8 @@ public class FrmElementParameters extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void initLocal() {
-        tblParams.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+        tblParams.getSelectionModel().addListSelectionListener(
+                new ListSelectionListener() {
 
             public void valueChanged(ListSelectionEvent e) {
                 ListSelectionModel lsm = (ListSelectionModel) e.getSource();

@@ -24,6 +24,7 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import org.apache.log4j.Logger;
 
@@ -80,20 +81,21 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
         frm.setElementClass(elementClass);
 
         frm.setVisible(true);
-//        try {
-//            int caretPosition = tc.getCaretPosition();
-//            String textBefore = tc.getText(0, caretPosition);
-//            String textAfter = tc.getText(caretPosition,
-//                    tc.getText().length() - caretPosition);
-//            String textInsert = ((JMenuItem) e.getSource()).getText();
-//            textInsert = stripCommonPart(textBefore, textInsert);
-//
-//            tc.setText(textBefore + textInsert + textAfter);
-//            tc.setCaretPosition(caretPosition + textInsert.length());
-//
-//        } catch (BadLocationException ex) {
-//            logger.error(ex.getMessage(), ex);
-//        }
+        
+        try {
+            int caretPosition = tc.getCaretPosition();
+            String textBefore = tc.getText(0, caretPosition);
+            String textAfter = tc.getText(caretPosition,
+                    tc.getText().length() - caretPosition);
+            String textInsert = frm.getElement().toString();
+            textInsert = stripCommonPart(textBefore, textInsert);
+
+            tc.setText(textBefore + textInsert + textAfter);
+            tc.setCaretPosition(caretPosition + textInsert.length());
+
+        } catch (BadLocationException ex) {
+            logger.error(ex.getMessage(), ex);
+        }
     }
 
     private JMenuItem createMenuItem(String exp) {
