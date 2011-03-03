@@ -71,7 +71,7 @@ public class ElementParametersTableModel extends AbstractTableModel {
     }
 
     public int getColumnCount() {
-        return 2;
+        return columnNames.length;
     }
 
     @Override
@@ -126,5 +126,4 @@ public class ElementParametersTableModel extends AbstractTableModel {
         }
     }
 
-    /* ---------------------------------------------------------------------- */
 }
