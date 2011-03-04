@@ -53,7 +53,7 @@ public class Renamer {
 
     private boolean includeExtensions = false;
 
-    private CriteriaTypeEnum type = CriteriaTypeEnum.REGULAR_EXPRESSION;
+    private CriteriaTypeEnum searchType = CriteriaTypeEnum.REGULAR_EXPRESSION;
 
     private SortType sortType = SortType.FILE_NAME;
 
@@ -138,8 +138,8 @@ public class Renamer {
         return sortType;
     }
 
-    public CriteriaTypeEnum getType() {
-        return type;
+    public CriteriaTypeEnum getSearchType() {
+        return searchType;
     }
 
     public boolean isIncludeSubFolders() {
@@ -180,6 +180,11 @@ public class Renamer {
         this.dirty = true;
     }
 
+    public void setIncludeExtensions(boolean includeExtensions) {
+        this.includeExtensions = includeExtensions;
+        this.dirty = true;
+    }
+
     public void setSearch(String search) throws RenamerException {
         if (this.search != null && search.equals(this.search.pattern())) {
             return;
@@ -208,12 +213,12 @@ public class Renamer {
         sortFiles();
     }
 
-    public void setType(CriteriaTypeEnum type) {
-        if (this.type.equals(type)) {
+    public void setSearchType(CriteriaTypeEnum type) {
+        if (this.searchType.equals(type)) {
             return;
         }
 
-        this.type = type;
+        this.searchType = type;
 
         try {
             parseSearch(SEARCH_ALL);
@@ -224,9 +229,8 @@ public class Renamer {
         this.dirty = true;
     }
 
-    public void setIncludeExtensions(boolean includeExtensions) {
-        this.includeExtensions = includeExtensions;
-        this.dirty = true;
+    public void setSelectedFiles(int[] selectedFiles) {
+        this.selectedFiles = selectedFiles;
     }
 
     /* ---------------------------------------------------------------------- */
@@ -261,7 +265,7 @@ public class Renamer {
         boolean r1 = !this.filesBefore.isEmpty() && this.rootReplace != null;
         boolean r2 = false;
 
-        switch (type) {
+        switch (searchType) {
             case SELECTED_FILES:
                 r2 = selectedFiles.length > 0;
                 break;
@@ -528,7 +532,7 @@ public class Renamer {
     private List<String> fillPreRenameList() {
         List<String> lst = null;
 
-        switch (type) {
+        switch (searchType) {
             case SELECTED_FILES:
                 lst = new ArrayList<String>(selectedFiles.length);
 

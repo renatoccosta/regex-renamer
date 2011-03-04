@@ -57,11 +57,11 @@ public class FrmPrincipal extends javax.swing.JFrame {
     public FrmPrincipal() {
         initComponents();
         initComponentsLocal();
+        initDefaultTarget();
     }
 
     public FrmPrincipal(String path) {
-        initComponents();
-        initComponentsLocal();
+        this();
 
         txtTarget.setText(path);
     }
@@ -368,12 +368,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         mnuOptions.add(mnuOrderDate);
         mnuOptions.add(jSeparator1);
 
-        mnuIncludeType.setSelected(true);
         mnuIncludeType.setText(bundle.getString("FrmPrincipal.mnuIncludeType.text")); // NOI18N
         mnuIncludeType.setIcon(new javax.swing.ImageIcon(getClass().getResource("/type.png"))); // NOI18N
         mnuOptions.add(mnuIncludeType);
 
-        mnuSubfolders.setSelected(true);
         mnuSubfolders.setText(bundle.getString("FrmPrincipal.mnuSubfolders.text")); // NOI18N
         mnuSubfolders.setIcon(new javax.swing.ImageIcon(getClass().getResource("/subfolder.png"))); // NOI18N
         mnuSubfolders.addActionListener(new java.awt.event.ActionListener() {
@@ -534,6 +532,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void initExpressionPopUp() {
         FrmElementParameters frm = new FrmElementParameters(this, true);
         this.epu = new ExpressionsPopUp(txtReplace, frm);
+    }
+
+    private void initDefaultTarget() {
+        txtTarget.setText(System.getProperty("user.home"));
+        try {
+            configureRenamer(true);
+        } catch (RenamerException ex) {
+            logger.error(ex);
+        }
     }
 
     private void btnFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFileActionPerformed
@@ -851,12 +858,20 @@ public class FrmPrincipal extends javax.swing.JFrame {
             renamer.setRootFolder(new File(txtTarget.getText()));
         }
 
-        if (!"".equals(txtReplace.getText())) {
-            renamer.setReplace(txtReplace.getText());
+        if (btnFindSelected.isSelected()) {
+            renamer.setSearchType(CriteriaTypeEnum.SELECTED_FILES);
+            renamer.setSelectedFiles(lstAntes.getSelectedIndices());
+        } else if (btnFindAll.isSelected()) {
+            renamer.setSearchType(CriteriaTypeEnum.ALL_FILES);
+        } else {
+            renamer.setSearchType(CriteriaTypeEnum.REGULAR_EXPRESSION);
+            if (!"".equals(txtFind.getText())) {
+                renamer.setSearch(txtFind.getText());
+            }
         }
 
-        if (!"".equals(txtFind.getText())) {
-            renamer.setSearch(txtFind.getText());
+        if (!"".equals(txtReplace.getText())) {
+            renamer.setReplace(txtReplace.getText());
         }
 
         if (refreshLists) {
@@ -864,9 +879,6 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Atualiza as listas
-     */
     private void refreshLists() {
         ((RenamerListModel) lstAntes.getModel()).refresh();
         ((RenamerListModel) lstDepois.getModel()).refresh();
