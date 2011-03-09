@@ -19,8 +19,6 @@ import br.com.renatoccosta.renamer.Renamer;
 import br.com.renatoccosta.renamer.i18n.Messages;
 import java.awt.Color;
 import java.awt.Component;
-import java.io.Serializable;
-import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 
@@ -28,33 +26,36 @@ import javax.swing.ListCellRenderer;
  *
  * @author renato
  */
-public class FileListRenderer extends DefaultListCellRenderer implements
-        ListCellRenderer, Serializable {
+public class FileListRenderer implements ListCellRenderer {
 
     private Renamer renamer;
+    
+    private ListCellRenderer nativeRenderer;
 
-    public FileListRenderer(Renamer renamer) {
-        super();
+    public FileListRenderer(ListCellRenderer nativeRenderer, Renamer renamer) {
+//        super();
+        this.nativeRenderer = nativeRenderer;
         this.renamer = renamer;
     }
 
-    @Override
+//    @Override
     public Component getListCellRendererComponent(JList list, Object value,
             int index, boolean isSelected, boolean cellHasFocus) {
 
-        Component c = super.getListCellRendererComponent(list, value, index,
-                isSelected, cellHasFocus);
+        Component c = nativeRenderer.getListCellRendererComponent(list, 
+                value, index, isSelected, cellHasFocus);
 
         //if the filename was changed, it's displayed in blue
-        if (!renamer.getFileNamesBefore().get(index).endsWith(value.toString())) {
-            setForeground(Color.BLUE);
+        if (!renamer.getFileNamesBefore().get(index).endsWith(
+                value.toString())) {
+            c.setForeground(Color.BLUE);
         }
 
         //if the filename is conflicting with another file, it's displayed in red
         if (renamer.getConflicts().containsKey(
                 renamer.getFileNamesAfter().get(index)) ||
                 value.toString().endsWith(Messages.getErrorRenamingMessage())) {
-            setForeground(Color.RED);
+            c.setForeground(Color.RED);
         }
 
         return c;
