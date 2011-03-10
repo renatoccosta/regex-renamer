@@ -81,21 +81,23 @@ public class ExpressionsPopUp extends JPopupMenu implements ActionListener {
         frm.setElementClass(elementClass);
 
         frm.setVisible(true);
-        
-        try {
-            int caretPosition = tc.getCaretPosition();
-            String textBefore = tc.getText(0, caretPosition);
-            String textAfter = tc.getText(caretPosition,
-                    tc.getText().length() - caretPosition);
-            String textInsert = frm.getElement().toString();
-            textInsert = stripCommonPart(textBefore, textInsert);
 
-            tc.setText(textBefore + textInsert + textAfter);
-            tc.setCaretPosition(caretPosition + textInsert.length());
+        if (frm.getReturnStatus() == FrmElementParameters.RET_OK) {
+            try {
+                int caretPosition = tc.getCaretPosition();
+                String textBefore = tc.getText(0, caretPosition);
+                String textAfter = tc.getText(caretPosition,
+                        tc.getText().length() - caretPosition);
+                String textInsert = frm.getElement().toString();
+                textInsert = stripCommonPart(textBefore, textInsert);
 
-        } catch (BadLocationException ex) {
-            logger.error(ex.getMessage(), ex);
+                tc.setText(textBefore + textInsert + textAfter);
+                tc.setCaretPosition(caretPosition + textInsert.length());
+            } catch (BadLocationException ex) {
+                logger.error(ex.getMessage(), ex);
+            }
         }
+
     }
 
     private JMenuItem createMenuItem(String exp) {
