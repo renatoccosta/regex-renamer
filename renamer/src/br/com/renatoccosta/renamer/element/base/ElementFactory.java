@@ -82,7 +82,7 @@ public class ElementFactory {
             Object value) throws InvalidParameterException {
         MetaElement me = MetaElement.getInstance(element.getClass());
         Field f = me.getParamByName(paramName).getField();
-        
+
         setParameter(element, f, value);
     }
 
@@ -93,7 +93,7 @@ public class ElementFactory {
             if (field.getAnnotation(Parameter.class) != null) {
                 if (value instanceof String) {
                     value = utilsBean.getConvertUtils().convert(
-                            value, field.getType());
+                            (String) value, field.getType());
                 }
 
                 PropertyUtils.setProperty(element, field.getName(), value);

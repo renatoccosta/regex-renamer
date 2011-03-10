@@ -816,6 +816,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     private void validateFields() throws Exception {
+        
+
         if (txtTarget.getText().trim().equals("")
                 || txtFind.getText().trim().equals("")
                 || txtReplace.getText().trim().equals("")) {
