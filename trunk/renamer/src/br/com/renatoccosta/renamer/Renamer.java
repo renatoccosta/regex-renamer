@@ -19,18 +19,28 @@ import br.com.renatoccosta.renamer.exception.RenamerException;
 import br.com.renatoccosta.renamer.element.base.Element;
 import br.com.renatoccosta.renamer.exception.ParseErrorsException;
 import br.com.renatoccosta.renamer.i18n.Messages;
+import br.com.renatoccosta.renamer.parser.RenamerLexer;
+import br.com.renatoccosta.renamer.parser.RenamerParser;
+import br.com.renatoccosta.renamer.parser.RenamerTreeParser;
 import br.com.renatoccosta.renamer.util.ArrayUtil;
 import br.com.renatoccosta.renamer.util.FileUtil;
 import java.io.File;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
+import org.antlr.runtime.ANTLRStringStream;
+import org.antlr.runtime.CharStream;
+import org.antlr.runtime.CommonTokenStream;
+import org.antlr.runtime.Lexer;
+import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.tree.CommonTreeNodeStream;
+import org.antlr.runtime.tree.Tree;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
 /**
@@ -41,12 +51,15 @@ import org.apache.log4j.Logger;
  */
 public class Renamer {
 
+    // <editor-fold defaultstate="collapsed" desc="contants">
     private static final Logger LOGGER = Logger.getLogger(Renamer.class);
 
     private static final String TMP_SUFIX = "~";
 
     private static final String SEARCH_ALL = "(.*)";
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="fields">
     private File rootFolder;
 
     private boolean includeSubFolders = false;
@@ -86,30 +99,17 @@ public class Renamer {
      * de renomear.
      */
     private boolean canRename = true;
+    // </editor-fold>
 
-    private Comparator<String> cmpFiles = new Comparator<String>() {
-
-        public int compare(String o1, String o2) {
-            int qtdo1 = o1.split("\\/").length;
-            int qtdo2 = o2.split("\\/").length;
-
-            if (qtdo1 != qtdo2) {
-                return qtdo1 - qtdo2;
-            }
-
-            return o1.compareTo(o2);
-        }
-
-    };
-
-    /* ---------------------------------------------------------------------- */
+    // <editor-fold defaultstate="collapsed" desc="constructor">
     /**
      * Cria uma instancia do renomeador.
      */
     public Renamer() {
     }
+    // </editor-fold>
 
-    /* ---------------------------------------------------------------------- */
+    // <editor-fold defaultstate="collapsed" desc="gets/sets">
     public File getRootFolder() {
         return rootFolder;
     }
@@ -232,8 +232,9 @@ public class Renamer {
     public void setSelectedFiles(int[] selectedFiles) {
         this.selectedFiles = selectedFiles;
     }
+    // </editor-fold>
 
-    /* ---------------------------------------------------------------------- */
+    // <editor-fold defaultstate="collapsed" desc="public methods">
     public void moveFilesUp(int startIndex, int endIndex) {
         if (startIndex <= 0) {
             return;
@@ -280,13 +281,39 @@ public class Renamer {
     }
 
     /**
-     * Verifica se existem conflitos de nomes de arquivos destino.
-     * @return True caso existam.
+     * Verifies if there are file name conflicts
+     * @return True for file conflicts
      */
     public boolean hasConflicts() throws RenamerException {
         return !conflicts.isEmpty();
     }
 
+    /**
+     * Executes the parse of the text and analyse the cursor position to
+     * generate the auto complete options.
+     *
+     * @param text Text to be parsed
+     * @param pos Position of the carret in the text
+     * @return List of auto-complete options or null if there was no options.
+     */
+    public List<String> queryAutoCompleteOptions(String text, int pos) {
+        try {
+            parseReplace(text);
+
+        } catch (RenamerException ex) {
+            if (ex instanceof ParseErrorsException) {
+                ParseErrorsException pee = (ParseErrorsException) ex;
+                int realPos = text.length() == pos ? -1 : pos;
+
+                return AutoComplete.process(pee.getExceptions(), realPos);
+            }
+        }
+
+        return null;
+    }
+    // </editor-fold>
+
+    // <editor-fold defaultstate="collapsed" desc="core methods">
     /**
      * This is the core method of this class.
      * It executes the renaming process in memory, without actually renaming the
@@ -307,19 +334,30 @@ public class Renamer {
         //iteração na lista de arquivos
         for (String strFile : preRenameFiles) {
             File f = new File(strFile);
+            String base = FilenameUtils.getBaseName(f.getName());
+            String ext = FilenameUtils.getExtension(f.getName());
+            String target;
 
-            String target = f.getName();
+            if (isIncludeExtensions()) {
+                target = base + "." + ext;
+            } else {
+                target = base;
+            }
 
             Matcher matcher = search.matcher(f.getName());
             if (matcher.find()) {
                 try {
                     target = rootReplace.getContent(search.pattern(),
-                            f.getName(), f);
+                            target, f);
                 } catch (Exception ex) {
                     target = Messages.getErrorRenamingMessage();
                     LOGGER.error(ex);
                     canRename = false;
                 }
+            }
+
+            if (!isIncludeExtensions()) {
+                target = target + "." + ext;
             }
 
             filesAfter.add(f.getParent() + File.separator + target);
@@ -336,9 +374,8 @@ public class Renamer {
     }
 
     /**
-     * Executa a renomeação dos arquivos, desde que não existam conflitos. Antes
-     * de chamar este método, chame o {@code previewRename()} para que resultado
-     * da renomeação saia correto.
+     * Executes the actual renaming process if everything is ready. Before
+     * calling this method, the {@code previewRename()} must be called.
      */
     public void rename() throws RenamerException {
         if (!isReady() || this.dirty || !this.canRename) {
@@ -399,36 +436,13 @@ public class Renamer {
 
         this.dirty = true;
     }
-
-    /**
-     * Executes the parse of the text and analyse the cursor position to 
-     * generate the auto complete options.
-     * 
-     * @param text Text to be parsed
-     * @param pos Position of the carret in the text
-     * @return List of auto-complete options or null if there was no options.
-     */
-    public List<String> queryAutoCompleteOptions(String text, int pos) {
-        try {
-            parseReplace(text);
-
-        } catch (RenamerException ex) {
-            if (ex instanceof ParseErrorsException) {
-                ParseErrorsException pee = (ParseErrorsException) ex;
-                int realPos = text.length() == pos ? -1 : pos;
-
-                return AutoComplete.process(pee.getExceptions(), realPos);
-            }
-        }
-
-        return null;
-    }
-
-    /* ---------------------------------------------------------------------- */
+    // </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="private methods">
     /**
      * Verifica se a string de localização do padrão de nome de arquivo é válida
      * como uma expressão regular
-     * 
+     *
      * @param localizar String de localizar
      * @throws ParseException Case existe um erro de sintaxe
      */
@@ -446,42 +460,34 @@ public class Renamer {
      *
      * @param replace Substitution string
      * @return Root element
-     * @throws ParseErrorsException If there was any error during the parse
+     * @throws RenamerException If there was any error during the parse
      */
     private Element parseReplace(String replace) throws RenamerException {
-//        try {
-//            RenamerLexer lexer = new RenamerLexer(replace);
-//
-//            TokenStream cts = new CommonTokenStream(lexer);
-//            RenamerParser parser = new RenamerParser(cts);
-//
-//            RenamerParser.begin_return br = null;
-//            br = parser.begin();
-//
-//            if (!parser.getExceptions().isEmpty()) {
-//                throw new ParseErrorsException(parser.getExceptions());
-//            }
-//
-//            CommonTree t = (CommonTree) br.getTree();
-//            CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
-//            nodes.setTokenStream(cts);
-//            TreeGrammar tg = new TreeGrammar(nodes);
-//
-//            tg.begin();
-//
-//            return tg.root;
-//
-//        } catch (RecognitionException ex) {
-//            throw new RenamerException(ex);
-//        }
-        return null;
+        try {
+            CharStream input = new ANTLRStringStream(replace);
+            Lexer lex = new RenamerLexer(input);
+
+            CommonTokenStream tokens = new CommonTokenStream(lex);
+            RenamerParser parser = new RenamerParser(tokens);
+            RenamerParser.document_return root = parser.document();
+
+            CommonTreeNodeStream nodes = new CommonTreeNodeStream(
+                    (Tree) root.getTree());
+            RenamerTreeParser walker = new RenamerTreeParser(nodes);
+            walker.document();
+
+            return walker.root;
+
+        } catch (RecognitionException ex) {
+            throw new RenamerException(ex);
+        }
     }
 
     private void calculateConflicts() {
         conflicts.clear();
 
         //chave: nome do arquivo
-        //valor: lista com o indice de cada ocorrência do nome do arquivo na 
+        //valor: lista com o indice de cada ocorrência do nome do arquivo na
         //lista original
         Map<String, List<Integer>> cfsTemp =
                 new HashMap<String, List<Integer>>();
@@ -547,5 +553,5 @@ public class Renamer {
 
         return lst;
     }
-
+    // </editor-fold>
 }
