@@ -25,7 +25,6 @@ import br.com.renatoccosta.renamer.parser.RenamerTreeParser;
 import br.com.renatoccosta.renamer.util.ArrayUtil;
 import br.com.renatoccosta.renamer.util.FileUtil;
 import java.io.File;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,7 +50,7 @@ import org.apache.log4j.Logger;
  */
 public class Renamer {
 
-    // <editor-fold defaultstate="collapsed" desc="contants">
+    // <editor-fold defaultstate="collapsed" desc="constants">
     private static final Logger LOGGER = Logger.getLogger(Renamer.class);
 
     private static final String TMP_SUFIX = "~";
@@ -186,6 +185,11 @@ public class Renamer {
     }
 
     public void setSearch(String search) throws RenamerException {
+        if (!searchType.equals(CriteriaTypeEnum.REGULAR_EXPRESSION)) {
+            throw new IllegalStateException(
+                    "Can only set regex expression when search type is regex");
+        }
+
         if (this.search != null && search.equals(this.search.pattern())) {
             return;
         }
@@ -329,38 +333,24 @@ public class Renamer {
         filesAfter.clear();
         rootReplace.resetState();
         canRename = true;
-        List<String> preRenameFiles = fillPreRenameList();
 
-        //iteração na lista de arquivos
-        for (String strFile : preRenameFiles) {
-            File f = new File(strFile);
-            String base = FilenameUtils.getBaseName(f.getName());
-            String ext = FilenameUtils.getExtension(f.getName());
-            String target;
+        switch (searchType) {
+            case SELECTED_FILES:
+                for (int i = 0; i < filesBefore.size(); i++) {
+                    String newName = filesBefore.get(i);
 
-            if (isIncludeExtensions()) {
-                target = base + "." + ext;
-            } else {
-                target = base;
-            }
+                    if (isSelected(i)) {
+                        newName = convertName(newName);
+                    }
 
-            Matcher matcher = search.matcher(f.getName());
-            if (matcher.find()) {
-                try {
-                    target = rootReplace.getContent(search.pattern(),
-                            target, f);
-                } catch (Exception ex) {
-                    target = Messages.getErrorRenamingMessage();
-                    LOGGER.error(ex);
-                    canRename = false;
+                    filesAfter.add(newName);
                 }
-            }
-
-            if (!isIncludeExtensions()) {
-                target = target + "." + ext;
-            }
-
-            filesAfter.add(f.getParent() + File.separator + target);
+                break;
+            default: //regex and all files
+                for (String fileName : filesBefore) {
+                    fileName = convertName(fileName);
+                    filesAfter.add(fileName);
+                }
         }
 
         //ocorreram problemas durante o rename de alguns arquivos
@@ -437,7 +427,7 @@ public class Renamer {
         this.dirty = true;
     }
     // </editor-fold>
-    
+
     // <editor-fold defaultstate="collapsed" desc="private methods">
     /**
      * Verifica se a string de localização do padrão de nome de arquivo é válida
@@ -552,6 +542,60 @@ public class Renamer {
         }
 
         return lst;
+    }
+
+    /**
+     * Checks if the corresponding item index is selected in the list
+     * 
+     * @param i Item index
+     * @return True if selected
+     */
+    private boolean isSelected(int i) {
+        for (int j : selectedFiles) {
+            if (i == j) {
+                return true;
+            } else if (i < j) {
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Converts the old file name for the new one, using the parsed replace string
+     * @param fileName File name to be changed
+     * @return New file name
+     */
+    private String convertName(String fileName) {
+        File f = new File(fileName);
+        String base = FilenameUtils.getBaseName(f.getName());
+        String ext = FilenameUtils.getExtension(f.getName());
+        String target;
+
+        if (isIncludeExtensions()) {
+            target = base + "." + ext;
+        } else {
+            target = base;
+        }
+
+        Matcher matcher = search.matcher(target);
+        if (matcher.find()) {
+            try {
+                target = rootReplace.getContent(search.pattern(),
+                        target, f);
+            } catch (Exception ex) {
+                target = Messages.getErrorRenamingMessage();
+                LOGGER.error(ex);
+                canRename = false;
+            }
+        }
+
+        if (!isIncludeExtensions()) {
+            target = target + "." + ext;
+        }
+
+        return f.getParent() + File.separator + target;
     }
     // </editor-fold>
 }

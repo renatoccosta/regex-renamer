@@ -52,6 +52,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private boolean lockScroll = false;
 
+    private CriteriaTypeEnum searchType = CriteriaTypeEnum.REGULAR_EXPRESSION;
+
     private JFileChooser fcCriteria = null;
 
     /** Creates new form FrmPrincipal */
@@ -280,7 +282,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addComponent(btnSortName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSortDate, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(77, Short.MAX_VALUE))
         );
 
         pnlButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
@@ -407,19 +409,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+            .addComponent(pnlButtons, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 525, Short.MAX_VALUE)
+                .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+            .addComponent(pnlStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lblBeforeAfter)
-                .addContainerGap(455, Short.MAX_VALUE))
-            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 587, Short.MAX_VALUE)
+                .addContainerGap(474, Short.MAX_VALUE))
+            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 579, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -429,13 +431,13 @@ public class FrmPrincipal extends javax.swing.JFrame {
                     .addComponent(lblExpression))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
+                    .addComponent(txtFind, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE)
+                        .addComponent(txtTarget, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFile))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                        .addComponent(txtReplace, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFunctions))
                     .addGroup(layout.createSequentialGroup()
@@ -476,7 +478,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(pnlOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
+                    .addComponent(pnlFiles, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -769,18 +771,21 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtReplaceKeyPressed
 
     private void btnFindRegexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindRegexActionPerformed
+        searchType = CriteriaTypeEnum.REGULAR_EXPRESSION;
         txtFind.setEnabled(true);
         lstAntes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         lstDepois.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }//GEN-LAST:event_btnFindRegexActionPerformed
 
     private void btnFindAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindAllActionPerformed
+        searchType = CriteriaTypeEnum.ALL_FILES;
         txtFind.setEnabled(false);
         lstAntes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         lstDepois.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }//GEN-LAST:event_btnFindAllActionPerformed
 
     private void btnFindSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindSelectedActionPerformed
+        searchType = CriteriaTypeEnum.SELECTED_FILES;
         txtFind.setEnabled(false);
         lstAntes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         lstDepois.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -815,11 +820,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         return fcCriteria;
     }
 
+    // <editor-fold defaultstate="collapsed" desc="validations">
     private void validateFields() throws Exception {
-        
+        if (searchType.equals(CriteriaTypeEnum.REGULAR_EXPRESSION) &&
+                txtFind.getText().trim().equals("")) {
+            throw new Exception(Messages.getFieldValidationMessage());
+        }
 
         if (txtTarget.getText().trim().equals("")
-                || txtFind.getText().trim().equals("")
                 || txtReplace.getText().trim().equals("")) {
             throw new Exception(Messages.getFieldValidationMessage());
         }
@@ -833,13 +841,16 @@ public class FrmPrincipal extends javax.swing.JFrame {
      */
     private void validadeSelection(int[] selectedIndices) throws
             RenamerException {
-        int qtd = selectedIndices[selectedIndices.length - 1] - selectedIndices[0];
+        int qtd = selectedIndices[selectedIndices.length - 1]
+                - selectedIndices[0];
 
         if (qtd != selectedIndices.length - 1) {
             throw new RenamerException(Messages.getContiguousSelectionMessage());
         }
     }
+    // </editor-fold>
 
+    // <editor-fold defaultstate="collapsed" desc="load/save criteria">
     private void loadCriteria(SavedCriteria criteria) {
         txtTarget.setText(criteria.getPath());
         txtFind.setText(criteria.getSearch());
@@ -858,6 +869,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         return sc;
     }
+    // </editor-fold>
 
     private void configureRenamer(boolean refreshLists) throws
             RenamerException {
@@ -869,16 +881,19 @@ public class FrmPrincipal extends javax.swing.JFrame {
             renamer.setRootFolder(new File(txtTarget.getText()));
         }
 
-        if (btnFindSelected.isSelected()) {
-            renamer.setSearchType(CriteriaTypeEnum.SELECTED_FILES);
-            renamer.setSelectedFiles(lstAntes.getSelectedIndices());
-        } else if (btnFindAll.isSelected()) {
-            renamer.setSearchType(CriteriaTypeEnum.ALL_FILES);
-        } else {
-            renamer.setSearchType(CriteriaTypeEnum.REGULAR_EXPRESSION);
-            if (!"".equals(txtFind.getText())) {
-                renamer.setSearch(txtFind.getText());
-            }
+        switch (searchType) {
+            case ALL_FILES:
+                renamer.setSearchType(CriteriaTypeEnum.ALL_FILES);
+                break;
+            case SELECTED_FILES:
+                renamer.setSearchType(CriteriaTypeEnum.SELECTED_FILES);
+                renamer.setSelectedFiles(lstAntes.getSelectedIndices());
+                break;
+            default: //regex
+                renamer.setSearchType(CriteriaTypeEnum.REGULAR_EXPRESSION);
+                if (!"".equals(txtFind.getText())) {
+                    renamer.setSearch(txtFind.getText());
+                }
         }
 
         if (!"".equals(txtReplace.getText())) {
