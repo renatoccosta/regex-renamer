@@ -501,12 +501,15 @@ public class Renamer {
     }
 
     private void sortFiles() {
-        if (sortType.equals(SortType.FILE_NAME)) {
-            FileUtil.sortFilesByName(filesBefore);
-            FileUtil.sortFilesByName(filesAfter);
-        } else {
-            FileUtil.sortFilesByDate(filesBefore);
-            FileUtil.sortFilesByDate(filesAfter);
+        switch (sortType) {
+            case FILE_NAME:
+                FileUtil.sortFilesByName(filesBefore);
+                FileUtil.sortFilesByName(filesAfter);
+                break;
+                
+            default:
+                FileUtil.sortFilesByDate(filesBefore);
+                FileUtil.sortFilesByDate(filesAfter);
         }
     }
 
