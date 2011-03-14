@@ -15,6 +15,7 @@
  */
 package br.com.renatoccosta.renamer.util;
 
+import br.com.renatoccosta.renamer.RenamedFile;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -31,47 +32,54 @@ public class FileUtil {
      * Compara os nomes dos arquivos. Os arquivos que estiverem em pastas de
      * níveis diferentes serão comparados pela sua proximidade da raiz.
      */
-    private static Comparator<String> compFileName = new Comparator<String>() {
+    private static Comparator<RenamedFile> compFileName =
+            new Comparator<RenamedFile>() {
 
-        public int compare(String o1, String o2) {
-            int depth1 = o1.split("\\" + File.separator).length;
-            int depth2 = o2.split("\\" + File.separator).length;
+                public int compare(RenamedFile o1, RenamedFile o2) {
+                    int depth1 = o1.getFileNameBefore().split(
+                            "\\" + File.separator).length;
+                    int depth2 = o2.getFileNameBefore().split(
+                            "\\" + File.separator).length;
 
-            if (depth1 > depth2) {
-                return 1;
-            } else if (depth2 > depth1) {
-                return -1;
-            } else {
-                return o1.compareTo(o2);
-            }
-        }
+                    if (depth1 > depth2) {
+                        return 1;
+                    } else if (depth2 > depth1) {
+                        return -1;
+                    } else {
+                        return o1.getFileNameBefore().compareTo(
+                                o2.getFileNameBefore());
+                    }
+                }
 
-    };
+            };
 
     /**
      * Compara as data de modificação de arquivos. Os arquivos que estiverem em
      * pastas de níveis diferentes serão comparados pela sua proximidade da raiz.
      */
-    private static Comparator<String> compFileDate = new Comparator<String>() {
+    private static Comparator<RenamedFile> compFileDate =
+            new Comparator<RenamedFile>() {
 
-        public int compare(String o1, String o2) {
-            int depth1 = o1.split("\\" + File.separator).length;
-            int depth2 = o2.split("\\" + File.separator).length;
+                public int compare(RenamedFile o1, RenamedFile o2) {
+                    int depth1 = o1.getFileNameBefore().split(
+                            "\\" + File.separator).length;
+                    int depth2 = o2.getFileNameBefore().split(
+                            "\\" + File.separator).length;
 
-            if (depth1 > depth2) {
-                return 1;
-            } else if (depth2 > depth1) {
-                return -1;
-            } else {
-                File f1 = new File(o1);
-                File f2 = new File(o2);
+                    if (depth1 > depth2) {
+                        return 1;
+                    } else if (depth2 > depth1) {
+                        return -1;
+                    } else {
+                        File f1 = new File(o1.getFileNameBefore());
+                        File f2 = new File(o2.getFileNameBefore());
 
-                return (f1.lastModified() < f2.lastModified()
-                        ? -1 : (f1.lastModified() == f2.lastModified() ? 0 : 1));
-            }
-        }
+                        return (f1.lastModified() < f2.lastModified()
+                                ? -1 : (f1.lastModified() == f2.lastModified() ? 0 : 1));
+                    }
+                }
 
-    };
+            };
 
     /**
      * Varre todos os arquivos da pasta e opcionalmente as subpastas e preenche
@@ -115,7 +123,7 @@ public class FileUtil {
      *
      * @param files Lista dos arquivos
      */
-    public static void sortFilesByName(List<String> files) {
+    public static void sortFilesByName(List<RenamedFile> files) {
         Collections.sort(files, compFileName);
     }
 
@@ -125,7 +133,7 @@ public class FileUtil {
      *
      * @param files Lista dos arquivos
      */
-    public static void sortFilesByDate(List<String> files) {
+    public static void sortFilesByDate(List<RenamedFile> files) {
         Collections.sort(files, compFileDate);
     }
 

@@ -33,12 +33,10 @@ public class FileListRenderer implements ListCellRenderer {
     private ListCellRenderer nativeRenderer;
 
     public FileListRenderer(ListCellRenderer nativeRenderer, Renamer renamer) {
-//        super();
         this.nativeRenderer = nativeRenderer;
         this.renamer = renamer;
     }
 
-//    @Override
     public Component getListCellRendererComponent(JList list, Object value,
             int index, boolean isSelected, boolean cellHasFocus) {
 
@@ -46,14 +44,14 @@ public class FileListRenderer implements ListCellRenderer {
                 value, index, isSelected, cellHasFocus);
 
         //if the filename was changed, it's displayed in blue
-        if (!renamer.getFileNamesBefore().get(index).endsWith(
+        if (!renamer.getFiles().get(index).getRelativeFileNameBefore().endsWith(
                 value.toString())) {
             c.setForeground(Color.BLUE);
         }
 
         //if the filename is conflicting with another file, it's displayed in red
         if (renamer.getConflicts().containsKey(
-                renamer.getFileNamesAfter().get(index)) ||
+                renamer.getFiles().get(index).getFileNameAfter()) ||
                 value.toString().endsWith(Messages.getErrorRenamingMessage())) {
             c.setForeground(Color.RED);
         }
