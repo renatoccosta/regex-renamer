@@ -15,7 +15,8 @@
  */
 package br.com.renatoccosta.renamer.view;
 
-import br.com.renatoccosta.renamer.Renamer;
+import br.com.renatoccosta.renamer.RenamedFile;
+import java.util.List;
 
 /**
  *
@@ -23,12 +24,12 @@ import br.com.renatoccosta.renamer.Renamer;
  */
 public class RenamerAfterListModel extends RenamerListModel {
 
-    public RenamerAfterListModel(Renamer renamer) {
-        super(renamer);
+    public RenamerAfterListModel(List<RenamedFile> files) {
+        super(files);
     }
 
     public Object getElementAt(int index) {
-        return stripFileName(renamer.getFileNamesAfter().get(index));
+        return files.get(index).getRelativeFileNameAfter();
     }
 
 }

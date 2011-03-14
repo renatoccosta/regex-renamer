@@ -71,9 +71,7 @@ public class Renamer {
 
     private int[] selectedFiles = new int[]{};
 
-    private List<String> filesBefore = new ArrayList<String>();
-
-    private List<String> filesAfter = new ArrayList<String>();
+    private List<RenamedFile> files = new ArrayList<RenamedFile>();
 
     /**
      * Map de nome do arquivo que possui conflitos com os indices de
@@ -114,19 +112,11 @@ public class Renamer {
     }
 
     /**
-     * Retorna uma lista com o nome dos arquivos antes da mudança de nome
-     * @return Lista com o nome dos arquivos
+     * Return the list of files in the specified folder
+     * @return
      */
-    public List<String> getFileNamesBefore() {
-        return this.filesBefore;
-    }
-
-    /**
-     * Retorna uma lista com o nome dos arquivos depois da mudança de nome
-     * @return Lista com o nome dos arquivos
-     */
-    public List<String> getFileNamesAfter() {
-        return this.filesAfter;
+    public List<RenamedFile> getFiles() {
+        return files;
     }
 
     public Map<String, List<Integer>> getConflicts() {
@@ -239,25 +229,33 @@ public class Renamer {
     // </editor-fold>
 
     // <editor-fold defaultstate="collapsed" desc="public methods">
-    public void moveFilesUp(int startIndex, int endIndex) {
-        if (startIndex <= 0) {
+    /**
+     * Move the selected items (files) one step up in the list
+     * @param selectedIndexes Array of selected items (as in JList)
+     */
+    public void moveFilesUp(int[] selectedIndexes) {
+        //there is no reason to move up if the firs item is selected
+        if (selectedIndexes.length < 0 || selectedIndexes[0] <= 0) {
             return;
         }
 
-        this.filesBefore = ArrayUtil.moveBlock(filesBefore, -1, startIndex,
-                endIndex);
-        this.filesAfter = ArrayUtil.moveBlock(filesAfter, -1, startIndex,
+        this.files = ArrayUtil.moveBlock(files, -1, startIndex,
                 endIndex);
     }
 
-    public void moveFilesDown(int startIndex, int endIndex) {
-        if (endIndex >= this.filesBefore.size() - 1) {
+    /**
+     * Move the selected items (files) one step down in the list
+     * @param selectedIndexes Array of selected items (as in JList)
+     */
+    public void moveFilesDown(int[] selectedIndexes) {
+        //there is no reason to move down if the last item is selected
+        if (selectedIndexes.length < 0
+                || selectedIndexes[selectedIndexes.length - 1]
+                >= this.files.size() - 1) {
             return;
         }
 
-        this.filesBefore = ArrayUtil.moveBlock(filesBefore, 1, startIndex,
-                endIndex);
-        this.filesAfter = ArrayUtil.moveBlock(filesAfter, 1, startIndex,
+        this.files = ArrayUtil.moveBlock(files, 1, startIndex,
                 endIndex);
     }
 
@@ -267,7 +265,7 @@ public class Renamer {
      * @return Whether it is ready for rename or not.
      */
     public boolean isReady() {
-        boolean r1 = !this.filesBefore.isEmpty() && this.rootReplace != null;
+        boolean r1 = !this.files.isEmpty() && this.rootReplace != null;
         boolean r2 = false;
 
         switch (searchType) {
@@ -330,26 +328,20 @@ public class Renamer {
             throw new RenamerException(Messages.getNotReadyMessage());
         }
 
-        filesAfter.clear();
         rootReplace.resetState();
         canRename = true;
 
         switch (searchType) {
             case SELECTED_FILES:
-                for (int i = 0; i < filesBefore.size(); i++) {
-                    String newName = filesBefore.get(i);
-
+                for (int i = 0; i < files.size(); i++) {
                     if (isSelected(i)) {
-                        newName = convertName(newName);
+                        convertName(files.get(i));
                     }
-
-                    filesAfter.add(newName);
                 }
                 break;
             default: //regex and all files
-                for (String fileName : filesBefore) {
-                    fileName = convertName(fileName);
-                    filesAfter.add(fileName);
+                for (RenamedFile file : files) {
+                    convertName(file);
                 }
         }
 
@@ -398,28 +390,20 @@ public class Renamer {
 
         //renomea para o temporário
         //apenas os arquivos que tiverem alterações nos nomes
-        for (int i = 0; i < filesBefore.size(); i++) {
-            String strFile = filesBefore.get(i);
-
-            if (strFile.equals(filesAfter.get(i))) {
-                continue;
+        for (RenamedFile f : files) {
+            if (f.shouldRename()) {
+                File file = new File(f.getFileNameBefore());
+                file.renameTo(new File(f.getFileNameBefore() + TMP_SUFIX));
             }
-
-            File file = new File(strFile);
-            file.renameTo(new File(strFile + TMP_SUFIX));
         }
 
         //renomea para o definitivo
         //apenas os arquivos que tiverem alterações nos nomes
-        for (int i = 0; i < filesBefore.size(); i++) {
-            String strFile = filesBefore.get(i);
-
-            if (strFile.equals(filesAfter.get(i))) {
-                continue;
+        for (RenamedFile f : files) {
+            if (f.shouldRename()) {
+                File file = new File(f.getFileNameBefore() + TMP_SUFIX);
+                file.renameTo(new File(f.getFileNameAfter()));
             }
-
-            File file = new File(strFile + TMP_SUFIX);
-            file.renameTo(new File(filesAfter.get(i)));
         }
 
         fillFileLists();
@@ -482,8 +466,8 @@ public class Renamer {
         Map<String, List<Integer>> cfsTemp =
                 new HashMap<String, List<Integer>>();
 
-        for (int i = 0; i < filesAfter.size(); i++) {
-            String fAfter = filesAfter.get(i);
+        for (int i = 0; i < files.size(); i++) {
+            String fAfter = files.get(i).getFileNameAfter();
             if (cfsTemp.containsKey(fAfter)) {
                 cfsTemp.get(fAfter).add(i);
             } else {
@@ -503,48 +487,28 @@ public class Renamer {
     private void sortFiles() {
         switch (sortType) {
             case FILE_NAME:
-                FileUtil.sortFilesByName(filesBefore);
-                FileUtil.sortFilesByName(filesAfter);
+                FileUtil.sortFilesByName(files);
                 break;
-                
+
             default:
-                FileUtil.sortFilesByDate(filesBefore);
-                FileUtil.sortFilesByDate(filesAfter);
+                FileUtil.sortFilesByDate(files);
         }
     }
 
     private void fillFileLists() {
-        this.filesBefore.clear();
-        this.filesAfter.clear();
+        this.files.clear();
         this.conflicts.clear();
 
         if (rootFolder != null) {
             List<String> flattenedFiles = FileUtil.flattenFiles(rootFolder,
                     includeSubFolders);
-            this.filesBefore.addAll(flattenedFiles);
-            this.filesAfter.addAll(flattenedFiles);
-
+            for (String f : flattenedFiles) {
+                RenamedFile rf = new RenamedFile(f, rootFolder.getAbsolutePath());
+                files.add(rf);
+            }
+            
             sortFiles();
         }
-    }
-
-    private List<String> fillPreRenameList() {
-        List<String> lst = null;
-
-        switch (searchType) {
-            case SELECTED_FILES:
-                lst = new ArrayList<String>(selectedFiles.length);
-
-                for (int i : selectedFiles) {
-                    lst.add(filesBefore.get(i));
-                }
-
-                break;
-            default: //all other options
-                lst = filesBefore;
-        }
-
-        return lst;
     }
 
     /**
@@ -567,11 +531,11 @@ public class Renamer {
 
     /**
      * Converts the old file name for the new one, using the parsed replace string
-     * @param fileName File name to be changed
+     * @param file File name to be changed
      * @return New file name
      */
-    private String convertName(String fileName) {
-        File f = new File(fileName);
+    private void convertName(RenamedFile file) {
+        File f = new File(file.getFileNameBefore());
         String base = FilenameUtils.getBaseName(f.getName());
         String ext = FilenameUtils.getExtension(f.getName());
         String target;
@@ -592,13 +556,13 @@ public class Renamer {
                 LOGGER.error(ex);
                 canRename = false;
             }
-        }
 
-        if (!isIncludeExtensions()) {
-            target = target + "." + ext;
-        }
+            if (!isIncludeExtensions()) {
+                target = target + "." + ext;
+            }
 
-        return f.getParent() + File.separator + target;
+            file.setFileNameAfter(f.getParent() + File.separator + target);
+        }
     }
     // </editor-fold>
 }

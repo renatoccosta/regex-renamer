@@ -200,7 +200,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlFiles.setDividerLocation(265);
         pnlFiles.setContinuousLayout(true);
 
-        lstAntes.setModel(new RenamerBeforeListModel(renamer));
+        lstAntes.setModel(new RenamerBeforeListModel(renamer.getFiles()));
         lstAntes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstAntes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -211,7 +211,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
         pnlFiles.setLeftComponent(pnlBefore);
 
-        lstDepois.setModel(new RenamerAfterListModel(renamer));
+        lstDepois.setModel(new RenamerAfterListModel(renamer.getFiles()));
         lstDepois.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         lstDepois.setCellRenderer(new FileListRenderer(lstDepois.getCellRenderer(), this.renamer));
         lstDepois.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -710,8 +710,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             validadeSelection(lstAntes.getSelectedIndices());
 
-            this.renamer.moveFilesUp(lstAntes.getMinSelectionIndex(),
-                    lstAntes.getMaxSelectionIndex());
+            this.renamer.moveFilesUp(lstAntes.getSelectedIndices());
 
             refreshLists();
             updateSelection(-1);
@@ -732,8 +731,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
             validadeSelection(lstAntes.getSelectedIndices());
 
-            this.renamer.moveFilesDown(lstAntes.getMinSelectionIndex(),
-                    lstAntes.getMaxSelectionIndex());
+            this.renamer.moveFilesDown(lstAntes.getSelectedIndices());
 
             refreshLists();
             updateSelection(1);
