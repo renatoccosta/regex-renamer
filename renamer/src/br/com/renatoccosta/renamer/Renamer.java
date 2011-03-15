@@ -239,8 +239,7 @@ public class Renamer {
             return;
         }
 
-        this.files = ArrayUtil.moveBlock(files, -1, startIndex,
-                endIndex);
+        this.files = ArrayUtil.moveBlock(files, -1, selectedIndexes);
     }
 
     /**
@@ -255,8 +254,7 @@ public class Renamer {
             return;
         }
 
-        this.files = ArrayUtil.moveBlock(files, 1, startIndex,
-                endIndex);
+        this.files = ArrayUtil.moveBlock(files, 1, selectedIndexes);
     }
 
     /**

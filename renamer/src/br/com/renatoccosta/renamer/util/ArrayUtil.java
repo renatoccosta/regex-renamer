@@ -25,7 +25,7 @@ import java.util.List;
  */
 public class ArrayUtil {
 
-    public static <T> List<T> moveBlock(List<T> source, int padding, 
+    public static <T> List<T> moveBlock(List<T> source, int padding,
             int startIdx, int endIdx) {
         int newStart = startIdx + padding;
         int newEnd = endIdx + padding;
@@ -50,6 +50,50 @@ public class ArrayUtil {
             dest.add(i + padding, source.get(i));
         }
 
+        return dest;
+    }
+
+    public static <T> List<T> moveBlock(List<T> source, int padding,
+            int[] selectedIndexes) {
+
+        if (selectedIndexes.length == 0) {
+            throw new IllegalArgumentException();
+        }
+
+        int newStart = selectedIndexes[0] + padding;
+        int newEnd = selectedIndexes[selectedIndexes.length - 1] + padding;
+
+        //valida os limites
+        if (newStart < 0 || newEnd > source.size() - 1) {
+            throw new IndexOutOfBoundsException(
+                    Messages.getOutOfBoundsMessage());
+        }
+
+        List dest = new ArrayList();
+
+        //preenche o novo array sem o elementos a serem deslocados
+        for (int i = 0; i < source.size(); i++) {
+            boolean add = true;
+
+            for (int j : selectedIndexes) {
+                if (i==j) {
+                    add = false;
+                    break;
+                } else if (i < j) {
+                    break;
+                }
+            }
+
+            if (add) {
+                dest.add(source.get(i));
+            }
+        }
+
+        //adiciona os elementos deslocados nas posições de destino
+        for (int idx : selectedIndexes) {
+            dest.add(idx + padding, source.get(idx));
+        }
+        
         return dest;
     }
 
