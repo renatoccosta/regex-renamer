@@ -170,6 +170,10 @@ public class Renamer {
     }
 
     public void setIncludeExtensions(boolean includeExtensions) {
+        if (this.includeExtensions == includeExtensions) {
+            return;
+        }
+
         this.includeExtensions = includeExtensions;
         this.dirty = true;
     }
@@ -239,7 +243,7 @@ public class Renamer {
             return;
         }
 
-        this.files = ArrayUtil.moveBlock(files, -1, selectedIndexes);
+        ArrayUtil.moveBlock(files, -1, selectedIndexes);
     }
 
     /**
@@ -254,7 +258,7 @@ public class Renamer {
             return;
         }
 
-        this.files = ArrayUtil.moveBlock(files, 1, selectedIndexes);
+        ArrayUtil.moveBlock(files, 1, selectedIndexes);
     }
 
     /**
@@ -332,8 +336,12 @@ public class Renamer {
         switch (searchType) {
             case SELECTED_FILES:
                 for (int i = 0; i < files.size(); i++) {
+                    RenamedFile rf = files.get(i);
+
                     if (isSelected(i)) {
-                        convertName(files.get(i));
+                        convertName(rf);
+                    } else {
+                        rf.setFileNameAfter(null);
                     }
                 }
                 break;
@@ -504,7 +512,7 @@ public class Renamer {
                 RenamedFile rf = new RenamedFile(f, rootFolder.getAbsolutePath());
                 files.add(rf);
             }
-            
+
             sortFiles();
         }
     }
@@ -560,7 +568,10 @@ public class Renamer {
             }
 
             file.setFileNameAfter(f.getParent() + File.separator + target);
+        } else {
+            file.setFileNameAfter(null);
         }
+
     }
     // </editor-fold>
 }
