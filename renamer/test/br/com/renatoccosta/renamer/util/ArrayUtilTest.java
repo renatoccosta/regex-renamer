@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package br.com.renatoccosta.renamer.util;
 
 import java.util.ArrayList;
@@ -14,7 +13,7 @@ import junit.framework.TestCase;
  * @author renato
  */
 public class ArrayUtilTest extends TestCase {
-    
+
     public ArrayUtilTest(String testName) {
         super(testName);
     }
@@ -34,11 +33,11 @@ public class ArrayUtilTest extends TestCase {
 
         List<String> source = generateList();
 
-        List<String> result = ArrayUtil.moveBlock(source, -2, 3, 3);
+        ArrayUtil.moveBlock(source, -2, new int[]{3});
 
         String expResult = "[a, d, b, c, e, f, g, h]";
 
-        assertEquals(expResult, result.toString());
+        assertEquals(expResult, source.toString());
     }
 
     public void testMoveBlockOneElementDown() throws Exception {
@@ -46,11 +45,11 @@ public class ArrayUtilTest extends TestCase {
 
         List<String> source = generateList();
 
-        List<String> result = ArrayUtil.moveBlock(source, 2, 3, 3);
+        ArrayUtil.moveBlock(source, 2, new int[]{3});
 
         String expResult = "[a, b, c, e, f, d, g, h]";
 
-        assertEquals(expResult, result.toString());
+        assertEquals(expResult, source.toString());
     }
 
     public void testMoveBlockMultipleElementUp() throws Exception {
@@ -58,11 +57,11 @@ public class ArrayUtilTest extends TestCase {
 
         List<String> source = generateList();
 
-        List<String> result = ArrayUtil.moveBlock(source, -2, 3, 4);
+        ArrayUtil.moveBlock(source, -2, new int[]{3, 4});
 
         String expResult = "[a, d, e, b, c, f, g, h]";
 
-        assertEquals(expResult, result.toString());
+        assertEquals(expResult, source.toString());
     }
 
     public void testMoveBlockMultipleElementDown() throws Exception {
@@ -70,11 +69,11 @@ public class ArrayUtilTest extends TestCase {
 
         List<String> source = generateList();
 
-        List<String> result = ArrayUtil.moveBlock(source, 2, 3, 4);
+        ArrayUtil.moveBlock(source, 2, new int[] {3, 4});
 
         String expResult = "[a, b, c, f, g, d, e, h]";
 
-        assertEquals(expResult, result.toString());
+        assertEquals(expResult, source.toString());
     }
 
     private List<String> generateList() {
