@@ -43,7 +43,7 @@ public class IndexedElement extends EmptyElement {
     @Parameter
     private int leading = 1;
 
-    private int contOriginal = 0;
+    private int counter = 0;
 
     /* ---------------------------------------------------------------------- */
     public int getInit() {
@@ -52,7 +52,7 @@ public class IndexedElement extends EmptyElement {
 
     public void setInit(int init) {
         this.init = init;
-        this.contOriginal = init;
+        this.counter = init;
     }
 
     public int getLeading() {
@@ -66,12 +66,12 @@ public class IndexedElement extends EmptyElement {
     /* ---------------------------------------------------------------------- */
     @Override
     public String getContent(String find, String target, File file) {
-        return String.format("%0" + leading + "d", init++);
+        return String.format("%0" + leading + "d", counter++);
     }
 
     @Override
     public void resetState() {
-        this.init = contOriginal;
+        this.counter = init;
     }
 
 }

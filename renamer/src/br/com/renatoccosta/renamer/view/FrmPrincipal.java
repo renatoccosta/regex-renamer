@@ -201,7 +201,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlFiles.setContinuousLayout(true);
 
         lstAntes.setModel(new RenamerBeforeListModel(renamer.getFiles()));
-        lstAntes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstAntes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         lstAntes.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 lstAntesValueChanged(evt);
@@ -212,7 +212,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pnlFiles.setLeftComponent(pnlBefore);
 
         lstDepois.setModel(new RenamerAfterListModel(renamer.getFiles()));
-        lstDepois.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstDepois.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
         lstDepois.setCellRenderer(new FileListRenderer(lstDepois.getCellRenderer(), this.renamer));
         lstDepois.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -703,45 +703,27 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_lstDepoisValueChanged
 
     private void btnUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpActionPerformed
-        try {
-            if (lstAntes.getSelectedIndex() == -1) {
-                return;
-            }
-
-            validadeSelection(lstAntes.getSelectedIndices());
-
-            this.renamer.moveFilesUp(lstAntes.getSelectedIndices());
-
-            refreshLists();
-            updateSelection(-1);
-
-        } catch (RenamerException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(),
-                    Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
-
-            logger.error(ex);
+        if (lstAntes.getSelectedIndex() <= 0) {
+            return;
         }
+
+        this.renamer.moveFilesUp(lstAntes.getSelectedIndices());
+
+        refreshLists();
+        updateSelection(-1);
     }//GEN-LAST:event_btnUpActionPerformed
 
     private void btnDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDownActionPerformed
-        try {
-            if (lstAntes.getSelectedIndex() == -1) {
-                return;
-            }
-
-            validadeSelection(lstAntes.getSelectedIndices());
-
-            this.renamer.moveFilesDown(lstAntes.getSelectedIndices());
-
-            refreshLists();
-            updateSelection(1);
-
-        } catch (RenamerException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(),
-                    Messages.getErrorCaption(), JOptionPane.ERROR_MESSAGE);
-
-            logger.error(ex);
+        if (lstAntes.getSelectedIndex() == -1
+                || lstAntes.getSelectedIndices()[lstAntes.getSelectedIndices().length - 1]
+                >= lstAntes.getModel().getSize() - 1) {
+            return;
         }
+
+        this.renamer.moveFilesDown(lstAntes.getSelectedIndices());
+
+        refreshLists();
+        updateSelection(1);
     }//GEN-LAST:event_btnDownActionPerformed
 
     private void btnSortNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortNameActionPerformed
@@ -771,15 +753,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private void btnFindRegexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindRegexActionPerformed
         searchType = CriteriaTypeEnum.REGULAR_EXPRESSION;
         txtFind.setEnabled(true);
-        lstAntes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        lstDepois.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        lstAntes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        lstDepois.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
     }//GEN-LAST:event_btnFindRegexActionPerformed
 
     private void btnFindAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindAllActionPerformed
         searchType = CriteriaTypeEnum.ALL_FILES;
         txtFind.setEnabled(false);
-        lstAntes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        lstDepois.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        lstAntes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        lstDepois.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
     }//GEN-LAST:event_btnFindAllActionPerformed
 
     private void btnFindSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindSelectedActionPerformed
@@ -820,8 +802,8 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="validations">
     private void validateFields() throws Exception {
-        if (searchType.equals(CriteriaTypeEnum.REGULAR_EXPRESSION) &&
-                txtFind.getText().trim().equals("")) {
+        if (searchType.equals(CriteriaTypeEnum.REGULAR_EXPRESSION)
+                && txtFind.getText().trim().equals("")) {
             throw new Exception(Messages.getFieldValidationMessage());
         }
 
@@ -831,23 +813,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Valida se a seleção está contígua
-     *
-     * @param selectedIndices Array de indices dos elementos selecionados
-     * @throws RenamerException
-     */
-    private void validadeSelection(int[] selectedIndices) throws
-            RenamerException {
-        int qtd = selectedIndices[selectedIndices.length - 1]
-                - selectedIndices[0];
-
-        if (qtd != selectedIndices.length - 1) {
-            throw new RenamerException(Messages.getContiguousSelectionMessage());
-        }
-    }
     // </editor-fold>
-
     // <editor-fold defaultstate="collapsed" desc="load/save criteria">
     private void loadCriteria(SavedCriteria criteria) {
         txtTarget.setText(criteria.getPath());
