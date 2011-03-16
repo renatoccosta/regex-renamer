@@ -3,16 +3,19 @@ Section: utils
 Priority: optional
 Maintainer: Renato Couto da Costa <renatoccosta@gmail.com>
 Build-Depends: debhelper (>= 7), ant, cdbs
-Build-Depends-Indep: default-jdk, antlr3-runtime, libcommons-lang-java,
- libxstream-java, libxpp3-java, liblog4j1.2-java
+Build-Depends-Indep: default-jdk, antlr3-runtime, libcommons-beanutils-java, 
+ libcommons-collections3-java, libcommons-io-java, libcommons-lang-java,
+ libjavassist-java, liblog4j1.2-java, libscannotation-java, libxstream-java,
+ libxpp3-java
 Standards-Version: 3.8.3
 Homepage: https://code.google.com/p/regex-renamer/
 
 Package: regex-renamer
 Architecture: all
-Depends: default-jre, antlr3-runtime, libcommons-lang-java,
- libxstream-java, libxpp3-java, liblog4j1.2-java, gconf2, nautilus-actions, 
- java-wrappers, ${misc:Depends}
+Depends: default-jre, antlr3-runtime, libcommons-beanutils-java,
+ libcommons-collections3-java, libcommons-io-java, libcommons-lang-java,
+ libjavassist-java, liblog4j1.2-java, libscannotation-java, libxstream-java,
+ libxpp3-java, gconf2, nautilus-actions, java-wrappers, ${misc:Depends}
 Description: Rename your files the way you want in a batch process!
  Renamer is a tool to mass rename files given an expression.
  .

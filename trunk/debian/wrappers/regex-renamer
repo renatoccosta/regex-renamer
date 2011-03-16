@@ -7,7 +7,7 @@ JAVA_CLASSPATH="/usr/lib/jni:/usr/lib/java"
 
 find_java_runtime java6
 
-find_jars log4j-1.2 commons-lang antlr-runtime xstream xpp3
+find_jars antlr-runtime commons-lang commons-beanutils commons-collections3 commons-io commons-lang commons-logging javassist log4j-1.2 scannotation xstream xpp3
 
 JAVA_CLASSPATH=$JAVA_CLASSPATH:/usr/share/regex-renamer/regex-renamer.jar
 
