@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="regex-renamer-debian-package" default="build" basedir="..">
-    <!--import file="../build.xml"/-->
 
-    <target name="clean" depends="-init">
-        <ant antfile="build.xml" target="clean" inheritall="true"/>
-    </target>
-
-    <target name="build" depends="-init">
-        <ant antfile="build.xml" target="jar" inheritall="true"/>
-    </target>
-
-    <target name="deb-source-package" depends="-source-tarball">
+    <target name="build-source-package" depends="-deb-init, -deb-clean, -source-tarball">
         <copy todir="${package.dir}/${application.title}-${version}">
             <fileset dir="renamer" excludes="nbproject/private/**"/>
         </copy>
@@ -19,6 +10,18 @@
             <fileset dir="debian"/>
         </copy>
         <chmod file="${package.dir}/${application.title}-${version}/debian/rules" perm="755"/>
+        <exec executable="debuild" os="Linux" dir="${package.dir}/${application.title}-${version}">
+            <arg value="-S"/>
+            <arg value="-k7F46E176"/>
+        </exec>
+    </target>
+
+    <target name="clean" depends="-init">
+        <ant antfile="build.xml" target="clean" inheritall="true"/>
+    </target>
+
+    <target name="build" depends="-init">
+        <ant antfile="build.xml" target="jar" inheritall="true"/>
     </target>
 
     <target name="deb-clean">
@@ -34,6 +37,11 @@
     <target name="-deb-init" depends="-init">
         <property file="renamer/nbproject/project.properties"/>
         <mkdir dir="${package.dir}"/>
+    </target>
+
+    <target name="-deb-clean">
+        <delete dir="${package.dir}"/>        
+        <ant antfile="build.xml" target="clean" inheritall="true" dir="renamer"/>
     </target>
 
     <target name="-source-tarball" depends="-deb-init">

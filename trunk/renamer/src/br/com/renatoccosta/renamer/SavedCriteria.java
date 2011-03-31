@@ -29,6 +29,8 @@ public class SavedCriteria {
 
     private String replace;
 
+    private SearchTypeEnum searchType;
+
     private boolean includeSubfolders = false;
 
     private boolean includeType = false;
@@ -64,6 +66,14 @@ public class SavedCriteria {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public SearchTypeEnum getSearchType() {
+        return searchType;
+    }
+
+    public void setSearchType(SearchTypeEnum searchType) {
+        this.searchType = searchType;
     }
 
     public boolean isIncludeSubfolders() {

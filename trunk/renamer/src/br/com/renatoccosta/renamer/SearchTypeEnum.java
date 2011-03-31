@@ -21,7 +21,7 @@ package br.com.renatoccosta.renamer;
  *
  * @author Renato Couto da Costa
  */
-public enum CriteriaTypeEnum {
+public enum SearchTypeEnum {
 
     REGULAR_EXPRESSION, ALL_FILES, SELECTED_FILES;
 
