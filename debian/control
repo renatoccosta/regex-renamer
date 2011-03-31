@@ -2,7 +2,7 @@ Source: regex-renamer
 Section: utils
 Priority: optional
 Maintainer: Renato Couto da Costa <renatoccosta@gmail.com>
-Build-Depends: debhelper (>= 7), ant, cdbs
+Build-Depends: debhelper (>= 7), ant, ant-optional, cdbs
 Build-Depends-Indep: default-jdk, antlr3-runtime, libcommons-beanutils-java, 
  libcommons-collections3-java, libcommons-io-java, libcommons-lang-java,
  libjavassist-java, liblog4j1.2-java, libscannotation-java, libxstream-java,

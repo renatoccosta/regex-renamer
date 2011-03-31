@@ -65,7 +65,7 @@ public class Renamer {
 
     private boolean includeExtensions = false;
 
-    private CriteriaTypeEnum searchType = CriteriaTypeEnum.REGULAR_EXPRESSION;
+    private SearchTypeEnum searchType = SearchTypeEnum.REGULAR_EXPRESSION;
 
     private SortType sortType = SortType.FILE_NAME;
 
@@ -127,7 +127,7 @@ public class Renamer {
         return sortType;
     }
 
-    public CriteriaTypeEnum getSearchType() {
+    public SearchTypeEnum getSearchType() {
         return searchType;
     }
 
@@ -179,7 +179,7 @@ public class Renamer {
     }
 
     public void setSearch(String search) throws RenamerException {
-        if (!searchType.equals(CriteriaTypeEnum.REGULAR_EXPRESSION)) {
+        if (!searchType.equals(SearchTypeEnum.REGULAR_EXPRESSION)) {
             throw new IllegalStateException(
                     "Can only set regex expression when search type is regex");
         }
@@ -211,7 +211,7 @@ public class Renamer {
         sortFiles();
     }
 
-    public void setSearchType(CriteriaTypeEnum type) {
+    public void setSearchType(SearchTypeEnum type) {
         if (this.searchType.equals(type)) {
             return;
         }

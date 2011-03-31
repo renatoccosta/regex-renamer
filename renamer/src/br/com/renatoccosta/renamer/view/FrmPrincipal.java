@@ -52,7 +52,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     private boolean lockScroll = false;
 
-    private CriteriaTypeEnum searchType = CriteriaTypeEnum.REGULAR_EXPRESSION;
+    private SearchTypeEnum searchType = SearchTypeEnum.REGULAR_EXPRESSION;
 
     private JFileChooser fcCriteria = null;
 
@@ -751,24 +751,15 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtReplaceKeyPressed
 
     private void btnFindRegexActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindRegexActionPerformed
-        searchType = CriteriaTypeEnum.REGULAR_EXPRESSION;
-        txtFind.setEnabled(true);
-        lstAntes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        lstDepois.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        setSearchType(SearchTypeEnum.REGULAR_EXPRESSION);
     }//GEN-LAST:event_btnFindRegexActionPerformed
 
     private void btnFindAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindAllActionPerformed
-        searchType = CriteriaTypeEnum.ALL_FILES;
-        txtFind.setEnabled(false);
-        lstAntes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-        lstDepois.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+        setSearchType(SearchTypeEnum.ALL_FILES);
     }//GEN-LAST:event_btnFindAllActionPerformed
 
     private void btnFindSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindSelectedActionPerformed
-        searchType = CriteriaTypeEnum.SELECTED_FILES;
-        txtFind.setEnabled(false);
-        lstAntes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-        lstDepois.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        setSearchType(SearchTypeEnum.SELECTED_FILES);
     }//GEN-LAST:event_btnFindSelectedActionPerformed
 
     private void btnFunctionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFunctionsActionPerformed
@@ -802,7 +793,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
 
     // <editor-fold defaultstate="collapsed" desc="validations">
     private void validateFields() throws Exception {
-        if (searchType.equals(CriteriaTypeEnum.REGULAR_EXPRESSION)
+        if (searchType.equals(SearchTypeEnum.REGULAR_EXPRESSION)
                 && txtFind.getText().trim().equals("")) {
             throw new Exception(Messages.getFieldValidationMessage());
         }
@@ -814,6 +805,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
 
     // </editor-fold>
+
     // <editor-fold defaultstate="collapsed" desc="load/save criteria">
     private void loadCriteria(SavedCriteria criteria) {
         txtTarget.setText(criteria.getPath());
@@ -821,6 +813,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         txtReplace.setText(criteria.getReplace());
         mnuSubfolders.setSelected(criteria.isIncludeSubfolders());
         mnuIncludeType.setSelected(criteria.isIncludeType());
+        setSearchType(criteria.getSearchType());
     }
 
     private SavedCriteria saveCriteria() {
@@ -828,6 +821,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         sc.setPath(txtTarget.getText());
         sc.setReplace(txtReplace.getText());
         sc.setSearch(txtFind.getText());
+        sc.setSearchType(searchType);
         sc.setIncludeSubfolders(mnuSubfolders.isSelected());
         sc.setIncludeType(mnuIncludeType.isSelected());
 
@@ -835,26 +829,61 @@ public class FrmPrincipal extends javax.swing.JFrame {
     }
     // </editor-fold>
 
+    private void setSearchType(SearchTypeEnum searchType) {
+        if (searchType == null) return;
+
+        this.searchType = searchType;
+
+
+        switch (searchType) {
+            case ALL_FILES:
+                txtFind.setEnabled(false);
+                lstAntes.setSelectionMode(
+                        ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+                lstDepois.setSelectionMode(
+                        ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+                btnFindAll.setSelected(true);
+                break;
+
+            case REGULAR_EXPRESSION:
+                txtFind.setEnabled(true);
+                lstAntes.setSelectionMode
+                        (ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+                lstDepois.setSelectionMode(
+                        ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+                btnFindRegex.setSelected(true);
+                break;
+
+            default:
+                txtFind.setEnabled(false);
+                lstAntes.setSelectionMode(
+                        ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+                lstDepois.setSelectionMode(
+                        ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+                btnFindSelected.setSelected(true);
+        }
+    }
+
     private void configureRenamer(boolean refreshLists) throws
             RenamerException {
-        renamer.setIncludeSubFolders(mnuSubfolders.isSelected());
-
-        renamer.setIncludeExtensions(mnuIncludeType.isSelected());
-
         if (!"".equals(txtTarget.getText())) {
             renamer.setRootFolder(new File(txtTarget.getText()));
         }
 
+        renamer.setIncludeSubFolders(mnuSubfolders.isSelected());
+
+        renamer.setIncludeExtensions(mnuIncludeType.isSelected());
+
         switch (searchType) {
             case ALL_FILES:
-                renamer.setSearchType(CriteriaTypeEnum.ALL_FILES);
+                renamer.setSearchType(SearchTypeEnum.ALL_FILES);
                 break;
             case SELECTED_FILES:
-                renamer.setSearchType(CriteriaTypeEnum.SELECTED_FILES);
+                renamer.setSearchType(SearchTypeEnum.SELECTED_FILES);
                 renamer.setSelectedFiles(lstAntes.getSelectedIndices());
                 break;
             default: //regex
-                renamer.setSearchType(CriteriaTypeEnum.REGULAR_EXPRESSION);
+                renamer.setSearchType(SearchTypeEnum.REGULAR_EXPRESSION);
                 if (!"".equals(txtFind.getText())) {
                     renamer.setSearch(txtFind.getText());
                 }

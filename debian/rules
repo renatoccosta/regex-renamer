@@ -5,9 +5,11 @@ include /usr/share/cdbs/1/class/ant.mk
 
 JAVA_HOME 		:= /usr/lib/jvm/default-java
 DEB_ANT_BUILDFILE 	:= debian/build.xml
+DEB_JARS                := ant-nodeps
+#DEB_ANT_ARGS += -Dant.library.dir=/usr/share/ant/lib
 
 build/regex-renamer::
-	cp resource/icon.PNG debian/regex-renamer.png
+	cp resource/icon.png debian/regex-renamer.png
 
 
 cleanbuilddir/regex-renamer::

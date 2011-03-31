@@ -1,3 +1,16 @@
+regex-renamer (2.0-1) maverick; urgency=low
+
+  * New upstream release
+    * New replace expression syntax
+      - Easy to understand
+      - Uses XML syntax
+    * New user interface
+      - Search options: Selected, All, Regex
+      - Add functions and fill parameters through a dialog box
+    * i18n improvements
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Sun, 27 Mar 2011 16:42:13 -0300
+
 regex-renamer (1.0-2) karmic; urgency=low
 
   * Corrected build dependencies on Java. Now it uses default-jdk
