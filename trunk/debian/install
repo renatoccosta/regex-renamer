@@ -5,3 +5,4 @@ dist/regex-renamer.jar usr/share/regex-renamer
 dist/log4j.properties usr/share/regex-renamer
 debian/wrappers/regex-renamer usr/bin
 debian/regex-renamer.schemas usr/share/gconf/schemas
+debian/log4j.properties var/log
