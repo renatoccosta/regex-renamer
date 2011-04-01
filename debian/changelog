@@ -1,3 +1,10 @@
+regex-renamer (2.0-2) maverick; urgency=low
+
+  * Fixed access denied when tring to create log file on /usr/java.
+    log4j.properties now redirects the log file do /var/log/regex-renamer.log
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Sun, 01 Apr 2011 16:00:00 -0300
+
 regex-renamer (2.0-1) maverick; urgency=low
 
   * New upstream release
