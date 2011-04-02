@@ -1,0 +1,15 @@
+#summary Starting point to read the documentation
+
+= Introduction =
+
+The documentation presented in this Wiki is intended for developers that wants to help with the coding or is just curious about it. Some users might find some help using the application reading these docs, but they won't explain step by step how to use it.
+
+This page is only the table of contents for the material and shows the logical sequence that they should be read for easy understanding.
+
+
+= Table of Contents =
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
