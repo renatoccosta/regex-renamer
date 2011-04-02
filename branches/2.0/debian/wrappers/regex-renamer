@@ -3,7 +3,7 @@
 # Include java-wrappers
 . /usr/lib/java-wrappers/java-wrappers.sh
 
-JAVA_CLASSPATH="/usr/lib/jni:/usr/lib/java"
+JAVA_CLASSPATH="/usr/lib/jni"
 
 find_java_runtime java6
 
