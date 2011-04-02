@@ -3,7 +3,7 @@
 
 = Programming Environment =
 
-This project uses Java as it's base programming language. It was created using Netbeans 6.7.1
+This project uses Java as it's base programming language. It was created using Netbeans, but future versions will be ported to use Maven as it's project manager and build system.
 
 == Dependencies ==
 
@@ -13,6 +13,8 @@ The project needs the following libraries to compile and run:
   * antlr-3.2 (only the runtime)
   * xstream-1.3 (including the xpp3)
   * log4j-1.2.15
+  * javassit
+  * scannotation
 
 = User Interface =
 
@@ -20,7 +22,9 @@ The application uses Swing to build the user interface. It's not possible, yet, 
 
 = Custom Language =
 
-This project used ANTLR (Another Tool for Language Recognition) for implementing it's own replace expression language.
+This project used ANTLR (Another Tool for Language Recognition) for implementing it's own replace expression language, which starting from version 2 is a subset of XML language. 
+
+The idea is to be simple (though not very neat - lot's of symbols) and easy to learn (since many people already know XML). The ReplaceEL needed to accept multiple hierarchies on it's structure, so that the functions can operate on it's children's result. So XML was the best option available.
 
 For more details considering this language, follow this link [ReplaceEL]
 
