@@ -1,0 +1,28 @@
+#summary Requirements intended for the first release of Regex-Renamer
+#labels Phase-Requirements
+
+= Introduction =
+
+This page shows a list of requirements intended to be implemented on the version 1.0 of Regex-Renamer 
+
+
+= Details =
+
+  * Select folder to rename it's files;
+  * Option to rename subfolders;
+  * Choose files to be renamed based on a regular expression;
+  * Rename files applying substitutions based on transformations of the filename;
+    * Transformations based on internal functions, such as:
+      # Change case;
+      # Generate index number;
+      # Filter text, etc.
+    * Combinations of these functions can be used freely
+    * This transformations needs to be described by a specific language, called Replace Expression Language;
+  * No files can be renamed if there are conflicts on destination names.
+  * User interface 
+    * Display the list of files in the folder:
+      * Before rename (actual names)
+      * After rename (in preview)
+    * Textbox for the regex
+    * Textbox for the replace expression
+  * ~~Online help~~
