@@ -22,3 +22,4 @@ This page shows a list of requirements intended to be implemented on the version
   * ~~Progress bar on rename execution~~
     * ~~Display summary after rename~~
   * Refresh contents after rename
+  * About dialog box
