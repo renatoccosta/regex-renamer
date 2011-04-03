@@ -1,0 +1,3 @@
+?package(regex-renamer):needs="X11" section="Applications/File Management"\
+  icon="/usr/share/pixmaps/regex-renamer.xpm"\
+  title="Regex Renamer" command="/usr/bin/regex-renamer"

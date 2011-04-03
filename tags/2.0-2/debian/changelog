@@ -1,0 +1,33 @@
+regex-renamer (2.0-2) maverick; urgency=low
+
+  * Fixed access denied when tring to create log file on /usr/java.
+    log4j.properties now redirects only to console
+  * Fixed wrong classpath on launch script that crashed application
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Sun, 01 Apr 2011 16:00:00 -0300
+
+regex-renamer (2.0-1) maverick; urgency=low
+
+  * New upstream release
+    * New replace expression syntax
+      - Easy to understand
+      - Uses XML syntax
+    * New user interface
+      - Search options: Selected, All, Regex
+      - Add functions and fill parameters through a dialog box
+    * i18n improvements
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Sun, 27 Mar 2011 16:42:13 -0300
+
+regex-renamer (1.0-2) karmic; urgency=low
+
+  * Corrected build dependencies on Java. Now it uses default-jdk
+    package
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Fri, 22 Jan 2010 23:51:20 -0300
+
+regex-renamer (1.0-1) karmic; urgency=low
+
+  * Initial release (LP: #0001)
+
+ -- Renato Couto da Costa <renatoccosta@gmail.com>  Sun, 17 Jan 2010 16:13:50 -0300
