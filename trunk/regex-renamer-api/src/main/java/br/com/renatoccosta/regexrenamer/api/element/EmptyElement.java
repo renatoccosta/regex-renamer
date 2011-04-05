@@ -16,9 +16,7 @@
  */
 package br.com.renatoccosta.regexrenamer.api.element;
 
-import br.com.renatoccosta.regexrenamer.api.element.Element;
-import br.com.renatoccosta.regexrenamer.api.InvalidElementException;
-import br.com.renatoccosta.regexrenamer.i18n.Messages;
+import br.com.renatoccosta.regexrenamer.api.exception.InvalidElementException;
 
 /**
  *
@@ -28,8 +26,7 @@ public abstract class EmptyElement extends Element {
 
     @Override
     public void add(Element element) throws InvalidElementException {
-        throw new InvalidElementException(
-                Messages.getEmptyElementChildsMessage(element.getId()));
+        throw new InvalidElementException(element.getId() + " is an empty element");
     }
 
     @Override

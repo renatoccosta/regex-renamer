@@ -18,7 +18,7 @@ package br.com.renatoccosta.regexrenamer.element;
 import br.com.renatoccosta.regexrenamer.api.element.EmptyElement;
 import br.com.renatoccosta.regexrenamer.api.meta.ElementType;
 import br.com.renatoccosta.regexrenamer.api.meta.Parameter;
-import br.com.renatoccosta.regexrenamer.api.RenamerException;
+import br.com.renatoccosta.regexrenamer.api.exception.RenamerException;
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
