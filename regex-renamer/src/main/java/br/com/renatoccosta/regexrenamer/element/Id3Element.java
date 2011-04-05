@@ -16,7 +16,7 @@
 package br.com.renatoccosta.regexrenamer.element;
 
 import br.com.renatoccosta.regexrenamer.api.element.EmptyElement;
-import br.com.renatoccosta.regexrenamer.api.RenamerException;
+import br.com.renatoccosta.regexrenamer.api.exception.RenamerException;
 import java.io.File;
 
 /**

@@ -15,7 +15,7 @@
  */
 package br.com.renatoccosta.regexrenamer.exception;
 
-import br.com.renatoccosta.regexrenamer.api.ElementException;
+import br.com.renatoccosta.regexrenamer.api.exception.ElementException;
 import br.com.renatoccosta.regexrenamer.i18n.Messages;
 
 /**

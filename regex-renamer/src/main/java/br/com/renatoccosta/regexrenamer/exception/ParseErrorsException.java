@@ -16,7 +16,7 @@
  */
 package br.com.renatoccosta.regexrenamer.exception;
 
-import br.com.renatoccosta.regexrenamer.api.RenamerException;
+import br.com.renatoccosta.regexrenamer.api.exception.RenamerException;
 import java.util.List;
 import org.antlr.runtime.RecognitionException;
 

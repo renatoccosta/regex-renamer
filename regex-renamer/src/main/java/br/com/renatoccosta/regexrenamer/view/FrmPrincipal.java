@@ -21,7 +21,7 @@ import br.com.renatoccosta.regexrenamer.SavedCriteria;
 import br.com.renatoccosta.regexrenamer.SearchTypeEnum;
 import br.com.renatoccosta.regexrenamer.SortType;
 import br.com.renatoccosta.regexrenamer.element.base.ElementsDirectory;
-import br.com.renatoccosta.regexrenamer.api.RenamerException;
+import br.com.renatoccosta.regexrenamer.api.exception.RenamerException;
 import br.com.renatoccosta.regexrenamer.i18n.Messages;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;

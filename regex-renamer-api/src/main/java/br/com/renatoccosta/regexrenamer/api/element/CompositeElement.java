@@ -16,8 +16,8 @@
 package br.com.renatoccosta.regexrenamer.api.element;
 
 import br.com.renatoccosta.regexrenamer.api.element.Element;
-import br.com.renatoccosta.regexrenamer.api.InvalidElementException;
-import br.com.renatoccosta.regexrenamer.api.RenamerException;
+import br.com.renatoccosta.regexrenamer.api.exception.InvalidElementException;
+import br.com.renatoccosta.regexrenamer.api.exception.RenamerException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

@@ -15,9 +15,9 @@
  */
 package br.com.renatoccosta.regexrenamer.api.element;
 
-import br.com.renatoccosta.regexrenamer.api.InvalidElementException;
-import br.com.renatoccosta.regexrenamer.api.RenamerException;
-import br.com.renatoccosta.regexrenamer.element.base.ElementsDirectory;
+import br.com.renatoccosta.regexrenamer.api.exception.InvalidElementException;
+import br.com.renatoccosta.regexrenamer.api.exception.RenamerException;
+import br.com.renatoccosta.regexrenamer.api.meta.ElementType;
 import br.com.renatoccosta.regexrenamer.api.meta.Parameter;
 import java.io.File;
 import java.lang.reflect.Field;
@@ -42,7 +42,7 @@ public abstract class Element {
      * @return Id do elemento ou null caso não seja possível obter o id
      */
     public String getId() {
-        return ElementsDirectory.getInstance().lookup(this.getClass());
+        return this.getClass().getAnnotation(ElementType.class).id();
     }
 
     public CompositeElement getParent() {

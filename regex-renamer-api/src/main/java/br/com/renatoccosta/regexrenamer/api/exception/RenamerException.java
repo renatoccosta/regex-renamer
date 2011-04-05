@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.renatoccosta.regexrenamer.api;
+package br.com.renatoccosta.regexrenamer.api.exception;
 
 /**
- * Base exception for the contruction of elements of the regex-renamer.
- * @author Renato Costa
+ * Base exception for the regex-renamer
+ * @author renato
  */
-public class ElementException extends RenamerException {
+public class RenamerException extends Exception {
 
-    public ElementException() {
+    public RenamerException(Throwable cause) {
+        super(cause);
     }
 
-    public ElementException(String message) {
-        super(message);
-    }
-
-    public ElementException(String message, Throwable cause) {
+    public RenamerException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public ElementException(Throwable cause) {
-        super(cause);
+    public RenamerException(String message) {
+        super(message);
+    }
+
+    public RenamerException() {
     }
 
 }

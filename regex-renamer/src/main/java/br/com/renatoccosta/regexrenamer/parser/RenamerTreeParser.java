@@ -17,7 +17,7 @@
  */
 package br.com.renatoccosta.regexrenamer.parser;
 
-import br.com.renatoccosta.regexrenamer.api.ElementException;
+import br.com.renatoccosta.regexrenamer.api.exception.ElementException;
 import br.com.renatoccosta.regexrenamer.api.element.CompositeElement;
 import br.com.renatoccosta.regexrenamer.api.element.Element;
 import br.com.renatoccosta.regexrenamer.element.LiteralElement;

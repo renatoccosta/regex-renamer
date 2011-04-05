@@ -1,6 +1,6 @@
 package br.com.renatoccosta.renamer.element;
 
-import br.com.renatoccosta.regexrenamer.api.RenamerException;
+import br.com.renatoccosta.regexrenamer.api.exception.RenamerException;
 import br.com.renatoccosta.regexrenamer.element.CaseElement;
 import junit.framework.TestCase;
 
