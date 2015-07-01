@@ -1,0 +1,44 @@
+# The Replace Expression Language #
+
+Regex-renamer uses regular expressions as it's core functionality to search for file patterns to be renamed. The syntax of the regular expression used is based on the [Java Regex](http://java.sun.com/docs/books/tutorial/essential/regex/). You should follow this link to learn more about this language.
+
+Besides the normal regex language to search for the files, there is another one to tell the application how to rename the files. This language is called the Replace Expression Language.
+  * Language because it has lexical and syntax rules
+  * Replace because it is used to replace the file names with other information
+  * Expression because it is composed of special characters that can be used to activate functionalities during the replace operation. There are two kinds of expressions:
+    * **Constant Expressions**: Means that whatever you type in the REL will be directly reflected in the destination name.
+    * **Variable Expressions**: Means that you are activating a certain function, passing parameters (if necessary) and getting a result. That result will be reflected in the destination name. There are some built-in variable expressions ready to be used. To know more about those expressions read [BuiltinVE](BuiltinVE.md). It is also possible to create more expressions using the APIs, but it's not available in this first version.
+    * **Capturing Group Expressions**: In the regular expression is possible to create capture groups of matches. These groups can be referenced on the REL using the syntax `$N`, where `N` is the number of the group. For more information about capture groups, read [here](http://java.sun.com/docs/books/tutorial/essential/regex/groups.html)
+
+## Syntax ##
+
+The syntax of the REL is very simple. Basically, everything that you type will be considered a constant expression, except the cases where the text is inside `${...}` or `$N`, which will be a variable expression and capturing group expression respectively.
+
+### Ex1: ###
+Let's say you type the following text as a search:
+
+`(.*)`
+
+This means that the search will match any number of characters, including zero (which is impossible for a file...). For the REL you type:
+
+`$1abc`
+
+This means that all the files will be renamed with the same name suffixed by `abc`. The REL is composed of a capturing group expression (`$1`) and a constant expression (`abc`).
+
+### Ex2: ###
+Considering the same search as the example 1, you type the following REL:
+
+`${case:lower}$1`
+
+This is an example of a variable expression. `case` is the name of the function and `lower` is a parameter. If a function requires more parameters, you need to use `:` (colon) to divide them. The result of this example will be a lower cased file name.
+
+### Ex3: ###
+Consider the following search text:
+
+`(.*?)(\d*)(.*?)`
+
+It will match texts that begins with 0 or more characters, followed by 0 or more numbers, followed by 0 or more characters. The REL is:
+
+`$2${case:upper}$1${/case}$3`
+
+This is a bit complex. First it puts the second capture group (the numbers) on the beginning of the name. Second it upper case the first capture group. The `${/case}` works like a XML tag, closing the `case` opened right before. And finally it repeats the text on the third capture group, without any kind of modification.

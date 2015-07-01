@@ -1,0 +1,23 @@
+# Introduction #
+
+Regex-renamer was built to be a flexibe and extensible tool to rename files of a
+folder.
+
+It uses regular expressions to search for file patterns (called search
+expression). The files that matches the pattern are renamed based on another
+expression (called replace expression). This expression is constructed using a
+simple language that was based on EL (expression language) to tell Regex-renamer
+how to replace the file names.
+
+The replace expressions can be divided into two categories:
+  * Constant Expressions;
+  * Variable Expressions
+
+Constant expressions are string literals that will be used in the new file name.
+Variable expressions are special code able to perform a wide range of functions
+like generate number sequences, obtain file information, query id3 tags, etc,
+and use this info on the new file name.
+
+The architecture of the Regex-renamer allows it's variable expression library to
+be extended and add new functionalities to the application. The API provides the
+needed interfaces to do this.
